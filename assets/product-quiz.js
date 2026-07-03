@@ -9,6 +9,9 @@
   'use strict';
 
   const AUTO_ADVANCE_DELAY = 420;
+  // Nell'editor tema di Shopify l'anteprima ricarica se cambia l'URL:
+  // in design mode saltiamo ogni riscrittura dell'URL.
+  const DESIGN_MODE = !!(window.Shopify && window.Shopify.designMode);
 
   class ProductQuiz {
     constructor(root) {
@@ -57,8 +60,16 @@
 
       if (this.emailForm) {
         this.emailForm.addEventListener('submit', (e) => {
-          e.preventDefault();
-          this.submitEmail();
+          if (DESIGN_MODE) {
+            // nell'editor tema niente POST reale: mostra solo il risultato
+            e.preventDefault();
+            this.showResult();
+            return;
+          }
+          // invio nativo: lascia lavorare il captcha anti-spam di Shopify.
+          // return_to riporta l'utente alla pagina con ?quiz_result=<vincitore>,
+          // che restoreFromUrl() ripristina al caricamento.
+          if (!this.prepareEmailSubmit()) e.preventDefault();
         });
       }
 
@@ -156,7 +167,7 @@
 
       if (prevStep && prevStep !== nextStep) {
         prevStep.classList.remove('is-active');
-        prevStep.classList.add(index > this.current ? 'is-leaving-up' : '');
+        if (index > this.current) prevStep.classList.add('is-leaving-up');
         window.setTimeout(() => prevStep.classList.remove('is-leaving-up'), 500);
       }
 
@@ -254,7 +265,7 @@
     }
 
     /* ------------------------------------------------ email */
-    submitEmail() {
+    prepareEmailSubmit() {
       const input = this.emailForm.querySelector('.cq__email-input');
       const error = this.emailForm.querySelector('.cq__email-error');
       const value = (input.value || '').trim();
@@ -264,21 +275,30 @@
       error.classList.toggle('is-visible', !valid);
       if (!valid) {
         input.focus();
-        return;
+        return false;
       }
 
-      if (!this.emailSubmitted) {
-        this.emailSubmitted = true;
-        const data = new FormData(this.emailForm);
-        // invio best-effort al form clienti Shopify: il risultato si mostra comunque
-        fetch(this.emailForm.action, {
-          method: 'POST',
-          body: data,
-          headers: { Accept: 'text/html' },
-        }).catch(() => {});
-        this.track('quiz_email_submitted');
+      // dopo il POST (ed eventuale captcha) Shopify riporta qui, sul risultato
+      const { winner } = this.computeWinner();
+      // il flusso captcha può ignorare return_to: salviamo il risultato anche
+      // in sessionStorage, così viene ripristinato ovunque si atterri dopo
+      try {
+        sessionStorage.setItem('cq_pending', JSON.stringify({ winner: winner, ts: Date.now() }));
+      } catch (e) {
+        /* storage non disponibile */
       }
-      this.showResult();
+      const returnInput = this.emailForm.querySelector('[data-cq-return]');
+      if (returnInput) {
+        try {
+          const url = new URL(window.location.href);
+          url.searchParams.set('quiz_result', winner);
+          returnInput.value = url.pathname + url.search;
+        } catch (e) {
+          returnInput.value = window.location.pathname + '?quiz_result=' + winner;
+        }
+      }
+      this.track('quiz_email_submitted', { result: winner });
+      return true;
     }
 
     /* ------------------------------------------------ risultato */
@@ -317,21 +337,74 @@
       this.show(resultIndex);
       this.track('quiz_completed', { result: winner, scores });
 
-      try {
-        const url = new URL(window.location.href);
-        url.searchParams.set('quiz_result', winner);
-        window.history.replaceState({}, '', url.toString());
-      } catch (e) {
-        /* niente URL API: pazienza */
+      if (!DESIGN_MODE) {
+        try {
+          const url = new URL(window.location.href);
+          url.searchParams.set('quiz_result', winner);
+          window.history.replaceState({}, '', url.toString());
+        } catch (e) {
+          /* niente URL API: pazienza */
+        }
       }
     }
 
+    /* anteprima risultato per l'editor tema (selezione blocco) */
+    previewResult(key) {
+      const resultStep = this.steps.find((s) => s.dataset.stepType === 'result');
+      if (!resultStep) return;
+      this.resultCards.forEach((card) => {
+        card.classList.toggle('is-visible', card.dataset.key === key);
+      });
+      let anyXsell = false;
+      this.xsellCards.forEach((card) => {
+        const forList = (card.dataset.crossFor || '').split(',').map((s) => s.trim());
+        const visible = forList.includes(key);
+        card.classList.toggle('is-visible', visible);
+        if (visible) anyXsell = true;
+      });
+      if (this.xsellWrap) this.xsellWrap.style.display = anyXsell ? '' : 'none';
+      this.show(this.steps.indexOf(resultStep));
+    }
+
+    previewXsell(card) {
+      const resultStep = this.steps.find((s) => s.dataset.stepType === 'result');
+      if (!resultStep) return;
+      if (!this.resultCards.some((c) => c.classList.contains('is-visible')) && this.resultCards[0]) {
+        this.resultCards[0].classList.add('is-visible');
+      }
+      card.classList.add('is-visible');
+      if (this.xsellWrap) this.xsellWrap.style.display = '';
+      this.show(this.steps.indexOf(resultStep));
+    }
+
     restoreFromUrl() {
+      if (DESIGN_MODE) return;
       // permette di riaprire/condividere un risultato: ?quiz_result=m3b
       try {
-        const url = new URL(window.location.href);
-        const saved = url.searchParams.get('quiz_result');
+        let saved = null;
+        try {
+          const url = new URL(window.location.href);
+          saved = url.searchParams.get('quiz_result');
+        } catch (e) {
+          /* ignora */
+        }
+        if (!saved) {
+          // ritorno dal captcha di Shopify: recupera il risultato in sospeso
+          try {
+            const pending = JSON.parse(sessionStorage.getItem('cq_pending') || 'null');
+            if (pending && pending.winner && Date.now() - pending.ts < 3600000) {
+              saved = pending.winner;
+            }
+          } catch (e) {
+            /* ignora */
+          }
+        }
         if (saved && this.resultCards.some((c) => c.dataset.key === saved)) {
+          try {
+            sessionStorage.removeItem('cq_pending');
+          } catch (e) {
+            /* ignora */
+          }
           this.resultCards.forEach((card) => {
             card.classList.toggle('is-visible', card.dataset.key === saved);
           });
@@ -358,11 +431,18 @@
       });
       this.resultCards.forEach((c) => c.classList.remove('is-visible'));
       try {
-        const url = new URL(window.location.href);
-        url.searchParams.delete('quiz_result');
-        window.history.replaceState({}, '', url.toString());
+        sessionStorage.removeItem('cq_pending');
       } catch (e) {
         /* ignora */
+      }
+      if (!DESIGN_MODE) {
+        try {
+          const url = new URL(window.location.href);
+          url.searchParams.delete('quiz_result');
+          window.history.replaceState({}, '', url.toString());
+        } catch (e) {
+          /* ignora */
+        }
       }
       this.show(0);
       this.track('quiz_restarted');
@@ -374,5 +454,28 @@
     }
   }
 
-  document.querySelectorAll('[data-product-quiz]').forEach((el) => new ProductQuiz(el));
+  function init(scope) {
+    (scope || document).querySelectorAll('[data-product-quiz]').forEach((el) => {
+      if (!el.__cqInstance) el.__cqInstance = new ProductQuiz(el);
+    });
+  }
+
+  init();
+
+  if (DESIGN_MODE) {
+    // ricrea il quiz quando l'editor tema ricarica la sezione
+    document.addEventListener('shopify:section:load', (e) => init(e.target));
+    // selezionando un blocco risultato/cross-sell nell'editor, mostra la sua anteprima
+    document.addEventListener('shopify:block:select', (e) => {
+      const root = e.target.closest('[data-product-quiz]');
+      if (!root || !root.__cqInstance) return;
+      const resultCard = e.target.closest('.cq__result-card');
+      if (resultCard) {
+        root.__cqInstance.previewResult(resultCard.dataset.key);
+        return;
+      }
+      const xsellCard = e.target.closest('.cq__xsell-card');
+      if (xsellCard) root.__cqInstance.previewXsell(xsellCard);
+    });
+  }
 })();
