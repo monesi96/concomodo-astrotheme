@@ -3,11 +3,357 @@
     "quiz": {
       "type": "product-quiz",
       "blocks": {
-        "result_m1": {
+        "domanda_1": {
+          "type": "question",
+          "settings": {
+            "kicker": "Iniziamo",
+            "title": "Per chi stai cercando il materasso?",
+            "hint": "Scegli una risposta.",
+            "layout": "list",
+            "multi": false,
+            "key": "who"
+          }
+        },
+        "domanda_1_risposta_1": {
+          "type": "answer",
+          "settings": {
+            "label": "Per me",
+            "value": "me"
+          }
+        },
+        "domanda_1_risposta_2": {
+          "type": "answer",
+          "settings": {
+            "label": "Per me e il mio partner",
+            "value": "partner",
+            "p_m3a": 1,
+            "p_m3b": 2
+          }
+        },
+        "domanda_1_risposta_3": {
+          "type": "answer",
+          "settings": {
+            "label": "Per la camera degli ospiti",
+            "value": "ospiti",
+            "p_m1": 2,
+            "p_m2": 2
+          }
+        },
+        "domanda_2": {
+          "type": "question",
+          "settings": {
+            "kicker": "La misura",
+            "title": "Che misura ti serve?",
+            "hint": "Scegli una risposta.",
+            "layout": "grid",
+            "multi": false,
+            "key": "size"
+          }
+        },
+        "domanda_2_risposta_1": {
+          "type": "answer",
+          "settings": {
+            "label": "Singolo",
+            "value": "singolo",
+            "icon": "singolo"
+          }
+        },
+        "domanda_2_risposta_2": {
+          "type": "answer",
+          "settings": {
+            "label": "Una piazza e mezza",
+            "value": "francese",
+            "icon": "francese"
+          }
+        },
+        "domanda_2_risposta_3": {
+          "type": "answer",
+          "settings": {
+            "label": "Matrimoniale",
+            "value": "matrimoniale",
+            "icon": "matrimoniale"
+          }
+        },
+        "domanda_2_risposta_4": {
+          "type": "answer",
+          "settings": {
+            "label": "Non lo so ancora",
+            "value": "unknown",
+            "icon": "domanda"
+          }
+        },
+        "domanda_3": {
+          "type": "question",
+          "settings": {
+            "kicker": "Oggi",
+            "title": "Cosa non sopporti del tuo materasso attuale?",
+            "hint": "Scegli una risposta.",
+            "layout": "list",
+            "multi": false,
+            "key": "complaint"
+          }
+        },
+        "domanda_3_risposta_1": {
+          "type": "answer",
+          "settings": {
+            "label": "È troppo morbido",
+            "value": "troppo_morbido",
+            "p_m1": 3,
+            "p_m3b": 2
+          }
+        },
+        "domanda_3_risposta_2": {
+          "type": "answer",
+          "settings": {
+            "label": "È troppo rigido",
+            "value": "troppo_rigido",
+            "p_m2": 3,
+            "p_m3a": 2
+          }
+        },
+        "domanda_3_risposta_3": {
+          "type": "answer",
+          "settings": {
+            "label": "Si è afflosciato o deformato",
+            "value": "afflosciato",
+            "p_m1": 2,
+            "p_m3a": 1,
+            "p_m3b": 2
+          }
+        },
+        "domanda_3_risposta_4": {
+          "type": "answer",
+          "settings": {
+            "label": "Sento tutti i movimenti del partner",
+            "value": "movimenti_partner",
+            "p_m2": 2,
+            "p_m3a": 2,
+            "p_m3b": 3
+          }
+        },
+        "domanda_3_risposta_5": {
+          "type": "answer",
+          "settings": {
+            "label": "Dormo caldo, mi sveglio sudato",
+            "value": "caldo",
+            "p_m1": 3,
+            "p_m3a": 1,
+            "p_m3b": 3
+          }
+        },
+        "domanda_3_risposta_6": {
+          "type": "answer",
+          "settings": {
+            "label": "Mi sveglio con dolori o indolenzito",
+            "value": "dolori",
+            "p_m2": 1,
+            "p_m3a": 3,
+            "p_m3b": 3
+          }
+        },
+        "domanda_3_risposta_7": {
+          "type": "answer",
+          "settings": {
+            "label": "Niente: ne sto cercando uno nuovo",
+            "value": "niente"
+          }
+        },
+        "domanda_4": {
+          "type": "question",
+          "settings": {
+            "kicker": "Come dormi",
+            "title": "In che posizione dormi più spesso?",
+            "hint": "Scegli una risposta.",
+            "layout": "grid",
+            "multi": false,
+            "key": "position"
+          }
+        },
+        "domanda_4_risposta_1": {
+          "type": "answer",
+          "settings": {
+            "label": "Sul fianco",
+            "value": "fianco",
+            "icon": "fianco",
+            "p_m2": 1,
+            "p_m3a": 2,
+            "p_m3b": 2
+          }
+        },
+        "domanda_4_risposta_2": {
+          "type": "answer",
+          "settings": {
+            "label": "Sulla schiena",
+            "value": "schiena",
+            "icon": "schiena",
+            "p_m1": 1,
+            "p_m3a": 2,
+            "p_m3b": 2
+          }
+        },
+        "domanda_4_risposta_3": {
+          "type": "answer",
+          "settings": {
+            "label": "A pancia in giù",
+            "value": "pancia",
+            "icon": "pancia",
+            "p_m1": 3,
+            "p_m3b": 1
+          }
+        },
+        "domanda_4_risposta_4": {
+          "type": "answer",
+          "settings": {
+            "label": "Cambio di continuo",
+            "value": "cambio",
+            "icon": "cambio",
+            "p_m3a": 1,
+            "p_m3b": 2
+          }
+        },
+        "domanda_5": {
+          "type": "question",
+          "settings": {
+            "kicker": "La sensazione",
+            "title": "Come deve accoglierti il materasso quando ti sdrai?",
+            "hint": "Scegli una risposta.",
+            "layout": "list",
+            "multi": false,
+            "key": "feel"
+          }
+        },
+        "domanda_5_risposta_1": {
+          "type": "answer",
+          "settings": {
+            "label": "Morbido e avvolgente: voglio “affondare” nel comfort",
+            "value": "morbido",
+            "p_m2": 4,
+            "p_m3a": 1
+          }
+        },
+        "domanda_5_risposta_2": {
+          "type": "answer",
+          "settings": {
+            "label": "Equilibrato: accogliente ma con sostegno",
+            "value": "equilibrato",
+            "p_m3a": 3,
+            "p_m3b": 3
+          }
+        },
+        "domanda_5_risposta_3": {
+          "type": "answer",
+          "settings": {
+            "label": "Sostenuto e deciso: preferisco dormire “sopra” il materasso",
+            "value": "deciso",
+            "p_m1": 4,
+            "p_m3b": 1
+          }
+        },
+        "domanda_6": {
+          "type": "question",
+          "settings": {
+            "kicker": "Le priorità",
+            "title": "Cosa non deve proprio mancare?",
+            "hint": "Scegli fino a 2 risposte.",
+            "layout": "list",
+            "multi": true,
+            "max": 2,
+            "key": "features"
+          }
+        },
+        "domanda_6_risposta_1": {
+          "type": "answer",
+          "settings": {
+            "label": "Isolamento dei movimenti",
+            "value": "isolamento",
+            "p_m2": 1,
+            "p_m3a": 1,
+            "p_m3b": 2
+          }
+        },
+        "domanda_6_risposta_2": {
+          "type": "answer",
+          "settings": {
+            "label": "Freschezza e traspirabilità",
+            "value": "freschezza",
+            "p_m1": 2,
+            "p_m3a": 1,
+            "p_m3b": 2
+          }
+        },
+        "domanda_6_risposta_3": {
+          "type": "answer",
+          "settings": {
+            "label": "Supporto ergonomico a zone",
+            "value": "ergonomia",
+            "p_m1": 1,
+            "p_m3a": 2,
+            "p_m3b": 2
+          }
+        },
+        "domanda_6_risposta_4": {
+          "type": "answer",
+          "settings": {
+            "label": "Rivestimento sfoderabile e lavabile",
+            "value": "sfoderabile",
+            "p_m2": 2,
+            "p_m3a": 2,
+            "p_m3b": 2
+          }
+        },
+        "domanda_6_risposta_5": {
+          "type": "answer",
+          "settings": {
+            "label": "Durata nel tempo",
+            "value": "durata",
+            "p_m1": 1,
+            "p_m3a": 1,
+            "p_m3b": 2
+          }
+        },
+        "domanda_7": {
+          "type": "question",
+          "settings": {
+            "kicker": "Ultima domanda",
+            "title": "Quanto conta il budget nella tua scelta?",
+            "hint": "Scegli una risposta.",
+            "layout": "list",
+            "multi": false,
+            "key": "budget"
+          }
+        },
+        "domanda_7_risposta_1": {
+          "type": "answer",
+          "settings": {
+            "label": "Dormire bene non ha prezzo: voglio il massimo",
+            "value": "top",
+            "p_m3a": 2,
+            "p_m3b": 3
+          }
+        },
+        "domanda_7_risposta_2": {
+          "type": "answer",
+          "settings": {
+            "label": "Cerco il giusto equilibrio qualità-prezzo",
+            "value": "equilibrio",
+            "p_m2": 1,
+            "p_m3a": 2,
+            "p_m3b": 1
+          }
+        },
+        "domanda_7_risposta_3": {
+          "type": "answer",
+          "settings": {
+            "label": "Ho un budget contenuto",
+            "value": "contenuto",
+            "p_m1": 3,
+            "p_m2": 3
+          }
+        },
+        "risultato_m1": {
           "type": "result",
           "settings": {
             "key": "m1",
-            "badge": "Consigliato per te",
             "title": "CC Rigido",
             "subtitle": "Materasso a molle insacchettate · 7 zone",
             "description": "Stabile, reattivo e con un sostegno deciso. Il rivestimento imbottito aggiunge comfort al primo contatto, ma la sensazione resta ferma e solida: ideale per chi ama dormire “sopra” il materasso.",
@@ -15,15 +361,13 @@
             "tag_2": "Traspirabilità ottima",
             "feat_1": "Molle insacchettate a 7 zone di portanza differenziata",
             "feat_2": "Fascia perimetrale 3D Air che disperde calore e umidità",
-            "feat_3": "Ribaltabile e modulare: abbinalo a un topper per più comfort",
-            "cta_label": "Scopri il materasso"
+            "feat_3": "Ribaltabile e modulare: abbinalo a un topper per più comfort"
           }
         },
-        "result_m2": {
+        "risultato_m2": {
           "type": "result",
           "settings": {
             "key": "m2",
-            "badge": "Consigliato per te",
             "title": "CC Morbido",
             "subtitle": "Materasso in memory sagomato · sfoderabile",
             "description": "Il più morbido e accogliente della gamma. Pensato per chi vuole un materasso comodo fin da subito, con una sensazione avvolgente ma comunque equilibrata.",
@@ -31,15 +375,13 @@
             "tag_2": "Sfoderabile e lavabile",
             "feat_1": "Memory sagomato a 7 zone che distribuisce la pressione",
             "feat_2": "Base in poliuretano sagomato per stabilità e sostegno",
-            "feat_3": "Fascia 3D Air e sagomature che favoriscono l’aerazione",
-            "cta_label": "Scopri il materasso"
+            "feat_3": "Fascia 3D Air e sagomature che favoriscono l’aerazione"
           }
         },
-        "result_m3a": {
+        "risultato_m3a": {
           "type": "result",
           "settings": {
             "key": "m3a",
-            "badge": "Consigliato per te",
             "title": "CC Completo",
             "subtitle": "Memory bugnato + strato di rinforzo · sfoderabile",
             "description": "Comfort evoluto e strutturato: superficie accogliente grazie al memory bugnato e più sostegno grazie allo strato strutturale. Rivestimento premium con filamenti d’argento.",
@@ -47,15 +389,13 @@
             "tag_2": "Tessuto premium",
             "feat_1": "Memory bugnato che lavora sulle diverse zone di appoggio",
             "feat_2": "Strato strutturale in poliuretano per sostegno e consistenza",
-            "feat_3": "Filamenti d’argento e 3D Air per la dispersione termica",
-            "cta_label": "Scopri il materasso"
+            "feat_3": "Filamenti d’argento e 3D Air per la dispersione termica"
           }
         },
-        "result_m3b": {
+        "risultato_m3b": {
           "type": "result",
           "settings": {
             "key": "m3b",
-            "badge": "Consigliato per te",
             "title": "CC Ibrido",
             "subtitle": "Molle a 7 zone + memory bugnato · sfoderabile",
             "description": "Stabile sotto, accogliente sopra. Il modello più completo della gamma: comfort, sostegno, traspirabilità e durata in un’unica soluzione.",
@@ -63,11 +403,10 @@
             "tag_2": "Traspirabilità eccellente",
             "feat_1": "Molle insacchettate a 7 zone: sostegno indipendente e progressivo",
             "feat_2": "Memory bugnato che accompagna le zone di appoggio del corpo",
-            "feat_3": "Rivestimento sfoderabile con filamenti d’argento e 3D Air",
-            "cta_label": "Scopri il materasso"
+            "feat_3": "Rivestimento sfoderabile con filamenti d’argento e 3D Air"
           }
         },
-        "xsell_topper": {
+        "cross_sell_1": {
           "type": "cross_sell",
           "settings": {
             "show_for": "m1",
@@ -75,7 +414,7 @@
             "subtitle": "Aggiungi accoglienza al sostegno deciso delle molle"
           }
         },
-        "xsell_cuscino": {
+        "cross_sell_2": {
           "type": "cross_sell",
           "settings": {
             "show_for": "m1,m2,m3a,m3b",
@@ -85,12 +424,48 @@
         }
       },
       "block_order": [
-        "result_m1",
-        "result_m2",
-        "result_m3a",
-        "result_m3b",
-        "xsell_topper",
-        "xsell_cuscino"
+        "domanda_1",
+        "domanda_1_risposta_1",
+        "domanda_1_risposta_2",
+        "domanda_1_risposta_3",
+        "domanda_2",
+        "domanda_2_risposta_1",
+        "domanda_2_risposta_2",
+        "domanda_2_risposta_3",
+        "domanda_2_risposta_4",
+        "domanda_3",
+        "domanda_3_risposta_1",
+        "domanda_3_risposta_2",
+        "domanda_3_risposta_3",
+        "domanda_3_risposta_4",
+        "domanda_3_risposta_5",
+        "domanda_3_risposta_6",
+        "domanda_3_risposta_7",
+        "domanda_4",
+        "domanda_4_risposta_1",
+        "domanda_4_risposta_2",
+        "domanda_4_risposta_3",
+        "domanda_4_risposta_4",
+        "domanda_5",
+        "domanda_5_risposta_1",
+        "domanda_5_risposta_2",
+        "domanda_5_risposta_3",
+        "domanda_6",
+        "domanda_6_risposta_1",
+        "domanda_6_risposta_2",
+        "domanda_6_risposta_3",
+        "domanda_6_risposta_4",
+        "domanda_6_risposta_5",
+        "domanda_7",
+        "domanda_7_risposta_1",
+        "domanda_7_risposta_2",
+        "domanda_7_risposta_3",
+        "risultato_m1",
+        "risultato_m2",
+        "risultato_m3a",
+        "risultato_m3b",
+        "cross_sell_1",
+        "cross_sell_2"
       ],
       "settings": {
         "color_scheme": "scheme-2",
@@ -108,5 +483,7 @@
       }
     }
   },
-  "order": ["quiz"]
+  "order": [
+    "quiz"
+  ]
 }
