@@ -83,7 +83,7 @@
               "type": "button",
               "name": "t:names.button",
               "settings": {
-                "label": "Acquista ora",
+                "label": "Scopri la comodità",
                 "link": "shopify://collections/all",
                 "open_in_new_tab": false,
                 "style_class": "button",
@@ -175,6 +175,7 @@
         },
         "button_t3LMAy": {
           "type": "button",
+          "disabled": true,
           "settings": {
             "label": "Scopri di più",
             "link": "shopify://collections/all",
