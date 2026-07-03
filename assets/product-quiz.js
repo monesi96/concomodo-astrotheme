@@ -280,6 +280,18 @@
 
       // dopo il POST (ed eventuale captcha) Shopify riporta qui, sul risultato
       const { winner } = this.computeWinner();
+
+      // salva sul cliente risultato e risposte come tag Shopify
+      // (admin -> Clienti: filtrabili, es. quiz-risultato-m3b)
+      const tagsInput = this.emailForm.querySelector('input[name="contact[tags]"]');
+      if (tagsInput) {
+        const tags = ['newsletter', 'quiz-materasso', 'quiz-risultato-' + winner];
+        Object.keys(this.answers).forEach((k) => {
+          const v = (this.answers[k] || []).join('+');
+          if (v) tags.push('quiz-' + k + '-' + v);
+        });
+        tagsInput.value = tags.join(',');
+      }
       // il flusso captcha può ignorare return_to: salviamo il risultato anche
       // in sessionStorage, così viene ripristinato ovunque si atterri dopo
       try {
