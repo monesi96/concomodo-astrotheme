@@ -60,8 +60,16 @@
 
       if (this.emailForm) {
         this.emailForm.addEventListener('submit', (e) => {
-          e.preventDefault();
-          this.submitEmail();
+          if (DESIGN_MODE) {
+            // nell'editor tema niente POST reale: mostra solo il risultato
+            e.preventDefault();
+            this.showResult();
+            return;
+          }
+          // invio nativo: lascia lavorare il captcha anti-spam di Shopify.
+          // return_to riporta l'utente alla pagina con ?quiz_result=<vincitore>,
+          // che restoreFromUrl() ripristina al caricamento.
+          if (!this.prepareEmailSubmit()) e.preventDefault();
         });
       }
 
@@ -257,7 +265,7 @@
     }
 
     /* ------------------------------------------------ email */
-    submitEmail() {
+    prepareEmailSubmit() {
       const input = this.emailForm.querySelector('.cq__email-input');
       const error = this.emailForm.querySelector('.cq__email-error');
       const value = (input.value || '').trim();
@@ -267,21 +275,23 @@
       error.classList.toggle('is-visible', !valid);
       if (!valid) {
         input.focus();
-        return;
+        return false;
       }
 
-      if (!this.emailSubmitted) {
-        this.emailSubmitted = true;
-        const data = new FormData(this.emailForm);
-        // invio best-effort al form clienti Shopify: il risultato si mostra comunque
-        fetch(this.emailForm.action, {
-          method: 'POST',
-          body: data,
-          headers: { Accept: 'text/html' },
-        }).catch(() => {});
-        this.track('quiz_email_submitted');
+      // dopo il POST (ed eventuale captcha) Shopify riporta qui, sul risultato
+      const { winner } = this.computeWinner();
+      const returnInput = this.emailForm.querySelector('[data-cq-return]');
+      if (returnInput) {
+        try {
+          const url = new URL(window.location.href);
+          url.searchParams.set('quiz_result', winner);
+          returnInput.value = url.pathname + url.search;
+        } catch (e) {
+          returnInput.value = window.location.pathname + '?quiz_result=' + winner;
+        }
       }
-      this.showResult();
+      this.track('quiz_email_submitted', { result: winner });
+      return true;
     }
 
     /* ------------------------------------------------ risultato */
