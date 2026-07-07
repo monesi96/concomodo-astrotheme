@@ -614,8 +614,8 @@
                       "static": true,
                       "settings": {
                         "product_card_gap": 4,
-                        "inherit_color_scheme": true,
-                        "color_scheme": "",
+                        "inherit_color_scheme": false,
+                        "color_scheme": "scheme-6",
                         "border": "none",
                         "border_width": 1,
                         "border_opacity": 100,
