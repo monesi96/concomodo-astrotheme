@@ -376,7 +376,12 @@
                               class="size-guide-table__corner"
                               colspan="2"
                             ></td>
-                            <th colspan="{{ size_guide_lengths.size }}">Lunghezza cm</th>
+                            <th
+                              class="size-guide-table__lengths-label"
+                              colspan="{{ size_guide_lengths.size }}"
+                            >
+                              Lunghezza cm
+                            </th>
                           </tr>
                           <tr>
                             <td
@@ -396,7 +401,7 @@
                                   class="size-guide-table__axis"
                                   rowspan="{{ size_guide_widths.size }}"
                                 >
-                                  Larghezza cm
+                                  <span class="size-guide-table__axis-label">Larghezza cm</span>
                                 </th>
                               {% endif %}
                               <th>{{ size_guide_width | strip }}</th>
@@ -1060,6 +1065,32 @@
 
   .size-guide-drawer__content .size-guide-table .size-guide-table__corner {
     border: none;
+  }
+
+  .size-guide-drawer__content .size-guide-table .size-guide-table__lengths-label {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .size-guide-drawer__content .size-guide-table .size-guide-table__axis {
+    text-align: center;
+    vertical-align: middle;
+    width: 1%;
+  }
+
+  /* "Larghezza cm" in verticale, dal basso verso l'alto */
+  .size-guide-table__axis-label {
+    display: inline-block;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    white-space: nowrap;
+  }
+
+  @supports (writing-mode: sideways-lr) {
+    .size-guide-table__axis-label {
+      writing-mode: sideways-lr;
+      transform: none;
+    }
   }
 
   @media screen and (max-width: 479px) {
