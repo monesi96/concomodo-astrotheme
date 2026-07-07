@@ -570,7 +570,7 @@
                     "carousel_on_mobile": true,
                     "max_products": 2,
                     "columns_gap": 16,
-                    "rows_gap": 16,
+                    "rows_gap": 20,
                     "icons_style": "arrow",
                     "icons_shape": "none",
                     "gap": 12,
@@ -603,7 +603,7 @@
                         "background_color": "#00000026",
                         "corner_radius": 0,
                         "padding-block-start": 0,
-                        "padding-block-end": 0,
+                        "padding-block-end": 10,
                         "padding-inline-start": 0,
                         "padding-inline-end": 0
                       },
@@ -641,59 +641,103 @@
                           },
                           "blocks": {}
                         },
-                        "product_title_xmt3tU": {
-                          "type": "product-title",
-                          "name": "t:names.product_title",
+                        "product_card_group_HigV7M": {
+                          "type": "_product-card-group",
+                          "name": "t:names.group",
                           "settings": {
-                            "width": "fit-content",
-                            "max_width": "normal",
-                            "alignment": "left",
-                            "type_preset": "rte",
-                            "font": "var(--font-body--family)",
-                            "font_size": "1rem",
-                            "line_height": "normal",
-                            "letter_spacing": "normal",
-                            "case": "none",
-                            "wrap": "pretty",
-                            "color": "var(--color-foreground)",
-                            "background": false,
-                            "background_color": "#00000026",
-                            "corner_radius": 0,
-                            "padding-block-start": 4,
+                            "content_direction": "row",
+                            "vertical_on_mobile": true,
+                            "horizontal_alignment": "center",
+                            "vertical_alignment": "center",
+                            "align_baseline": false,
+                            "horizontal_alignment_flex_direction_column": "flex-start",
+                            "vertical_alignment_flex_direction_column": "center",
+                            "gap": 12,
+                            "width": "custom",
+                            "custom_width": 100,
+                            "width_mobile": "fill",
+                            "custom_width_mobile": 100,
+                            "height": "fit",
+                            "custom_height": 100,
+                            "inherit_color_scheme": true,
+                            "color_scheme": "",
+                            "background_media": "none",
+                            "video_position": "cover",
+                            "background_image_position": "cover",
+                            "border": "none",
+                            "border_width": 1,
+                            "border_opacity": 100,
+                            "border_radius": 0,
+                            "toggle_overlay": false,
+                            "overlay_color": "#00000026",
+                            "overlay_style": "solid",
+                            "gradient_direction": "to top",
+                            "link": "",
+                            "open_in_new_tab": false,
+                            "padding-block-start": 10,
                             "padding-block-end": 0,
-                            "padding-inline-start": 0,
-                            "padding-inline-end": 0
+                            "padding-inline-start": 10,
+                            "padding-inline-end": 10
                           },
-                          "blocks": {}
-                        },
-                        "price_G74aBR": {
-                          "type": "price",
-                          "name": "t:names.product_price",
-                          "settings": {
-                            "show_sale_price_first": true,
-                            "show_installments": false,
-                            "show_tax_info": false,
-                            "type_preset": "h6",
-                            "width": "100%",
-                            "alignment": "left",
-                            "font": "var(--font-body--family)",
-                            "font_size": "1rem",
-                            "line_height": "normal",
-                            "letter_spacing": "normal",
-                            "case": "none",
-                            "color": "var(--color-foreground)",
-                            "padding-block-start": 0,
-                            "padding-block-end": 0,
-                            "padding-inline-start": 0,
-                            "padding-inline-end": 0
+                          "blocks": {
+                            "product_title_PfyYUy": {
+                              "type": "product-title",
+                              "name": "t:names.product_title",
+                              "settings": {
+                                "width": "100%",
+                                "max_width": "none",
+                                "alignment": "left",
+                                "type_preset": "h4",
+                                "font": "var(--font-body--family)",
+                                "font_size": "1rem",
+                                "line_height": "normal",
+                                "letter_spacing": "normal",
+                                "case": "none",
+                                "wrap": "pretty",
+                                "color": "var(--color-foreground)",
+                                "background": false,
+                                "background_color": "#00000026",
+                                "corner_radius": 0,
+                                "padding-block-start": 4,
+                                "padding-block-end": 0,
+                                "padding-inline-start": 0,
+                                "padding-inline-end": 0
+                              },
+                              "blocks": {}
+                            },
+                            "price_e9PGKV": {
+                              "type": "price",
+                              "name": "t:names.product_price",
+                              "settings": {
+                                "show_sale_price_first": true,
+                                "show_installments": false,
+                                "show_tax_info": false,
+                                "type_preset": "h4",
+                                "width": "100%",
+                                "alignment": "right",
+                                "font": "var(--font-body--family)",
+                                "font_size": "1rem",
+                                "line_height": "normal",
+                                "letter_spacing": "normal",
+                                "case": "none",
+                                "color": "var(--color-foreground)",
+                                "padding-block-start": 0,
+                                "padding-block-end": 0,
+                                "padding-inline-start": 0,
+                                "padding-inline-end": 0
+                              },
+                              "blocks": {}
+                            }
                           },
-                          "blocks": {}
+                          "block_order": [
+                            "product_title_PfyYUy",
+                            "price_e9PGKV"
+                          ]
                         }
                       },
                       "block_order": [
                         "product_card_gallery_yWB6jf",
-                        "product_title_xmt3tU",
-                        "price_G74aBR"
+                        "product_card_group_HigV7M"
                       ]
                     }
                   },
