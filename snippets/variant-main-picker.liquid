@@ -389,7 +389,7 @@
                               colspan="2"
                             ></td>
                             {% for size_guide_length in size_guide_lengths %}
-                              <th>{{ size_guide_length | strip }}</th>
+                              <th class="size-guide-table__length">{{ size_guide_length | strip }}</th>
                             {% endfor %}
                           </tr>
                         </thead>
@@ -404,7 +404,7 @@
                                   <span class="size-guide-table__axis-label">Larghezza cm</span>
                                 </th>
                               {% endif %}
-                              <th>{{ size_guide_width | strip }}</th>
+                              <th class="size-guide-table__width">{{ size_guide_width | strip }}</th>
                               {% for size_guide_length in size_guide_lengths %}
                                 <td>{{ size_guide_width | strip }}x{{ size_guide_length | strip }}</td>
                               {% endfor %}
@@ -1070,6 +1070,23 @@
   .size-guide-drawer__content .size-guide-table .size-guide-table__lengths-label {
     text-align: center;
     vertical-align: middle;
+  }
+
+  /* Valori Larghezza in bold come quelli Lunghezza */
+  .size-guide-drawer__content .size-guide-table .size-guide-table__width {
+    font-weight: 600;
+  }
+
+  /* Sfondo etichette assi */
+  .size-guide-drawer__content .size-guide-table .size-guide-table__lengths-label,
+  .size-guide-drawer__content .size-guide-table .size-guide-table__axis {
+    background-color: #e4ded6;
+  }
+
+  /* Sfondo valori inseriti da schema (celle interne invariate) */
+  .size-guide-drawer__content .size-guide-table .size-guide-table__length,
+  .size-guide-drawer__content .size-guide-table .size-guide-table__width {
+    background-color: #f4efe8;
   }
 
   .size-guide-drawer__content .size-guide-table .size-guide-table__axis {
