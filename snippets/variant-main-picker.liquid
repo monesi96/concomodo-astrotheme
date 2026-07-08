@@ -20,13 +20,15 @@
   assign misure_split = false
   if block_settings.split_misure and block_settings.variant_style != 'dropdowns'
     for product_option in product_resource.options_with_values
+      if product_option.name == 'Dimensione'
+        assign dimensione_option = product_option
+      endif
       if product_option.name == 'Misure'
         assign misure_first_value = product_option.values.first.name
         if misure_first_value contains 'x'
           assign misure_split = true
           assign misure_option = product_option
         endif
-        break
       endif
     endfor
   endif
@@ -315,6 +317,24 @@
       class="misure-split-picker misure-split-picker--{{ block_settings.alignment }}{% if staged_variant_selection %} misure-split-picker--staged{% endif %}"
       data-block-id="{{ block.id }}"
     >
+      {% if dimensione_option %}
+        {%- comment -%}
+          Mappa Dimensione → misure acquistabili, usata al cambio Dimensione per
+          ripiegare sulla larghezza minima e tenere sempre una variante reale selezionata.
+        {%- endcomment -%}
+        <script type="application/json" data-misure-matrix>
+          {
+            {%- for dimensione_value in dimensione_option.values -%}
+              {%- assign dimensione_variants = product_resource.variants | where: 'option1', dimensione_value.name | where: 'available' -%}
+              {{ dimensione_value.name | json }}: [
+                {%- for dimensione_variant in dimensione_variants -%}
+                  {{ dimensione_variant.option2 | json }}{% unless forloop.last %},{% endunless %}
+                {%- endfor -%}
+              ]{% unless forloop.last %},{% endunless %}
+            {%- endfor -%}
+          }
+        </script>
+      {% endif %}
       <fieldset
         class="variant-option variant-option--buttons variant-option--{{ settings.variant_button_width }}"
         data-misure-role="length"
@@ -387,6 +407,46 @@
           picker.classList.add('variant-picker--dimension-chosen');
           var wrapper = document.querySelector('misure-split-picker[data-block-id="' + (picker.dataset.blockId || '') + '"]');
           if (wrapper) wrapper.classList.add('misure-split-picker--dimension-chosen');
+        };
+
+        // Al cambio Dimensione la Misura selezionata può non esistere più
+        // (le larghezze cambiano con la dimensione): ripiega sulla larghezza
+        // minima disponibile mantenendo la lunghezza scelta, PRIMA che il
+        // picker costruisca la richiesta, così una variante reale è sempre
+        // selezionata e il prezzo resta visibile.
+        var retargetMisura = function (picker, wrapper, newDimensione) {
+          var matrixEl = wrapper.querySelector('script[data-misure-matrix]');
+          if (!matrixEl) return;
+
+          var matrix;
+          try {
+            matrix = JSON.parse(matrixEl.textContent);
+          } catch (error) {
+            return;
+          }
+
+          var validMisure = matrix[newDimensione];
+          if (!validMisure || !validMisure.length) return;
+
+          var currentInput = picker.querySelector('[data-option-name="Misure"] input:checked');
+          var currentMisura = currentInput ? currentInput.value : '';
+          if (validMisure.indexOf(currentMisura) !== -1) return;
+
+          var currentLength = currentMisura.split('x')[1];
+          var nextMisura = null;
+          for (var i = 0; i < validMisure.length; i++) {
+            // Le misure sono in ordine larghezza crescente: la prima con la
+            // stessa lunghezza è la larghezza minima consentita.
+            if (validMisure[i].split('x')[1] === currentLength) {
+              nextMisura = validMisure[i];
+              break;
+            }
+          }
+          if (!nextMisura) nextMisura = validMisure[0];
+
+          var nextInput = picker.querySelector('[data-option-name="Misure"] input[value="' + nextMisura + '"]');
+          // Solo checked, senza dispatch: il fetch parte già dal change della Dimensione
+          if (nextInput) nextInput.checked = true;
         };
 
         // Allinea i selettori sintetici Lunghezza/Larghezza allo stato reale
@@ -462,11 +522,19 @@
               return;
             }
 
-            // Al primo cambio dell'opzione Dimensione, rivela le opzioni successive
+            // Cambio dell'opzione Dimensione (questo listener è in capture,
+            // quindi gira prima che il picker costruisca la richiesta)
             if (!target.closest('[data-gate-trigger]')) return;
 
             var gatePicker = target.closest('variant-picker');
             if (!gatePicker) return;
+
+            if (target instanceof HTMLInputElement) {
+              var gateWrapper = document.querySelector(
+                'misure-split-picker[data-block-id="' + (gatePicker.dataset.blockId || '') + '"]'
+              );
+              if (gateWrapper) retargetMisura(gatePicker, gateWrapper, target.value);
+            }
 
             gatePicker.dimensionChosen = true;
             revealGatedOptions(gatePicker);
