@@ -98,21 +98,33 @@
           {%- endfor -%}
         {%- endif -%}
 
-        {%- comment -%} ── Row: Supporto ergonomico ── {%- endcomment -%}
+        {%- comment -%} ── Row: Supporto ergonomico (meter a tacche) ── {%- endcomment -%}
         {%- if section.settings.show_support -%}
           {% render 'comparison-tooltip', label: section.settings.support_label, tooltip: section.settings.support_tooltip %}
           {%- for i in (1..2) -%}
             {%- if forloop.first %}{% assign s = spec_a %}{% else %}{% assign s = spec_b %}{% endif -%}
-            {% render 'comparison-cell', type: 'text', title: s.support_title, description: s.support_description %}
+            {% render 'comparison-cell',
+              type: 'meter',
+              title: s.support_title,
+              value: s.support_value,
+              min_label: section.settings.support_min_label,
+              max_label: section.settings.support_max_label
+            %}
           {%- endfor -%}
         {%- endif -%}
 
-        {%- comment -%} ── Row: Raffreddamento e traspirabilità ── {%- endcomment -%}
+        {%- comment -%} ── Row: Raffreddamento e traspirabilità (meter a tacche) ── {%- endcomment -%}
         {%- if section.settings.show_cooling -%}
           {% render 'comparison-tooltip', label: section.settings.cooling_label, tooltip: section.settings.cooling_tooltip %}
           {%- for i in (1..2) -%}
             {%- if forloop.first %}{% assign s = spec_a %}{% else %}{% assign s = spec_b %}{% endif -%}
-            {% render 'comparison-cell', type: 'text', title: s.cooling_title, description: s.cooling_description %}
+            {% render 'comparison-cell',
+              type: 'meter',
+              title: s.cooling_title,
+              value: s.cooling_value,
+              min_label: section.settings.cooling_min_label,
+              max_label: section.settings.cooling_max_label
+            %}
           {%- endfor -%}
         {%- endif -%}
 
@@ -442,6 +454,32 @@
     margin-block-start: 1rem;
   }
 
+  /* ── Level meter (support & cooling): 5 tacche a riempimento proporzionale ── */
+  .mattress-comparison__meter {
+    display: flex;
+    gap: 5px;
+    max-width: 240px;
+    margin-inline: auto;
+  }
+
+  .mattress-comparison__meter-seg {
+    position: relative;
+    flex: 1;
+    height: 8px;
+    border-radius: 999px;
+    background: rgb(var(--color-foreground-rgb) / 0.12);
+    overflow: hidden;
+  }
+
+  .mattress-comparison__meter-seg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    width: var(--f, 0%);
+    border-radius: inherit;
+    background: rgb(var(--color-foreground-rgb) / 0.55);
+  }
+
   /* ── Footer / CTA ── */
   .mattress-comparison__footer {
     grid-column: 2;
@@ -540,6 +578,18 @@
       "label": "Tooltip text"
     },
     {
+      "type": "text",
+      "id": "support_min_label",
+      "label": "Meter start label",
+      "default": "Essenziale"
+    },
+    {
+      "type": "text",
+      "id": "support_max_label",
+      "label": "Meter end label",
+      "default": "Massimo"
+    },
+    {
       "type": "header",
       "content": "Row · Cooling & breathability"
     },
@@ -559,6 +609,18 @@
       "type": "textarea",
       "id": "cooling_tooltip",
       "label": "Tooltip text"
+    },
+    {
+      "type": "text",
+      "id": "cooling_min_label",
+      "label": "Meter start label",
+      "default": "Buona"
+    },
+    {
+      "type": "text",
+      "id": "cooling_max_label",
+      "label": "Meter end label",
+      "default": "Eccellente"
     },
     {
       "type": "header",

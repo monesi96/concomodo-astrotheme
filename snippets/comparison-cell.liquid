@@ -1,14 +1,13 @@
 {%- doc -%}
   Renders one mattress's value cell for a comparison row.
 
-  @param {string} type - 'feel' | 'text' | 'value'
+  @param {string} type - 'feel' | 'meter' | 'value'
   @param {object} [spec] - The mattress_comparison metaobject (used by 'feel')
-  @param {string} [title] - Bold value title (used by 'text')
-  @param {string} [description] - Value description (used by 'text')
-  @param {string} [value] - Big value, e.g. "22 cm" (used by 'value')
+  @param {string} [title] - Short label above the meter (used by 'meter')
+  @param {string} [value] - Meter score 0-100 (used by 'meter') or big value, e.g. "22 cm" (used by 'value')
   @param {string} [subtext] - Small caption under the big value (used by 'value')
-  @param {string} [min_label] - Left end of the firmness scale (used by 'feel')
-  @param {string} [max_label] - Right end of the firmness scale (used by 'feel')
+  @param {string} [min_label] - Left end label of the scale/meter (used by 'feel' and 'meter')
+  @param {string} [max_label] - Right end label of the scale/meter (used by 'feel' and 'meter')
 {%- enddoc -%}
 <div class="mattress-comparison__cell mattress-comparison__cell--{{ type }}">
   {%- case type -%}
@@ -29,16 +28,38 @@
       {%- if spec.feel_title != blank -%}
         <div class="mattress-comparison__value-title">{{ spec.feel_title }}</div>
       {%- endif -%}
-      {%- if spec.feel_description != blank -%}
-        <div class="mattress-comparison__value-text">{{ spec.feel_description | newline_to_br }}</div>
-      {%- endif -%}
 
-    {%- when 'text' -%}
+    {%- when 'meter' -%}
       {%- if title != blank -%}
-        <div class="mattress-comparison__value-title">{{ title }}</div>
+        <div class="mattress-comparison__scale-label">{{ title }}</div>
       {%- endif -%}
-      {%- if description != blank -%}
-        <div class="mattress-comparison__value-text">{{ description | newline_to_br }}</div>
+      {%- if value != blank -%}
+        <div
+          class="mattress-comparison__meter"
+          role="img"
+          aria-label="{{ title }}: {{ value }} su 100"
+        >
+          {%- for i in (1..5) -%}
+            {%- liquid
+              # Ogni tacca copre 20 punti: riempimento proporzionale al punteggio
+              assign seg_start = i | minus: 1 | times: 20
+              assign seg_fill = value | minus: seg_start
+              if seg_fill > 20
+                assign seg_fill = 20
+              elsif seg_fill < 0
+                assign seg_fill = 0
+              endif
+              assign seg_percent = seg_fill | times: 5
+            -%}
+            <span class="mattress-comparison__meter-seg" style="--f: {{ seg_percent }}%;"></span>
+          {%- endfor -%}
+        </div>
+        {%- if min_label != blank or max_label != blank -%}
+          <div class="mattress-comparison__scale-ends">
+            <span>{{ min_label }}</span>
+            <span>{{ max_label }}</span>
+          </div>
+        {%- endif -%}
       {%- endif -%}
 
     {%- when 'value' -%}
