@@ -15,6 +15,49 @@
     assign staged_variant_selection = true
   endif
 
+  # Misure divise: l'opzione "Misure" (valori "80x190") viene nascosta e pilotata
+  # da due selettori sintetici Lunghezza + Larghezza, fuori da <variant-picker>.
+  assign misure_split = false
+  if block_settings.split_misure and block_settings.variant_style != 'dropdowns'
+    for product_option in product_resource.options_with_values
+      if product_option.name == 'Misure'
+        assign misure_first_value = product_option.values.first.name
+        if misure_first_value contains 'x'
+          assign misure_split = true
+          assign misure_option = product_option
+        endif
+        break
+      endif
+    endfor
+  endif
+
+  if misure_split
+    assign split_length_label = block_settings.split_length_label | default: 'Lunghezza (cm)'
+    assign split_width_label = block_settings.split_width_label | default: 'Larghezza (cm)'
+
+    assign misure_selected_parts = misure_option.selected_value | split: 'x'
+    assign misure_selected_width = misure_selected_parts[0]
+    assign misure_selected_length = misure_selected_parts[1]
+
+    assign misure_lengths_raw = ''
+    assign misure_widths_raw = ''
+    assign misure_avail_lengths_raw = ''
+    assign misure_avail_widths_raw = ''
+    for misure_value in misure_option.values
+      assign misure_parts = misure_value.name | split: 'x'
+      assign misure_widths_raw = misure_widths_raw | append: misure_parts[0] | append: ','
+      assign misure_lengths_raw = misure_lengths_raw | append: misure_parts[1] | append: ','
+      if misure_value.available
+        assign misure_avail_widths_raw = misure_avail_widths_raw | append: misure_parts[0] | append: ','
+        assign misure_avail_lengths_raw = misure_avail_lengths_raw | append: misure_parts[1] | append: ','
+      endif
+    endfor
+    assign misure_lengths = misure_lengths_raw | split: ',' | uniq
+    assign misure_widths = misure_widths_raw | split: ',' | uniq
+    assign misure_avail_lengths = misure_avail_lengths_raw | split: ',' | uniq
+    assign misure_avail_widths = misure_avail_widths_raw | split: ',' | uniq
+  endif
+
   assign size_guide_label = block_settings.size_guide_label | default: 'Guida alle misure'
   assign size_guide_title = block_settings.size_guide_title | default: size_guide_label
 
@@ -87,8 +130,15 @@
 
         {%- if variant_style == 'swatch' or block_settings.variant_style == 'buttons' -%}
           {%- assign fieldset_index = forloop.index0 -%}
+          {%- liquid
+            assign is_misure_proxy = false
+            if misure_split and product_option.name == 'Misure'
+              assign is_misure_proxy = true
+            endif
+          -%}
           <fieldset
-            class="variant-option variant-option--buttons{% if variant_style == 'swatch' %} variant-option--swatches{% else %} variant-option--{{ settings.variant_button_width }}{% endif %}{% if staged_variant_selection and product_option.name != 'Dimensione' %} variant-option--gated{% endif %}"
+            class="variant-option variant-option--buttons{% if variant_style == 'swatch' %} variant-option--swatches{% else %} variant-option--{{ settings.variant_button_width }}{% endif %}{% if is_misure_proxy %} variant-option--misure-proxy{% elsif staged_variant_selection and product_option.name != 'Dimensione' %} variant-option--gated{% endif %}"
+            data-option-name="{{ product_option.name | escape }}"
             data-fieldset-index="{{ fieldset_index }}"
             ref="fieldsets[]"
             {% if staged_variant_selection and product_option.name == 'Dimensione' %}
@@ -260,38 +310,180 @@
     </form>
   </variant-picker>
 
-  {% if staged_variant_selection %}
+  {% if misure_split %}
+    <misure-split-picker
+      class="misure-split-picker misure-split-picker--{{ block_settings.alignment }}{% if staged_variant_selection %} misure-split-picker--staged{% endif %}"
+      data-block-id="{{ block.id }}"
+    >
+      <fieldset
+        class="variant-option variant-option--buttons variant-option--{{ settings.variant_button_width }}"
+        data-misure-role="length"
+        style="--variant-ch: 1.95em;"
+      >
+        <legend>
+          <div class="variant-option__legend-row">{{ split_length_label | escape }}</div>
+        </legend>
+        {% for misure_length in misure_lengths %}
+          <label class="variant-option__button-label">
+            <input
+              type="radio"
+              name="MisureLunghezza-{{ block.id }}-{{ product_resource.id }}"
+              value="{{ misure_length }}"
+              aria-label="{{ misure_length }}"
+              data-msp="length"
+              data-option-available="{% if misure_avail_lengths contains misure_length %}true{% else %}false{% endif %}"
+              data-previous-checked="false"
+              {% if misure_length == misure_selected_length %}
+                data-current-checked="true"
+                checked
+              {% else %}
+                data-current-checked="false"
+              {% endif %}
+            >
+            <span class="variant-option__button-label__pill"></span>
+            <span class="variant-option__button-label__text">{{ misure_length }}</span>
+          </label>
+        {% endfor %}
+      </fieldset>
+      <fieldset
+        class="variant-option variant-option--buttons variant-option--{{ settings.variant_button_width }}"
+        data-misure-role="width"
+        style="--variant-ch: 1.95em;"
+      >
+        <legend>
+          <div class="variant-option__legend-row">{{ split_width_label | escape }}</div>
+        </legend>
+        {% for misure_width in misure_widths %}
+          <label class="variant-option__button-label">
+            <input
+              type="radio"
+              name="MisureLarghezza-{{ block.id }}-{{ product_resource.id }}"
+              value="{{ misure_width }}"
+              aria-label="{{ misure_width }}"
+              data-msp="width"
+              data-option-available="{% if misure_avail_widths contains misure_width %}true{% else %}false{% endif %}"
+              data-previous-checked="false"
+              {% if misure_width == misure_selected_width %}
+                data-current-checked="true"
+                checked
+              {% else %}
+                data-current-checked="false"
+              {% endif %}
+            >
+            <span class="variant-option__button-label__pill"></span>
+            <span class="variant-option__button-label__text">{{ misure_width }}</span>
+          </label>
+        {% endfor %}
+      </fieldset>
+    </misure-split-picker>
+  {% endif %}
+
+  {% if staged_variant_selection or misure_split %}
     <script>
       if (!window.stagedVariantSelectionInit) {
         window.stagedVariantSelectionInit = true;
 
         var revealGatedOptions = function (picker) {
           picker.classList.add('variant-picker--dimension-chosen');
+          var wrapper = document.querySelector('misure-split-picker[data-block-id="' + (picker.dataset.blockId || '') + '"]');
+          if (wrapper) wrapper.classList.add('misure-split-picker--dimension-chosen');
         };
 
-        // Al primo cambio dell'opzione Dimensione, rivela le opzioni successive
+        // Allinea i selettori sintetici Lunghezza/Larghezza allo stato reale
+        // dell'opzione Misure (variante selezionata + larghezze disponibili
+        // per la Dimensione corrente).
+        var syncMisureSplit = function (wrapper) {
+          var picker = document.querySelector('variant-picker[data-block-id="' + wrapper.dataset.blockId + '"]');
+          if (!picker) return;
+          var realInputs = picker.querySelectorAll('[data-option-name="Misure"] input[type="radio"]');
+          if (!realInputs.length) return;
+
+          var selectedWidth = null;
+          var selectedLength = null;
+          var availableWidths = {};
+          var availableLengths = {};
+
+          realInputs.forEach(function (input) {
+            var parts = input.value.split('x');
+            if (input.dataset.optionAvailable === 'true') {
+              availableWidths[parts[0]] = true;
+              availableLengths[parts[1]] = true;
+            }
+            if (input.checked) {
+              selectedWidth = parts[0];
+              selectedLength = parts[1];
+            }
+          });
+
+          wrapper.querySelectorAll('input[data-msp]').forEach(function (input) {
+            var isWidth = input.dataset.msp === 'width';
+            var available = isWidth ? availableWidths[input.value] : availableLengths[input.value];
+            input.dataset.optionAvailable = available ? 'true' : 'false';
+
+            var shouldCheck = input.value === (isWidth ? selectedWidth : selectedLength);
+            if (input.checked !== shouldCheck) input.checked = shouldCheck;
+            input.dataset.currentChecked = shouldCheck ? 'true' : 'false';
+            input.dataset.previousChecked = 'false';
+          });
+        };
+
         document.addEventListener(
           'change',
           function (event) {
             var target = event.target;
             if (!(target instanceof HTMLInputElement) && !(target instanceof HTMLSelectElement)) return;
+
+            // Selettori sintetici: componi "LarghezzaxLunghezza" e attiva il radio reale
+            if (target instanceof HTMLInputElement && target.dataset.msp) {
+              var wrapper = target.closest('misure-split-picker');
+              if (!wrapper) return;
+
+              if (target.dataset.msp === 'length') {
+                wrapper.classList.add('misure-split-picker--length-chosen');
+              }
+
+              var checkedLength = wrapper.querySelector('input[data-msp="length"]:checked');
+              var checkedWidth = wrapper.querySelector('input[data-msp="width"]:checked');
+              if (!checkedLength || !checkedWidth) return;
+
+              var picker = document.querySelector('variant-picker[data-block-id="' + wrapper.dataset.blockId + '"]');
+              if (!picker) return;
+
+              var realInput = picker.querySelector(
+                '[data-option-name="Misure"] input[value="' + checkedWidth.value + 'x' + checkedLength.value + '"]'
+              );
+              if (realInput && !realInput.checked) {
+                realInput.checked = true;
+                realInput.dispatchEvent(new Event('change', { bubbles: true }));
+              } else if (!realInput) {
+                // Combinazione inesistente: riallinea i sintetici alla variante reale
+                syncMisureSplit(wrapper);
+              }
+              return;
+            }
+
+            // Al primo cambio dell'opzione Dimensione, rivela le opzioni successive
             if (!target.closest('[data-gate-trigger]')) return;
 
-            var picker = target.closest('variant-picker');
-            if (!picker) return;
+            var gatePicker = target.closest('variant-picker');
+            if (!gatePicker) return;
 
-            picker.dimensionChosen = true;
-            revealGatedOptions(picker);
+            gatePicker.dimensionChosen = true;
+            revealGatedOptions(gatePicker);
           },
           true
         );
 
         // Il morph post-fetch rigenera le classi dal server: ri-applica lo stato
+        // e riallinea i selettori sintetici (che vivono fuori dal morph).
         document.addEventListener('variant:update', function (event) {
           var picker = event.target;
-          if (picker instanceof HTMLElement && picker.dimensionChosen) {
+          if (!(picker instanceof HTMLElement)) return;
+          if (picker.dimensionChosen) {
             revealGatedOptions(picker);
           }
+          var wrapper = document.querySelector('misure-split-picker[data-block-id="' + (picker.dataset.blockId || '') + '"]');
+          if (wrapper) syncMisureSplit(wrapper);
         });
       }
     </script>
@@ -945,6 +1137,53 @@
 
   @media (prefers-reduced-motion: reduce) {
     .variant-picker--dimension-chosen .variant-option--gated {
+      animation: none;
+    }
+  }
+
+  /* Misure divise: il fieldset reale "Misure" resta nel DOM (guida la selezione
+     della variante) ma è nascosto; il cliente usa i selettori sintetici. */
+  .variant-option--misure-proxy {
+    display: none;
+  }
+
+  misure-split-picker {
+    display: block;
+  }
+
+  .misure-split-picker .variant-option {
+    margin-top: var(--padding-lg);
+  }
+
+  .misure-split-picker--center .variant-option {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .misure-split-picker--right .variant-option {
+    text-align: right;
+    justify-content: right;
+  }
+
+  /* Selezione progressiva a 3 step: Lunghezza dopo la Dimensione, Larghezza dopo la Lunghezza */
+  .misure-split-picker--staged:not(.misure-split-picker--dimension-chosen) [data-misure-role] {
+    display: none;
+  }
+
+  .misure-split-picker--staged:not(.misure-split-picker--length-chosen) [data-misure-role='width'] {
+    display: none;
+  }
+
+  .misure-split-picker--dimension-chosen [data-misure-role='length'],
+  .misure-split-picker--length-chosen [data-misure-role='width'] {
+    animation: variantOptionReveal calc(var(--animation-speed) * 1.5) var(--animation-easing) both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .misure-split-picker--dimension-chosen [data-misure-role='length'],
+    .misure-split-picker--length-chosen [data-misure-role='width'] {
       animation: none;
     }
   }
