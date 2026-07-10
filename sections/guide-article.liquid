@@ -202,12 +202,12 @@
           </details>
 
         {%- when 'cta' -%}
-          <aside class="guide-article__cta color-{{ block.settings.color_scheme }}" style="padding: 0 1rem" {{ block.shopify_attributes }}>
+          <aside class="guide-article__cta color-{{ block.settings.color_scheme }}" {{ block.shopify_attributes }}>
             {%- if block.settings.heading != blank -%}
-              <h2 class="guide-article__cta-heading">{{ block.settings.heading }}</h2>
+              <h2 class="guide-article__cta-heading"  style="padding-bottom: .5rem">{{ block.settings.heading }}</h2>
             {%- endif -%}
             {%- if block.settings.text != blank -%}
-              <div class="guide-article__cta-text rte">{{ block.settings.text }}</div>
+              <div class="guide-article__cta-text rte" style="padding-bottom: 1rem">{{ block.settings.text }}</div>
             {%- endif -%}
             {%- if block.settings.button_label != blank and block.settings.button_link != blank -%}
               <a class="button guide-article__cta-button" style="margin: auto" href="{{ block.settings.button_link }}">
