@@ -1722,7 +1722,7 @@
                     "alignment": "left",
                     "font": "var(--font-heading--family)",
                     "font_size": "1.5rem",
-                    "line_height": "normal",
+                    "line_height": "tight",
                     "letter_spacing": "normal",
                     "case": "none",
                     "color": "var(--color-foreground-heading)",
