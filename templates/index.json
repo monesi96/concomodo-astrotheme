@@ -90,7 +90,7 @@
                 "weight": "600",
                 "font_size_desktop": "1rem",
                 "font_size_mobile": "",
-                "width": "custom",
+                "width": "fit-content",
                 "custom_width": 20,
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 100
