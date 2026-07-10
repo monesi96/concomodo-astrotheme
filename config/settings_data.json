@@ -48,7 +48,7 @@
     "page_width": "normal",
     "page_transition_enabled": true,
     "transition_to_main_product": true,
-    "card_hover_effect": "subtle-zoom",
+    "card_hover_effect": "lift",
     "badge_position": "top-right",
     "badge_corner_radius": 100,
     "badge_sale_color_scheme": "scheme-1",
@@ -412,9 +412,9 @@
       },
       "scheme-5cc54846-b01b-4ce6-9b99-8344319b3293": {
         "settings": {
-          "background": "#FFFFFF00",
+          "background": "rgba(0,0,0,0)",
           "foreground_heading": "#464646",
-          "foreground": "#FFFFFF",
+          "foreground": "#ffffff",
           "primary": "#464646",
           "primary_hover": "#b2c8d1",
           "border": "#cbc4bc",
