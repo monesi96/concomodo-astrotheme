@@ -161,7 +161,7 @@
             "text_TegzA4": {
               "type": "text",
               "settings": {
-                "text": "<p><a href=\"/collections/materassi\" title=\"Materassi\">materassi</a><br/><a href=\"/collections/topper\" title=\"Topper\">topper</a><br/><a href=\"/collections/topper-copia\" title=\"Cuscini\">cuscini</a><br/><a href=\"#\" title=\"#\">faq</a><br/><a href=\"#\" title=\"#\">recensioni</a></p>",
+                "text": "<p><a href=\"/collections/materassi\" title=\"Materassi\">materassi</a><br/><a href=\"/collections/topper\" title=\"Topper\">topper</a><br/><a href=\"#\" title=\"#\">faq</a><br/><a href=\"#\" title=\"#\">recensioni</a></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
