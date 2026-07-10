@@ -2066,6 +2066,33 @@
     "section_wiLr9X": {
       "type": "section",
       "blocks": {
+        "text_Y8qEaF": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<h3>Che cosa dicono di noi</h3>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h3",
+            "font": "var(--font-body--family)",
+            "weight": "",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
         "judge_me_reviews_cards_carousel_4WRrFJ": {
           "type": "shopify://apps/judge-me-reviews/blocks/cards_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
@@ -2550,6 +2577,7 @@
         }
       },
       "block_order": [
+        "text_Y8qEaF",
         "judge_me_reviews_cards_carousel_4WRrFJ",
         "group_TwzenE"
       ],
