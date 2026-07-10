@@ -1916,7 +1916,7 @@
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
-            "border_radius": 0
+            "border_radius": 30
           },
           "blocks": {
             "collection_title_9jU6kF": {
@@ -2018,7 +2018,7 @@
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
-                "border_radius": 30
+                "border_radius": 0
               },
               "blocks": {}
             }
