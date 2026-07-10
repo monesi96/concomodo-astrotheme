@@ -7,10 +7,11 @@
 {% capture children %}
   {% content_for 'blocks', closest.product: product %}
   {%- comment -%}
-    On a product page the cards are complementary products (topper, accessori): they can be
-    added to the cart inheriting the size selected on the main product.
+    Recommendation cards (topper, accessori) can be added to the cart inheriting the size
+    selected on the main product. `recommendations.performed` is only true inside the
+    /recommendations/products request, which is the one that renders those cards.
   {%- endcomment -%}
-  {% if template.name == 'product' %}
+  {% if recommendations.performed %}
     {% render 'linked-size-add', product: product, section_id: section.id %}
   {% endif %}
 {% endcapture %}
@@ -26,6 +27,11 @@
     display: block;
     width: 100%;
     margin-block-start: var(--padding-xs);
+  }
+
+  /* Our button replaces the theme's "Scegli" overlay, which would open a second picker. */
+  product-card:has(linked-size-add:not([hidden])) .quick-add {
+    display: none;
   }
 
   /* The real theme product form: functional, never shown. */
