@@ -144,13 +144,40 @@
             "padding-inline-end": 0
           },
           "blocks": {
+            "text_f9NiTq": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>Realizziamo articoli che funzionano meglio e durano più a lungo. I nostri prodotti risolvono problemi reali con un design pulito e materiali autentici.</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "weight": "",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
             "spacer_khnjYV": {
               "type": "spacer",
               "name": "t:names.spacer",
               "settings": {
                 "size": "pixel",
                 "percent_size": 100,
-                "pixel_size": 60,
+                "pixel_size": 100,
                 "custom_mobile_size": false,
                 "size_mobile": "percent",
                 "percent_size_mobile": 100,
@@ -186,6 +213,7 @@
             }
           },
           "block_order": [
+            "text_f9NiTq",
             "spacer_khnjYV",
             "text_TegzA4"
           ]
@@ -229,20 +257,6 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "spacer_HEFNQR": {
-              "type": "spacer",
-              "name": "t:names.spacer",
-              "settings": {
-                "size": "pixel",
-                "percent_size": 100,
-                "pixel_size": 60,
-                "custom_mobile_size": false,
-                "size_mobile": "percent",
-                "percent_size_mobile": 100,
-                "pixel_size_mobile": 120
-              },
-              "blocks": {}
-            },
             "text_XtUVdM": {
               "type": "text",
               "settings": {
@@ -288,12 +302,53 @@
                 "custom_url": ""
               },
               "blocks": {}
+            },
+            "spacer_HEFNQR": {
+              "type": "spacer",
+              "name": "t:names.spacer",
+              "settings": {
+                "size": "pixel",
+                "percent_size": 100,
+                "pixel_size": 60,
+                "custom_mobile_size": false,
+                "size_mobile": "percent",
+                "percent_size_mobile": 100,
+                "pixel_size_mobile": 120
+              },
+              "blocks": {}
+            },
+            "text_mYjCiV": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Guida alle taglie<br/>100 notti di prova<br/>Informativa di vendita<br/>Dormire comodi</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-subheading--family)",
+                "weight": "",
+                "font_size": "1.125rem",
+                "line_height": "loose",
+                "letter_spacing": "normal",
+                "case": "uppercase",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
             }
           },
           "block_order": [
-            "spacer_HEFNQR",
             "text_XtUVdM",
-            "social_links_MapUeF"
+            "social_links_MapUeF",
+            "spacer_HEFNQR",
+            "text_mYjCiV"
           ]
         }
       },
