@@ -1504,7 +1504,7 @@
                 "text": "<h2>Le nostre comodità</h2>",
                 "width": "100%",
                 "max_width": "normal",
-                "alignment": "center",
+                "alignment": "left",
                 "type_preset": "h3",
                 "font": "var(--font-body--family)",
                 "font_size": "1rem",
@@ -1526,6 +1526,7 @@
             "group_GUDRLa": {
               "type": "group",
               "name": "t:names.group",
+              "disabled": true,
               "settings": {
                 "content_direction": "row",
                 "vertical_on_mobile": false,
@@ -1774,8 +1775,7 @@
         }
       },
       "custom_css": [
-        "> div > div {margin: 0 30px;}",
-        "> div {background: linear-gradient( 0deg, rgba(255, 255, 255, 1) 50%, rgba(244, 239, 232, 1) 50% );}",
+        "> div {background: linear-gradient( 0deg, rgba(255, 255, 255, 1) 60%, rgba(244, 239, 232, 1) 60% );}",
         "@media screen and (max-width: 749px) {> div > div {margin: 0; }}"
       ],
       "name": "t:names.products_carousel",
