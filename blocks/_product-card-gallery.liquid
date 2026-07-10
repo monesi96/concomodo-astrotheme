@@ -15,7 +15,7 @@
         <div
           class="
             product-badges__badge product-badges__badge--rectangle
-            {% if product.available == false %} color-{{ settings.badge_sold_out_color_scheme }}{% elsif product.compare_at_price > product.price %} color-{{ settings.badge_sale_color_scheme }}{% endif %}
+            {% if product.available == false %} color-{{ settings.badge_sold_out_color_scheme }}{% elsif product.compare_at_price > product.price %} color-{{ settings.badge_sale_color_scheme }} product-badges__badge--sale{% endif %}
           "
         >
           {%- if product.available == false -%}
@@ -85,6 +85,12 @@
   .product-badges__badge--rectangle {
     padding-block: var(--badge-rectangle-padding-block);
     padding-inline: var(--badge-rectangle-padding-inline);
+  }
+
+  /* Badge "In offerta": arancione promozioni, vince sul color scheme del badge */
+  .product-badges__badge.product-badges__badge--sale {
+    background: #ff8752;
+    color: #fff;
   }
 {% endstylesheet %}
 
