@@ -403,7 +403,8 @@
         }
       },
       "custom_css": [
-        ".card-gallery {height: stretch;}"
+        ".card-gallery {height: stretch;}",
+        ".card-gallery .product-media{border-radius: 30px; overflow: hidden}"
       ],
       "settings": {
         "layout_type": "grid",
