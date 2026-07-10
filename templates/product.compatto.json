@@ -1256,7 +1256,7 @@
                     "gap": 12,
                     "width": "fit-content",
                     "custom_width": 100,
-                    "width_mobile": "fill",
+                    "width_mobile": "fit-content",
                     "custom_width_mobile": 100,
                     "height": "fit",
                     "custom_height": 100,
@@ -1300,7 +1300,7 @@
                       "settings": {
                         "text": "<p>Parla con noi</p>",
                         "width": "fit-content",
-                        "max_width": "normal",
+                        "max_width": "narrow",
                         "alignment": "left",
                         "type_preset": "rte",
                         "font": "var(--font-body--family)",
