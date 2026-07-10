@@ -28,7 +28,7 @@
             "custom_width": 100,
             "width_mobile": "fill",
             "custom_width_mobile": 100,
-            "height": "fit",
+            "height": "fill",
             "custom_height": 100,
             "inherit_color_scheme": false,
             "color_scheme": "scheme-4f5be44b-415b-463d-863e-be705cbe7656",
@@ -178,7 +178,7 @@
         "vertical_alignment_flex_direction_column": "center",
         "gap": 12,
         "section_width": "full-width",
-        "section_height": "",
+        "section_height": "large",
         "section_height_custom": 50,
         "color_scheme": "scheme-1",
         "background_media": "none",
@@ -399,7 +399,7 @@
                 "height": "fit",
                 "custom_height": 100,
                 "inherit_color_scheme": false,
-                "color_scheme": "scheme-4",
+                "color_scheme": "scheme-4f5be44b-415b-463d-863e-be705cbe7656",
                 "background_media": "none",
                 "video_position": "cover",
                 "background_image_position": "cover",
@@ -512,7 +512,7 @@
                 "height": "fit",
                 "custom_height": 100,
                 "inherit_color_scheme": false,
-                "color_scheme": "scheme-4",
+                "color_scheme": "scheme-4f5be44b-415b-463d-863e-be705cbe7656",
                 "background_media": "none",
                 "video_position": "cover",
                 "background_image_position": "cover",
@@ -620,7 +620,7 @@
       ],
       "custom_css": [
         "@media screen and (max-width: 749px) {.section-content-wrapper > .group-block > .group-block-content > .group-block {height: auto; }}",
-        "img{}"
+        "img {}"
       ],
       "name": "t:names.custom_section",
       "settings": {
