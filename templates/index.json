@@ -1820,7 +1820,7 @@
             "custom_width_mobile": 100,
             "height": "fit",
             "custom_height": 100,
-            "inherit_color_scheme": false,
+            "inherit_color_scheme": true,
             "color_scheme": "scheme-58084d4c-a86e-4d0a-855e-a0966e5043f7",
             "background_media": "none",
             "video_position": "cover",
@@ -1846,7 +1846,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>LE NOSTRE COLLEZIONI</p>",
+                "text": "",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1873,9 +1873,9 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Troviamo la soluzione perfetta <strong>con</strong> te</p>",
-                "width": "fit-content",
-                "max_width": "normal",
+                "text": "<p>Troviamo la soluzione perfetta con te</p>",
+                "width": "100%",
+                "max_width": "none",
                 "alignment": "left",
                 "type_preset": "h3",
                 "font": "var(--font-body--family)",
@@ -1895,30 +1895,11 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
-            },
-            "button_CNPt3q": {
-              "type": "button",
-              "name": "t:names.button",
-              "settings": {
-                "label": "Scopri i nostri prodotti",
-                "link": "shopify://collections/all",
-                "open_in_new_tab": false,
-                "style_class": "button-secondary",
-                "weight": "",
-                "font_size_desktop": "",
-                "font_size_mobile": "",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
             }
           },
           "block_order": [
             "text_fnrLMP",
-            "text_bjkEqE",
-            "button_CNPt3q"
+            "text_bjkEqE"
           ]
         },
         "static-collection-card": {
@@ -1928,7 +1909,7 @@
           "settings": {
             "placement": "on_image",
             "horizontal_alignment": "center",
-            "vertical_alignment": "flex-end",
+            "vertical_alignment": "center",
             "collection_card_gap": 8,
             "inherit_color_scheme": false,
             "color_scheme": "scheme-5",
@@ -1945,7 +1926,7 @@
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
-                "type_preset": "h3",
+                "type_preset": "h4",
                 "font": "var(--font-body--family)",
                 "font_size": "1rem",
                 "line_height": "normal",
@@ -2052,7 +2033,7 @@
         "group_nRm9zM"
       ],
       "custom_css": [
-        "@media screen and (min-width: 750px) {.section-resource-list__content {width: 25%; } .collection-card {height: 500px; } .resource-list__carousel .resource-list__slide {width: 33.33%; }}",
+        "@media screen and (min-width: 750px) {.collection-card {height: 500px; } .resource-list__carousel .resource-list__slide {width: 33.33%; }}",
         "@media screen and (max-width: 749px) {> div > div {margin: 0; } .collection-card {height: 340px; } .section-resource-list__list-wrapper {width: 100%; } .collection-card__content p {font-size: 0.8em; }}"
       ],
       "name": "t:names.collections_carousel",
@@ -2074,10 +2055,10 @@
         "max_collections": 4,
         "icons_style": "none",
         "icons_shape": "circle",
-        "content_direction": "row",
+        "content_direction": "column",
         "section_width": "page-width",
         "gap": 12,
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
         "padding-block-start": 45,
         "padding-block-end": 45
       }
@@ -2112,7 +2093,7 @@
             "stars_color": "",
             "arrows_color": "#464646",
             "transition_speed": 5,
-            "header_text": "Guarda le nostre recensioni",
+            "header_text": "Che cosa dicono di noi",
             "show_average_rating": true,
             "rating_display": "default"
           }
