@@ -1294,7 +1294,8 @@
   .size-guide-drawer__dialog {
     position: fixed;
     border-radius: 0;
-    width: 34rem;
+    /* Wide enough for the 4-column Matrimoniale table to fit without scrolling. */
+    width: 46rem;
     max-width: 92vw;
     height: 100%;
     margin: 0 0 0 auto;
@@ -1370,11 +1371,13 @@
     border-radius: var(--style-border-radius-popover);
   }
 
+  /* Last-resort escape hatch: the table should fit on its own at every breakpoint. */
   .size-guide-drawer__group-table {
     overflow-x: auto;
   }
 
   .size-guide-drawer__content .size-guide-table {
+    width: 100%;
     border-collapse: collapse;
     text-align: center;
     font-size: 0.8125rem;
@@ -1389,7 +1392,7 @@
 
   .size-guide-drawer__content .size-guide-table :is(th, td) {
     border: 1px solid var(--color-border);
-    padding: var(--padding-2xs) var(--padding-xs);
+    padding: var(--padding-2xs);
     font-weight: 400;
   }
 
@@ -1445,16 +1448,19 @@
     }
   }
 
-  @media screen and (max-width: 479px) {
-    .size-guide-drawer__group-columns {
-      grid-template-columns: minmax(0, 1fr);
-    }
-  }
-
   @media screen and (max-width: 749px) {
     .size-guide-drawer__dialog {
       width: 100dvw;
       max-width: 100%;
+    }
+
+    /* Stack image over table so the table gets the full drawer width. */
+    .size-guide-drawer__group-columns {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .size-guide-drawer__content .size-guide-table {
+      font-size: 0.75rem;
     }
   }
 {% endstylesheet %}
