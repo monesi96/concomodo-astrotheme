@@ -402,7 +402,9 @@
           ]
         }
       },
-      "custom_css": [],
+      "custom_css": [
+        ".card-gallery{height: stretch}"
+      ],
       "settings": {
         "layout_type": "grid",
         "product_card_size": "extra-large",
