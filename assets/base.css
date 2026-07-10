@@ -2208,8 +2208,7 @@ product-price.text-block:is(.h1, .h2, .h3, .h4, .h5, .h6) > *:not(.tax-note) {
 
 .compare-at-price {
   opacity: 0.4;
-  /*text-decoration-line: line-through;*/
-  text-decoration-thickness: 1.5px;
+  text-decoration-line: line-through;
   font-size: .6em;
 }
 
