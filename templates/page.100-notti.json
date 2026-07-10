@@ -31,9 +31,10 @@
             "height": "fit",
             "custom_height": 100,
             "inherit_color_scheme": false,
-            "color_scheme": "scheme-6",
-            "background_media": "none",
+            "color_scheme": "scheme-4f5be44b-415b-463d-863e-be705cbe7656",
+            "background_media": "image",
             "video_position": "cover",
+            "background_image": "shopify://shop_images/3S3A6752_copy.jpg",
             "background_image_position": "cover",
             "border": "none",
             "border_width": 1,
@@ -46,7 +47,7 @@
             "link": "",
             "open_in_new_tab": false,
             "placeholder": "",
-            "padding-block-start": 80,
+            "padding-block-start": 100,
             "padding-block-end": 80,
             "padding-inline-start": 30,
             "padding-inline-end": 30
@@ -72,7 +73,7 @@
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
-                "padding-block-start": 0,
+                "padding-block-start": 60,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
@@ -163,6 +164,9 @@
       "block_order": [
         "group_hero"
       ],
+      "custom_css": [
+        "{margin-top: -100px;}"
+      ],
       "name": "t:names.custom_section",
       "settings": {
         "content_direction": "column",
@@ -184,8 +188,8 @@
         "border_width": 1,
         "border_opacity": 100,
         "border_radius": 0,
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
+        "toggle_overlay": true,
+        "overlay_color": "#464646",
         "overlay_style": "solid",
         "gradient_direction": "to top",
         "padding-block-start": 0,
@@ -282,7 +286,7 @@
                 "height": "fill",
                 "custom_height": 100,
                 "inherit_color_scheme": false,
-                "color_scheme": "scheme-58084d4c-a86e-4d0a-855e-a0966e5043f7",
+                "color_scheme": "scheme-4f5be44b-415b-463d-863e-be705cbe7656",
                 "background_media": "none",
                 "video_position": "cover",
                 "background_image_position": "cover",
@@ -395,7 +399,7 @@
                 "height": "fit",
                 "custom_height": 100,
                 "inherit_color_scheme": false,
-                "color_scheme": "scheme-58084d4c-a86e-4d0a-855e-a0966e5043f7",
+                "color_scheme": "scheme-4",
                 "background_media": "none",
                 "video_position": "cover",
                 "background_image_position": "cover",
@@ -508,7 +512,7 @@
                 "height": "fit",
                 "custom_height": 100,
                 "inherit_color_scheme": false,
-                "color_scheme": "scheme-58084d4c-a86e-4d0a-855e-a0966e5043f7",
+                "color_scheme": "scheme-4",
                 "background_media": "none",
                 "video_position": "cover",
                 "background_image_position": "cover",
@@ -615,7 +619,8 @@
         "group_CRAMyr"
       ],
       "custom_css": [
-        "@media screen and (max-width: 749px) {.section-content-wrapper > .group-block > .group-block-content > .group-block {height: auto; }}"
+        "@media screen and (max-width: 749px) {.section-content-wrapper > .group-block > .group-block-content > .group-block {height: auto; }}",
+        "img{}"
       ],
       "name": "t:names.custom_section",
       "settings": {
@@ -638,8 +643,8 @@
         "border_width": 1,
         "border_opacity": 100,
         "border_radius": 0,
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
+        "toggle_overlay": true,
+        "overlay_color": "#464646",
         "overlay_style": "solid",
         "gradient_direction": "to top",
         "padding-block-start": 80,
