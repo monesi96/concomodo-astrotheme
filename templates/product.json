@@ -777,10 +777,40 @@
                   "block_order": [
                     "text_ccPepX"
                   ]
+                },
+                "product_upsell_D3mNqA": {
+                  "type": "product-upsell",
+                  "name": "Upsell prodotto",
+                  "settings": {
+                    "heading": "Completa il tuo letto <strong>con</strong>",
+                    "hint": "Scegli il topper più adatto a te: puoi aggiungerne solo uno.",
+                    "topper_1_badge": "Più morbidezza",
+                    "topper_1_text": "Se il materasso è troppo rigido e lo vuoi più morbido, senza effetto sprofondo.",
+                    "topper_2_badge": "Più sostegno",
+                    "topper_2_text": "Allunga la vita del materasso e dà più rigidità a quello che sprofonda.",
+                    "gift_enabled": true,
+                    "gift_badge": "In regalo",
+                    "gift_free_label": "Gratis",
+                    "gift_text": "Aggiungi un topper e il cuscino te lo regaliamo noi.",
+                    "gift_cart_property": "In regalo con il topper",
+                    "solo_discount_percent": 50,
+                    "solo_badge": "-50% solo online",
+                    "add_label": "Aggiungi",
+                    "unavailable_label": "Non disponibile",
+                    "inherit_color_scheme": true,
+                    "color_scheme": "scheme-1",
+                    "border_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 16,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
-                "product_recommendations_fpMjBt"
+                "product_recommendations_fpMjBt",
+                "product_upsell_D3mNqA"
               ]
             },
             "group_hnXFGW": {

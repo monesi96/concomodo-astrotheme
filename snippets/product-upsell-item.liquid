@@ -1,0 +1,185 @@
+{%- doc -%}
+  Renders one row of the product upsell block: image, badge, benefit text, price
+  and an add/remove control. Used both for the two toppers (mutually exclusive
+  choice, size inherited from the main product) and for the gift pillow.
+
+  Toppers follow the same Dimensione/Misure matching rules as linked-size-add:
+  they render only when the product shares both options with the main product,
+  or when it has a single variant. The gift row always uses the first available
+  variant.
+
+  @param {object} product - The upsell product
+  @param {string} role - 'topper' or 'gift'
+  @param {string} badge - Static badge text (topper rows)
+  @param {string} benefit - Benefit/description text shown under the title
+  @param {string} add_label - Label of the add button
+  @param {string} unavailable_label - Label when the inherited size is unavailable
+  @param {number} solo_percent - Gift only: display discount % when bought alone
+  @param {string} solo_badge - Gift only: badge shown when bought alone
+  @param {string} gift_badge - Gift only: badge shown when a topper is selected
+  @param {string} gift_free_label - Gift only: price label when free
+{%- enddoc -%}
+
+{%- liquid
+  assign dimensione_index = 0
+  assign misure_index = 0
+  for product_option in product.options_with_values
+    if product_option.name == 'Dimensione'
+      assign dimensione_index = forloop.index
+    endif
+    if product_option.name == 'Misure'
+      assign misure_index = forloop.index
+    endif
+  endfor
+
+  assign is_linked = false
+  if dimensione_index > 0 and misure_index > 0
+    assign is_linked = true
+  endif
+
+  assign is_single = false
+  if product.variants.size == 1
+    assign is_single = true
+  endif
+
+  assign can_render = false
+  if product != blank and product.available
+    if role == 'gift'
+      assign can_render = true
+    elsif is_linked or is_single
+      assign can_render = true
+    endif
+  endif
+-%}
+
+{%- if can_render -%}
+  {%- assign row_image = product.featured_media.preview_image | image_url: width: 160 -%}
+
+  <div
+    class="product-upsell__row"
+    data-upsell-row
+    data-upsell-role="{{ role }}"
+    data-product-id="{{ product.id }}"
+    data-linked="{{ is_linked }}"
+    {% if role == 'gift' %}
+      data-gift-badge="{{ gift_badge | escape }}"
+      data-free-label="{{ gift_free_label | escape }}"
+      data-solo-badge="{{ solo_badge | escape }}"
+    {% endif %}
+  >
+    <script type="application/json" data-upsell-variants>
+      [
+        {%- if role == 'gift' -%}
+          {%- liquid
+            assign gift_variant = product.selected_or_first_available_variant
+            assign keep_percent = 100 | minus: solo_percent
+            assign solo_cents = gift_variant.price | times: keep_percent | divided_by: 100
+          -%}
+          {
+            "id": {{ gift_variant.id }},
+            "available": {{ gift_variant.available }},
+            "price": {{ gift_variant.price | money | json }},
+            "soloPrice": {{ solo_cents | money | json }}
+            {%- if gift_variant.compare_at_price > gift_variant.price -%}
+              , "compareAt": {{ gift_variant.compare_at_price | money | json }}
+            {%- endif -%}
+          }
+        {%- else -%}
+          {%- for variant in product.variants -%}
+            {%- liquid
+              assign variant_dimensione = ''
+              assign variant_misure = ''
+              case dimensione_index
+                when 1
+                  assign variant_dimensione = variant.option1
+                when 2
+                  assign variant_dimensione = variant.option2
+                when 3
+                  assign variant_dimensione = variant.option3
+              endcase
+              case misure_index
+                when 1
+                  assign variant_misure = variant.option1
+                when 2
+                  assign variant_misure = variant.option2
+                when 3
+                  assign variant_misure = variant.option3
+              endcase
+            -%}
+            {
+              "id": {{ variant.id }},
+              "dimensione": {{ variant_dimensione | json }},
+              "misure": {{ variant_misure | json }},
+              "sizeLabel": {{ variant.title | json }},
+              "available": {{ variant.available }},
+              "price": {{ variant.price | money | json }}
+              {%- if variant.compare_at_price > variant.price -%}
+                , "compareAt": {{ variant.compare_at_price | money | json }}
+              {%- endif -%}
+            }{% unless forloop.last %},{% endunless %}
+          {%- endfor -%}
+        {%- endif -%}
+      ]
+    </script>
+
+    <div class="product-upsell__media">
+      {%- if row_image != blank -%}
+        <img
+          class="product-upsell__image"
+          src="{{ row_image }}"
+          alt=""
+          width="80"
+          height="80"
+          loading="lazy"
+        >
+      {%- endif -%}
+    </div>
+
+    <div class="product-upsell__info">
+      {%- if role == 'gift' -%}
+        <span class="product-upsell__badge" data-upsell-badge hidden></span>
+      {%- elsif badge != blank -%}
+        <span class="product-upsell__badge" data-upsell-badge>{{ badge }}</span>
+      {%- endif -%}
+
+      <p class="product-upsell__title">{{ product.title }}</p>
+
+      {%- if benefit != blank -%}
+        <div class="product-upsell__benefit">{{ benefit }}</div>
+      {%- endif -%}
+
+      {%- unless role == 'gift' or is_single -%}
+        <p class="product-upsell__meta" data-upsell-meta hidden>
+          <span data-upsell-size></span>
+        </p>
+      {%- endunless -%}
+
+      <p class="product-upsell__price">
+        <s class="product-upsell__compare" data-upsell-compare hidden></s>
+        <span class="product-upsell__amount" data-upsell-price></span>
+      </p>
+    </div>
+
+    <div class="product-upsell__actions">
+      <button
+        type="button"
+        class="button product-upsell__add"
+        data-upsell-add
+        data-label-default="{{ add_label | escape }}"
+        data-label-unavailable="{{ unavailable_label | escape }}"
+      >
+        <span class="product-upsell__plus" aria-hidden="true">+</span>
+        <span data-upsell-add-label>{{ add_label }}</span>
+      </button>
+      <button
+        type="button"
+        class="product-upsell__remove"
+        data-upsell-remove
+        hidden
+        aria-label="Rimuovi {{ product.title | escape }}"
+      >
+        {{- 'icon-close.svg' | inline_asset_content -}}
+      </button>
+    </div>
+  </div>
+{%- endif -%}
