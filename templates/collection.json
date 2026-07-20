@@ -309,12 +309,61 @@
                         "padding-inline-end": 0
                       },
                       "blocks": {}
+                    },
+                    "product_features_ftr01": {
+                      "type": "product-features",
+                      "name": "Caratteristiche prodotto",
+                      "settings": {
+                        "gap": 10,
+                        "icon_size": 22,
+                        "value_font_size": 16,
+                        "show_dividers": false,
+                        "padding-block-start": 4,
+                        "padding-block-end": 4,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {
+                        "feat_sensazione": {
+                          "type": "_product-feature-item",
+                          "settings": {
+                            "icon": "silhouette",
+                            "metafield": "custom.sensazione",
+                            "text": "",
+                            "label": ""
+                          }
+                        },
+                        "feat_altezza": {
+                          "type": "_product-feature-item",
+                          "settings": {
+                            "icon": "ruler",
+                            "metafield": "custom.altezza",
+                            "text": "",
+                            "label": ""
+                          }
+                        },
+                        "feat_costruzione": {
+                          "type": "_product-feature-item",
+                          "settings": {
+                            "icon": "box",
+                            "metafield": "custom.costruzione",
+                            "text": "",
+                            "label": ""
+                          }
+                        }
+                      },
+                      "block_order": [
+                        "feat_sensazione",
+                        "feat_altezza",
+                        "feat_costruzione"
+                      ]
                     }
                   },
                   "block_order": [
                     "product_title_tCcdbP",
                     "price_twBYfi",
-                    "text_JxUjKy"
+                    "text_JxUjKy",
+                    "product_features_ftr01"
                   ]
                 },
                 "product_card_group_eehFHj": {
