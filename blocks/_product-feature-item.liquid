@@ -1,0 +1,133 @@
+{%- doc -%}
+  One row of the product features list: an icon (theme icon or uploaded image)
+  plus a value.
+
+  The value is resolved in this order:
+    1. the product metafield named in "Metafield" (e.g. `custom.altezza`),
+       so each product shows its own value;
+    2. otherwise the static "Testo fisso" (same on every card).
+
+  When neither is set the row is hidden on the storefront, and shows a
+  placeholder only inside the theme editor.
+{%- enddoc -%}
+
+{%- liquid
+  assign s = block.settings
+  assign product = closest.product
+
+  assign value = ''
+  assign key = s.metafield | strip
+
+  if key != blank
+    assign parts = key | split: '.'
+    if parts.size >= 2
+      assign mf_namespace = parts[0]
+      assign mf_field = parts[1]
+    else
+      assign mf_namespace = 'custom'
+      assign mf_field = parts[0]
+    endif
+
+    assign mf = product.metafields[mf_namespace][mf_field]
+    if mf != blank
+      assign value = mf.value
+    endif
+  endif
+
+  if value == blank
+    assign value = s.text
+  endif
+-%}
+
+{%- capture icon -%}
+  {%- render 'icon-or-image',
+    icon: s.icon,
+    image_upload: s.image_upload,
+    width: 48,
+    class_name: 'product-feature__icon-media'
+  -%}
+{%- endcapture -%}
+
+{%- if value != blank -%}
+  <li class="product-feature" {{ block.shopify_attributes }}>
+    {%- if icon != blank -%}
+      <span class="product-feature__icon">{{ icon }}</span>
+    {%- endif -%}
+    <span class="product-feature__text">
+      {%- if s.label != blank -%}<strong class="product-feature__label">{{ s.label | escape }}</strong> {% endif -%}
+      {{ value }}
+    </span>
+  </li>
+{%- elsif request.design_mode -%}
+  <li class="product-feature product-feature--empty" {{ block.shopify_attributes }}>
+    {%- if icon != blank -%}
+      <span class="product-feature__icon">{{ icon }}</span>
+    {%- endif -%}
+    <span class="product-feature__text">Imposta un metafield o un testo fisso per questa caratteristica</span>
+  </li>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Caratteristica",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Icona"
+    },
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "Icona del tema",
+      "info": "Ignorata se carichi un'immagine qui sotto.",
+      "options": [
+        { "value": "none", "label": "Nessuna" },
+        { "value": "ruler", "label": "Righello" },
+        { "value": "box", "label": "Scatola" },
+        { "value": "clipboard", "label": "Appunti" },
+        { "value": "check_box", "label": "Spunta" },
+        { "value": "leaf", "label": "Foglia" },
+        { "value": "plant", "label": "Pianta" },
+        { "value": "recycle", "label": "Riciclo" },
+        { "value": "heart", "label": "Cuore" },
+        { "value": "silhouette", "label": "Silhouette" },
+        { "value": "fire", "label": "Fuoco" },
+        { "value": "lightning_bolt", "label": "Fulmine" },
+        { "value": "lock", "label": "Lucchetto" },
+        { "value": "eye", "label": "Occhio" },
+        { "value": "price_tag", "label": "Etichetta" },
+        { "value": "question_mark", "label": "Punto interrogativo" }
+      ],
+      "default": "check_box"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_upload",
+      "label": "Icona personalizzata (SVG/PNG)"
+    },
+    {
+      "type": "header",
+      "content": "Contenuto"
+    },
+    {
+      "type": "text",
+      "id": "metafield",
+      "label": "Metafield",
+      "info": "Es. custom.altezza — legge il metafield del prodotto, così il valore cambia da prodotto a prodotto. Lascia vuoto per usare il testo fisso."
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Testo fisso",
+      "info": "Usato se il metafield è vuoto o non impostato. Attenzione: appare uguale su tutte le schede."
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Etichetta (opzionale)",
+      "info": "Prefisso in grassetto, es. \"Altezza:\"."
+    }
+  ]
+}
+{% endschema %}

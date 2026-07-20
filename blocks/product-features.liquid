@@ -1,0 +1,191 @@
+{%- doc -%}
+  Product features list for product cards: a compact stack of icon + text rows
+  that highlight the key traits of a product (feel, height, construction, …),
+  in the spirit of the reference collection cards.
+
+  The container only lays out and styles the rows. Each row is a child
+  `_product-feature-item` block whose value comes from a product metafield
+  (so it is per-product) or from a static fallback text. Add it inside a
+  product card (or a product card group) and drop one row per trait.
+{%- enddoc -%}
+
+{%- liquid
+  assign s = block.settings
+  assign product = closest.product
+-%}
+
+{%- capture rows -%}
+  {%- content_for 'blocks', closest.product: product -%}
+{%- endcapture -%}
+
+{%- if rows != blank -%}
+  <ul
+    class="product-features spacing-style{% if s.show_dividers %} product-features--divided{% endif %}"
+    style="
+      --pf-gap: {{ s.gap }}px;
+      --pf-icon-size: {{ s.icon_size }}px;
+      --pf-value-size: {{ s.value_font_size }}px;
+      {% render 'spacing-style', settings: s %}
+    "
+    {{ block.shopify_attributes }}
+  >
+    {{ rows }}
+  </ul>
+{%- endif -%}
+
+{% stylesheet %}
+  .product-features {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--pf-gap, 10px);
+    width: 100%;
+  }
+
+  .product-feature {
+    display: flex;
+    align-items: center;
+    gap: var(--padding-sm, 10px);
+    font-size: var(--pf-value-size, 16px);
+    line-height: 1.35;
+    color: var(--color-foreground);
+  }
+
+  .product-feature__icon {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--pf-icon-size, 22px);
+  }
+
+  .product-feature__icon :is(svg, img) {
+    width: var(--pf-icon-size, 22px);
+    height: auto;
+  }
+
+  /* icon-or-image renders uploaded icons with an inline width; keep them in step. */
+  .product-feature__icon img {
+    /* stylelint-disable-next-line declaration-no-important */
+    width: var(--pf-icon-size, 22px) !important;
+    height: auto;
+  }
+
+  .product-feature__text {
+    min-width: 0;
+  }
+
+  .product-feature__label {
+    font-weight: 600;
+  }
+
+  .product-features--divided .product-feature:not(:last-child) {
+    padding-block-end: var(--pf-gap, 10px);
+    border-block-end: 1px solid color-mix(in srgb, var(--color-foreground) 12%, transparent);
+  }
+
+  .product-feature--empty {
+    opacity: 0.55;
+    font-style: italic;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Caratteristiche prodotto",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_product-feature-item"
+    }
+  ],
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Aggiungi una riga per ogni caratteristica (icona + testo). Ogni riga può leggere un metafield del prodotto, così il valore cambia da prodotto a prodotto."
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Spazio tra le righe",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Dimensione icone",
+      "min": 12,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "value_font_size",
+      "label": "Dimensione testo",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dividers",
+      "label": "Linea divisoria tra le righe",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ]
+}
+{% endschema %}
