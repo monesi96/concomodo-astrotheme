@@ -1,0 +1,487 @@
+{%- doc -%}
+  Product page upsell with a guided choice:
+
+  - Two toppers in mutually exclusive choice (adding one removes the other),
+    each with its own benefit text, inheriting Dimensione/Misure from the main
+    product like linked-size-add.
+  - A gift pillow: added automatically (free of charge) when a topper is chosen,
+    or purchasable alone at a configurable display discount.
+
+  The block only *shows* the promotional prices. The actual cart prices must be
+  backed by two automatic discounts in the Shopify admin (see the schema note).
+{%- enddoc -%}
+
+{%- liquid
+  assign topper_1 = block.settings.topper_1
+  assign topper_2 = block.settings.topper_2
+  assign gift_product = block.settings.gift_product
+-%}
+
+<script src="{{ 'product-upsell.js' | asset_url }}" type="module"></script>
+
+<product-upsell
+  class="
+    product-upsell
+    {% unless block.settings.inherit_color_scheme %}color-{{ block.settings.color_scheme }}{% endunless %}
+    spacing-style
+  "
+  style="
+    {% render 'spacing-style', settings: block.settings %}
+    --product-upsell-radius: {{ block.settings.border_radius }}px;
+  "
+  data-section-id="{{ section.id }}"
+  data-gift-enabled="{{ block.settings.gift_enabled }}"
+  data-solo-percent="{{ block.settings.solo_discount_percent }}"
+  data-gift-cart-property="{{ block.settings.gift_cart_property | escape }}"
+  {{ block.shopify_attributes }}
+>
+  {%- if block.settings.heading != blank -%}
+    <h4 class="product-upsell__heading">{{ block.settings.heading }}</h4>
+  {%- endif -%}
+
+  {%- if block.settings.hint != blank -%}
+    <p class="product-upsell__hint">{{ block.settings.hint }}</p>
+  {%- endif -%}
+
+  <div class="product-upsell__rows">
+    {%- for i in (1..2) -%}
+      {%- liquid
+        assign product_key = 'topper_' | append: i
+        assign badge_key = product_key | append: '_badge'
+        assign text_key = product_key | append: '_text'
+        assign topper_product = block.settings[product_key]
+        assign topper_badge = block.settings[badge_key]
+        assign topper_text = block.settings[text_key]
+      -%}
+      {%- if topper_product != blank -%}
+        {% render 'product-upsell-item',
+          product: topper_product,
+          role: 'topper',
+          badge: topper_badge,
+          benefit: topper_text,
+          add_label: block.settings.add_label,
+          unavailable_label: block.settings.unavailable_label
+        %}
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if gift_product != blank -%}
+      {% render 'product-upsell-item',
+        product: gift_product,
+        role: 'gift',
+        benefit: block.settings.gift_text,
+        add_label: block.settings.add_label,
+        unavailable_label: block.settings.unavailable_label,
+        solo_percent: block.settings.solo_discount_percent,
+        solo_badge: block.settings.solo_badge,
+        gift_badge: block.settings.gift_badge,
+        gift_free_label: block.settings.gift_free_label
+      %}
+    {%- endif -%}
+  </div>
+
+  {%- if request.design_mode -%}
+    {%- if topper_1 == blank and topper_2 == blank and gift_product == blank -%}
+      <p class="product-upsell__setup">
+        Upsell prodotto: scegli i due topper e il cuscino nelle impostazioni del
+        blocco. Il blocco resta invisibile finché non selezioni almeno un
+        prodotto.
+      </p>
+    {%- endif -%}
+  {%- endif -%}
+</product-upsell>
+
+{% stylesheet %}
+  .product-upsell {
+    display: block;
+    width: 100%;
+    border-radius: var(--product-upsell-radius, 0);
+  }
+
+  .product-upsell__heading {
+    margin: 0;
+  }
+
+  .product-upsell__hint {
+    margin: 4px 0 0;
+    font-size: var(--font-size--xs);
+    opacity: 0.7;
+  }
+
+  .product-upsell__rows {
+    display: flex;
+    flex-direction: column;
+    margin-block-start: 6px;
+  }
+
+  .product-upsell__row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-block: 16px;
+    border-block-start: 1px solid color-mix(in srgb, var(--color-foreground) 12%, transparent);
+    transition: opacity 0.2s ease;
+  }
+
+  .product-upsell__row:first-child {
+    border-block-start: 0;
+  }
+
+  .product-upsell__media {
+    flex: 0 0 auto;
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+  }
+
+  .product-upsell__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .product-upsell__info {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .product-upsell__badge {
+    align-self: flex-start;
+    font-size: var(--font-size--2xs, 0.6875rem);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 100px;
+    background-color: color-mix(in srgb, var(--color-foreground) 8%, transparent);
+  }
+
+  .product-upsell__title {
+    margin: 0;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  .product-upsell__benefit {
+    font-size: var(--font-size--xs);
+    line-height: 1.4;
+    opacity: 0.75;
+  }
+
+  .product-upsell__benefit p {
+    margin: 0;
+  }
+
+  .product-upsell__meta {
+    margin: 0;
+    font-size: var(--font-size--xs);
+    opacity: 0.75;
+  }
+
+  .product-upsell__price {
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .product-upsell__compare {
+    font-size: var(--font-size--xs);
+    opacity: 0.55;
+  }
+
+  .product-upsell__amount {
+    font-weight: 600;
+  }
+
+  .product-upsell__actions {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+  }
+
+  .product-upsell__add {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding-block: 8px;
+    padding-inline: 16px;
+    min-height: 0;
+    font-size: var(--font-size--sm, 0.875rem);
+    border-radius: 100px;
+  }
+
+  .product-upsell__plus {
+    font-weight: 600;
+  }
+
+  .product-upsell__remove {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: currentcolor;
+    cursor: pointer;
+  }
+
+  .product-upsell__remove:hover {
+    background-color: color-mix(in srgb, var(--color-foreground) 8%, transparent);
+  }
+
+  .product-upsell__remove svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .product-upsell__row[data-selected] .product-upsell__media {
+    outline: 2px solid color-mix(in srgb, var(--color-foreground) 60%, transparent);
+    outline-offset: 1px;
+  }
+
+  product-upsell[data-busy] .product-upsell__add,
+  product-upsell[data-busy] .product-upsell__remove {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .product-upsell__setup {
+    margin: 10px 0 0;
+    padding: 12px 14px;
+    font-size: var(--font-size--xs);
+    border: 1px dashed color-mix(in srgb, var(--color-foreground) 35%, transparent);
+    border-radius: 12px;
+    opacity: 0.8;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Upsell prodotto",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Scelta tra due topper (uno esclude l'altro) + cuscino in regalo con il topper, oppure scontato se preso da solo."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Titolo",
+      "default": "Completa il tuo letto <strong>con</strong>"
+    },
+    {
+      "type": "text",
+      "id": "hint",
+      "label": "Sottotitolo",
+      "default": "Scegli il topper più adatto a te: puoi aggiungerne solo uno."
+    },
+    {
+      "type": "header",
+      "content": "Topper 1"
+    },
+    {
+      "type": "product",
+      "id": "topper_1",
+      "label": "Prodotto"
+    },
+    {
+      "type": "text",
+      "id": "topper_1_badge",
+      "label": "Etichetta",
+      "default": "Più morbidezza"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "topper_1_text",
+      "label": "Testo beneficio",
+      "default": "Se il materasso è troppo rigido e lo vuoi più morbido, senza effetto sprofondo."
+    },
+    {
+      "type": "header",
+      "content": "Topper 2"
+    },
+    {
+      "type": "product",
+      "id": "topper_2",
+      "label": "Prodotto"
+    },
+    {
+      "type": "text",
+      "id": "topper_2_badge",
+      "label": "Etichetta",
+      "default": "Più sostegno"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "topper_2_text",
+      "label": "Testo beneficio",
+      "default": "Allunga la vita del materasso e dà più rigidità a quello che sprofonda."
+    },
+    {
+      "type": "header",
+      "content": "Cuscino"
+    },
+    {
+      "type": "product",
+      "id": "gift_product",
+      "label": "Prodotto"
+    },
+    {
+      "type": "checkbox",
+      "id": "gift_enabled",
+      "label": "In regalo con un topper",
+      "info": "Aggiunto automaticamente al carrello quando il cliente sceglie un topper.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "gift_badge",
+      "label": "Etichetta quando è in regalo",
+      "default": "In regalo"
+    },
+    {
+      "type": "text",
+      "id": "gift_free_label",
+      "label": "Prezzo quando è in regalo",
+      "default": "Gratis"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "gift_text",
+      "label": "Testo beneficio",
+      "default": "Aggiungi un topper e il cuscino te lo regaliamo noi."
+    },
+    {
+      "type": "text",
+      "id": "gift_cart_property",
+      "label": "Nota in carrello (regalo)",
+      "info": "Compare in carrello sotto il cuscino come 'Omaggio: …'. Lascia vuoto per nasconderla.",
+      "default": "In regalo con il topper"
+    },
+    {
+      "type": "range",
+      "id": "solo_discount_percent",
+      "label": "Sconto se preso da solo (%)",
+      "info": "Solo visualizzazione del prezzo: lo sconto reale va creato in Shopify (vedi nota in fondo).",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "text",
+      "id": "solo_badge",
+      "label": "Etichetta sconto da solo",
+      "default": "-50% solo online"
+    },
+    {
+      "type": "header",
+      "content": "Bottoni"
+    },
+    {
+      "type": "text",
+      "id": "add_label",
+      "label": "Testo bottone aggiungi",
+      "default": "Aggiungi"
+    },
+    {
+      "type": "text",
+      "id": "unavailable_label",
+      "label": "Testo misura non disponibile",
+      "default": "Non disponibile"
+    },
+    {
+      "type": "header",
+      "content": "Stile"
+    },
+    {
+      "type": "checkbox",
+      "id": "inherit_color_scheme",
+      "label": "Eredita schema colori",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Schema colori",
+      "default": "scheme-1",
+      "visible_if": "{{ block.settings.inherit_color_scheme == false }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Raggio bordi",
+      "min": 0,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Spaziatura"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Sopra",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Sotto",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "Sinistra",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "Destra",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "paragraph",
+      "content": "Importante: il blocco mostra i prezzi promo ma NON li applica. In Shopify admin → Sconti crea due sconti automatici: 1) 'Compra X ricevi Y' — compra un topper, cuscino gratis; 2) sconto % sul cuscino (es. 50%). Shopify applica in automatico il più conveniente."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Upsell prodotto",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}
