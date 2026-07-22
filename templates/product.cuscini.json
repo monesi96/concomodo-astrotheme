@@ -6,7 +6,8 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */{
+ */
+{
   "sections": {
     "main": {
       "type": "product-information",
@@ -520,15 +521,12 @@
                 "size_guide_title": "Guida alle misure",
                 "size_guide_intro": "",
                 "size_guide_text_1": "",
-                "size_guide_image_1": "",
                 "size_guide_widths_1": "",
                 "size_guide_lengths_1": "",
                 "size_guide_text_2": "",
-                "size_guide_image_2": "",
                 "size_guide_widths_2": "",
                 "size_guide_lengths_2": "",
                 "size_guide_text_3": "",
-                "size_guide_image_3": "",
                 "size_guide_widths_3": "",
                 "size_guide_lengths_3": "",
                 "size_guide_text_4": "",
@@ -1758,6 +1756,7 @@
       "block_order": [
         "image_reAnKg"
       ],
+      "disabled": true,
       "name": "t:names.custom_section",
       "settings": {
         "content_direction": "row",
@@ -1841,6 +1840,7 @@
         "image_qUkBjY",
         "image_XrKLYn"
       ],
+      "disabled": true,
       "name": "t:names.custom_section",
       "settings": {
         "content_direction": "row",
@@ -2224,35 +2224,6 @@
             "padding-inline-end": 80
           },
           "blocks": {
-            "judge_me_reviews_reviews_grid_widget_JK9WaU": {
-              "type": "shopify://apps/judge-me-reviews/blocks/reviews_grid_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-              "settings": {
-                "show_sample_reviews": true,
-                "review_selection": "all",
-                "products": [],
-                "show_media_only": false,
-                "display_order": "media_first",
-                "card_grouping": "per_media",
-                "columns_desktop": 3,
-                "rows_desktop": 3,
-                "columns_mobile": "2",
-                "rows_mobile": 6,
-                "show_stars": true,
-                "show_reviewer_name": true,
-                "show_review_title_on_hover_desktop": true,
-                "max_width": 1100,
-                "corner_styling": "soft",
-                "card_spacing": "medium",
-                "header_text_color": "#000000",
-                "star_and_reviewer_name_color": "#f9f9f9",
-                "drop_shadow_color": "#000000",
-                "overlay_and_background_color": "#000000",
-                "content_color": "#f9f9f9",
-                "header_text": "From our customers",
-                "show_average_rating": true,
-                "rating_display": "default"
-              }
-            },
             "judge_me_reviews_review_widget_4xpznm": {
               "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
               "disabled": true,
@@ -2391,7 +2362,6 @@
             }
           },
           "block_order": [
-            "judge_me_reviews_reviews_grid_widget_JK9WaU",
             "judge_me_reviews_review_widget_4xpznm",
             "group_xGhaML",
             "group_DF6wXL"
@@ -2766,6 +2736,7 @@
         "text_AeVcgk",
         "group_xAYeNY"
       ],
+      "disabled": true,
       "custom_css": [],
       "name": "Video",
       "settings": {
