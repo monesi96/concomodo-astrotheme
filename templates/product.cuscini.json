@@ -3812,10 +3812,17 @@
         "padding-block-start": 100,
         "padding-block-end": 40
       }
+    },
+    "product_indicators_cc": {
+      "type": "product-indicators",
+      "settings": {
+        "color_scheme": "scheme-1"
+      }
     }
   },
   "order": [
     "main",
+    "product_indicators_cc",
     "section_kHXYc3",
     "section_kbCGBj",
     "section_7KrxGG",

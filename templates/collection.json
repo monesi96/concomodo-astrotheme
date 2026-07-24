@@ -2242,6 +2242,12 @@
         "padding-block-start": 0,
         "padding-block-end": 80
       }
+    },
+    "parla_con_noi_cc": {
+      "type": "parla-con-noi",
+      "settings": {
+        "color_scheme": "scheme-1"
+      }
     }
   },
   "order": [
@@ -2251,6 +2257,7 @@
     "section_bundlebuilder",
     "section_promo",
     "section_faq",
-    "section_newsletter"
+    "section_newsletter",
+    "parla_con_noi_cc"
   ]
 }
