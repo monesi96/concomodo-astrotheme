@@ -2208,6 +2208,7 @@
         "judge_me_reviews_cards_carousel_4WRrFJ",
         "group_TwzenE"
       ],
+      "disabled": true,
       "custom_css": [
         "> div > div {margin: 0 30px;}",
         "@media screen and (max-width: 749px) {> div > div {margin: 0; }}"
