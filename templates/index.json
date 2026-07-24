@@ -3167,10 +3167,29 @@
             "text_7qQVdD",
             "group_3pfNfb"
           ]
+        },
+        "button_wyt9jy": {
+          "type": "button",
+          "name": "t:names.button",
+          "settings": {
+            "label": "Scopri la nostra filosofia",
+            "link": "shopify://pages/dormire-comodi",
+            "open_in_new_tab": false,
+            "style_class": "button",
+            "weight": "",
+            "font_size_desktop": "",
+            "font_size_mobile": "",
+            "width": "fit-content",
+            "custom_width": 100,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100
+          },
+          "blocks": {}
         }
       },
       "block_order": [
-        "group_p89AzC"
+        "group_p89AzC",
+        "button_wyt9jy"
       ],
       "custom_css": [
         "> div > div {margin: 0 30px;}",
