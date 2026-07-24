@@ -1,0 +1,225 @@
+{%- liquid
+  assign align_class = 'parla-con-noi--' | append: section.settings.layout
+-%}
+
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--{{ section.settings.section_width }} parla-con-noi color-{{ section.settings.color_scheme }} spacing-style {{ align_class }}"
+  style="{% render 'spacing-style', settings: section.settings %} --pcn-radius: {{ section.settings.corner_radius }}px;"
+  {% if request.visual_preview_mode %}data-shopify-visual-preview{% endif %}
+>
+  <div class="parla-con-noi__inner">
+    {%- if section.settings.text != blank -%}
+      <div class="parla-con-noi__text">{{ section.settings.text }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.button_label != blank -%}
+      <a
+        class="parla-con-noi__button"
+        {% if section.settings.button_link != blank %}href="{{ section.settings.button_link }}"{% else %}role="link" aria-disabled="true"{% endif %}
+        {% if section.settings.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+      >
+        {%- if section.settings.icon != blank -%}
+          <span class="parla-con-noi__icon">{% render 'image', image: section.settings.icon %}</span>
+        {%- endif -%}
+        <span class="parla-con-noi__button-label">{{ section.settings.button_label }}</span>
+      </a>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .parla-con-noi {
+    --pcn-radius: 30px;
+  }
+
+  .parla-con-noi__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 1.5rem;
+    max-width: 720px;
+    margin-inline: auto;
+    padding: 1rem 1rem 1rem 1.75rem;
+    border-radius: var(--pcn-radius);
+    background: rgb(var(--color-foreground-rgb) / 0.05);
+  }
+
+  .parla-con-noi--center .parla-con-noi__inner {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .parla-con-noi--stack .parla-con-noi__inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .parla-con-noi__text {
+    font-size: 1.05em;
+  }
+
+  .parla-con-noi__text > :first-child { margin-block-start: 0; }
+  .parla-con-noi__text > :last-child { margin-block-end: 0; }
+
+  .parla-con-noi__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1.3rem;
+    border-radius: 999px;
+    background: var(--color-primary, var(--color-foreground));
+    color: var(--color-primary-contrast, var(--color-background));
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+  }
+
+  .parla-con-noi__button:hover {
+    opacity: 0.9;
+  }
+
+  .parla-con-noi__icon {
+    display: inline-flex;
+    width: 22px;
+    height: 22px;
+  }
+
+  .parla-con-noi__icon img,
+  .parla-con-noi__icon svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Parla con noi",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Testo",
+      "default": "<p>Hai ancora dei dubbi?</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Testo pulsante",
+      "default": "Parla con noi"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link pulsante",
+      "info": "Es. tel:0800000000, un link WhatsApp o la pagina contatti."
+    },
+    {
+      "type": "checkbox",
+      "id": "open_in_new_tab",
+      "label": "Apri in una nuova scheda",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "icon",
+      "label": "Icona pulsante"
+    },
+    {
+      "type": "header",
+      "content": "Aspetto"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Disposizione",
+      "options": [
+        { "value": "split", "label": "Testo e pulsante ai lati" },
+        { "value": "center", "label": "Centrato" },
+        { "value": "stack", "label": "In colonna" }
+      ],
+      "default": "split"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "Raggio angoli",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Larghezza sezione",
+      "options": [
+        { "value": "page-width", "label": "Pagina" },
+        { "value": "full-width", "label": "Piena" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Schema colore",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Spaziatura"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Sopra",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Sotto",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "Sinistra",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "Destra",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Parla con noi"
+    }
+  ]
+}
+{% endschema %}

@@ -3855,6 +3855,12 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "parla_con_noi_cc": {
+      "type": "parla-con-noi",
+      "settings": {
+        "color_scheme": "scheme-1"
+      }
     }
   },
   "order": [
@@ -3870,6 +3876,7 @@
     "section_9w3rDi",
     "installment_payments_aUaDcf",
     "section_EpVhwi",
-    "section_TVqEJg"
+    "section_TVqEJg",
+    "parla_con_noi_cc"
   ]
 }

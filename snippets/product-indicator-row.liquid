@@ -1,0 +1,60 @@
+{%- doc -%}
+  Renders one product indicator row: icon + label + info tooltip, a 5-notch
+  meter proportional to `value` (0-100), and min/max end labels.
+
+  @param {string} label - Row label (e.g. "Traspirabilità")
+  @param {string} value - Score 0-100
+  @param {object} [icon] - Image object shown before the label
+  @param {string} [tooltip] - Optional info tooltip text
+  @param {string} [min_label] - Left end label
+  @param {string} [max_label] - Right end label
+{%- enddoc -%}
+<div class="product-indicators__row">
+  <div class="product-indicators__head">
+    {%- if icon != blank -%}
+      <span class="product-indicators__icon">
+        {% render 'image', image: icon %}
+      </span>
+    {%- endif -%}
+    {%- if label != blank -%}
+      <span class="product-indicators__label">{{ label }}</span>
+    {%- endif -%}
+    {%- if tooltip != blank -%}
+      <span class="product-indicators__tip">
+        <button
+          type="button"
+          class="product-indicators__tip-btn"
+          aria-label="{{ label | strip_html | escape }}: maggiori informazioni"
+        >i</button>
+        <span class="product-indicators__tip-bubble" role="tooltip">{{ tooltip }}</span>
+      </span>
+    {%- endif -%}
+  </div>
+
+  <div
+    class="product-indicators__meter"
+    role="img"
+    aria-label="{{ label | strip_html | escape }}: {{ value }} su 100"
+  >
+    {%- for i in (1..5) -%}
+      {%- liquid
+        assign seg_start = i | minus: 1 | times: 20
+        assign seg_fill = value | minus: seg_start
+        if seg_fill > 20
+          assign seg_fill = 20
+        elsif seg_fill < 0
+          assign seg_fill = 0
+        endif
+        assign seg_percent = seg_fill | times: 5
+      -%}
+      <span class="product-indicators__meter-seg" style="--f: {{ seg_percent }}%;"></span>
+    {%- endfor -%}
+  </div>
+
+  {%- if min_label != blank or max_label != blank -%}
+    <div class="product-indicators__ends">
+      <span>{{ min_label }}</span>
+      <span>{{ max_label }}</span>
+    </div>
+  {%- endif -%}
+</div>

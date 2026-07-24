@@ -1,0 +1,285 @@
+{%- liquid
+  assign show_trial = section.settings.show_trial
+  assign show_quiz = section.settings.show_quiz
+-%}
+
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--{{ section.settings.section_width }} trial-quiz color-{{ section.settings.color_scheme }} spacing-style"
+  style="{% render 'spacing-style', settings: section.settings %} --tq-radius: {{ section.settings.corner_radius }}px;"
+  {% if request.visual_preview_mode %}data-shopify-visual-preview{% endif %}
+>
+  <div class="trial-quiz__inner">
+    {%- if show_trial -%}
+      <div class="trial-quiz__card color-{{ section.settings.trial_scheme }}">
+        {%- if section.settings.trial_eyebrow != blank -%}
+          <p class="trial-quiz__eyebrow">{{ section.settings.trial_eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.trial_heading != blank -%}
+          <h3 class="trial-quiz__heading">{{ section.settings.trial_heading }}</h3>
+        {%- endif -%}
+        {%- if section.settings.trial_text != blank -%}
+          <div class="trial-quiz__text">{{ section.settings.trial_text }}</div>
+        {%- endif -%}
+        {%- if section.settings.trial_button_label != blank -%}
+          <a class="trial-quiz__button button" href="{{ section.settings.trial_button_link | default: '#' }}">
+            {{ section.settings.trial_button_label }}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if show_quiz -%}
+      <div class="trial-quiz__card color-{{ section.settings.quiz_scheme }}">
+        {%- if section.settings.quiz_eyebrow != blank -%}
+          <p class="trial-quiz__eyebrow">{{ section.settings.quiz_eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.quiz_heading != blank -%}
+          <h3 class="trial-quiz__heading">{{ section.settings.quiz_heading }}</h3>
+        {%- endif -%}
+        {%- if section.settings.quiz_text != blank -%}
+          <div class="trial-quiz__text">{{ section.settings.quiz_text }}</div>
+        {%- endif -%}
+        {%- if section.settings.quiz_button_label != blank -%}
+          <a class="trial-quiz__button button" href="{{ section.settings.quiz_button_link | default: '#' }}">
+            {{ section.settings.quiz_button_label }}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .trial-quiz__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 1100px;
+    margin-inline: auto;
+  }
+
+  @media screen and (min-width: 750px) {
+    .trial-quiz__inner {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .trial-quiz__card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: clamp(1.75rem, 4vw, 3rem);
+    border-radius: var(--tq-radius);
+    background: var(--color-background);
+    height: 100%;
+  }
+
+  .trial-quiz__eyebrow {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+
+  .trial-quiz__heading {
+    margin: 0;
+  }
+
+  .trial-quiz__text {
+    margin: 0;
+    opacity: 0.9;
+    line-height: 1.5;
+  }
+
+  .trial-quiz__text > :first-child { margin-block-start: 0; }
+  .trial-quiz__text > :last-child { margin-block-end: 0; }
+
+  .trial-quiz__button {
+    margin-block-start: auto;
+    text-decoration: none;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Prova 100 notti + Quiz",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Card · Prova 100 notti"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trial",
+      "label": "Mostra card",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "trial_eyebrow",
+      "label": "Sopratitolo",
+      "default": "PROVALO A CASA TUA"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "trial_heading",
+      "label": "Titolo",
+      "default": "100 notti di prova"
+    },
+    {
+      "type": "richtext",
+      "id": "trial_text",
+      "label": "Testo",
+      "default": "<p>Dormi sul tuo nuovo materasso per 100 notti. Se non è quello giusto per te, lo ritiriamo e ti rimborsiamo — senza costi.</p>"
+    },
+    {
+      "type": "text",
+      "id": "trial_button_label",
+      "label": "Testo pulsante",
+      "default": "Come funziona la prova"
+    },
+    {
+      "type": "url",
+      "id": "trial_button_link",
+      "label": "Link pulsante",
+      "default": "/pages/100-notti"
+    },
+    {
+      "type": "color_scheme",
+      "id": "trial_scheme",
+      "label": "Schema colore card",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Card · Quiz"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quiz",
+      "label": "Mostra card",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "quiz_eyebrow",
+      "label": "Sopratitolo",
+      "default": "NON SAI QUALE SCEGLIERE?"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "quiz_heading",
+      "label": "Titolo",
+      "default": "Trova il materasso perfetto"
+    },
+    {
+      "type": "richtext",
+      "id": "quiz_text",
+      "label": "Testo",
+      "default": "<p>Rispondi a poche domande sul tuo modo di dormire: in un minuto ti consigliamo il materasso più adatto a te.</p>"
+    },
+    {
+      "type": "text",
+      "id": "quiz_button_label",
+      "label": "Testo pulsante",
+      "default": "Inizia il quiz"
+    },
+    {
+      "type": "url",
+      "id": "quiz_button_link",
+      "label": "Link pulsante",
+      "default": "/pages/quiz"
+    },
+    {
+      "type": "color_scheme",
+      "id": "quiz_scheme",
+      "label": "Schema colore card",
+      "default": "scheme-4"
+    },
+    {
+      "type": "header",
+      "content": "Sezione"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "Raggio angoli",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Larghezza sezione",
+      "options": [
+        { "value": "page-width", "label": "Pagina" },
+        { "value": "full-width", "label": "Piena" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Schema colore sfondo",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Spaziatura"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Sopra",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Sotto",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "Sinistra",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "Destra",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prova 100 notti + Quiz"
+    }
+  ]
+}
+{% endschema %}
