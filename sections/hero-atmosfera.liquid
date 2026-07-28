@@ -57,13 +57,18 @@
 -%}
 
 <hero-atmosfera
-  class="hero-atm hero-atm--{{ atmosfera }} hero-atm--{{ section.settings.alignment }}{% if is_dark %} hero-atm--dark{% endif %}{% if section.settings.orb_position == 'left' %} hero-atm--orb-left{% endif %}"
+  class="hero-atm hero-atm--{{ atmosfera }} hero-atm--{{ section.settings.alignment }}{% if is_dark %} hero-atm--dark{% endif %}{% if section.settings.orb_position == 'left' %} hero-atm--orb-left{% endif %}{% if section.settings.image != blank %} hero-atm--media-{{ section.settings.image_layout }}{% unless section.settings.show_image_mobile %} hero-atm--media-desktop{% endunless %}{% endif %}"
   style="
     --ha-height: {{ height }};
     --ha-height-mobile: {{ height_mobile }};
     --ha-ink: {{ ink }};
     --ha-haze: {{ section.settings.haze_color }};
     --ha-scroll-ink: {{ scroll_ink }};
+    {% if section.settings.image != blank %}
+      --ha-media-width: {{ section.settings.image_width }}%;
+      --ha-media-offset: {{ section.settings.image_offset }}%;
+      --ha-media-parallax: {{ section.settings.image_parallax }};
+    {% endif %}
     {% if section.settings.alignment == 'left' %}
       --ha-align: start; --ha-justify: flex-start; --ha-content-margin: 0;
     {% endif %}
@@ -113,21 +118,12 @@
     {%- endfor -%}
   </div>
 
-  {%- if section.settings.image != blank -%}
-    <div class="hero-atm__media" aria-hidden="true">
-      {{
-        section.settings.image
-        | image_url: width: 1600
-        | image_tag: loading: 'eager', widths: '600, 900, 1200, 1600', alt: section.settings.image.alt
-      }}
-    </div>
-  {%- endif -%}
-
   {%- if section.settings.show_haze -%}
     <div class="hero-atm__haze" aria-hidden="true"></div>
   {%- endif -%}
 
-  <div class="hero-atm__content">
+  <div class="hero-atm__stage">
+    <div class="hero-atm__content">
     {%- if section.settings.eyebrow != blank -%}
       <p class="hero-atm__eyebrow">{{ section.settings.eyebrow }}</p>
     {%- endif -%}
@@ -162,6 +158,22 @@
             {{- section.settings.button_2_label -}}
           </a>
         {%- endif -%}
+      </div>
+    {%- endif -%}
+    </div>
+
+    {%- if section.settings.image != blank -%}
+      <div class="hero-atm__media{% if section.settings.image_shadow %} hero-atm__media--shadow{% endif %}{% if section.settings.image_float %} hero-atm__media--float{% endif %}">
+        {{
+          section.settings.image
+          | image_url: width: 1800
+          | image_tag:
+            loading: 'eager',
+            fetchpriority: 'high',
+            widths: '600, 900, 1200, 1500, 1800',
+            sizes: '(min-width: 750px) 60vw, 92vw',
+            alt: section.settings.image.alt
+        }}
       </div>
     {%- endif -%}
   </div>
@@ -331,7 +343,66 @@
       "type": "image_picker",
       "id": "image",
       "label": "Immagine",
-      "info": "Facoltativa: appare in basso al centro e si muove con la parallasse. Meglio se con sfondo trasparente."
+      "info": "Pensata per uno scontornato in PNG con sfondo trasparente (prodotto o scena)."
+    },
+    {
+      "type": "select",
+      "id": "image_layout",
+      "label": "Posizione",
+      "options": [
+        { "value": "sotto", "label": "Sotto al testo" },
+        { "value": "affianco", "label": "Accanto al testo" }
+      ],
+      "default": "sotto"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "label": "Larghezza",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "image_offset",
+      "label": "Scostamento verticale",
+      "info": "Valori negativi fanno uscire l'immagine dal bordo inferiore.",
+      "min": -25,
+      "max": 15,
+      "step": 1,
+      "unit": "%",
+      "default": -6
+    },
+    {
+      "type": "range",
+      "id": "image_parallax",
+      "label": "Intensità della parallasse",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "default": 14
+    },
+    {
+      "type": "checkbox",
+      "id": "image_shadow",
+      "label": "Ombra morbida sotto l'immagine",
+      "info": "Appoggia lo scontornato sul cielo invece di lasciarlo sospeso.",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "image_float",
+      "label": "Respiro lento dell'immagine",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image_mobile",
+      "label": "Mostra l'immagine su mobile",
+      "default": true
     },
     {
       "type": "header",

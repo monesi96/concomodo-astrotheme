@@ -196,21 +196,95 @@ body:has(.header[transparent]) .hero-atm {
   pointer-events: none;
 }
 
-/* ── Immagine in primo piano ── */
-.hero-atm__media {
-  position: absolute;
-  inset-block-end: 0;
-  inset-inline: 0;
-  z-index: -1;
+/* ── Palco: testo e immagine in primo piano ── */
+.hero-atm__stage {
+  position: relative;
+  z-index: 1;
   display: flex;
-  justify-content: center;
-  translate: 0 calc(var(--ha-p) * -14%);
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.25rem, 4vh, 2.75rem);
+  width: 100%;
+  max-width: 1180px;
+}
+
+/* Immagine accanto al testo (solo da tablet in su) */
+@media screen and (min-width: 750px) {
+  .hero-atm--media-affianco .hero-atm__stage {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(2rem, 5vw, 4rem);
+    text-align: start;
+  }
+
+  .hero-atm--media-affianco .hero-atm__content {
+    flex: 1 1 46%;
+    max-width: 34rem;
+    margin-inline: 0;
+    text-align: start;
+  }
+
+  .hero-atm--media-affianco .hero-atm__actions {
+    justify-content: flex-start;
+  }
+
+  .hero-atm--media-affianco .hero-atm__text {
+    margin-inline: 0;
+  }
+
+  .hero-atm--media-affianco .hero-atm__media {
+    flex: 1 1 54%;
+  }
+}
+
+/* ── Immagine in primo piano (pensata per uno scontornato) ── */
+.hero-atm__media {
+  position: relative;
+  width: var(--ha-media-width, 70%);
+  max-width: 900px;
+  margin-block-end: var(--ha-media-offset, 0%);
+  translate: 0 calc(var(--ha-p) * var(--ha-media-parallax, 14) * -1%);
 }
 
 .hero-atm__media img {
-  width: min(760px, 82%);
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
   height: auto;
   object-fit: contain;
+}
+
+/* Ombra ellittica: appoggia lo scontornato invece di lasciarlo sospeso */
+.hero-atm__media--shadow::after {
+  content: '';
+  position: absolute;
+  inset-block-end: 2%;
+  inset-inline: 10%;
+  height: 9%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(0 0 0 / 0.42), rgb(0 0 0 / 0));
+  filter: blur(6px);
+}
+
+.hero-atm--giorno .hero-atm__media--shadow::after {
+  background: radial-gradient(closest-side, rgb(70 70 70 / 0.28), rgb(70 70 70 / 0));
+}
+
+.hero-atm__media--float img {
+  animation: hero-atm-float 9s ease-in-out infinite;
+}
+
+@keyframes hero-atm-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 /* ── Contenuto ── */
@@ -376,8 +450,23 @@ body:has(.header[transparent]) .hero-atm {
     margin-inline: auto;
   }
 
+  /* su schermi stretti la luna finiva dietro al titolo: più piccola e più in alto */
   .hero-atm__orb {
-    width: clamp(56px, 18vw, 90px);
+    width: clamp(48px, 14vw, 76px);
+    inset-block-start: 4%;
+    inset-inline-end: 6%;
+  }
+
+  .hero-atm--orb-left .hero-atm__orb {
+    inset-inline-start: 6%;
+  }
+
+  .hero-atm__media {
+    width: min(100%, calc(var(--ha-media-width, 70%) + 25%));
+  }
+
+  .hero-atm--media-desktop .hero-atm__media {
+    display: none;
   }
 }
 
@@ -394,8 +483,13 @@ body:has(.header[transparent]) .hero-atm {
 
   .hero-atm__cloud,
   .hero-atm__star,
-  .hero-atm__scroll svg {
+  .hero-atm__scroll svg,
+  .hero-atm__media--float img {
     animation: none;
+  }
+
+  .hero-atm__media {
+    translate: none;
   }
 
   .hero-atm__content {
