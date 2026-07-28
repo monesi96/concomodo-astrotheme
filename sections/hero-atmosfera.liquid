@@ -82,7 +82,7 @@
 
 <hero-atmosfera
   id="hero-atm-{{ section.id }}"
-  class="hero-atm hero-atm--{{ atmosfera }} hero-atm--{{ section.settings.alignment }}{% if section.settings.orb_position == 'left' %} hero-atm--orb-left{% endif %}{% if section.settings.image != blank %} hero-atm--media-{{ section.settings.image_layout }}{% unless section.settings.show_image_mobile %} hero-atm--media-desktop{% endunless %}{% endif %}"
+  class="hero-atm hero-atm--{{ atmosfera }} hero-atm--{{ section.settings.alignment }}{% if section.settings.orb_position == 'left' %} hero-atm--orb-left{% endif %}{% if section.settings.image != blank %} hero-atm--media-{{ section.settings.image_layout }} hero-atm--media-{{ section.settings.image_fit }}{% unless section.settings.show_image_mobile %} hero-atm--media-desktop{% endunless %}{% endif %}"
   style="
     --ha-height: {{ height }};
     --ha-height-mobile: {{ height_mobile }};
@@ -452,6 +452,17 @@
       "step": 5,
       "unit": "%",
       "default": 70
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Come sta nella fascia",
+      "info": "Vale con l'immagine sotto al testo.",
+      "options": [
+        { "value": "intera", "label": "Intera (nessun taglio)" },
+        { "value": "riempi", "label": "Riempi la fascia (taglia dal basso)" }
+      ],
+      "default": "intera"
     },
     {
       "type": "range",
