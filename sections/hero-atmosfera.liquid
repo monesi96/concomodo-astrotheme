@@ -50,6 +50,15 @@
       assign height_mobile = '74svh'
   endcase
 
+  # scena in primo piano: l'immagine scelta dall'editor oppure, se il
+  # campo è vuoto, quella inclusa nel tema (già scontornata e tarata)
+  assign scene_url = ''
+  if section.settings.image != blank
+    assign scene_url = section.settings.image | image_url: width: 1400
+  elsif section.settings.default_scene
+    assign scene_url = 'hero-atmosfera-scena.webp' | asset_url
+  endif
+
   # l'indicatore di scroll sta sopra la sfumatura: sceglie il colore
   # che si legge sul colore della sezione successiva
   assign scroll_ink = ''
@@ -64,34 +73,45 @@
 -%}
 
 {%- capture media_html -%}
-  {%- if section.settings.image != blank -%}
+  {%- if scene_url != blank -%}
     <div class="hero-atm__media{% if section.settings.image_shadow %} hero-atm__media--shadow{% endif %}{% if section.settings.image_float %} hero-atm__media--float{% endif %}">
-      {{
-        section.settings.image
-        | image_url: width: 1800
-        | image_tag:
-          loading: 'eager',
-          fetchpriority: 'high',
-          widths: '600, 900, 1200, 1500, 1800',
-          sizes: '(min-width: 750px) 60vw, 92vw',
-          alt: section.settings.image.alt
-      }}
+      {%- if section.settings.image != blank -%}
+        {{
+          section.settings.image
+          | image_url: width: 1800
+          | image_tag:
+            loading: 'eager',
+            fetchpriority: 'high',
+            widths: '600, 900, 1200, 1500, 1800',
+            sizes: '(min-width: 750px) 60vw, 92vw',
+            alt: section.settings.image.alt
+        }}
+      {%- else -%}
+        <img
+          src="{{ 'hero-atmosfera-scena.webp' | asset_url }}"
+          alt="Uomo che dorme su un materasso Con comodo"
+          width="1800"
+          height="1471"
+          loading="eager"
+          fetchpriority="high"
+        >
+      {%- endif -%}
     </div>
   {%- endif -%}
 {%- endcapture -%}
 
 <hero-atmosfera
   id="hero-atm-{{ section.id }}"
-  class="hero-atm hero-atm--{{ atmosfera }} hero-atm--{{ section.settings.alignment }}{% if section.settings.orb_position == 'left' %} hero-atm--orb-left{% endif %}{% if section.settings.image != blank %} hero-atm--media-{{ section.settings.image_layout }} hero-atm--media-{{ section.settings.image_fit }}{% if section.settings.image_blend %} hero-atm--media-blend{% endif %}{% unless section.settings.show_image_mobile %} hero-atm--media-desktop{% endunless %}{% endif %}"
+  class="hero-atm hero-atm--{{ atmosfera }} hero-atm--{{ section.settings.alignment }}{% if section.settings.orb_position == 'left' %} hero-atm--orb-left{% endif %}{% if scene_url != blank %} hero-atm--media-{{ section.settings.image_layout }} hero-atm--media-{{ section.settings.image_fit }}{% if section.settings.image_blend %} hero-atm--media-blend{% endif %}{% unless section.settings.show_image_mobile %} hero-atm--media-desktop{% endunless %}{% endif %}"
   style="
     --ha-height: {{ height }};
     --ha-height-mobile: {{ height_mobile }};
     --ha-haze: {{ section.settings.haze_color }};
     {% if scroll_ink != blank %}--ha-scroll-ink: {{ scroll_ink }};{% endif %}
-    {% if section.settings.image != blank %}
+    {% if scene_url != blank %}
       --ha-media-width: {{ section.settings.image_width }};
       --ha-media-height: {{ section.settings.image_height }};
-      --ha-media-src: url('{{ section.settings.image | image_url: width: 1400 }}');
+      --ha-media-src: url('{{ scene_url }}');
       --ha-media-offset: {{ section.settings.image_offset }};
       --ha-media-parallax: {{ section.settings.image_parallax }};
     {% endif %}
@@ -202,7 +222,7 @@
     {{ media_html }}
   {%- endif -%}
 
-  {%- if section.settings.image != blank and section.settings.image_blend -%}
+  {%- if scene_url != blank and section.settings.image_blend -%}
     <div class="hero-atm__mist" aria-hidden="true">
       <span style="--l: -10%; --b: -10%; --w: 62%; --h: 58%; --t: 30s;"></span>
       <span style="--l: 22%; --b: -18%; --w: 66%; --h: 64%; --t: 24s; --d: -9s;"></span>
@@ -441,7 +461,13 @@
       "type": "image_picker",
       "id": "image",
       "label": "Immagine",
-      "info": "Pensata per uno scontornato in PNG con sfondo trasparente (prodotto o scena)."
+      "info": "Se la lasci vuota viene usata la scena inclusa nel tema, già scontornata e tarata."
+    },
+    {
+      "type": "checkbox",
+      "id": "default_scene",
+      "label": "Usa la scena inclusa se non scegli un'immagine",
+      "default": true
     },
     {
       "type": "select",
@@ -461,7 +487,7 @@
       "max": 100,
       "step": 5,
       "unit": "%",
-      "default": 70
+      "default": 100
     },
     {
       "type": "select",
@@ -490,7 +516,7 @@
       "max": 70,
       "step": 2,
       "unit": "%",
-      "default": 40
+      "default": 56
     },
     {
       "type": "range",
@@ -510,7 +536,7 @@
       "min": 0,
       "max": 40,
       "step": 2,
-      "default": 14
+      "default": 10
     },
     {
       "type": "checkbox",
