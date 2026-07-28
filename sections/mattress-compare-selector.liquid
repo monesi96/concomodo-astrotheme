@@ -1,0 +1,681 @@
+{%- comment -%}
+  Comparatore materassi con selettori — l'utente sceglie da 2 a 3 materassi
+  da confrontare tramite un campo a tendina per colonna.
+
+  Due usi previsti:
+  · pagina dedicata → "Mostra immagini prodotto" attivo (scheda completa)
+  · sezione in pagina collezione → solo i campi testuali (versione compatta)
+
+  I dati delle righe arrivano dal metaobject `custom.comparison` del prodotto,
+  lo stesso usato dal comparatore della scheda prodotto.
+{%- endcomment -%}
+
+{%- liquid
+  assign source = section.settings.collection
+  if source == blank
+    assign source = collections['materassi']
+  endif
+  if source == blank or source.products.size == 0
+    assign source = collections['all']
+  endif
+
+  assign max_products = section.settings.max_products
+  assign slots = section.settings.columns | plus: 0
+
+  comment
+    Elenco degli handle disponibili: serve a validare i materassi
+    preimpostati nelle impostazioni della sezione.
+  endcomment
+  assign handle_string = ','
+  for product in source.products limit: max_products
+    assign handle_string = handle_string | append: product.handle | append: ','
+  endfor
+  assign handles = handle_string | remove_first: ',' | split: ','
+
+  comment
+    Selezione iniziale di ogni colonna: materasso scelto nelle impostazioni
+    se appartiene alla collezione, altrimenti l'i-esimo della lista.
+  endcomment
+  assign selected_string = ''
+  for i in (1..slots)
+    assign setting_key = 'default_product_' | append: i
+    assign chosen = section.settings[setting_key].handle
+    assign probe = ',' | append: chosen | append: ','
+    if chosen != blank and handle_string contains probe
+      assign selected_string = selected_string | append: chosen | append: ','
+    else
+      assign position = i | minus: 1
+      assign fallback = handles[position]
+      assign selected_string = selected_string | append: fallback | append: ','
+    endif
+  endfor
+  assign selected = selected_string | split: ','
+
+  comment
+    Righe attive, nell'ordine in cui vengono mostrate.
+  endcomment
+  assign row_string = ''
+  if section.settings.show_price
+    assign row_string = row_string | append: 'price,'
+  endif
+  if section.settings.show_feel
+    assign row_string = row_string | append: 'feel,'
+  endif
+  if section.settings.show_support
+    assign row_string = row_string | append: 'support,'
+  endif
+  if section.settings.show_cooling
+    assign row_string = row_string | append: 'cooling,'
+  endif
+  if section.settings.show_height
+    assign row_string = row_string | append: 'height,'
+  endif
+  if section.settings.show_layers
+    assign row_string = row_string | append: 'layers,'
+  endif
+  if section.settings.show_description
+    assign row_string = row_string | append: 'description,'
+  endif
+  assign rows = row_string | split: ','
+-%}
+
+{%- if handles.size > 0 -%}
+  {{ 'mattress-compare-selector.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'mattress-compare-selector.js' | asset_url }}" defer></script>
+
+  <div class="section-background color-{{ section.settings.color_scheme }}"></div>
+  <mattress-compare-selector
+    class="section section--{{ section.settings.section_width }} mcs color-{{ section.settings.color_scheme }} spacing-style{% unless section.settings.show_media %} mcs--compact{% endunless %}"
+    style="
+      {%- render 'spacing-style', settings: section.settings %}
+      --mcs-slots: {{ slots }};
+      --mcs-radius: {{ section.settings.corner_radius }}px;
+    "
+    {% if section.settings.sync_url %}
+      data-param="confronto"
+    {% endif %}
+    {% if request.visual_preview_mode %}
+      data-shopify-visual-preview
+    {% endif %}
+  >
+    {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+      <div class="mcs__header">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="mcs__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <div class="mcs__subheading">{{ section.settings.subheading }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="mcs__scroller">
+      <div class="mcs__table">
+        {%- comment -%} ── Colonne: immagine (facoltativa) + campo di selezione ── {%- endcomment -%}
+        {%- for i in (1..slots) -%}
+          {%- liquid
+            assign position = i | minus: 1
+            assign current = selected[position]
+          -%}
+          <div class="mcs__slot">
+            {%- if section.settings.show_media -%}
+              <div class="mcs__media">
+                {%- for product in source.products limit: max_products -%}
+                  {%- assign card_image = product.metafields.custom.comparison.value.card_image
+                    | default: product.featured_image
+                  -%}
+                  <div
+                    class="mcs__pane"
+                    data-mcs-pane
+                    data-slot="{{ i }}"
+                    data-handle="{{ product.handle }}"
+                    {% unless product.handle == current %}
+                      hidden
+                    {% endunless %}
+                  >
+                    <a href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+                      {% render 'image', image: card_image, height: 600 %}
+                    </a>
+                  </div>
+                {%- endfor -%}
+                <div
+                  class="mcs__pane"
+                  data-mcs-pane
+                  data-slot="{{ i }}"
+                  data-handle=""
+                  {% if current != blank %}
+                    hidden
+                  {% endif %}
+                >
+                  <span class="mcs__media-empty">{{ section.settings.empty_label }}</span>
+                </div>
+              </div>
+            {%- endif -%}
+
+            <label class="mcs__field-label" for="mcs-{{ section.id }}-{{ i }}">
+              {{- section.settings.slot_label }} {{ i -}}
+            </label>
+            <span class="mcs__field">
+              <select
+                class="mcs__select"
+                id="mcs-{{ section.id }}-{{ i }}"
+                data-mcs-select
+                data-slot="{{ i }}"
+              >
+                {%- if section.settings.allow_empty or current == blank -%}
+                  <option value="" {% if current == blank %}selected{% endif %}>
+                    {{- section.settings.empty_label -}}
+                  </option>
+                {%- endif -%}
+                {%- for product in source.products limit: max_products -%}
+                  <option value="{{ product.handle }}" {% if product.handle == current %}selected{% endif %}>
+                    {{- product.title | escape -}}
+                  </option>
+                {%- endfor -%}
+              </select>
+              <svg class="mcs__field-caret" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="m3.5 6 4.5 4.5L12.5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </div>
+        {%- endfor -%}
+
+        {%- comment -%} ── Righe di confronto ── {%- endcomment -%}
+        {%- for row in rows -%}
+          {%- liquid
+            if row == blank
+              continue
+            endif
+            assign row_label = ''
+            assign row_tooltip = ''
+            case row
+              when 'price'
+                assign row_label = section.settings.price_label
+                assign row_tooltip = ''
+              when 'feel'
+                assign row_label = section.settings.feel_label
+                assign row_tooltip = section.settings.feel_tooltip
+              when 'support'
+                assign row_label = section.settings.support_label
+                assign row_tooltip = section.settings.support_tooltip
+              when 'cooling'
+                assign row_label = section.settings.cooling_label
+                assign row_tooltip = section.settings.cooling_tooltip
+              when 'height'
+                assign row_label = section.settings.height_label
+                assign row_tooltip = section.settings.height_tooltip
+              when 'layers'
+                assign row_label = section.settings.layers_label
+                assign row_tooltip = section.settings.layers_tooltip
+              when 'description'
+                assign row_label = section.settings.description_label
+                assign row_tooltip = ''
+            endcase
+          -%}
+          <div class="mcs__row-label">
+            <span class="mcs__pill">
+              <span>{{ row_label }}</span>
+              {%- if row_tooltip != blank -%}
+                <span class="mcs__tip" data-mcs-tip>
+                  <button
+                    type="button"
+                    class="mcs__tip-btn"
+                    data-mcs-tip-btn
+                    aria-expanded="false"
+                    aria-label="{{ row_label | strip_html | escape }}"
+                  >
+                    ?
+                  </button>
+                  <span class="mcs__tip-bubble" role="tooltip">{{ row_tooltip }}</span>
+                </span>
+              {%- endif -%}
+            </span>
+          </div>
+
+          {%- for i in (1..slots) -%}
+            {%- liquid
+              assign position = i | minus: 1
+              assign current = selected[position]
+            -%}
+            <div class="mcs__cell">
+              {%- for product in source.products limit: max_products -%}
+                <div
+                  class="mcs__pane"
+                  data-mcs-pane
+                  data-slot="{{ i }}"
+                  data-handle="{{ product.handle }}"
+                  {% unless product.handle == current %}
+                    hidden
+                  {% endunless %}
+                >
+                  {% render 'mcs-cell', product: product, field: row, settings: section.settings %}
+                </div>
+              {%- endfor -%}
+              <div
+                class="mcs__pane"
+                data-mcs-pane
+                data-slot="{{ i }}"
+                data-handle=""
+                {% if current != blank %}
+                  hidden
+                {% endif %}
+              >
+                <span class="mcs__empty">—</span>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endfor -%}
+
+        {%- comment -%} ── Riga pulsanti ── {%- endcomment -%}
+        {%- if section.settings.show_cta -%}
+          {%- for i in (1..slots) -%}
+            {%- liquid
+              assign position = i | minus: 1
+              assign current = selected[position]
+            -%}
+            <div class="mcs__cell mcs__cell--cta">
+              {%- for product in source.products limit: max_products -%}
+                <div
+                  class="mcs__pane"
+                  data-mcs-pane
+                  data-slot="{{ i }}"
+                  data-handle="{{ product.handle }}"
+                  {% unless product.handle == current %}
+                    hidden
+                  {% endunless %}
+                >
+                  {% render 'mcs-cell', product: product, field: 'cta', settings: section.settings %}
+                </div>
+              {%- endfor -%}
+              <div
+                class="mcs__pane"
+                data-mcs-pane
+                data-slot="{{ i }}"
+                data-handle=""
+                {% if current != blank %}
+                  hidden
+                {% endif %}
+              ></div>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </mattress-compare-selector>
+
+{%- elsif request.design_mode -%}
+  <div class="section section--page-width color-{{ section.settings.color_scheme }} spacing-style">
+    <div class="mcs__placeholder">
+      Scegli una collezione con i materassi da confrontare nelle impostazioni della sezione.
+      I dati delle righe (sensazione, supporto, traspirabilità, altezza, strati) vengono letti dal
+      metaobject <code>custom.comparison</code> di ogni prodotto.
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Comparatore selezionabile",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Titolo",
+      "default": "Confronta i materassi"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Sottotitolo",
+      "default": "<p>Scegli due modelli e vedi le differenze punto per punto.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Materassi"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collezione",
+      "info": "I prodotti di questa collezione popolano i campi di selezione. Se vuoto usa la collezione \"materassi\"."
+    },
+    {
+      "type": "range",
+      "id": "max_products",
+      "label": "Materassi selezionabili",
+      "min": 2,
+      "max": 16,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Colonne di confronto",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "product",
+      "id": "default_product_1",
+      "label": "Preselezionato colonna 1"
+    },
+    {
+      "type": "product",
+      "id": "default_product_2",
+      "label": "Preselezionato colonna 2"
+    },
+    {
+      "type": "product",
+      "id": "default_product_3",
+      "label": "Preselezionato colonna 3"
+    },
+    {
+      "type": "text",
+      "id": "slot_label",
+      "label": "Etichetta del campo",
+      "info": "Seguita dal numero della colonna.",
+      "default": "Materasso"
+    },
+    {
+      "type": "text",
+      "id": "empty_label",
+      "label": "Testo colonna vuota",
+      "default": "Scegli un materasso"
+    },
+    {
+      "type": "checkbox",
+      "id": "allow_empty",
+      "label": "Permetti di svuotare una colonna",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "sync_url",
+      "label": "Salva la scelta nell'indirizzo della pagina",
+      "info": "Permette di condividere un confronto già impostato.",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Immagini"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_media",
+      "label": "Mostra le immagini prodotto",
+      "info": "Attivo nella pagina dedicata, da spegnere nella versione compatta in pagina collezione.",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Righe di confronto"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "Prezzo",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "price_label",
+      "label": "Etichetta prezzo",
+      "default": "Prezzo"
+    },
+    {
+      "type": "text",
+      "id": "price_prefix",
+      "label": "Testo prima del prezzo",
+      "default": "da"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_feel",
+      "label": "Sensazione",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "feel_label",
+      "label": "Etichetta sensazione",
+      "default": "Sensazione"
+    },
+    {
+      "type": "text",
+      "id": "feel_tooltip",
+      "label": "Spiegazione sensazione",
+      "default": "Quanto il materasso risulta morbido o rigido al primo contatto."
+    },
+    {
+      "type": "text",
+      "id": "firmness_min_label",
+      "label": "Estremo sinistro sensazione",
+      "default": "Morbido"
+    },
+    {
+      "type": "text",
+      "id": "firmness_max_label",
+      "label": "Estremo destro sensazione",
+      "default": "Rigido"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_support",
+      "label": "Supporto ergonomico",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "support_label",
+      "label": "Etichetta supporto",
+      "default": "Supporto ergonomico"
+    },
+    {
+      "type": "text",
+      "id": "support_tooltip",
+      "label": "Spiegazione supporto",
+      "default": "Quanto la colonna vertebrale resta allineata nelle diverse posizioni."
+    },
+    {
+      "type": "text",
+      "id": "support_min_label",
+      "label": "Estremo sinistro supporto",
+      "default": "Base"
+    },
+    {
+      "type": "text",
+      "id": "support_max_label",
+      "label": "Estremo destro supporto",
+      "default": "Avanzato"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cooling",
+      "label": "Traspirabilità",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cooling_label",
+      "label": "Etichetta traspirabilità",
+      "default": "Traspirabilità"
+    },
+    {
+      "type": "text",
+      "id": "cooling_tooltip",
+      "label": "Spiegazione traspirabilità",
+      "default": "Quanto il materasso disperde calore e umidità durante la notte."
+    },
+    {
+      "type": "text",
+      "id": "cooling_min_label",
+      "label": "Estremo sinistro traspirabilità",
+      "default": "Base"
+    },
+    {
+      "type": "text",
+      "id": "cooling_max_label",
+      "label": "Estremo destro traspirabilità",
+      "default": "Massima"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_height",
+      "label": "Altezza",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "height_label",
+      "label": "Etichetta altezza",
+      "default": "Altezza"
+    },
+    {
+      "type": "text",
+      "id": "height_tooltip",
+      "label": "Spiegazione altezza",
+      "default": ""
+    },
+    {
+      "type": "checkbox",
+      "id": "show_layers",
+      "label": "Strati",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "layers_label",
+      "label": "Etichetta strati",
+      "default": "Strati"
+    },
+    {
+      "type": "text",
+      "id": "layers_tooltip",
+      "label": "Spiegazione strati",
+      "default": ""
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Descrizione breve",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "description_label",
+      "label": "Etichetta descrizione",
+      "default": "In sintesi"
+    },
+    {
+      "type": "header",
+      "content": "Pulsanti"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Mostra i pulsanti prodotto",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Testo del pulsante",
+      "default": "Scopri"
+    },
+    {
+      "type": "select",
+      "id": "cta_style",
+      "label": "Stile del pulsante",
+      "options": [
+        { "value": "primary", "label": "Primario" },
+        { "value": "secondary", "label": "Secondario" }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "header",
+      "content": "Sezione"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "Raggio angoli",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Larghezza sezione",
+      "options": [
+        { "value": "page-width", "label": "Pagina" },
+        { "value": "full-width", "label": "Piena" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Schema colore",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Spaziatura"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Sopra",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Sotto",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "Sinistra",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "Destra",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparatore selezionabile"
+    }
+  ]
+}
+{% endschema %}

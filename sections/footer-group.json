@@ -539,11 +539,79 @@
         "padding-block-start": 30,
         "padding-block-end": 30
       }
+    },
+    "popup_fullscreen_concomodo": {
+      "type": "popup-fullscreen",
+      "disabled": true,
+      "blocks": {
+        "option_1": {
+          "type": "option",
+          "settings": {
+            "label": "Dormire più profondamente",
+            "value": "riposo-profondo",
+            "link": "shopify://collections/materassi"
+          }
+        },
+        "option_2": {
+          "type": "option",
+          "settings": {
+            "label": "Meno dolori e tensioni",
+            "value": "dolori",
+            "link": "shopify://collections/materassi"
+          }
+        },
+        "option_3": {
+          "type": "option",
+          "settings": {
+            "label": "Addormentarmi prima",
+            "value": "addormentarsi",
+            "link": "shopify://pages/quiz"
+          }
+        }
+      },
+      "block_order": [
+        "option_1",
+        "option_2",
+        "option_3"
+      ],
+      "settings": {
+        "eyebrow": "Con comodo",
+        "heading": "Un extra 5% di sconto",
+        "subheading": "<p>Scegli il tuo obiettivo di riposo</p>",
+        "dismiss_label": "No, grazie",
+        "close_label": "Chiudi",
+        "image_position": "right",
+        "show_image_mobile": true,
+        "enable_email": true,
+        "email_heading": "Dove ti mandiamo lo sconto?",
+        "email_text": "<p>Lascia la tua email: ricevi subito il codice e i consigli per dormire meglio.</p>",
+        "email_placeholder": "La tua email",
+        "email_button": "Ricevi lo sconto",
+        "email_legal": "<p>Iscrivendoti accetti di ricevere comunicazioni da Con comodo. Puoi disiscriverti quando vuoi.</p>",
+        "success_heading": "Ecco il tuo sconto",
+        "success_text": "<p>Usa il codice al checkout. Te lo abbiamo mandato anche via email.</p>",
+        "discount_code": "COMODO5",
+        "copy_label": "Copia",
+        "copied_label": "Copiato!",
+        "success_cta_label": "Scopri i materassi",
+        "success_close_label": "Chiudi",
+        "trigger": "delay",
+        "delay": 6,
+        "scroll_percent": 30,
+        "frequency": "days",
+        "frequency_days": 14,
+        "visibility": "all",
+        "storage_key": "sconto-5",
+        "button_style": "primary",
+        "corner_radius": 24,
+        "color_scheme": "scheme-1"
+      }
     }
   },
   "order": [
     "installment_payments_concomodo",
     "footer_m9NzUG",
-    "footer_utilities_jLGE8U"
+    "footer_utilities_jLGE8U",
+    "popup_fullscreen_concomodo"
   ]
 }
