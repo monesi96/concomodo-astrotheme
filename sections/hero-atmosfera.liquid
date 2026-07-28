@@ -1,6 +1,6 @@
 {%- comment -%}
   Hero atmosfera (v3) — testo a sinistra, foto a destra a filo dei bordi
-  e, sotto la foto, una fascia di cielo animato: il ciclo
+  e, sopra la foto, una fascia di cielo animato: il ciclo
   giorno → tramonto → sera → notte gira in loop (10 s di default),
   graduale e uguale per tutti. Le nuvole entrano da sinistra e restano
   visibili solo dentro la fascia. Tutto in CSS, nessuna libreria.
@@ -75,23 +75,6 @@
   </div>
 
   <div class="hero-atm__visual">
-    <div class="hero-atm__photo">
-      {%- if section.settings.image != blank -%}
-        {{
-          section.settings.image
-          | image_url: width: 1800
-          | image_tag:
-            loading: 'eager',
-            fetchpriority: 'high',
-            widths: '600, 900, 1200, 1500, 1800',
-            sizes: '(min-width: 750px) 50vw, 100vw',
-            alt: section.settings.image.alt
-        }}
-      {%- else -%}
-        {{ 'hero-apparel-2' | placeholder_svg_tag: 'hero-atm__placeholder' }}
-      {%- endif -%}
-    </div>
-
     <div class="hero-atm__sky" aria-hidden="true">
       <div class="hero-atm__layer hero-atm__layer--tramonto"></div>
       <div class="hero-atm__layer hero-atm__layer--sera"></div>
@@ -136,6 +119,23 @@
             ></span>
           {%- endfor -%}
         </div>
+      {%- endif -%}
+    </div>
+
+    <div class="hero-atm__photo">
+      {%- if section.settings.image != blank -%}
+        {{
+          section.settings.image
+          | image_url: width: 1800
+          | image_tag:
+            loading: 'eager',
+            fetchpriority: 'high',
+            widths: '600, 900, 1200, 1500, 1800',
+            sizes: '(min-width: 750px) 50vw, 100vw',
+            alt: section.settings.image.alt
+        }}
+      {%- else -%}
+        {{ 'hero-apparel-2' | placeholder_svg_tag: 'hero-atm__placeholder' }}
       {%- endif -%}
     </div>
   </div>
@@ -213,13 +213,13 @@
       "type": "image_picker",
       "id": "image",
       "label": "Immagine",
-      "info": "Riempie la parte alta della colonna destra, a filo dei bordi e senza tagli ai lati. Finché è vuota si vede un segnaposto."
+      "info": "Riempie la parte bassa della colonna destra, a filo dei bordi e senza tagli ai lati. Finché è vuota si vede un segnaposto."
     },
     {
       "type": "range",
       "id": "photo_height",
       "label": "Altezza della foto",
-      "info": "Quanta colonna destra occupa la foto: il resto è il cielo animato.",
+      "info": "Quanta colonna destra occupa la foto: il resto, sopra, è il cielo animato.",
       "min": 45,
       "max": 75,
       "step": 1,
