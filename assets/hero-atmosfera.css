@@ -42,6 +42,15 @@ body:has(.header[transparent]) .hero-atm {
   translate: 0 calc(var(--ha-p) * 6%);
 }
 
+.hero-atm--notte,
+.hero-atm--alba {
+  --ha-ink: var(--ha-cream);
+}
+
+.hero-atm--giorno {
+  --ha-ink: var(--ha-charcoal);
+}
+
 .hero-atm--notte .hero-atm__sky {
   background: linear-gradient(180deg, #12151a 0%, var(--ha-night) 46%, #38414a 100%);
 }
@@ -65,6 +74,10 @@ body:has(.header[transparent]) .hero-atm {
 
 .hero-atm--alba .hero-atm__stars {
   opacity: 0.45;
+}
+
+.hero-atm--giorno .hero-atm__stars {
+  display: none;
 }
 
 .hero-atm__star {
@@ -190,7 +203,9 @@ body:has(.header[transparent]) .hero-atm {
   position: absolute;
   inset-block-end: 0;
   inset-inline: 0;
-  z-index: -1;
+  /* sopra l'immagine: il fondo della foto si dissolve nel colore della
+     sezione successiva invece di finire con un taglio netto */
+  z-index: 1;
   height: clamp(90px, 18vh, 220px);
   background: linear-gradient(180deg, rgb(244 239 232 / 0) 0%, var(--ha-haze, var(--ha-cream)) 100%);
   pointer-events: none;
@@ -199,7 +214,6 @@ body:has(.header[transparent]) .hero-atm {
 /* ── Palco: testo e immagine in primo piano ── */
 .hero-atm__stage {
   position: relative;
-  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -234,17 +248,22 @@ body:has(.header[transparent]) .hero-atm {
   }
 
   .hero-atm--media-affianco .hero-atm__media {
-    flex: 1 1 54%;
+    flex: 0 1 auto;
+    width: calc(var(--ha-media-width, 70) * 0.55vw);
   }
 }
 
 /* ── Immagine in primo piano (pensata per uno scontornato) ── */
 .hero-atm__media {
   position: relative;
-  width: var(--ha-media-width, 70%);
-  max-width: 900px;
-  margin-block-end: var(--ha-media-offset, 0%);
-  translate: 0 calc(var(--ha-p) * var(--ha-media-parallax, 14) * -1%);
+  z-index: 0;
+  /* larghezza in vw: una scena può uscire dal contenitore del testo e
+     arrivare ai bordi dello schermo, come una foto a tutta pagina */
+  width: calc(var(--ha-media-width, 70) * 1vw);
+  max-width: none;
+  /* scostamento e parallasse in un'unica trasformazione: le percentuali
+     qui sono relative all'altezza dell'immagine, non alla pagina */
+  translate: 0 calc((var(--ha-media-offset, 0) * -1%) - (var(--ha-p) * var(--ha-media-parallax, 14) * 1%));
 }
 
 .hero-atm__media img {
@@ -254,6 +273,31 @@ body:has(.header[transparent]) .hero-atm {
   width: 100%;
   height: auto;
   object-fit: contain;
+}
+
+/* Immagine sotto al testo: l'hero diventa una griglia a due righe —
+   testo sopra, fascia dell'immagine sotto. Niente trucchi di
+   posizionamento: il testo resta sotto all'header e non si sovrappone
+   mai alla foto, qualunque sia l'altezza scelta. */
+.hero-atm--media-sotto {
+  grid-template-rows: minmax(0, 1fr) calc(var(--ha-media-height, 40) * 1svh);
+  row-gap: clamp(0.5rem, 2vh, 1.5rem);
+  padding-block-end: 0;
+}
+
+.hero-atm--media-sotto .hero-atm__media {
+  grid-row: 2;
+  align-self: end;
+  justify-self: center;
+  height: 100%;
+}
+
+/* Il taglio parte dal basso, dove la foto è meno interessante, e la
+   foschia lo dissolve nella sezione successiva. */
+.hero-atm--media-sotto .hero-atm__media img {
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 0%;
 }
 
 /* Ombra ellittica: appoggia lo scontornato invece di lasciarlo sospeso */
@@ -276,6 +320,12 @@ body:has(.header[transparent]) .hero-atm {
   animation: hero-atm-float 9s ease-in-out infinite;
 }
 
+/* nella fascia bassa l'immagine è tagliata a misura: qualche pixel in più
+   evita che il respiro scopra una riga vuota sotto */
+.hero-atm--media-sotto .hero-atm__media--float img {
+  height: calc(100% + 14px);
+}
+
 @keyframes hero-atm-float {
   0%,
   100% {
@@ -290,7 +340,7 @@ body:has(.header[transparent]) .hero-atm {
 /* ── Contenuto ── */
 .hero-atm__content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   width: 100%;
   max-width: var(--ha-content-width, 46rem);
   margin-inline: var(--ha-content-margin, auto);
@@ -373,36 +423,36 @@ body:has(.header[transparent]) .hero-atm {
 
 /* Su cielo scuro il pulsante principale del tema (carbone su carbone)
    sparirebbe: lo invertiamo in crema con testo scuro. */
-.hero-atm--dark .hero-atm__button:not(.hero-atm__button--ghost) {
+:is(.hero-atm--notte, .hero-atm--alba) .hero-atm__button:not(.hero-atm__button--ghost) {
   background: var(--ha-cream);
   color: var(--ha-charcoal);
   box-shadow: none;
 }
 
-.hero-atm--dark .hero-atm__button:not(.hero-atm__button--ghost):hover {
+:is(.hero-atm--notte, .hero-atm--alba) .hero-atm__button:not(.hero-atm__button--ghost):hover {
   background: var(--ha-white);
   color: var(--ha-charcoal);
 }
 
 /* Su fondo scuro il bottone secondario deve restare leggibile */
-.hero-atm--dark .hero-atm__button--ghost {
+:is(.hero-atm--notte, .hero-atm--alba) .hero-atm__button--ghost {
   background: rgb(244 239 232 / 0.14);
   color: var(--ha-cream);
   box-shadow: inset 0 0 0 1px rgb(244 239 232 / 0.7);
 }
 
-.hero-atm--dark .hero-atm__button--ghost:hover {
+:is(.hero-atm--notte, .hero-atm--alba) .hero-atm__button--ghost:hover {
   background: rgb(244 239 232 / 0.26);
 }
 
 /* ── Indicatore di scroll ── */
 .hero-atm__scroll {
   position: absolute;
+  z-index: 2;
   inset-block-end: clamp(1rem, 3vh, 2rem);
   /* sta sopra la foschia, quindi prende il colore che ci si legge sopra */
   color: var(--ha-scroll-ink, inherit);
   inset-inline: 0;
-  z-index: 1;
   display: flex;
   justify-content: center;
   gap: 0.5rem;
@@ -462,7 +512,7 @@ body:has(.header[transparent]) .hero-atm {
   }
 
   .hero-atm__media {
-    width: min(100%, calc(var(--ha-media-width, 70%) + 25%));
+    width: min(100vw, calc((var(--ha-media-width, 70) + 25) * 1vw));
   }
 
   .hero-atm--media-desktop .hero-atm__media {
