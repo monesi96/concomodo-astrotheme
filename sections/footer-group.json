@@ -440,25 +440,20 @@
                         "social_links_cwbWW3"
                       ]
                     },
-                    "text_qwV9y8": {
-                      "type": "text",
+                    "menu_9K8zBx": {
+                      "type": "menu",
+                      "name": "t:names.menu",
                       "settings": {
-                        "text": "<p><a href=\"/pages/guida-acquisto\" title=\"Guida Acquisto\">Guida acquisto</a><br/><a href=\"/pages/100-notti\" title=\"100 notti\">100 notti di prova</a><br/>Informativa di vendita<br/><a href=\"/pages/dormire-comodi\" title=\"Dormire Comodi\">Dormire comodi</a></p>",
-                        "width": "100%",
-                        "max_width": "normal",
-                        "alignment": "left",
-                        "type_preset": "custom",
-                        "font": "var(--font-subheading--family)",
-                        "weight": "",
-                        "font_size": "1.125rem",
-                        "line_height": "loose",
-                        "letter_spacing": "normal",
-                        "case": "uppercase",
-                        "wrap": "pretty",
-                        "color": "var(--color-foreground)",
-                        "background": false,
-                        "background_color": "#00000026",
-                        "corner_radius": 0,
+                        "menu": "footer",
+                        "heading": "",
+                        "menu_spacing": 12,
+                        "show_as_accordion": false,
+                        "accordion_icon": "caret",
+                        "accordion_dividers": false,
+                        "inherit_color_scheme": true,
+                        "color_scheme": "",
+                        "heading_preset": "h3",
+                        "link_preset": "paragraph",
                         "padding-block-start": 0,
                         "padding-block-end": 0,
                         "padding-inline-start": 0,
@@ -469,7 +464,7 @@
                   },
                   "block_order": [
                     "group_qbqU3j",
-                    "text_qwV9y8"
+                    "menu_9K8zBx"
                   ]
                 }
               },
@@ -542,30 +537,29 @@
     },
     "popup_fullscreen_concomodo": {
       "type": "popup-fullscreen",
-      "disabled": true,
       "blocks": {
         "option_1": {
           "type": "option",
           "settings": {
             "label": "Dormire più profondamente",
-            "value": "riposo-profondo",
-            "link": "shopify://collections/materassi"
+            "link": "shopify://collections/materassi",
+            "value": "riposo-profondo"
           }
         },
         "option_2": {
           "type": "option",
           "settings": {
             "label": "Meno dolori e tensioni",
-            "value": "dolori",
-            "link": "shopify://collections/materassi"
+            "link": "shopify://collections/materassi",
+            "value": "dolori"
           }
         },
         "option_3": {
           "type": "option",
           "settings": {
             "label": "Addormentarmi prima",
-            "value": "addormentarsi",
-            "link": "shopify://pages/quiz"
+            "link": "shopify://pages/quiz",
+            "value": "addormentarsi"
           }
         }
       },
@@ -574,6 +568,7 @@
         "option_2",
         "option_3"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "Con comodo",
         "heading": "Un extra 5% di sconto",
@@ -594,6 +589,7 @@
         "copy_label": "Copia",
         "copied_label": "Copiato!",
         "success_cta_label": "Scopri i materassi",
+        "success_cta_link": "",
         "success_close_label": "Chiudi",
         "trigger": "delay",
         "delay": 6,
