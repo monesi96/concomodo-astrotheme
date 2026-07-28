@@ -1079,7 +1079,7 @@
             "border_radius": 30,
             "toggle_overlay": false,
             "overlay_color": "#00000026",
-            "overlay_style": "solid",
+            "overlay_style": "gradient",
             "gradient_direction": "to top",
             "link": "",
             "open_in_new_tab": false,
