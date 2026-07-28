@@ -13,15 +13,27 @@
 {%- liquid
   assign atmosfera = section.settings.atmosfera
 
+  comment
+    Atmosfera automatica: il primo disegno usa l'ora del negozio, poi lo
+    script qui sotto la corregge con l'ora vera di chi guarda.
+  endcomment
+  if atmosfera == 'auto'
+    assign shop_hour = 'now' | date: '%H' | plus: 0
+    if shop_hour >= section.settings.hour_night or shop_hour < section.settings.hour_morning
+      assign atmosfera = 'notte'
+    elsif shop_hour >= section.settings.hour_day
+      assign atmosfera = 'giorno'
+    else
+      assign atmosfera = 'alba'
+    endif
+  endif
+
   assign is_dark = false
   if atmosfera == 'notte' or atmosfera == 'alba'
     assign is_dark = true
   endif
 
-  assign show_stars = false
-  if section.settings.show_stars and is_dark
-    assign show_stars = true
-  endif
+  assign show_stars = section.settings.show_stars
 
   case section.settings.height
     when 'piccola'
@@ -38,14 +50,9 @@
       assign height_mobile = '74svh'
   endcase
 
-  assign ink = '#464646'
-  if is_dark
-    assign ink = '#f4efe8'
-  endif
-
   # l'indicatore di scroll sta sopra la sfumatura: sceglie il colore
   # che si legge sul colore della sezione successiva
-  assign scroll_ink = ink
+  assign scroll_ink = ''
   if section.settings.show_haze
     assign haze_brightness = section.settings.haze_color | color_brightness
     if haze_brightness > 140
@@ -56,23 +63,46 @@
   endif
 -%}
 
+{%- capture media_html -%}
+  {%- if section.settings.image != blank -%}
+    <div class="hero-atm__media{% if section.settings.image_shadow %} hero-atm__media--shadow{% endif %}{% if section.settings.image_float %} hero-atm__media--float{% endif %}">
+      {{
+        section.settings.image
+        | image_url: width: 1800
+        | image_tag:
+          loading: 'eager',
+          fetchpriority: 'high',
+          widths: '600, 900, 1200, 1500, 1800',
+          sizes: '(min-width: 750px) 60vw, 92vw',
+          alt: section.settings.image.alt
+      }}
+    </div>
+  {%- endif -%}
+{%- endcapture -%}
+
 <hero-atmosfera
-  class="hero-atm hero-atm--{{ atmosfera }} hero-atm--{{ section.settings.alignment }}{% if is_dark %} hero-atm--dark{% endif %}{% if section.settings.orb_position == 'left' %} hero-atm--orb-left{% endif %}{% if section.settings.image != blank %} hero-atm--media-{{ section.settings.image_layout }}{% unless section.settings.show_image_mobile %} hero-atm--media-desktop{% endunless %}{% endif %}"
+  id="hero-atm-{{ section.id }}"
+  class="hero-atm hero-atm--{{ atmosfera }} hero-atm--{{ section.settings.alignment }}{% if section.settings.orb_position == 'left' %} hero-atm--orb-left{% endif %}{% if section.settings.image != blank %} hero-atm--media-{{ section.settings.image_layout }}{% unless section.settings.show_image_mobile %} hero-atm--media-desktop{% endunless %}{% endif %}"
   style="
     --ha-height: {{ height }};
     --ha-height-mobile: {{ height_mobile }};
-    --ha-ink: {{ ink }};
     --ha-haze: {{ section.settings.haze_color }};
-    --ha-scroll-ink: {{ scroll_ink }};
+    {% if scroll_ink != blank %}--ha-scroll-ink: {{ scroll_ink }};{% endif %}
     {% if section.settings.image != blank %}
-      --ha-media-width: {{ section.settings.image_width }}%;
-      --ha-media-offset: {{ section.settings.image_offset }}%;
+      --ha-media-width: {{ section.settings.image_width }};
+      --ha-media-height: {{ section.settings.image_height }};
+      --ha-media-offset: {{ section.settings.image_offset }};
       --ha-media-parallax: {{ section.settings.image_parallax }};
     {% endif %}
     {% if section.settings.alignment == 'left' %}
       --ha-align: start; --ha-justify: flex-start; --ha-content-margin: 0;
     {% endif %}
   "
+  {% if section.settings.atmosfera == 'auto' %}
+    data-hour-morning="{{ section.settings.hour_morning }}"
+    data-hour-day="{{ section.settings.hour_day }}"
+    data-hour-night="{{ section.settings.hour_night }}"
+  {% endif %}
   {% if request.visual_preview_mode %}
     data-shopify-visual-preview
   {% endif %}
@@ -162,21 +192,14 @@
     {%- endif -%}
     </div>
 
-    {%- if section.settings.image != blank -%}
-      <div class="hero-atm__media{% if section.settings.image_shadow %} hero-atm__media--shadow{% endif %}{% if section.settings.image_float %} hero-atm__media--float{% endif %}">
-        {{
-          section.settings.image
-          | image_url: width: 1800
-          | image_tag:
-            loading: 'eager',
-            fetchpriority: 'high',
-            widths: '600, 900, 1200, 1500, 1800',
-            sizes: '(min-width: 750px) 60vw, 92vw',
-            alt: section.settings.image.alt
-        }}
-      </div>
+    {%- if section.settings.image_layout == 'affianco' -%}
+      {{ media_html }}
     {%- endif -%}
   </div>
+
+  {%- if section.settings.image_layout != 'affianco' -%}
+    {{ media_html }}
+  {%- endif -%}
 
   {%- if section.settings.scroll_label != blank -%}
     <div class="hero-atm__scroll" aria-hidden="true">
@@ -188,6 +211,34 @@
   {%- endif -%}
 </hero-atmosfera>
 
+{%- if section.settings.atmosfera == 'auto' -%}
+  {%- comment -%}
+    Inline e subito dopo la sezione: l'atmosfera viene corretta con l'ora
+    locale di chi guarda prima che il browser disegni, senza sfarfallii.
+  {%- endcomment -%}
+  <script>
+    (function () {
+      var hero = document.getElementById('hero-atm-{{ section.id }}');
+      if (!hero) return;
+
+      var hour = new Date().getHours();
+      var morning = Number(hero.dataset.hourMorning);
+      var day = Number(hero.dataset.hourDay);
+      var night = Number(hero.dataset.hourNight);
+
+      var atmosfera = 'alba';
+      if (hour >= night || hour < morning) {
+        atmosfera = 'notte';
+      } else if (hour >= day) {
+        atmosfera = 'giorno';
+      }
+
+      hero.classList.remove('hero-atm--notte', 'hero-atm--alba', 'hero-atm--giorno');
+      hero.classList.add('hero-atm--' + atmosfera);
+    })();
+  </script>
+{%- endif -%}
+
 {% schema %}
 {
   "name": "Hero atmosfera",
@@ -198,11 +249,48 @@
       "id": "atmosfera",
       "label": "Atmosfera",
       "options": [
+        { "value": "auto", "label": "Automatica (ora locale di chi guarda)" },
         { "value": "notte", "label": "Notte stellata" },
         { "value": "alba", "label": "Alba" },
         { "value": "giorno", "label": "Nuvole di giorno" }
       ],
-      "default": "notte"
+      "default": "auto"
+    },
+    {
+      "type": "range",
+      "id": "hour_morning",
+      "label": "La mattina inizia alle",
+      "info": "Da qui fino al pomeriggio si vede l'alba.",
+      "min": 0,
+      "max": 11,
+      "step": 1,
+      "unit": "h",
+      "default": 6,
+      "visible_if": "{{ section.settings.atmosfera == \"auto\" }}"
+    },
+    {
+      "type": "range",
+      "id": "hour_day",
+      "label": "Il pomeriggio inizia alle",
+      "info": "Da qui fino alla sera si vedono le nuvole di giorno.",
+      "min": 8,
+      "max": 18,
+      "step": 1,
+      "unit": "h",
+      "default": 11,
+      "visible_if": "{{ section.settings.atmosfera == \"auto\" }}"
+    },
+    {
+      "type": "range",
+      "id": "hour_night",
+      "label": "La sera inizia alle",
+      "info": "Da qui fino alla mattina si vede la notte stellata.",
+      "min": 15,
+      "max": 23,
+      "step": 1,
+      "unit": "h",
+      "default": 19,
+      "visible_if": "{{ section.settings.atmosfera == \"auto\" }}"
     },
     {
       "type": "select",
@@ -364,6 +452,17 @@
       "step": 5,
       "unit": "%",
       "default": 70
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "label": "Altezza visibile",
+      "info": "Quanta parte della scena si vede: il taglio parte dal basso. Vale con l'immagine sotto al testo.",
+      "min": 20,
+      "max": 70,
+      "step": 2,
+      "unit": "%",
+      "default": 40
     },
     {
       "type": "range",
