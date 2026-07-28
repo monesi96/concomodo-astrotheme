@@ -1267,6 +1267,39 @@
         "padding-inline-end": 0
       }
     },
+    "mattress_quick_compare_ptWQmR": {
+      "type": "mattress-quick-compare",
+      "name": "Comparatore materassi",
+      "settings": {
+        "heading": "Confronta i nostri materassi",
+        "subheading": "<p>Quattro modelli, una sola cosa in comune: dormire meglio. Trova quello giusto per te.</p>",
+        "product_1": "compatto",
+        "product_2": "morbido",
+        "product_3": "cc-completo-molle",
+        "product_4": "materasso-1",
+        "show_firmness": true,
+        "firmness_label": "Durezza",
+        "show_support": true,
+        "support_label": "Supporto",
+        "show_cooling": true,
+        "cooling_label": "Traspirabilità",
+        "show_height": true,
+        "height_label": "Altezza",
+        "show_layers": false,
+        "layers_label": "Strati",
+        "price_prefix": "da",
+        "cta_label": "Scopri",
+        "highlight": 3,
+        "highlight_badge": "Più venduto",
+        "corner_radius": 28,
+        "section_width": "full-width",
+        "color_scheme": "scheme-2",
+        "padding-block-start": 40,
+        "padding-block-end": 40,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
+      }
+    },
     "section_promo": {
       "type": "section",
       "blocks": {
@@ -2334,6 +2367,7 @@
     "main",
     "section_bundle",
     "section_bundlebuilder",
+    "mattress_quick_compare_ptWQmR",
     "section_promo",
     "section_faq",
     "vuoi_parlare_con_noi_cc",
