@@ -150,7 +150,10 @@
       "type": "hero-atmosfera",
       "name": "Hero atmosfera",
       "settings": {
-        "atmosfera": "alba",
+        "atmosfera": "auto",
+        "hour_morning": 5,
+        "hour_day": 14,
+        "hour_night": 20,
         "height": "media",
         "alignment": "center",
         "eyebrow": "",
@@ -167,7 +170,14 @@
         "orb_position": "right",
         "show_haze": true,
         "haze_color": "#f4efe8",
-        "image": "shopify://shop_images/M2-top.png",
+        "image_layout": "sotto",
+        "image_width": 70,
+        "image_height": 40,
+        "image_offset": -6,
+        "image_parallax": 14,
+        "image_shadow": true,
+        "image_float": true,
+        "show_image_mobile": true,
         "scroll_label": "Scorri"
       }
     },
