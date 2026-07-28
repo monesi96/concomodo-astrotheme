@@ -2455,7 +2455,7 @@
               "settings": {
                 "image_ratio": "adapt",
                 "toggle_overlay": true,
-                "overlay_color": "#00000026",
+                "overlay_color": "#46464646",
                 "overlay_style": "gradient",
                 "gradient_direction": "to top",
                 "border": "none",
