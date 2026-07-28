@@ -16,36 +16,28 @@
           "type": "chapter",
           "settings": {
             "heading": "Perché il materasso nuovo sembra \"diverso\"",
-            "content": "<p>Le prime notti su un materasso nuovo possono sorprendere: sembra più rigido, più \"presente\" di quello a cui eri abituato. È normale, e succede per due motivi.</p><p>Il primo: i materiali sono nuovi davvero. Memory e poliuretani escono dalla produzione compatti e raggiungono la loro portanza definitiva solo dopo qualche settimana di utilizzo.</p><p>Il secondo è il tuo corpo: dopo anni sullo stesso materasso — magari afflosciato — schiena e spalle si sono adattate a una superficie che non li sosteneva più. Serve qualche notte perché \"disimparino\" le vecchie abitudini.</p>",
-            "link_label": "",
-            "link": ""
+            "content": "<p>Le prime notti su un materasso nuovo possono sorprendere: sembra più rigido, più \"presente\" di quello a cui eri abituato. È normale, e succede per due motivi.</p><p>Il primo: i materiali sono nuovi davvero. Memory e poliuretani escono dalla produzione compatti e raggiungono la loro portanza definitiva solo dopo qualche settimana di utilizzo.</p><p>Il secondo è il tuo corpo: dopo anni sullo stesso materasso — magari afflosciato — schiena e spalle si sono adattate a una superficie che non li sosteneva più. Serve qualche notte perché \"disimparino\" le vecchie abitudini.</p>"
           }
         },
         "cap_2": {
           "type": "chapter",
           "settings": {
             "heading": "Quanto dura il rodaggio",
-            "content": "<p>Per la maggior parte delle persone bastano <strong>2–4 settimane</strong> di utilizzo regolare. I materassi con strati in memory si assestano un po' più in fretta, perché il materiale reagisce al calore del corpo notte dopo notte; le strutture a molle insacchettate raggiungono il loro equilibrio in tempi simili.</p><p>È anche il motivo per cui la nostra prova dura <strong>100 notti</strong> e non 10: un giudizio onesto su un materasso si dà dopo il rodaggio, non durante.</p>",
-            "link_label": "",
-            "link": ""
+            "content": "<p>Per la maggior parte delle persone bastano <strong>2–4 settimane</strong> di utilizzo regolare. I materassi con strati in memory si assestano un po' più in fretta, perché il materiale reagisce al calore del corpo notte dopo notte; le strutture a molle insacchettate raggiungono il loro equilibrio in tempi simili.</p><p>È anche il motivo per cui la nostra prova dura <strong>100 notti</strong> e non 10: un giudizio onesto su un materasso si dà dopo il rodaggio, non durante.</p>"
           }
         },
         "cap_3": {
           "type": "chapter",
           "settings": {
             "heading": "Come accelerare l'adattamento",
-            "content": "<p>Qualche accorgimento aiuta il materasso (e te) ad ambientarsi prima:</p><ul><li><strong>Dormici ogni notte.</strong> Il modo migliore per rodarlo è usarlo: il calore e il peso del corpo fanno il lavoro.</li><li><strong>Lascialo respirare.</strong> Appena sfoderato dall'imballo, dagli qualche ora in una stanza areata per distendersi completamente.</li><li><strong>Tieni la camera temperata.</strong> Il memory è più accogliente in un ambiente tra i 18 e i 21 gradi; al freddo risulta più rigido.</li><li><strong>Distribuisci l'uso.</strong> Nelle prime settimane alterna i lati su cui ti sdrai, così l'assestamento è uniforme.</li></ul>",
-            "link_label": "",
-            "link": ""
+            "content": "<p>Qualche accorgimento aiuta il materasso (e te) ad ambientarsi prima:</p><ul><li><strong>Dormici ogni notte.</strong> Il modo migliore per rodarlo è usarlo: il calore e il peso del corpo fanno il lavoro.</li><li><strong>Lascialo respirare.</strong> Appena sfoderato dall'imballo, dagli qualche ora in una stanza areata per distendersi completamente.</li><li><strong>Tieni la camera temperata.</strong> Il memory è più accogliente in un ambiente tra i 18 e i 21 gradi; al freddo risulta più rigido.</li><li><strong>Distribuisci l'uso.</strong> Nelle prime settimane alterna i lati su cui ti sdrai, così l'assestamento è uniforme.</li></ul>"
           }
         },
         "cap_4": {
           "type": "chapter",
           "settings": {
             "heading": "Gli errori da evitare",
-            "content": "<ul><li><strong>Giudicarlo dopo tre notti.</strong> Le prime notti dicono poco: il corpo sta ancora facendo il confronto col vecchio materasso.</li><li><strong>Usare una base sbagliata.</strong> Una rete cedevole o doghe troppo distanziate cambiano completamente la sensazione del materasso (e possono comprometterne la garanzia).</li><li><strong>Piegarlo o arrotolarlo di nuovo.</strong> Una volta aperto, il materasso va tenuto disteso.</li><li><strong>Dormire altrove \"per abituarsi piano\".</strong> Alternare divano e letto nuovo allunga solo il rodaggio.</li></ul>",
-            "link_label": "",
-            "link": ""
+            "content": "<ul><li><strong>Giudicarlo dopo tre notti.</strong> Le prime notti dicono poco: il corpo sta ancora facendo il confronto col vecchio materasso.</li><li><strong>Usare una base sbagliata.</strong> Una rete cedevole o doghe troppo distanziate cambiano completamente la sensazione del materasso (e possono comprometterne la garanzia).</li><li><strong>Piegarlo o arrotolarlo di nuovo.</strong> Una volta aperto, il materasso va tenuto disteso.</li><li><strong>Dormire altrove \"per abituarsi piano\".</strong> Alternare divano e letto nuovo allunga solo il rodaggio.</li></ul>"
           }
         },
         "cap_5": {
@@ -97,8 +89,7 @@
             "heading": "Il materasso giusto si sceglie con comodo",
             "text": "<p>Non ce l'hai ancora? Rispondi a poche domande e ti consigliamo il modello più adatto a come dormi. E poi hai 100 notti per provarlo, rodaggio compreso.</p>",
             "button_label": "Fai il quiz",
-            "button_link": "/pages/quiz",
-            "color_scheme": "scheme-58084d4c-a86e-4d0a-855e-a0966e5043f7"
+            "button_link": "/pages/quiz"
           }
         }
       },
@@ -120,14 +111,16 @@
         "title": "Come \"rodare\" il materasso nuovo (e perché serve tempo)",
         "intro": "<p>Un materasso nuovo non dà il meglio la prima notte: come le scarpe buone, ha bisogno di un po' di rodaggio. Ecco cosa succede nelle prime settimane, come accelerare l'adattamento e quando preoccuparsi (spoiler: quasi mai).</p>",
         "show_toc": true,
-        "toc_title": "In questa guida",
-        "color_scheme": "",
-        "padding-block-start": 48,
-        "padding-block-end": 64
+        "toc_title": "In questa guida"
       }
+    },
+    "parla": {
+      "type": "vuoi-parlare-con-noi",
+      "settings": {}
     }
   },
   "order": [
-    "guide"
+    "guide",
+    "parla"
   ]
 }
