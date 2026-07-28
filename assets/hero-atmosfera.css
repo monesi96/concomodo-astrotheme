@@ -292,10 +292,16 @@ body:has(.header[transparent]) .hero-atm {
   height: 100%;
 }
 
-/* Il taglio parte dal basso, dove la foto è meno interessante, e la
-   foschia lo dissolve nella sezione successiva. */
+/* Due modi di stare nella fascia: "intera" mostra tutta la scena
+   appoggiata in basso, "riempi" la ritaglia dal basso per occupare
+   tutta la fascia. */
 .hero-atm--media-sotto .hero-atm__media img {
   height: 100%;
+  object-fit: contain;
+  object-position: 50% 100%;
+}
+
+.hero-atm--media-riempi .hero-atm__media img {
   object-fit: cover;
   object-position: 50% 0%;
 }
