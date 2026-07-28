@@ -100,6 +100,83 @@
         "padding-block-end": 48
       }
     },
+    "text_slider_64NyLh": {
+      "type": "text-slider",
+      "blocks": {
+        "item_L9emBW": {
+          "type": "item",
+          "settings": {
+            "text": "Prova 100 notti",
+            "link": "",
+            "color_mode": "auto",
+            "custom_color": "#464646"
+          }
+        },
+        "item_Y4Mqje": {
+          "type": "item",
+          "settings": {
+            "text": "Garanzia 10 anni",
+            "link": "",
+            "color_mode": "auto",
+            "custom_color": "#464646"
+          }
+        },
+        "item_Fd3Ynq": {
+          "type": "item",
+          "settings": {
+            "text": "Spedizione e reso gratuiti",
+            "link": "",
+            "color_mode": "auto",
+            "custom_color": "#464646"
+          }
+        },
+        "item_jYq6eR": {
+          "type": "item",
+          "settings": {
+            "text": "Pagamento in 3 rate",
+            "link": "",
+            "color_mode": "auto",
+            "custom_color": "#464646"
+          }
+        },
+        "item_yyBEVd": {
+          "type": "item",
+          "settings": {
+            "text": "Made in Italy",
+            "link": "",
+            "color_mode": "auto",
+            "custom_color": "#464646"
+          }
+        }
+      },
+      "block_order": [
+        "item_L9emBW",
+        "item_Y4Mqje",
+        "item_Fd3Ynq",
+        "item_jYq6eR",
+        "item_yyBEVd"
+      ],
+      "name": "Slider testuale",
+      "settings": {
+        "speed": 60,
+        "direction": "left",
+        "pause_on_hover": true,
+        "text_size": 20,
+        "font_weight": "500",
+        "uppercase": false,
+        "alternate_colors": true,
+        "accent_color": "#4a6f7d",
+        "separator": "none",
+        "separator_text": "—",
+        "gap": 48,
+        "show_borders": false,
+        "color_scheme": "",
+        "padding-block-start": 20,
+        "padding-block-end": 20,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
+      }
+    },
     "main": {
       "type": "main-collection",
       "blocks": {
@@ -1300,6 +1377,200 @@
         "padding-inline-end": 0
       }
     },
+    "collection_list_pxN4wG": {
+      "type": "collection-list",
+      "blocks": {
+        "group_qPkAwK": {
+          "type": "group",
+          "name": "t:names.header",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 20,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_R84Ug6": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>Mettili alla prova <strong>con</strong> le tue notti</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h3",
+                "font": "var(--font-body--family)",
+                "weight": "400",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 16,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "button_JEDAQF": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "Scopri i nostri prodotti",
+                "link": "shopify://collections/all",
+                "open_in_new_tab": false,
+                "style_class": "button-secondary",
+                "weight": "",
+                "font_size_desktop": "",
+                "font_size_mobile": "",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_R84Ug6",
+            "button_JEDAQF"
+          ]
+        },
+        "static-collection-card": {
+          "type": "_collection-card",
+          "name": "t:names.collection_card",
+          "static": true,
+          "settings": {
+            "placement": "on_image",
+            "horizontal_alignment": "center",
+            "vertical_alignment": "flex-end",
+            "collection_card_gap": 8,
+            "inherit_color_scheme": false,
+            "color_scheme": "scheme-5",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0
+          },
+          "blocks": {
+            "collection_title_qfcxBt": {
+              "type": "collection-title",
+              "name": "t:names.collection_title",
+              "settings": {
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h3",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 15,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "collection-card-image": {
+              "type": "_collection-card-image",
+              "name": "t:names.collection_card_image",
+              "static": true,
+              "settings": {
+                "image_ratio": "adapt",
+                "toggle_overlay": true,
+                "overlay_color": "#00000026",
+                "overlay_style": "gradient",
+                "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 30
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "collection_title_qfcxBt"
+          ]
+        }
+      },
+      "block_order": [
+        "group_qPkAwK"
+      ],
+      "custom_css": [
+        "> div > div {margin: 0 30px;}",
+        "@media screen and (min-width: 750px) {.section-resource-list__content {width: 25%; } .collection-card {height: 500px; } .resource-list__carousel .resource-list__slide {width: 33.33%; }}",
+        "@media screen and (max-width: 749px) {> div > div {margin: 0; } .collection-card {height: 340px; } .section-resource-list__list-wrapper {width: 100%; }}"
+      ],
+      "name": "t:names.collections_carousel",
+      "settings": {
+        "collection_list": [
+          "materassi",
+          "topper",
+          "topper-copia"
+        ],
+        "layout_type": "carousel",
+        "carousel_card_layout": "vertical",
+        "carousel_on_mobile": false,
+        "columns": 3,
+        "mobile_columns": "2",
+        "mobile_card_size": "60cqw",
+        "columns_gap": 20,
+        "bento_gap": 8,
+        "rows_gap": 8,
+        "max_collections": 4,
+        "icons_style": "none",
+        "icons_shape": "circle",
+        "content_direction": "row",
+        "section_width": "page-width",
+        "gap": 12,
+        "color_scheme": "scheme-2",
+        "padding-block-start": 45,
+        "padding-block-end": 45
+      }
+    },
     "section_promo": {
       "type": "section",
       "blocks": {
@@ -2360,92 +2631,16 @@
         "padding-inline-start": 0,
         "padding-inline-end": 0
       }
-    },
-    "text_slider_64NyLh": {
-      "type": "text-slider",
-      "blocks": {
-        "item_L9emBW": {
-          "type": "item",
-          "settings": {
-            "text": "Prova 100 notti",
-            "link": "",
-            "color_mode": "auto",
-            "custom_color": "#464646"
-          }
-        },
-        "item_Y4Mqje": {
-          "type": "item",
-          "settings": {
-            "text": "Garanzia 10 anni",
-            "link": "",
-            "color_mode": "auto",
-            "custom_color": "#464646"
-          }
-        },
-        "item_Fd3Ynq": {
-          "type": "item",
-          "settings": {
-            "text": "Spedizione e reso gratuiti",
-            "link": "",
-            "color_mode": "auto",
-            "custom_color": "#464646"
-          }
-        },
-        "item_jYq6eR": {
-          "type": "item",
-          "settings": {
-            "text": "Pagamento in 3 rate",
-            "link": "",
-            "color_mode": "auto",
-            "custom_color": "#464646"
-          }
-        },
-        "item_yyBEVd": {
-          "type": "item",
-          "settings": {
-            "text": "Made in Italy",
-            "link": "",
-            "color_mode": "auto",
-            "custom_color": "#464646"
-          }
-        }
-      },
-      "block_order": [
-        "item_L9emBW",
-        "item_Y4Mqje",
-        "item_Fd3Ynq",
-        "item_jYq6eR",
-        "item_yyBEVd"
-      ],
-      "name": "Slider testuale",
-      "settings": {
-        "speed": 60,
-        "direction": "left",
-        "pause_on_hover": true,
-        "text_size": 20,
-        "font_weight": "500",
-        "uppercase": false,
-        "alternate_colors": true,
-        "accent_color": "#4a6f7d",
-        "separator": "none",
-        "separator_text": "—",
-        "gap": 48,
-        "show_borders": false,
-        "color_scheme": "",
-        "padding-block-start": 20,
-        "padding-block-end": 20,
-        "padding-inline-start": 0,
-        "padding-inline-end": 0
-      }
     }
   },
   "order": [
     "section",
-    "text_slider_64NyLh",
     "main",
     "section_bundle",
     "section_bundlebuilder",
+    "text_slider_64NyLh",
     "mattress_quick_compare_ptWQmR",
+    "collection_list_pxN4wG",
     "section_promo",
     "section_faq",
     "vuoi_parlare_con_noi_cc",
