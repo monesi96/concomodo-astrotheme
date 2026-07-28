@@ -229,7 +229,7 @@
             "text_KrLyht": {
               "type": "text",
               "settings": {
-                "text": "<p>Scopri di più</p>",
+                "text": "<p><a href=\"/pages/100-notti\" title=\"100 notti\">Scopri di più</a></p>",
                 "width": "fit-content",
                 "max_width": "none",
                 "alignment": "center",
@@ -259,7 +259,7 @@
                 "icon": "arrow",
                 "image_upload": "shopify://shop_images/tabler-icon-arrow-right.svg",
                 "width": 24,
-                "link": "",
+                "link": "shopify://pages/100-notti",
                 "open_in_new_tab": false
               },
               "blocks": {}
