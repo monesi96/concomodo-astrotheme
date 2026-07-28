@@ -82,7 +82,7 @@
 
 <hero-atmosfera
   id="hero-atm-{{ section.id }}"
-  class="hero-atm hero-atm--{{ atmosfera }} hero-atm--{{ section.settings.alignment }}{% if section.settings.orb_position == 'left' %} hero-atm--orb-left{% endif %}{% if section.settings.image != blank %} hero-atm--media-{{ section.settings.image_layout }} hero-atm--media-{{ section.settings.image_fit }}{% unless section.settings.show_image_mobile %} hero-atm--media-desktop{% endunless %}{% endif %}"
+  class="hero-atm hero-atm--{{ atmosfera }} hero-atm--{{ section.settings.alignment }}{% if section.settings.orb_position == 'left' %} hero-atm--orb-left{% endif %}{% if section.settings.image != blank %} hero-atm--media-{{ section.settings.image_layout }} hero-atm--media-{{ section.settings.image_fit }}{% if section.settings.image_blend %} hero-atm--media-blend{% endif %}{% unless section.settings.show_image_mobile %} hero-atm--media-desktop{% endunless %}{% endif %}"
   style="
     --ha-height: {{ height }};
     --ha-height-mobile: {{ height_mobile }};
@@ -91,6 +91,7 @@
     {% if section.settings.image != blank %}
       --ha-media-width: {{ section.settings.image_width }};
       --ha-media-height: {{ section.settings.image_height }};
+      --ha-media-src: url('{{ section.settings.image | image_url: width: 1400 }}');
       --ha-media-offset: {{ section.settings.image_offset }};
       --ha-media-parallax: {{ section.settings.image_parallax }};
     {% endif %}
@@ -199,6 +200,15 @@
 
   {%- if section.settings.image_layout != 'affianco' -%}
     {{ media_html }}
+  {%- endif -%}
+
+  {%- if section.settings.image != blank and section.settings.image_blend -%}
+    <div class="hero-atm__mist" aria-hidden="true">
+      <span style="--l: -10%; --b: -10%; --w: 62%; --h: 58%; --t: 30s;"></span>
+      <span style="--l: 22%; --b: -18%; --w: 66%; --h: 64%; --t: 24s; --d: -9s;"></span>
+      <span style="--l: 60%; --b: -6%; --w: 54%; --h: 54%; --t: 34s; --d: -18s;"></span>
+      <span style="--l: 4%; --b: 8%; --w: 50%; --h: 44%; --t: 28s; --d: -14s;"></span>
+    </div>
   {%- endif -%}
 
   {%- if section.settings.scroll_label != blank -%}
@@ -463,6 +473,13 @@
         { "value": "riempi", "label": "Riempi la fascia (taglia dal basso)" }
       ],
       "default": "intera"
+    },
+    {
+      "type": "checkbox",
+      "id": "image_blend",
+      "label": "Integra con l'atmosfera",
+      "info": "Adatta la luce dello scontornato al cielo (fredda di notte, ambrata all'alba), sfuma il bordo basso e aggiunge un alone dietro la scena.",
+      "default": true
     },
     {
       "type": "range",
