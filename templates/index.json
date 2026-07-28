@@ -56,7 +56,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h1>La tua nuova routine sarà <strong>dormire bene.</strong></h1>",
+                "text": "<h1>La tua nuova<br/>routine sarà<br/><strong>dormire bene.</strong></h1>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
