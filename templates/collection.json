@@ -1827,7 +1827,7 @@
                           "settings": {
                             "text": "<p>Se hai dubbi, fai il nostro quiz: in un minuto ti consigliamo il modello più adatto in base a corporatura, posizione nel sonno e preferenze di sostegno. In alternativa puoi confrontare i modelli nella pagina di ogni prodotto.</p>",
                             "width": "100%",
-                            "max_width": "normal",
+                            "max_width": "none",
                             "alignment": "left",
                             "type_preset": "rte",
                             "font": "var(--font-body--family)",
@@ -1867,7 +1867,7 @@
                           "settings": {
                             "text": "<p>I nostri materassi arrivano compressi e arrotolati in una comoda scatola. Una volta aperti, riprendono la forma in poche ore: per il pieno comfort consigliamo di attendere 24-48 ore prima del primo utilizzo.</p>",
                             "width": "100%",
-                            "max_width": "normal",
+                            "max_width": "none",
                             "alignment": "left",
                             "type_preset": "rte",
                             "font": "var(--font-body--family)",
@@ -1907,7 +1907,7 @@
                           "settings": {
                             "text": "<p>Trovi tutte le misure standard: singolo 80×190, piazza e mezza 120×190, matrimoniale 160×190 e matrimoniale XL 180×200. Su richiesta realizziamo anche misure personalizzate — scrivici e ti aiutiamo a trovare la soluzione giusta.</p>",
                             "width": "100%",
-                            "max_width": "normal",
+                            "max_width": "none",
                             "alignment": "left",
                             "type_preset": "rte",
                             "font": "var(--font-body--family)",
@@ -1947,7 +1947,7 @@
                           "settings": {
                             "text": "<p>Sì. La spedizione è sempre gratuita in tutta Italia e i materassi sono coperti da garanzia fino a 10 anni.</p>",
                             "width": "100%",
-                            "max_width": "normal",
+                            "max_width": "none",
                             "alignment": "left",
                             "type_preset": "rte",
                             "font": "var(--font-body--family)",
