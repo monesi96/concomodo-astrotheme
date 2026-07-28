@@ -1,7 +1,7 @@
 /* ------------------------------------------------------------------
    Con comodo — Hero atmosfera (v3)
 
-   Testo a sinistra, foto a destra a filo dei bordi e, sotto la foto,
+   Testo a sinistra, foto a destra a filo dei bordi e, sopra la foto,
    una fascia di cielo animato. Il ciclo giorno → tramonto → sera →
    notte gira in loop (durata: --ha-cycle, 10 s di default) ed è
    graduale: gli strati di cielo sfumano uno sull'altro, il sole
@@ -94,11 +94,11 @@ body:has(.header[transparent]) .hero-atm__content {
   border-color: rgb(70 70 70 / 0.7);
 }
 
-/* ── colonna destra: foto sopra, cielo animato sotto ─────────────── */
+/* ── colonna destra: cielo animato sopra, foto sotto ─────────────── */
 
 .hero-atm__visual {
   display: grid;
-  grid-template-rows: calc(var(--ha-height, 76svh) * var(--ha-photo, 0.62)) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) calc(var(--ha-height, 76svh) * var(--ha-photo, 0.62));
   min-height: var(--ha-height, 76svh);
 }
 
@@ -330,7 +330,7 @@ body:has(.header[transparent]) .hero-atm__content {
 
   .hero-atm__visual {
     min-height: 0;
-    grid-template-rows: 46svh 22svh;
+    grid-template-rows: 22svh 46svh;
   }
 }
 
