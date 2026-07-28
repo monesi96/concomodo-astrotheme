@@ -187,7 +187,7 @@
           "background": "#b2c8d1",
           "foreground_heading": "#464646",
           "foreground": "#464646",
-          "primary": "#f4efe8",
+          "primary": "#6B6A6A",
           "primary_hover": "#464646",
           "border": "rgba(0,0,0,0)",
           "shadow": "{{ shop.brand.colors.primary[0].background }}",
