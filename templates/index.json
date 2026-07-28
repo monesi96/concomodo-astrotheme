@@ -56,7 +56,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h1>La tua nuova<br/>routine sarà<br/><strong>dormire bene.</strong></h1>",
+                "text": "<h1>La tua nuova routine sarà <strong>dormire bene.</strong></h1>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
@@ -114,7 +114,7 @@
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
-        "image_1": "shopify://shop_images/home.png",
+        "image_1": "shopify://shop_images/hf_20260707_142325_9f478322-ab1e-4808-9b98-6f5e364e5b42_min.png",
         "image_border_radius": 0,
         "media_type_2": "image",
         "stack_media_on_mobile": false,
