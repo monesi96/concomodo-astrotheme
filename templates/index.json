@@ -107,7 +107,6 @@
       "block_order": [
         "group_fCMeMm"
       ],
-      "disabled": true,
       "custom_css": [
         ".color-scheme-5 {background: linear-gradient( 0deg, rgba(178, 200, 209, 1) 50%, rgba(244, 239, 232, 1) 50% );}",
         "img {border-radius: 0 0 30px 30px;}"
@@ -148,6 +147,7 @@
     },
     "hero_atmosfera_ALAf3q": {
       "type": "hero-atmosfera",
+      "disabled": true,
       "name": "Hero atmosfera",
       "settings": {
         "height": "media",
@@ -158,7 +158,8 @@
         "button_link": "",
         "button_2_label": "Fai il quiz",
         "button_2_link": "",
-        "photo_height": 62,
+        "image": "shopify://shop_images/pnggmmmaa.png",
+        "photo_height": 70,
         "cycle_seconds": 10,
         "cloud_count": 5,
         "show_stars": true
