@@ -2553,7 +2553,7 @@
               "settings": {
                 "image_ratio": "adapt",
                 "toggle_overlay": true,
-                "overlay_color": "#46464646",
+                "overlay_color": "#46464645",
                 "overlay_style": "gradient",
                 "gradient_direction": "to top",
                 "border": "none",
@@ -4005,6 +4005,75 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "popup_fullscreen_B4y8gG": {
+      "type": "popup-fullscreen",
+      "blocks": {
+        "option_ryqTHN": {
+          "type": "option",
+          "settings": {
+            "label": "Dormire più profondamente",
+            "link": "",
+            "value": "riposo-profondo"
+          }
+        },
+        "option_fbDpmL": {
+          "type": "option",
+          "settings": {
+            "label": "Meno dolori e tensioni",
+            "link": "",
+            "value": "dolori"
+          }
+        },
+        "option_tVfPca": {
+          "type": "option",
+          "settings": {
+            "label": "Addormentarmi prima",
+            "link": "",
+            "value": "addormentarsi"
+          }
+        }
+      },
+      "block_order": [
+        "option_ryqTHN",
+        "option_fbDpmL",
+        "option_tVfPca"
+      ],
+      "name": "Popup fullscreen",
+      "settings": {
+        "eyebrow": "",
+        "heading": "Un extra 5% di sconto",
+        "subheading": "<p>Scegli il tuo obiettivo di riposo</p>",
+        "dismiss_label": "No, grazie",
+        "close_label": "Chiudi",
+        "image": "shopify://shop_images/cuscini_d0745e16-7ea7-489a-a9fb-7c1f4049c855.jpg",
+        "image_position": "right",
+        "show_image_mobile": true,
+        "enable_email": true,
+        "email_heading": "Dove ti mandiamo lo sconto?",
+        "email_text": "<p>Lascia la tua email: ricevi subito il codice e i consigli per dormire meglio.</p>",
+        "email_placeholder": "La tua email",
+        "email_button": "Ricevi lo sconto",
+        "email_legal": "<p>Iscrivendoti accetti di ricevere comunicazioni da Con comodo. Puoi disiscriverti quando vuoi.</p>",
+        "success_heading": "Ecco il tuo sconto",
+        "success_text": "<p>Usa il codice al checkout. Te lo abbiamo mandato anche via email.</p>",
+        "discount_code": "COMODO5",
+        "copy_label": "Copia",
+        "copied_label": "Copiato!",
+        "success_cta_label": "Scopri i materassi",
+        "success_cta_link": "",
+        "success_close_label": "Chiudi",
+        "trigger": "delay",
+        "delay": 6,
+        "scroll_percent": 30,
+        "frequency": "days",
+        "frequency_days": 14,
+        "visibility": "all",
+        "storage_key": "sconto-5",
+        "button_style": "primary",
+        "corner_radius": 24,
+        "color_scheme": ""
+      }
     }
   },
   "order": [
@@ -4021,6 +4090,7 @@
     "vuoi_parlare_con_noi_cc",
     "installment_payments_aUaDcf",
     "section_EpVhwi",
-    "section_TVqEJg"
+    "section_TVqEJg",
+    "popup_fullscreen_B4y8gG"
   ]
 }
