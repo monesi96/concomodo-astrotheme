@@ -1777,7 +1777,7 @@
                       "type": "_accordion-row",
                       "settings": {
                         "heading": "Come funzionano le 100 notti di prova?",
-                        "open_by_default": false,
+                        "open_by_default": true,
                         "icon": "none",
                         "width": 30
                       },
@@ -1787,7 +1787,7 @@
                           "settings": {
                             "text": "<p>Acquisti il tuo materasso e lo provi a casa fino a 100 notti. Se non ti convince, ci pensiamo noi: lo ritiriamo gratuitamente e ti rimborsiamo. Le 100 notti si applicano ai materassi; per topper e cuscini valgono le normali condizioni di reso.</p>",
                             "width": "100%",
-                            "max_width": "normal",
+                            "max_width": "none",
                             "alignment": "left",
                             "type_preset": "rte",
                             "font": "var(--font-body--family)",
@@ -2001,8 +2001,8 @@
         "> div {max-width: 1000px; margin: auto;}",
         "summary .svg-wrapper {width: 24px;}",
         ".accordion .details__header {padding: 30px 0;}",
-        ".accordion--dividers accordion-custom .details {border-block-end: 2px solid #cbc4bc;}",
-        ".accordion--dividers accordion-custom:last-child .details {border-block-end: none;}"
+        ".accordion--dividers accordion-custom:last-child .details {border-block-end: none;}",
+        ".accordion--dividers accordion-custom:first-child .details {border-block-start: none;}"
       ],
       "name": "FAQ",
       "settings": {
