@@ -1,0 +1,142 @@
+{%- doc -%}
+  Renders one cell of the selectable mattress comparator.
+
+  @param {object} product - The product shown in this cell
+  @param {string} field - 'price' | 'feel' | 'support' | 'cooling' | 'height' | 'layers' | 'description' | 'cta'
+  @param {object} settings - section.settings (labels and CTA text)
+
+  Spec data comes from the product's `custom.comparison` metaobject, the same
+  one used by the product-page comparison. Missing values render as a dash.
+{%- enddoc -%}
+
+{%- liquid
+  assign spec = product.metafields.custom.comparison.value
+
+  assign meter_title = ''
+  assign meter_value = ''
+  assign meter_min = ''
+  assign meter_max = ''
+  assign big_value = ''
+  assign big_sub = ''
+
+  case field
+    when 'support'
+      assign meter_title = spec.support_title
+      assign meter_value = spec.support_value
+      assign meter_min = settings.support_min_label
+      assign meter_max = settings.support_max_label
+    when 'cooling'
+      assign meter_title = spec.cooling_title
+      assign meter_value = spec.cooling_value
+      assign meter_min = settings.cooling_min_label
+      assign meter_max = settings.cooling_max_label
+    when 'height'
+      assign big_value = spec.height_value
+      assign big_sub = spec.height_subtext
+    when 'layers'
+      assign big_value = spec.layers_count
+      assign big_sub = spec.layers_subtext
+  endcase
+-%}
+
+{%- case field -%}
+  {%- when 'price' -%}
+    {%- liquid
+      assign min_price = 0
+      for variant in product.variants
+        if variant.price > 0 and min_price == 0
+          assign min_price = variant.price
+        elsif variant.price > 0 and variant.price < min_price
+          assign min_price = variant.price
+        endif
+      endfor
+    -%}
+    {%- if min_price > 0 -%}
+      <div class="mcs__price">
+        {%- if settings.price_prefix != blank -%}
+          <span class="mcs__price-prefix">{{ settings.price_prefix }}</span>
+        {%- endif -%}
+        {{ min_price | money }}
+      </div>
+    {%- else -%}
+      <span class="mcs__empty">—</span>
+    {%- endif -%}
+
+  {%- when 'feel' -%}
+    {%- if spec.firmness_value != blank -%}
+      {%- if spec.firmness_label != blank -%}
+        <div class="mcs__cell-title">{{ spec.firmness_label }}</div>
+      {%- endif -%}
+      <div class="mcs__scale" style="--v: {{ spec.firmness_value }};">
+        <span class="mcs__scale-fill"></span>
+        <span class="mcs__scale-knob"></span>
+      </div>
+      {%- if settings.firmness_min_label != blank or settings.firmness_max_label != blank -%}
+        <div class="mcs__scale-ends">
+          <span>{{ settings.firmness_min_label }}</span>
+          <span>{{ settings.firmness_max_label }}</span>
+        </div>
+      {%- endif -%}
+      {%- if spec.feel_title != blank -%}
+        <div class="mcs__cell-sub">{{ spec.feel_title }}</div>
+      {%- endif -%}
+    {%- else -%}
+      <span class="mcs__empty">—</span>
+    {%- endif -%}
+
+  {%- when 'support' or 'cooling' -%}
+    {%- if meter_value != blank -%}
+      {%- if meter_title != blank -%}
+        <div class="mcs__cell-title">{{ meter_title }}</div>
+      {%- endif -%}
+      <div class="mcs__meter" role="img" aria-label="{{ meter_value }} su 100">
+        {%- for i in (1..5) -%}
+          {%- liquid
+            assign seg_start = i | minus: 1 | times: 20
+            assign seg_fill = meter_value | minus: seg_start
+            if seg_fill > 20
+              assign seg_fill = 20
+            elsif seg_fill < 0
+              assign seg_fill = 0
+            endif
+            assign seg_percent = seg_fill | times: 5
+          -%}
+          <span class="mcs__meter-seg" style="--f: {{ seg_percent }}%;"></span>
+        {%- endfor -%}
+      </div>
+      {%- if meter_min != blank or meter_max != blank -%}
+        <div class="mcs__scale-ends">
+          <span>{{ meter_min }}</span>
+          <span>{{ meter_max }}</span>
+        </div>
+      {%- endif -%}
+    {%- else -%}
+      <span class="mcs__empty">—</span>
+    {%- endif -%}
+
+  {%- when 'height' or 'layers' -%}
+    {%- if big_value != blank -%}
+      <div class="mcs__value">{{ big_value }}</div>
+      {%- if big_sub != blank -%}
+        <div class="mcs__cell-sub">{{ big_sub }}</div>
+      {%- endif -%}
+    {%- else -%}
+      <span class="mcs__empty">—</span>
+    {%- endif -%}
+
+  {%- when 'description' -%}
+    {%- assign text = spec.short_description | default: product.description -%}
+    {%- if text != blank -%}
+      <p class="mcs__text">{{ text | strip_html | truncatewords: 26 }}</p>
+    {%- else -%}
+      <span class="mcs__empty">—</span>
+    {%- endif -%}
+
+  {%- when 'cta' -%}
+    <a
+      class="mcs__cta button{% if settings.cta_style == 'secondary' %} button-secondary{% endif %}"
+      href="{{ product.url }}"
+    >
+      {{- settings.cta_label | default: 'Scopri' -}}
+    </a>
+{%- endcase -%}

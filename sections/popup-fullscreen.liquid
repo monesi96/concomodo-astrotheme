@@ -1,0 +1,549 @@
+{%- comment -%}
+  Popup fullscreen — overlay a tutto schermo con immagine.
+  Step 1: obiettivi (blocchi "Opzione") · Step 2 (facoltativo): email
+  · Step 3: conferma con codice sconto.
+
+  La sezione vive nel gruppo footer, quindi è disponibile su tutte le pagine:
+  l'impostazione "Dove mostrarlo" decide su quali template si attiva.
+{%- endcomment -%}
+
+{%- liquid
+  assign visibility = section.settings.visibility
+  assign is_visible = false
+  case visibility
+    when 'all'
+      assign is_visible = true
+    when 'index'
+      if request.page_type == 'index'
+        assign is_visible = true
+      endif
+    when 'index_collection'
+      if request.page_type == 'index' or request.page_type == 'collection' or request.page_type == 'list-collections'
+        assign is_visible = true
+      endif
+    when 'product'
+      if request.page_type == 'product'
+        assign is_visible = true
+      endif
+  endcase
+
+  if request.design_mode
+    assign is_visible = true
+  endif
+
+  assign options = section.blocks | where: 'type', 'option'
+-%}
+
+{%- if is_visible -%}
+  {{ 'popup-fullscreen.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'popup-fullscreen.js' | asset_url }}" defer></script>
+
+  <popup-fullscreen
+    data-section-id="{{ section.id }}"
+    data-storage-key="{{ section.settings.storage_key | escape }}"
+    data-trigger="{{ section.settings.trigger }}"
+    data-delay="{{ section.settings.delay }}"
+    data-scroll="{{ section.settings.scroll_percent }}"
+    data-frequency="{{ section.settings.frequency }}"
+    data-days="{{ section.settings.frequency_days }}"
+    data-email-step="{% if section.settings.enable_email %}true{% else %}false{% endif %}"
+  >
+    <dialog
+      class="pfs color-{{ section.settings.color_scheme }}{% if section.settings.image == blank %} pfs--no-media{% endif %}{% if section.settings.image_position == 'left' %} pfs--media-left{% endif %}{% unless section.settings.show_image_mobile %} pfs--hide-media-mobile{% endunless %}"
+      style="--pfs-radius: {{ section.settings.corner_radius }}px;"
+      {% if section.settings.heading != blank %}
+        aria-labelledby="pfs-heading-{{ section.id }}"
+      {% else %}
+        aria-label="{{ section.settings.eyebrow | default: 'Promozione' | strip_html | escape }}"
+      {% endif %}
+      data-pfs-dialog
+    >
+      <div class="pfs__panel">
+        <button
+          type="button"
+          class="pfs__close"
+          data-pfs-close
+          aria-label="{{ section.settings.close_label | default: 'Chiudi' | escape }}"
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <div class="pfs__content">
+          <div class="pfs__inner">
+            {%- if section.settings.eyebrow != blank -%}
+              <p class="pfs__eyebrow">{{ section.settings.eyebrow }}</p>
+            {%- endif -%}
+
+            {%- comment -%} ── Step 1 · obiettivi ── {%- endcomment -%}
+            <div class="pfs__step" data-pfs-step="goals">
+              {%- if section.settings.heading != blank -%}
+                <h2 class="pfs__heading" id="pfs-heading-{{ section.id }}">{{ section.settings.heading }}</h2>
+              {%- endif -%}
+              {%- if section.settings.subheading != blank -%}
+                <div class="pfs__subheading">{{ section.settings.subheading }}</div>
+              {%- endif -%}
+
+              {%- if options.size > 0 -%}
+                <div class="pfs__options">
+                  {%- for block in options -%}
+                    {%- liquid
+                      assign option_class = 'pfs__option button'
+                      if section.settings.button_style == 'secondary'
+                        assign option_class = 'pfs__option button button-secondary'
+                      endif
+                    -%}
+                    {%- if block.settings.link != blank and section.settings.enable_email == false -%}
+                      <a
+                        class="{{ option_class }}"
+                        href="{{ block.settings.link }}"
+                        data-pfs-goal
+                        data-label="{{ block.settings.label | escape }}"
+                        data-value="{{ block.settings.value | escape }}"
+                        {{ block.shopify_attributes }}
+                      >
+                        {{- block.settings.label -}}
+                      </a>
+                    {%- else -%}
+                      <button
+                        type="button"
+                        class="{{ option_class }}"
+                        data-pfs-goal
+                        data-label="{{ block.settings.label | escape }}"
+                        data-value="{{ block.settings.value | escape }}"
+                        data-link="{{ block.settings.link }}"
+                        {{ block.shopify_attributes }}
+                      >
+                        {{- block.settings.label -}}
+                      </button>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+
+              {%- if section.settings.dismiss_label != blank -%}
+                <button type="button" class="pfs__dismiss" data-pfs-close>
+                  {{- section.settings.dismiss_label -}}
+                </button>
+              {%- endif -%}
+            </div>
+
+            {%- comment -%} ── Step 2 · email ── {%- endcomment -%}
+            {%- if section.settings.enable_email -%}
+              <div class="pfs__step" data-pfs-step="email" hidden>
+                <h2 class="pfs__heading">{{ section.settings.email_heading }}</h2>
+                {%- if section.settings.email_text != blank -%}
+                  <div class="pfs__subheading">{{ section.settings.email_text }}</div>
+                {%- endif -%}
+                <span class="pfs__goal-chip" data-pfs-goal-label hidden></span>
+
+                {%- form 'customer', class: 'pfs__form' -%}
+                  {%- if form.posted_successfully? -%}
+                    <span hidden data-pfs-posted></span>
+                  {%- elsif form.errors -%}
+                    <p class="pfs__error">{{ form.errors.messages['email'] | default: 'Controlla la tua email e riprova.' }}</p>
+                  {%- endif -%}
+
+                  <input type="hidden" name="contact[tags]" value="newsletter" data-base="newsletter" data-pfs-tags>
+                  <label class="visually-hidden" for="pfs-email-{{ section.id }}">
+                    {{- section.settings.email_placeholder | default: 'Email' -}}
+                  </label>
+                  <input
+                    id="pfs-email-{{ section.id }}"
+                    class="pfs__field"
+                    type="email"
+                    name="contact[email]"
+                    autocomplete="email"
+                    required
+                    placeholder="{{ section.settings.email_placeholder | default: 'La tua email' | escape }}"
+                    data-pfs-email
+                  >
+                  <button type="submit" class="pfs__submit button">
+                    {{- section.settings.email_button | default: 'Ricevi lo sconto' -}}
+                  </button>
+                  {%- if section.settings.email_legal != blank -%}
+                    <div class="pfs__legal">{{ section.settings.email_legal }}</div>
+                  {%- endif -%}
+                {%- endform -%}
+
+                {%- if section.settings.dismiss_label != blank -%}
+                  <button type="button" class="pfs__dismiss" data-pfs-close>
+                    {{- section.settings.dismiss_label -}}
+                  </button>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+
+            {%- comment -%} ── Step 3 · conferma ── {%- endcomment -%}
+            <div class="pfs__step" data-pfs-step="success" hidden>
+              <h2 class="pfs__heading">{{ section.settings.success_heading }}</h2>
+              {%- if section.settings.success_text != blank -%}
+                <div class="pfs__subheading">{{ section.settings.success_text }}</div>
+              {%- endif -%}
+
+              {%- if section.settings.discount_code != blank -%}
+                <div class="pfs__code">
+                  <span>{{ section.settings.discount_code }}</span>
+                  <button
+                    type="button"
+                    class="pfs__copy"
+                    data-pfs-copy="{{ section.settings.discount_code | escape }}"
+                    data-label-copied="{{ section.settings.copied_label | default: 'Copiato!' | escape }}"
+                  >
+                    {{- section.settings.copy_label | default: 'Copia' -}}
+                  </button>
+                </div>
+              {%- endif -%}
+
+              <a
+                class="pfs__success-cta button"
+                {% if section.settings.success_cta_link != blank %}
+                  href="{{ section.settings.success_cta_link }}"
+                {% else %}
+                  hidden
+                {% endif %}
+                data-pfs-success-cta
+              >
+                {{- section.settings.success_cta_label | default: 'Continua lo shopping' -}}
+              </a>
+
+              <button type="button" class="pfs__dismiss" data-pfs-close>
+                {{- section.settings.success_close_label | default: 'Chiudi' -}}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {%- if section.settings.image != blank -%}
+          <div class="pfs__media">
+            {{
+              section.settings.image
+              | image_url: width: 1600
+              | image_tag:
+                loading: 'lazy',
+                sizes: '(min-width: 750px) 50vw, 100vw',
+                widths: '600, 900, 1200, 1600',
+                alt: section.settings.image.alt
+            }}
+          </div>
+        {%- endif -%}
+      </div>
+    </dialog>
+  </popup-fullscreen>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Popup fullscreen",
+  "tag": "section",
+  "blocks": [
+    {
+      "type": "option",
+      "name": "Obiettivo",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Testo del pulsante",
+          "default": "Dormire più profondamente"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (facoltativo)",
+          "info": "Usato se lo step email è disattivato, oppure come pulsante finale dopo l'iscrizione."
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Tag obiettivo",
+          "info": "Aggiunto al contatto come \"obiettivo-<tag>\". Se vuoto viene generato dal testo.",
+          "default": "riposo-profondo"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Contenuto"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Occhiello",
+      "default": "Con comodo"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Titolo",
+      "default": "Un extra 5% di sconto"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Sottotitolo",
+      "default": "<p>Scegli il tuo obiettivo di riposo</p>"
+    },
+    {
+      "type": "text",
+      "id": "dismiss_label",
+      "label": "Testo del link di chiusura",
+      "default": "No, grazie"
+    },
+    {
+      "type": "text",
+      "id": "close_label",
+      "label": "Etichetta accessibile della X",
+      "default": "Chiudi"
+    },
+    {
+      "type": "header",
+      "content": "Immagine"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Immagine"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Posizione immagine",
+      "options": [
+        { "value": "right", "label": "A destra" },
+        { "value": "left", "label": "A sinistra" }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image_mobile",
+      "label": "Mostra l'immagine su mobile",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Step email"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_email",
+      "label": "Chiedi l'email dopo la scelta",
+      "info": "Il contatto viene iscritto alla newsletter con il tag dell'obiettivo scelto.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "email_heading",
+      "label": "Titolo",
+      "default": "Dove ti mandiamo lo sconto?"
+    },
+    {
+      "type": "richtext",
+      "id": "email_text",
+      "label": "Testo",
+      "default": "<p>Lascia la tua email: ricevi subito il codice e i consigli per dormire meglio.</p>"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Placeholder campo email",
+      "default": "La tua email"
+    },
+    {
+      "type": "text",
+      "id": "email_button",
+      "label": "Testo del pulsante",
+      "default": "Ricevi lo sconto"
+    },
+    {
+      "type": "richtext",
+      "id": "email_legal",
+      "label": "Nota privacy",
+      "default": "<p>Iscrivendoti accetti di ricevere comunicazioni da Con comodo. Puoi disiscriverti quando vuoi.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Conferma"
+    },
+    {
+      "type": "text",
+      "id": "success_heading",
+      "label": "Titolo",
+      "default": "Ecco il tuo sconto"
+    },
+    {
+      "type": "richtext",
+      "id": "success_text",
+      "label": "Testo",
+      "default": "<p>Usa il codice al checkout. Te lo abbiamo mandato anche via email.</p>"
+    },
+    {
+      "type": "text",
+      "id": "discount_code",
+      "label": "Codice sconto",
+      "default": "COMODO5"
+    },
+    {
+      "type": "text",
+      "id": "copy_label",
+      "label": "Testo \"copia\"",
+      "default": "Copia"
+    },
+    {
+      "type": "text",
+      "id": "copied_label",
+      "label": "Testo dopo la copia",
+      "default": "Copiato!"
+    },
+    {
+      "type": "text",
+      "id": "success_cta_label",
+      "label": "Testo del pulsante finale",
+      "default": "Scopri i materassi"
+    },
+    {
+      "type": "url",
+      "id": "success_cta_link",
+      "label": "Link del pulsante finale",
+      "info": "Se lasci vuoto viene usato il link dell'obiettivo scelto."
+    },
+    {
+      "type": "text",
+      "id": "success_close_label",
+      "label": "Testo del link di chiusura",
+      "default": "Chiudi"
+    },
+    {
+      "type": "header",
+      "content": "Comparsa"
+    },
+    {
+      "type": "select",
+      "id": "trigger",
+      "label": "Quando mostrarlo",
+      "options": [
+        { "value": "delay", "label": "Dopo qualche secondo" },
+        { "value": "scroll", "label": "Dopo uno scroll" },
+        { "value": "exit", "label": "All'uscita dal sito" },
+        { "value": "immediate", "label": "Subito" }
+      ],
+      "default": "delay"
+    },
+    {
+      "type": "range",
+      "id": "delay",
+      "label": "Ritardo",
+      "info": "Usato anche come fallback su mobile con il trigger \"all'uscita\".",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "s",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "scroll_percent",
+      "label": "Scroll della pagina",
+      "min": 5,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "default": 30
+    },
+    {
+      "type": "select",
+      "id": "frequency",
+      "label": "Frequenza",
+      "options": [
+        { "value": "days", "label": "Una volta ogni tot giorni" },
+        { "value": "session", "label": "Una volta per sessione" },
+        { "value": "always", "label": "Sempre (per i test)" }
+      ],
+      "default": "days"
+    },
+    {
+      "type": "range",
+      "id": "frequency_days",
+      "label": "Giorni tra una comparsa e l'altra",
+      "min": 1,
+      "max": 90,
+      "step": 1,
+      "unit": "g",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "visibility",
+      "label": "Dove mostrarlo",
+      "options": [
+        { "value": "all", "label": "Tutte le pagine" },
+        { "value": "index", "label": "Solo home" },
+        { "value": "index_collection", "label": "Home e collezioni" },
+        { "value": "product", "label": "Solo schede prodotto" }
+      ],
+      "default": "all"
+    },
+    {
+      "type": "text",
+      "id": "storage_key",
+      "label": "Chiave di memoria",
+      "info": "Cambiala per far ricomparire il popup a chi lo aveva già chiuso.",
+      "default": "sconto-5"
+    },
+    {
+      "type": "header",
+      "content": "Aspetto"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Stile dei pulsanti",
+      "options": [
+        { "value": "primary", "label": "Primario" },
+        { "value": "secondary", "label": "Secondario" }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "Raggio angoli immagine",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Schema colore",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Popup fullscreen",
+      "blocks": {
+        "option-1": {
+          "type": "option",
+          "settings": { "label": "Dormire più profondamente", "value": "riposo-profondo" }
+        },
+        "option-2": {
+          "type": "option",
+          "settings": { "label": "Meno dolori e tensioni", "value": "dolori" }
+        },
+        "option-3": {
+          "type": "option",
+          "settings": { "label": "Addormentarmi prima", "value": "addormentarsi" }
+        }
+      },
+      "block_order": ["option-1", "option-2", "option-3"]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,428 @@
+{%- comment -%}
+  Slider testuale — strip a scorrimento continuo con le promesse del brand.
+  Ogni voce è un blocco: può usare il colore di base, il colore accento o un
+  colore personalizzato. Con "colori alternati" le voci si alternano da sole.
+{%- endcomment -%}
+
+<script src="{{ 'text-slider.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign accent = section.settings.accent_color
+  assign items = section.blocks
+-%}
+
+{%- if items.size > 0 -%}
+  <div class="section-background color-{{ section.settings.color_scheme }}"></div>
+  <text-slider-strip
+    class="section section--full-width text-slider color-{{ section.settings.color_scheme }} spacing-style{% if section.settings.pause_on_hover %} text-slider--pausable{% endif %}{% if section.settings.show_borders %} text-slider--bordered{% endif %}"
+    style="
+      {%- render 'spacing-style', settings: section.settings %}
+      --ts-gap-base: {{ section.settings.gap }}px;
+      --ts-size: {{ section.settings.text_size }}px;
+      --ts-weight: {{ section.settings.font_weight }};
+      --ts-accent: {{ accent }};
+      --ts-direction: {% if section.settings.direction == 'right' %}reverse{% else %}normal{% endif %};
+    "
+    data-speed="{{ section.settings.speed }}"
+    {% if request.visual_preview_mode %}
+      data-shopify-visual-preview
+    {% endif %}
+  >
+    <div class="text-slider__viewport">
+      <div class="text-slider__track" data-ts-track>
+        <div class="text-slider__group" data-ts-group>
+          {%- for block in items -%}
+            {%- liquid
+              assign color_value = ''
+              assign is_odd_item = forloop.index0 | modulo: 2
+              case block.settings.color_mode
+                when 'accent'
+                  assign color_value = accent
+                when 'custom'
+                  assign color_value = block.settings.custom_color
+                when 'auto'
+                  if section.settings.alternate_colors and is_odd_item == 0
+                    assign color_value = accent
+                  endif
+              endcase
+            -%}
+            <span
+              class="text-slider__item{% if section.settings.uppercase %} text-slider__item--upper{% endif %}"
+              {% if color_value != blank %}
+                style="--ts-item-color: {{ color_value }};"
+              {% endif %}
+              {{ block.shopify_attributes }}
+            >
+              {%- if block.settings.link != blank -%}
+                <a class="text-slider__link" href="{{ block.settings.link }}">{{ block.settings.text }}</a>
+              {%- else -%}
+                {{ block.settings.text }}
+              {%- endif -%}
+            </span>
+            {%- unless section.settings.separator == 'none' -%}
+              <span class="text-slider__separator" aria-hidden="true">
+                {%- case section.settings.separator -%}
+                  {%- when 'dot' -%}•
+                  {%- when 'slash' -%}/
+                  {%- when 'star' -%}✳
+                  {%- when 'line' -%}
+                    <span class="text-slider__rule"></span>
+                  {%- when 'custom' -%}
+                    {{- section.settings.separator_text -}}
+                {%- endcase -%}
+              </span>
+            {%- endunless -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </text-slider-strip>
+
+{%- elsif request.design_mode -%}
+  <div class="section section--page-width color-{{ section.settings.color_scheme }} spacing-style">
+    <p class="text-slider__placeholder">Aggiungi una o più voci di testo per popolare lo slider.</p>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .text-slider {
+    --ts-gap: var(--ts-gap-base, 48px);
+    --ts-size: 20px;
+    --ts-weight: 500;
+
+    display: block;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .text-slider--bordered {
+    border-block: 1px solid rgb(var(--color-foreground-rgb) / 0.12);
+  }
+
+  .text-slider__viewport {
+    overflow: hidden;
+  }
+
+  .text-slider__track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+  }
+
+  .text-slider--ready .text-slider__track {
+    animation: text-slider-scroll var(--ts-duration, 30s) linear infinite;
+    animation-direction: var(--ts-direction, normal);
+  }
+
+  .text-slider--pausable:hover .text-slider__track,
+  .text-slider--pausable:focus-within .text-slider__track {
+    animation-play-state: paused;
+  }
+
+  @keyframes text-slider-scroll {
+    to {
+      transform: translate3d(calc(-1 * var(--ts-distance, 50%)), 0, 0);
+    }
+  }
+
+  .text-slider__group {
+    display: flex;
+    align-items: center;
+    gap: var(--ts-gap);
+    padding-inline-end: var(--ts-gap);
+    min-width: max-content;
+  }
+
+  .text-slider__item {
+    color: var(--ts-item-color, var(--color-foreground));
+    font-family: var(--font-body--family);
+    font-size: var(--ts-size);
+    font-weight: var(--ts-weight);
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .text-slider__item--upper {
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .text-slider__link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .text-slider__link:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+
+  .text-slider__separator {
+    color: rgb(var(--color-foreground-rgb) / 0.35);
+    font-size: calc(var(--ts-size) * 0.8);
+    line-height: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .text-slider__rule {
+    display: block;
+    width: calc(var(--ts-gap) * 0.8);
+    height: 1px;
+    background: currentcolor;
+  }
+
+  .text-slider__placeholder {
+    padding: 1.5rem;
+    border: 1px dashed rgb(var(--color-foreground-rgb) / 0.3);
+    border-radius: 12px;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .text-slider {
+      --ts-gap: max(20px, calc(var(--ts-gap-base, 48px) * 0.65));
+    }
+
+    .text-slider__item {
+      font-size: calc(var(--ts-size) * 0.8);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .text-slider__track {
+      animation: none !important;
+    }
+
+    .text-slider__viewport {
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Slider testuale",
+  "tag": "section",
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Voce",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Testo",
+          "default": "Prova 100 notti"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (facoltativo)"
+        },
+        {
+          "type": "select",
+          "id": "color_mode",
+          "label": "Colore",
+          "options": [
+            { "value": "auto", "label": "Automatico (alternato)" },
+            { "value": "base", "label": "Colore testo" },
+            { "value": "accent", "label": "Colore accento" },
+            { "value": "custom", "label": "Personalizzato" }
+          ],
+          "default": "auto"
+        },
+        {
+          "type": "color",
+          "id": "custom_color",
+          "label": "Colore personalizzato",
+          "default": "#464646"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Velocità",
+      "info": "Pixel al secondo: più alto, più veloce.",
+      "min": 10,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "Direzione",
+      "options": [
+        { "value": "left", "label": "Verso sinistra" },
+        { "value": "right", "label": "Verso destra" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Metti in pausa al passaggio del mouse",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Testo"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Dimensione testo",
+      "min": 12,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Spessore",
+      "options": [
+        { "value": "400", "label": "Normale" },
+        { "value": "500", "label": "Medio" },
+        { "value": "600", "label": "Semi-grassetto" },
+        { "value": "700", "label": "Grassetto" }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "checkbox",
+      "id": "uppercase",
+      "label": "Tutto maiuscolo",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "alternate_colors",
+      "label": "Colori alternati",
+      "info": "Vale per le voci con colore \"Automatico\": una sì e una no usano il colore accento.",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Colore accento",
+      "info": "Tono brand con contrasto sufficiente per il testo. L'azzurro chiaro #b2c8d1 è poco leggibile su fondo crema.",
+      "default": "#4a6f7d"
+    },
+    {
+      "type": "header",
+      "content": "Separatore"
+    },
+    {
+      "type": "select",
+      "id": "separator",
+      "label": "Separatore tra le voci",
+      "options": [
+        { "value": "none", "label": "Nessuno" },
+        { "value": "dot", "label": "Punto •" },
+        { "value": "slash", "label": "Barra /" },
+        { "value": "star", "label": "Asterisco ✳" },
+        { "value": "line", "label": "Linea" },
+        { "value": "custom", "label": "Personalizzato" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "text",
+      "id": "separator_text",
+      "label": "Separatore personalizzato",
+      "default": "—"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Spazio tra le voci",
+      "min": 8,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Sezione"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_borders",
+      "label": "Linee sopra e sotto",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Schema colore",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "Spaziatura"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Sopra",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Sotto",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "Sinistra",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "Destra",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Slider testuale",
+      "blocks": {
+        "item-1": { "type": "item", "settings": { "text": "Prova 100 notti", "color_mode": "auto" } },
+        "item-2": { "type": "item", "settings": { "text": "Garanzia 10 anni", "color_mode": "auto" } },
+        "item-3": { "type": "item", "settings": { "text": "Spedizione e reso gratuiti", "color_mode": "auto" } },
+        "item-4": { "type": "item", "settings": { "text": "Pagamento in 3 rate", "color_mode": "auto" } },
+        "item-5": { "type": "item", "settings": { "text": "Made in Italy", "color_mode": "auto" } }
+      },
+      "block_order": ["item-1", "item-2", "item-3", "item-4", "item-5"]
+    }
+  ]
+}
+{% endschema %}

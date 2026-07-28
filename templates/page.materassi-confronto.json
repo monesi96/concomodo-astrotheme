@@ -1,0 +1,107 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "blocks": {
+        "heading": {
+          "type": "text",
+          "name": "Title",
+          "settings": {
+            "text": "<h1>{{ closest.page.title }}</h1>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "h2",
+            "font": "var(--font-primary--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "page-content": {
+          "type": "page-content",
+          "settings": {},
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "heading",
+        "page-content"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "gap": 24,
+        "color_scheme": "",
+        "padding-block-start": 40,
+        "padding-block-end": 8
+      }
+    },
+    "comparatore": {
+      "type": "mattress-compare-selector",
+      "settings": {
+        "heading": "Confronta i materassi Con comodo",
+        "subheading": "<p>Scegli i modelli che ti interessano: differenze di sensazione, supporto, traspirabilità e altezza, una accanto all'altra.</p>",
+        "max_products": 8,
+        "columns": "3",
+        "slot_label": "Materasso",
+        "empty_label": "Scegli un materasso",
+        "allow_empty": true,
+        "sync_url": true,
+        "show_media": true,
+        "show_price": true,
+        "price_label": "Prezzo",
+        "price_prefix": "da",
+        "show_feel": true,
+        "feel_label": "Sensazione",
+        "feel_tooltip": "Quanto il materasso risulta morbido o rigido al primo contatto.",
+        "firmness_min_label": "Morbido",
+        "firmness_max_label": "Rigido",
+        "show_support": true,
+        "support_label": "Supporto ergonomico",
+        "support_tooltip": "Quanto la colonna vertebrale resta allineata nelle diverse posizioni.",
+        "support_min_label": "Base",
+        "support_max_label": "Avanzato",
+        "show_cooling": true,
+        "cooling_label": "Traspirabilità",
+        "cooling_tooltip": "Quanto il materasso disperde calore e umidità durante la notte.",
+        "cooling_min_label": "Base",
+        "cooling_max_label": "Massima",
+        "show_height": true,
+        "height_label": "Altezza",
+        "show_layers": true,
+        "layers_label": "Strati",
+        "show_description": true,
+        "description_label": "In sintesi",
+        "show_cta": true,
+        "cta_label": "Scopri",
+        "cta_style": "primary",
+        "corner_radius": 20,
+        "section_width": "page-width",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 24,
+        "padding-block-end": 56,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
+      }
+    },
+    "parla": {
+      "type": "vuoi-parlare-con-noi"
+    }
+  },
+  "order": [
+    "main",
+    "comparatore",
+    "parla"
+  ]
+}
