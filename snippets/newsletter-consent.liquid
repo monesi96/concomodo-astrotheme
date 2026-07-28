@@ -1,0 +1,79 @@
+{%- doc -%}
+  Casella di consenso privacy per i form newsletter.
+
+  @param {string} id - id univoco dell'input (uno per ogni form nella pagina)
+  @param {string} [text] - testo alternativo, ha la precedenza sull'impostazione tema (HTML consentito)
+  @param {string} [class] - classi aggiuntive sul contenitore
+
+  La spunta è obbligatoria: senza consenso il browser blocca l'invio del form.
+  L'iscrizione registrata da Shopify porta con sé data e ora, che restano la
+  prova del consenso. Il testo si modifica una volta per tutti i form in
+  Impostazioni tema → Privacy e newsletter.
+
+  @example
+  {% render 'newsletter-consent', id: 'EmailConsent-' | append: block.id %}
+{%- enddoc -%}
+
+{%- if settings.newsletter_consent_enabled -%}
+  {%- liquid
+    assign consent_text = text | default: settings.newsletter_consent_text
+
+    if consent_text == blank
+      assign policy_url = shop.privacy_policy.url | default: '/policies/privacy-policy'
+      capture consent_text
+        echo 'Ho letto e accetto la <a href="'
+        echo policy_url
+        echo '" target="_blank" rel="noopener">privacy policy</a>.'
+      endcapture
+    endif
+  -%}
+
+  <div class="newsletter-consent {{ class }}">
+    <input
+      class="newsletter-consent__input"
+      type="checkbox"
+      id="{{ id }}"
+      required
+    >
+    <label class="newsletter-consent__text" for="{{ id }}">{{ consent_text }}</label>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .newsletter-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.55rem;
+    margin-block: 0.6rem;
+    text-align: start;
+  }
+
+  .newsletter-consent__input {
+    flex: none;
+    width: 1.05em;
+    height: 1.05em;
+    margin: 0;
+    margin-block-start: 0.15em;
+    accent-color: var(--color-foreground);
+    cursor: pointer;
+  }
+
+  .newsletter-consent__text {
+    font-size: 0.8rem;
+    line-height: 1.45;
+    opacity: 0.75;
+    cursor: pointer;
+  }
+
+  .newsletter-consent__text a {
+    color: inherit;
+  }
+
+  .newsletter-consent__text > :first-child {
+    margin-block-start: 0;
+  }
+
+  .newsletter-consent__text > :last-child {
+    margin-block-end: 0;
+  }
+{% endstylesheet %}

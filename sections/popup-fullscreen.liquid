@@ -159,6 +159,8 @@
                     placeholder="{{ section.settings.email_placeholder | default: 'La tua email' | escape }}"
                     data-pfs-email
                   >
+                  {%- capture consent_id -%}pfs-consent-{{ section.id }}{%- endcapture -%}
+                  {% render 'newsletter-consent', id: consent_id, class: 'pfs__consent' %}
                   <button type="submit" class="pfs__submit button">
                     {{- section.settings.email_button | default: 'Ricevi lo sconto' -}}
                   </button>

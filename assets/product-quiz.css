@@ -3,6 +3,14 @@
    Palette brand: crema #f4efe8 · charcoal #464646 · azzurro #b2c8d1
 ------------------------------------------------------------------- */
 
+/* Il footer del tema è tirato su di 35px (custom CSS della sezione footer nel
+   footer group) per l'effetto arrotondato: senza questo spazio coprirebbe il
+   bordo inferiore del quiz. Lo spazio viene tolto anche dall'altezza del box,
+   così la pagina non diventa più alta di prima. */
+.cq-section {
+  padding-block-end: var(--cq-footer-gap, 48px);
+}
+
 .cq {
   --cq-bg: var(--color-background, #f4efe8);
   --cq-ink: var(--color-foreground, #464646);
@@ -25,7 +33,7 @@
   font-family: var(--cq-font-body);
   border-radius: var(--cq-radius-lg);
   overflow: hidden;
-  min-height: min(760px, calc(100dvh - 120px));
+  min-height: min(760px, calc(100dvh - 120px - var(--cq-footer-gap, 48px)));
   display: flex;
   flex-direction: column;
 }
@@ -800,7 +808,7 @@
 @media (max-width: 749px) {
   .cq {
     border-radius: 0;
-    min-height: calc(100dvh - var(--header-group-height, 64px));
+    min-height: calc(100dvh - var(--header-group-height, 64px) - var(--cq-footer-gap, 48px));
   }
 
   .cq__options--pictures {
@@ -832,4 +840,15 @@
     gap: 10px;
     align-items: center;
   }
+}
+
+/* consenso privacy (snippet condiviso newsletter-consent) */
+.cq__consent {
+  margin-block: 0;
+}
+
+.cq__consent .newsletter-consent__text {
+  color: var(--cq-ink-soft);
+  opacity: 1;
+  font-size: 0.8125rem;
 }

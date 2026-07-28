@@ -62,6 +62,9 @@
       </button>
     </div>
 
+    {%- capture consent_id -%}EmailConsent-{{ block.id }}{%- endcapture -%}
+    {% render 'newsletter-consent', id: consent_id %}
+
     {%- if form.errors -%}
       <div
         id="Email-signup__message-error-{{ block.id }}"
