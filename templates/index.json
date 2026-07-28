@@ -133,7 +133,7 @@
         "gap": 24,
         "section_width": "page-width",
         "section_height": "custom",
-        "section_height_custom": 60,
+        "section_height_custom": 80,
         "color_scheme": "scheme-5",
         "toggle_overlay": true,
         "overlay_color": "#12121266",
