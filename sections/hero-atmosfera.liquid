@@ -1,180 +1,41 @@
 {%- comment -%}
-  Hero atmosfera (v2) — cielo animato nello stile della pagina
-  "Perché dormire comodi": notte stellata, alba o nuvole di giorno.
-
-  Tutto in CSS (nuvole che scorrono, stelle che pulsano) più una
-  parallasse leggera allo scroll: nessuna libreria, nessuna immagine
-  obbligatoria. L'immagine prodotto è facoltativa e sta in primo piano.
+  Hero atmosfera (v3) — testo a sinistra, foto a destra a filo dei bordi
+  e, sotto la foto, una fascia di cielo animato: il ciclo
+  giorno → tramonto → sera → notte gira in loop (10 s di default),
+  graduale e uguale per tutti. Le nuvole entrano da sinistra e restano
+  visibili solo dentro la fascia. Tutto in CSS, nessuna libreria.
 {%- endcomment -%}
 
 {{ 'hero-atmosfera.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'hero-atmosfera.js' | asset_url }}" defer></script>
 
 {%- liquid
-  assign atmosfera = section.settings.atmosfera
-
-  comment
-    Atmosfera automatica: il primo disegno usa l'ora del negozio, poi lo
-    script qui sotto la corregge con l'ora vera di chi guarda.
-  endcomment
-  if atmosfera == 'auto'
-    assign shop_hour = 'now' | date: '%H' | plus: 0
-    if shop_hour >= section.settings.hour_night or shop_hour < section.settings.hour_morning
-      assign atmosfera = 'notte'
-    elsif shop_hour >= section.settings.hour_day
-      assign atmosfera = 'giorno'
-    else
-      assign atmosfera = 'alba'
-    endif
-  endif
-
-  assign is_dark = false
-  if atmosfera == 'notte' or atmosfera == 'alba'
-    assign is_dark = true
-  endif
-
-  assign show_stars = section.settings.show_stars
-
   case section.settings.height
     when 'piccola'
       assign height = '62svh'
-      assign height_mobile = '60svh'
     when 'grande'
       assign height = '88svh'
-      assign height_mobile = '80svh'
     when 'schermo'
       assign height = '100svh'
-      assign height_mobile = '100svh'
     else
-      assign height = '78svh'
-      assign height_mobile = '74svh'
+      assign height = '76svh'
   endcase
 
-  # scena in primo piano: l'immagine scelta dall'editor oppure, se il
-  # campo è vuoto, quella inclusa nel tema (già scontornata e tarata)
-  assign scene_url = ''
-  if section.settings.image != blank
-    assign scene_url = section.settings.image | image_url: width: 1400
-  elsif section.settings.default_scene
-    assign scene_url = 'hero-atmosfera-scena.webp' | asset_url
-  endif
-
-  # l'indicatore di scroll sta sopra la sfumatura: sceglie il colore
-  # che si legge sul colore della sezione successiva
-  assign scroll_ink = ''
-  if section.settings.show_haze
-    assign haze_brightness = section.settings.haze_color | color_brightness
-    if haze_brightness > 140
-      assign scroll_ink = '#464646'
-    else
-      assign scroll_ink = '#f4efe8'
-    endif
-  endif
+  assign photo_frac = section.settings.photo_height | divided_by: 100.0
 -%}
 
-{%- capture media_html -%}
-  {%- if scene_url != blank -%}
-    <div class="hero-atm__media{% if section.settings.image_shadow %} hero-atm__media--shadow{% endif %}{% if section.settings.image_float %} hero-atm__media--float{% endif %}">
-      {%- if section.settings.image != blank -%}
-        {{
-          section.settings.image
-          | image_url: width: 1800
-          | image_tag:
-            loading: 'eager',
-            fetchpriority: 'high',
-            widths: '600, 900, 1200, 1500, 1800',
-            sizes: '(min-width: 750px) 60vw, 92vw',
-            alt: section.settings.image.alt
-        }}
-      {%- else -%}
-        <img
-          src="{{ 'hero-atmosfera-scena.webp' | asset_url }}"
-          alt="Uomo che dorme su un materasso Con comodo"
-          width="1800"
-          height="1471"
-          loading="eager"
-          fetchpriority="high"
-        >
-      {%- endif -%}
-    </div>
-  {%- endif -%}
-{%- endcapture -%}
-
-<hero-atmosfera
+<div
   id="hero-atm-{{ section.id }}"
-  class="hero-atm hero-atm--{{ atmosfera }} hero-atm--{{ section.settings.alignment }}{% if section.settings.orb_position == 'left' %} hero-atm--orb-left{% endif %}{% if scene_url != blank %} hero-atm--media-{{ section.settings.image_layout }} hero-atm--media-{{ section.settings.image_fit }}{% if section.settings.image_blend %} hero-atm--media-blend{% endif %}{% unless section.settings.show_image_mobile %} hero-atm--media-desktop{% endunless %}{% endif %}"
+  class="hero-atm"
   style="
     --ha-height: {{ height }};
-    --ha-height-mobile: {{ height_mobile }};
-    --ha-haze: {{ section.settings.haze_color }};
-    {% if scroll_ink != blank %}--ha-scroll-ink: {{ scroll_ink }};{% endif %}
-    {% if scene_url != blank %}
-      --ha-media-width: {{ section.settings.image_width }};
-      --ha-media-height: {{ section.settings.image_height }};
-      --ha-media-src: url('{{ scene_url }}');
-      --ha-media-offset: {{ section.settings.image_offset }};
-      --ha-media-parallax: {{ section.settings.image_parallax }};
-    {% endif %}
-    {% if section.settings.alignment == 'left' %}
-      --ha-align: start; --ha-justify: flex-start; --ha-content-margin: 0;
-    {% endif %}
+    --ha-photo: {{ photo_frac }};
+    --ha-cycle: {{ section.settings.cycle_seconds }}s;
   "
-  {% if section.settings.atmosfera == 'auto' %}
-    data-hour-morning="{{ section.settings.hour_morning }}"
-    data-hour-day="{{ section.settings.hour_day }}"
-    data-hour-night="{{ section.settings.hour_night }}"
-  {% endif %}
   {% if request.visual_preview_mode %}
     data-shopify-visual-preview
   {% endif %}
 >
-  <div class="hero-atm__sky" aria-hidden="true"></div>
-
-  {%- if show_stars -%}
-    <div class="hero-atm__stars" aria-hidden="true">
-      {%- for i in (1..section.settings.star_count) -%}
-        {%- liquid
-          # posizioni pseudo-casuali ma stabili: dipendono solo dall'indice
-          assign x = i | times: 37 | modulo: 98 | plus: 1
-          assign y = i | times: 61 | modulo: 66 | plus: 2
-          assign s = i | modulo: 3 | plus: 1
-          assign d = i | times: 137 | modulo: 4000
-          assign t = i | modulo: 4 | plus: 3
-        -%}
-        <span
-          class="hero-atm__star"
-          style="--x: {{ x }}%; --y: {{ y }}%; --s: {{ s }}px; --d: -{{ d }}ms; --t: {{ t }}s;"
-        ></span>
-      {%- endfor -%}
-    </div>
-  {%- endif -%}
-
-  {%- if section.settings.show_orb -%}
-    <div class="hero-atm__orb" aria-hidden="true"></div>
-  {%- endif -%}
-
-  <div class="hero-atm__clouds" aria-hidden="true">
-    {%- for i in (1..section.settings.cloud_count) -%}
-      {%- liquid
-        assign top = i | times: 17 | modulo: 58 | plus: 4
-        assign w = i | times: 53 | modulo: 170 | plus: 150
-        assign speed = i | times: 29 | modulo: 70 | plus: 90
-        assign delay = i | times: 37 | modulo: 90
-        assign o = i | modulo: 4 | times: 12 | plus: 22
-      -%}
-      <span
-        class="hero-atm__cloud"
-        style="--top: {{ top }}%; --w: {{ w }}px; --speed: {{ speed }}s; --delay: -{{ delay }}s; --o: 0.{{ o }};"
-      ></span>
-    {%- endfor -%}
-  </div>
-
-  {%- if section.settings.show_haze -%}
-    <div class="hero-atm__haze" aria-hidden="true"></div>
-  {%- endif -%}
-
-  <div class="hero-atm__stage">
-    <div class="hero-atm__content">
+  <div class="hero-atm__content">
     {%- if section.settings.eyebrow != blank -%}
       <p class="hero-atm__eyebrow">{{ section.settings.eyebrow }}</p>
     {%- endif -%}
@@ -201,7 +62,7 @@
         {%- endif -%}
         {%- if section.settings.button_2_label != blank -%}
           <a
-            class="hero-atm__button button button-secondary hero-atm__button--ghost"
+            class="hero-atm__button button hero-atm__button--ghost"
             {% if section.settings.button_2_link != blank %}
               href="{{ section.settings.button_2_link }}"
             {% endif %}
@@ -211,117 +72,80 @@
         {%- endif -%}
       </div>
     {%- endif -%}
-    </div>
-
-    {%- if section.settings.image_layout == 'affianco' -%}
-      {{ media_html }}
-    {%- endif -%}
   </div>
 
-  {%- if section.settings.image_layout != 'affianco' -%}
-    {{ media_html }}
-  {%- endif -%}
-
-  {%- if scene_url != blank and section.settings.image_blend -%}
-    <div class="hero-atm__mist" aria-hidden="true">
-      <span style="--l: -10%; --b: -10%; --w: 62%; --h: 58%; --t: 30s;"></span>
-      <span style="--l: 22%; --b: -18%; --w: 66%; --h: 64%; --t: 24s; --d: -9s;"></span>
-      <span style="--l: 60%; --b: -6%; --w: 54%; --h: 54%; --t: 34s; --d: -18s;"></span>
-      <span style="--l: 4%; --b: 8%; --w: 50%; --h: 44%; --t: 28s; --d: -14s;"></span>
+  <div class="hero-atm__visual">
+    <div class="hero-atm__photo">
+      {%- if section.settings.image != blank -%}
+        {{
+          section.settings.image
+          | image_url: width: 1800
+          | image_tag:
+            loading: 'eager',
+            fetchpriority: 'high',
+            widths: '600, 900, 1200, 1500, 1800',
+            sizes: '(min-width: 750px) 50vw, 100vw',
+            alt: section.settings.image.alt
+        }}
+      {%- else -%}
+        {{ 'hero-apparel-2' | placeholder_svg_tag: 'hero-atm__placeholder' }}
+      {%- endif -%}
     </div>
-  {%- endif -%}
 
-  {%- if section.settings.scroll_label != blank -%}
-    <div class="hero-atm__scroll" aria-hidden="true">
-      {{ section.settings.scroll_label }}
-      <svg viewBox="0 0 20 20" fill="none">
-        <path d="M10 4v12m0 0-5-5m5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+    <div class="hero-atm__sky" aria-hidden="true">
+      <div class="hero-atm__layer hero-atm__layer--tramonto"></div>
+      <div class="hero-atm__layer hero-atm__layer--sera"></div>
+      <div class="hero-atm__layer hero-atm__layer--notte"></div>
+
+      {%- if section.settings.show_stars -%}
+        <div class="hero-atm__stars">
+          {%- for i in (1..40) -%}
+            {%- liquid
+              # posizioni pseudo-casuali ma stabili: dipendono solo dall'indice
+              assign x = i | times: 37 | modulo: 96 | plus: 2
+              assign y = i | times: 61 | modulo: 62 | plus: 4
+              assign s = i | modulo: 3 | plus: 1
+              assign d = i | times: 137 | modulo: 4000
+              assign t = i | modulo: 4 | plus: 3
+            -%}
+            <span
+              class="hero-atm__star"
+              style="--x: {{ x }}%; --y: {{ y }}%; --s: {{ s }}px; --d: -{{ d }}ms; --t: {{ t }}s;"
+            ></span>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      <div class="hero-atm__sun"></div>
+      <div class="hero-atm__moon"></div>
+
+      {%- if section.settings.cloud_count > 0 -%}
+        <div class="hero-atm__clouds">
+          {%- for i in (1..section.settings.cloud_count) -%}
+            {%- liquid
+              assign top = i | times: 17 | modulo: 52 | plus: 6
+              assign w = i | times: 53 | modulo: 150 | plus: 130
+              assign speed = i | times: 29 | modulo: 40 | plus: 42
+              assign delay = i | times: 37 | modulo: 80
+              assign o = i | modulo: 4 | times: 14 | plus: 40
+              assign sx = i | times: 23 | modulo: 70 | plus: 10
+            -%}
+            <span
+              class="hero-atm__cloud"
+              style="--top: {{ top }}%; --w: {{ w }}px; --speed: {{ speed }}s; --delay: -{{ delay }}s; --o: 0.{{ o }}; --sx: 0.{{ sx }};"
+            ></span>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
     </div>
-  {%- endif -%}
-</hero-atmosfera>
-
-{%- if section.settings.atmosfera == 'auto' -%}
-  {%- comment -%}
-    Inline e subito dopo la sezione: l'atmosfera viene corretta con l'ora
-    locale di chi guarda prima che il browser disegni, senza sfarfallii.
-  {%- endcomment -%}
-  <script>
-    (function () {
-      var hero = document.getElementById('hero-atm-{{ section.id }}');
-      if (!hero) return;
-
-      var hour = new Date().getHours();
-      var morning = Number(hero.dataset.hourMorning);
-      var day = Number(hero.dataset.hourDay);
-      var night = Number(hero.dataset.hourNight);
-
-      var atmosfera = 'alba';
-      if (hour >= night || hour < morning) {
-        atmosfera = 'notte';
-      } else if (hour >= day) {
-        atmosfera = 'giorno';
-      }
-
-      hero.classList.remove('hero-atm--notte', 'hero-atm--alba', 'hero-atm--giorno');
-      hero.classList.add('hero-atm--' + atmosfera);
-    })();
-  </script>
-{%- endif -%}
+  </div>
+</div>
 
 {% schema %}
 {
   "name": "Hero atmosfera",
   "tag": "section",
   "settings": [
-    {
-      "type": "select",
-      "id": "atmosfera",
-      "label": "Atmosfera",
-      "options": [
-        { "value": "auto", "label": "Automatica (ora locale di chi guarda)" },
-        { "value": "notte", "label": "Notte stellata" },
-        { "value": "alba", "label": "Alba" },
-        { "value": "giorno", "label": "Nuvole di giorno" }
-      ],
-      "default": "auto"
-    },
-    {
-      "type": "range",
-      "id": "hour_morning",
-      "label": "La mattina inizia alle",
-      "info": "Da qui fino al pomeriggio si vede l'alba.",
-      "min": 0,
-      "max": 11,
-      "step": 1,
-      "unit": "h",
-      "default": 6,
-      "visible_if": "{{ section.settings.atmosfera == \"auto\" }}"
-    },
-    {
-      "type": "range",
-      "id": "hour_day",
-      "label": "Il pomeriggio inizia alle",
-      "info": "Da qui fino alla sera si vedono le nuvole di giorno.",
-      "min": 8,
-      "max": 18,
-      "step": 1,
-      "unit": "h",
-      "default": 11,
-      "visible_if": "{{ section.settings.atmosfera == \"auto\" }}"
-    },
-    {
-      "type": "range",
-      "id": "hour_night",
-      "label": "La sera inizia alle",
-      "info": "Da qui fino alla mattina si vede la notte stellata.",
-      "min": 15,
-      "max": 23,
-      "step": 1,
-      "unit": "h",
-      "default": 19,
-      "visible_if": "{{ section.settings.atmosfera == \"auto\" }}"
-    },
     {
       "type": "select",
       "id": "height",
@@ -333,16 +157,6 @@
         { "value": "schermo", "label": "Tutto lo schermo" }
       ],
       "default": "media"
-    },
-    {
-      "type": "select",
-      "id": "alignment",
-      "label": "Allineamento del testo",
-      "options": [
-        { "value": "center", "label": "Centrato" },
-        { "value": "left", "label": "A sinistra" }
-      ],
-      "default": "center"
     },
     {
       "type": "header",
@@ -393,179 +207,54 @@
     },
     {
       "type": "header",
-      "content": "Cielo"
+      "content": "Foto"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Immagine",
+      "info": "Riempie la parte alta della colonna destra, a filo dei bordi e senza tagli ai lati. Finché è vuota si vede un segnaposto."
+    },
+    {
+      "type": "range",
+      "id": "photo_height",
+      "label": "Altezza della foto",
+      "info": "Quanta colonna destra occupa la foto: il resto è il cielo animato.",
+      "min": 45,
+      "max": 75,
+      "step": 1,
+      "unit": "%",
+      "default": 62
+    },
+    {
+      "type": "header",
+      "content": "Cielo animato"
+    },
+    {
+      "type": "range",
+      "id": "cycle_seconds",
+      "label": "Durata del ciclo giorno–notte",
+      "info": "Giorno, tramonto, sera e notte si alternano in loop, in modo graduale.",
+      "min": 6,
+      "max": 24,
+      "step": 1,
+      "unit": "s",
+      "default": 10
     },
     {
       "type": "range",
       "id": "cloud_count",
       "label": "Numero di nuvole",
       "min": 0,
-      "max": 10,
+      "max": 8,
       "step": 1,
-      "default": 5
+      "default": 4
     },
     {
       "type": "checkbox",
       "id": "show_stars",
-      "label": "Mostra le stelle",
-      "info": "Solo per le atmosfere notte e alba.",
+      "label": "Mostra le stelle di notte",
       "default": true
-    },
-    {
-      "type": "range",
-      "id": "star_count",
-      "label": "Numero di stelle",
-      "min": 10,
-      "max": 120,
-      "step": 5,
-      "default": 60
-    },
-    {
-      "type": "checkbox",
-      "id": "show_orb",
-      "label": "Mostra luna o sole",
-      "default": true
-    },
-    {
-      "type": "select",
-      "id": "orb_position",
-      "label": "Posizione di luna o sole",
-      "options": [
-        { "value": "right", "label": "A destra" },
-        { "value": "left", "label": "A sinistra" }
-      ],
-      "default": "right"
-    },
-    {
-      "type": "header",
-      "content": "Raccordo con la sezione sotto"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_haze",
-      "label": "Sfuma il bordo inferiore",
-      "info": "Fa svanire il cielo nel colore della sezione successiva.",
-      "default": true
-    },
-    {
-      "type": "color",
-      "id": "haze_color",
-      "label": "Colore della sfumatura",
-      "default": "#f4efe8"
-    },
-    {
-      "type": "header",
-      "content": "Immagine in primo piano"
-    },
-    {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Immagine",
-      "info": "Se la lasci vuota viene usata la scena inclusa nel tema, già scontornata e tarata."
-    },
-    {
-      "type": "checkbox",
-      "id": "default_scene",
-      "label": "Usa la scena inclusa se non scegli un'immagine",
-      "default": true
-    },
-    {
-      "type": "select",
-      "id": "image_layout",
-      "label": "Posizione",
-      "options": [
-        { "value": "sotto", "label": "Sotto al testo" },
-        { "value": "affianco", "label": "Accanto al testo" }
-      ],
-      "default": "sotto"
-    },
-    {
-      "type": "range",
-      "id": "image_width",
-      "label": "Larghezza",
-      "min": 30,
-      "max": 100,
-      "step": 5,
-      "unit": "%",
-      "default": 100
-    },
-    {
-      "type": "select",
-      "id": "image_fit",
-      "label": "Come sta nella fascia",
-      "info": "Vale con l'immagine sotto al testo.",
-      "options": [
-        { "value": "intera", "label": "Intera (nessun taglio)" },
-        { "value": "riempi", "label": "Riempi la fascia (taglia dal basso)" }
-      ],
-      "default": "intera"
-    },
-    {
-      "type": "checkbox",
-      "id": "image_blend",
-      "label": "Integra con l'atmosfera",
-      "info": "Adatta la luce dello scontornato al cielo (fredda di notte, ambrata all'alba), sfuma il bordo basso e aggiunge un alone dietro la scena.",
-      "default": true
-    },
-    {
-      "type": "range",
-      "id": "image_height",
-      "label": "Altezza visibile",
-      "info": "Quanta parte della scena si vede: il taglio parte dal basso. Vale con l'immagine sotto al testo.",
-      "min": 20,
-      "max": 70,
-      "step": 2,
-      "unit": "%",
-      "default": 56
-    },
-    {
-      "type": "range",
-      "id": "image_offset",
-      "label": "Scostamento verticale",
-      "info": "Valori negativi fanno uscire l'immagine dal bordo inferiore.",
-      "min": -25,
-      "max": 15,
-      "step": 1,
-      "unit": "%",
-      "default": -6
-    },
-    {
-      "type": "range",
-      "id": "image_parallax",
-      "label": "Intensità della parallasse",
-      "min": 0,
-      "max": 40,
-      "step": 2,
-      "default": 10
-    },
-    {
-      "type": "checkbox",
-      "id": "image_shadow",
-      "label": "Ombra morbida sotto l'immagine",
-      "info": "Appoggia lo scontornato sul cielo invece di lasciarlo sospeso.",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "image_float",
-      "label": "Respiro lento dell'immagine",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_image_mobile",
-      "label": "Mostra l'immagine su mobile",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": "Extra"
-    },
-    {
-      "type": "text",
-      "id": "scroll_label",
-      "label": "Testo dell'indicatore di scroll",
-      "default": "Scorri"
     }
   ],
   "presets": [
