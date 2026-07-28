@@ -114,7 +114,7 @@
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
-        "image_1": "shopify://shop_images/hf_20260707_142325_9f478322-ab1e-4808-9b98-6f5e364e5b42_min.png",
+        "image_1": "shopify://shop_images/hero.jpg",
         "image_border_radius": 0,
         "media_type_2": "image",
         "stack_media_on_mobile": false,
@@ -135,7 +135,7 @@
         "section_height": "medium",
         "section_height_custom": 50,
         "color_scheme": "scheme-5",
-        "toggle_overlay": false,
+        "toggle_overlay": true,
         "overlay_color": "#12121266",
         "overlay_style": "gradient",
         "gradient_direction": "to top",
