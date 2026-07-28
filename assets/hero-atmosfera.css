@@ -1,162 +1,292 @@
-/* ─────────────────────────────────────────────────────────────
-   Con comodo — Hero atmosfera (v2)
-   Cielo animato in stile "Perché dormire comodi": notte stellata,
-   alba o nuvole di giorno. Solo CSS + un filo di parallasse allo
-   scroll (--hero-p, 0 in cima → 1 quando l'hero è uscito).
-   Palette: crema #F4EFE8 · carbone #464646 · cielo #B2C8D1
-   ───────────────────────────────────────────────────────────── */
+/* ------------------------------------------------------------------
+   Con comodo — Hero atmosfera (v3)
+
+   Testo a sinistra, foto a destra a filo dei bordi e, sotto la foto,
+   una fascia di cielo animato. Il ciclo giorno → tramonto → sera →
+   notte gira in loop (durata: --ha-cycle, 10 s di default) ed è
+   graduale: gli strati di cielo sfumano uno sull'altro, il sole
+   tramonta a destra e riappare all'alba a sinistra, le nuvole entrano
+   sempre da sinistra e restano visibili solo dentro la fascia.
+
+   Tutti gli elementi animati condividono la stessa durata, quindi
+   restano sincronizzati; a 0% e a 100% ogni proprietà coincide, così
+   il loop non ha stacchi.
+   Palette: crema #F4EFE8 · carbone #464646 · accento #4A6F7D
+------------------------------------------------------------------- */
 
 .hero-atm {
-  --ha-cream: #f4efe8;
+  --ha-crema: #f4efe8;
   --ha-charcoal: #464646;
-  --ha-night: #23272c;
-  --ha-night-2: #171a1e;
-  --ha-sky: #b2c8d1;
-  --ha-white: #ffffff;
-  --ha-p: 0;
+  --ha-accent: #4a6f7d;
+  --ha-band-w: 50vw;
 
-  position: relative;
   display: grid;
-  place-items: center;
-  isolation: isolate;
-  overflow: clip;
-  width: 100%;
-  min-height: var(--ha-height, 78svh);
-  padding-block: clamp(3rem, 8vh, 6rem);
-  padding-inline: clamp(1.25rem, 5vw, 4rem);
-  color: var(--ha-ink, var(--ha-cream));
-  text-align: var(--ha-align, center);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-height: var(--ha-height, 76svh);
+  background: var(--ha-crema);
+  color: var(--ha-charcoal);
+  overflow: hidden;
+}
+
+/* ── colonna sinistra: il testo ──────────────────────────────────── */
+
+.hero-atm__content {
+  align-self: center;
+  justify-self: start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  max-width: 640px;
+  padding-block: 56px;
+  padding-inline: clamp(24px, 6vw, 88px);
+  text-align: left;
 }
 
 /* Header trasparente: il tema tira su la prima sezione, quindi
    recuperiamo lo spazio per non finire sotto al menu. */
-body:has(.header[transparent]) .hero-atm {
-  padding-block-start: calc(var(--header-group-height, 0px) + clamp(2rem, 6vh, 4rem));
+body:has(.header[transparent]) .hero-atm__content {
+  padding-block-start: calc(var(--header-group-height, 0px) + 40px);
 }
 
-/* ── Fondale ── */
+.hero-atm__eyebrow {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ha-accent);
+}
+
+.hero-atm__heading {
+  margin: 0;
+  font-size: clamp(2.1rem, 1.2rem + 3.2vw, 3.5rem);
+  line-height: 1.07;
+  color: inherit;
+}
+
+.hero-atm__text {
+  max-width: 52ch;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: rgb(70 70 70 / 0.85);
+}
+
+.hero-atm__text p {
+  margin: 0;
+}
+
+.hero-atm__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-block-start: 8px;
+}
+
+.hero-atm__button--ghost {
+  background: transparent;
+  color: var(--ha-charcoal);
+  border: 1px solid rgb(70 70 70 / 0.4);
+}
+
+.hero-atm__button--ghost:hover {
+  background: rgb(70 70 70 / 0.06);
+  border-color: rgb(70 70 70 / 0.7);
+}
+
+/* ── colonna destra: foto sopra, cielo animato sotto ─────────────── */
+
+.hero-atm__visual {
+  display: grid;
+  grid-template-rows: calc(var(--ha-height, 76svh) * var(--ha-photo, 0.62)) minmax(0, 1fr);
+  min-height: var(--ha-height, 76svh);
+}
+
+.hero-atm__photo {
+  position: relative;
+  overflow: hidden;
+  background: #e9e2d8;
+}
+
+.hero-atm__photo img,
+.hero-atm__photo svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-atm__placeholder {
+  color: #cbc4bc;
+}
+
+/* la fascia: tutto ciò che si muove vive (e si taglia) qui dentro */
 .hero-atm__sky {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #8fbcd6 0%, #c6dfec 55%, #eaf3f6 100%);
+}
+
+/* ── strati di cielo che sfumano col ciclo ───────────────────────── */
+
+.hero-atm__layer {
   position: absolute;
-  inset: -10% 0 0;
-  z-index: -3;
-  translate: 0 calc(var(--ha-p) * 6%);
+  inset: 0;
+  z-index: 1;
+  opacity: 0;
+  animation: var(--ha-cycle, 10s) linear infinite;
 }
 
-.hero-atm--notte,
-.hero-atm--alba {
-  --ha-ink: var(--ha-cream);
+.hero-atm__layer--tramonto {
+  background: linear-gradient(180deg, #6d86ad 0%, #b97f77 38%, #ea9f6a 68%, #f7cf96 100%);
+  animation-name: ha-tramonto;
 }
 
-.hero-atm--giorno {
-  --ha-ink: var(--ha-charcoal);
+.hero-atm__layer--sera {
+  background: linear-gradient(180deg, #262f47 0%, #4c4a70 45%, #8a6680 78%, #b97a70 100%);
+  animation-name: ha-sera;
 }
 
-.hero-atm--notte .hero-atm__sky {
-  background: linear-gradient(180deg, #12151a 0%, var(--ha-night) 46%, #38414a 100%);
+.hero-atm__layer--notte {
+  background: linear-gradient(180deg, #121519 0%, #1d2126 45%, #262e3a 80%, #303a49 100%);
+  animation-name: ha-notte;
 }
 
-.hero-atm--alba .hero-atm__sky {
-  background: linear-gradient(180deg, #2c3742 0%, #7d8a94 38%, #d9b9a3 72%, var(--ha-cream) 100%);
+/* timeline del ciclo (in % della durata):
+   giorno 0–28 · tramonto 38–44 · sera 54–62 · notte 72–85 · alba 85–100
+   Al ritorno gli strati si spengono in cascata inversa (notte → sera →
+   tramonto), così l'alba ripassa dai colori caldi prima del giorno. */
+
+@keyframes ha-tramonto {
+  0%, 28% { opacity: 0; }
+  38%, 92% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
-.hero-atm--giorno .hero-atm__sky {
-  background: linear-gradient(180deg, #8fb0bd 0%, var(--ha-sky) 52%, var(--ha-cream) 100%);
+@keyframes ha-sera {
+  0%, 44% { opacity: 0; }
+  54%, 88% { opacity: 1; }
+  95%, 100% { opacity: 0; }
 }
 
-/* ── Stelle (solo notte e alba) ── */
+@keyframes ha-notte {
+  0%, 62% { opacity: 0; }
+  72%, 85% { opacity: 1; }
+  92%, 100% { opacity: 0; }
+}
+
+/* ── stelle: visibili solo nel tratto di notte ───────────────────── */
+
 .hero-atm__stars {
   position: absolute;
   inset: 0;
-  z-index: -2;
-  pointer-events: none;
-  translate: 0 calc(var(--ha-p) * 14%);
+  z-index: 2;
+  opacity: 0;
+  animation: ha-stelle var(--ha-cycle, 10s) linear infinite;
 }
 
-.hero-atm--alba .hero-atm__stars {
-  opacity: 0.45;
-}
-
-.hero-atm--giorno .hero-atm__stars {
-  display: none;
+@keyframes ha-stelle {
+  0%, 64% { opacity: 0; }
+  74%, 85% { opacity: 1; }
+  93%, 100% { opacity: 0; }
 }
 
 .hero-atm__star {
   position: absolute;
-  inset-block-start: var(--y);
-  inset-inline-start: var(--x);
-  width: var(--s);
-  height: var(--s);
+  left: var(--x, 50%);
+  top: var(--y, 50%);
+  width: var(--s, 2px);
+  height: var(--s, 2px);
   border-radius: 50%;
-  background: var(--ha-white);
-  opacity: 0.75;
-  animation: hero-atm-twinkle var(--t) ease-in-out var(--d) infinite alternate;
+  background: #eef2f7;
+  animation: ha-brilla var(--t, 4s) ease-in-out var(--d, 0ms) infinite;
 }
 
-@keyframes hero-atm-twinkle {
-  from {
-    opacity: 0.15;
-    transform: scale(0.8);
-  }
-
-  to {
-    opacity: 0.9;
-    transform: scale(1);
-  }
+@keyframes ha-brilla {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.95; }
 }
 
-/* ── Luna / sole ── */
-.hero-atm__orb {
+/* ── sole: attraversa il giorno, tramonta a destra, rinasce a sinistra ── */
+
+.hero-atm__sun {
   position: absolute;
-  inset-block-start: clamp(8%, 12vh, 18%);
-  inset-inline-end: clamp(6%, 12vw, 16%);
-  z-index: -2;
-  width: clamp(70px, 9vw, 130px);
+  z-index: 3;
+  width: clamp(54px, 6vw, 84px);
   aspect-ratio: 1;
   border-radius: 50%;
-  translate: 0 calc(var(--ha-p) * 22%);
+  background: radial-gradient(circle, #fff8e3 0%, #ffd98d 55%, rgb(255 214 138 / 0) 74%);
+  box-shadow: 0 0 56px 22px rgb(255 220 150 / 0.35);
+  animation: ha-sole var(--ha-cycle, 10s) linear infinite;
 }
 
-.hero-atm--orb-left .hero-atm__orb {
-  inset-inline-end: auto;
-  inset-inline-start: clamp(6%, 12vw, 16%);
+@keyframes ha-sole {
+  0% { left: 16%; top: 28%; transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  20% { left: 38%; top: 16%; }
+  38% { left: 64%; top: 38%; }
+  50% { left: 78%; top: 70%; transform: translate(-50%, -50%) scale(1.14); }
+  58% { left: 82%; top: 106%; opacity: 1; }
+  60% { left: 83%; top: 118%; opacity: 0; }
+  62% { left: 5%; top: 120%; opacity: 0; }
+  90% { left: 5%; top: 114%; opacity: 0; }
+  93% { left: 8%; top: 98%; opacity: 1; }
+  100% { left: 16%; top: 28%; transform: translate(-50%, -50%) scale(1); opacity: 1; }
 }
 
-.hero-atm--notte .hero-atm__orb {
-  background: radial-gradient(circle at 38% 34%, #fdfaf3 0%, #efe6d4 58%, #d9cdb8 100%);
-  box-shadow: 0 0 60px 18px rgb(253 250 243 / 0.18);
+/* ── luna: spicchio che accompagna la notte ──────────────────────── */
+
+.hero-atm__moon {
+  position: absolute;
+  z-index: 3;
+  right: 16%;
+  top: 22%;
+  width: clamp(30px, 3.2vw, 42px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  box-shadow:
+    inset -9px 7px 0 0 #e9edf4,
+    0 0 32px 10px rgb(214 224 235 / 0.25);
+  opacity: 0;
+  animation: ha-luna var(--ha-cycle, 10s) linear infinite;
 }
 
-.hero-atm--alba .hero-atm__orb {
-  background: radial-gradient(circle at 50% 50%, #ffe9c9 0%, #f6c98d 60%, rgb(246 201 141 / 0) 72%);
-  box-shadow: 0 0 90px 40px rgb(246 201 141 / 0.25);
+@keyframes ha-luna {
+  0%, 66% { opacity: 0; transform: rotate(-14deg) translateY(12px); }
+  74% { opacity: 1; transform: rotate(-14deg) translateY(0); }
+  85% { opacity: 1; transform: rotate(-14deg) translateY(-5px); }
+  92%, 100% { opacity: 0; transform: rotate(-14deg) translateY(-11px); }
 }
 
-.hero-atm--giorno .hero-atm__orb {
-  background: radial-gradient(circle at 50% 50%, #fffdf6 0%, rgb(255 253 246 / 0.55) 55%, rgb(255 253 246 / 0) 72%);
-}
+/* ── nuvole: entrano da sinistra, si spengono di notte ───────────── */
 
-/* ── Nuvole ── */
 .hero-atm__clouds {
   position: absolute;
   inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  translate: 0 calc(var(--ha-p) * -8%);
+  z-index: 4;
+  animation: ha-nuvole-luce var(--ha-cycle, 10s) linear infinite;
+}
+
+/* la luce delle nuvole segue il ciclo: bianche di giorno, scure di notte */
+@keyframes ha-nuvole-luce {
+  0%, 28% { filter: brightness(1); opacity: 1; }
+  44% { filter: brightness(0.9); opacity: 0.95; }
+  62%, 85% { filter: brightness(0.45); opacity: 0.55; }
+  95%, 100% { filter: brightness(1); opacity: 1; }
 }
 
 .hero-atm__cloud {
   position: absolute;
-  inset-block-start: var(--top);
-  display: block;
-  width: var(--w);
-  height: calc(var(--w) * 0.3);
+  left: 0;
+  top: var(--top, 20%);
+  width: var(--w, 220px);
+  height: calc(var(--w, 220px) * 0.3);
   border-radius: 999px;
-  background: var(--ha-white);
-  opacity: var(--o, 0.4);
-  animation: hero-atm-drift var(--speed, 120s) linear var(--delay, 0s) infinite;
+  background: rgb(255 255 255 / 0.92);
+  filter: blur(1px);
+  opacity: var(--o, 0.55);
+  animation: ha-nuvola var(--speed, 60s) linear var(--delay, 0s) infinite;
 }
 
-/* i due gobbi che rendono la forma "nuvola", come nella pagina parallax */
 .hero-atm__cloud::before,
 .hero-atm__cloud::after {
   content: '';
@@ -166,511 +296,64 @@ body:has(.header[transparent]) .hero-atm {
 }
 
 .hero-atm__cloud::before {
-  width: 52%;
+  width: 46%;
   aspect-ratio: 1;
-  inset-block-start: -48%;
-  inset-inline-start: 14%;
+  left: 15%;
+  bottom: 34%;
 }
 
 .hero-atm__cloud::after {
-  width: 36%;
+  width: 32%;
   aspect-ratio: 1;
-  inset-block-start: -28%;
-  inset-inline-end: 16%;
+  right: 18%;
+  bottom: 42%;
 }
 
-.hero-atm--notte .hero-atm__cloud {
-  background: #2f353d;
-  filter: blur(6px);
+@keyframes ha-nuvola {
+  from { transform: translateX(calc(-1 * var(--w, 220px) - 40px)); }
+  to { transform: translateX(calc(var(--ha-band-w, 50vw) + 40px)); }
 }
 
-.hero-atm--alba .hero-atm__cloud {
-  background: #e7d3c4;
-}
+/* ── mobile: tutto in colonna, foto e fascia a piena larghezza ───── */
 
-@keyframes hero-atm-drift {
-  from {
-    transform: translateX(-40vw);
-  }
-
-  to {
-    transform: translateX(140vw);
-  }
-}
-
-/* ── Foschia in basso: raccorda l'hero con la sezione successiva ── */
-.hero-atm__haze {
-  position: absolute;
-  inset-block-end: 0;
-  inset-inline: 0;
-  /* sopra l'immagine: il fondo della foto si dissolve nel colore della
-     sezione successiva invece di finire con un taglio netto */
-  z-index: 1;
-  height: clamp(90px, 18vh, 220px);
-  background: linear-gradient(180deg, rgb(244 239 232 / 0) 0%, var(--ha-haze, var(--ha-cream)) 100%);
-  pointer-events: none;
-}
-
-/* ── Palco: testo e immagine in primo piano ── */
-.hero-atm__stage {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: clamp(1.25rem, 4vh, 2.75rem);
-  width: 100%;
-  max-width: 1180px;
-}
-
-/* Immagine accanto al testo (solo da tablet in su) */
-@media screen and (min-width: 750px) {
-  .hero-atm--media-affianco .hero-atm__stage {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: clamp(2rem, 5vw, 4rem);
-    text-align: start;
-  }
-
-  .hero-atm--media-affianco .hero-atm__content {
-    flex: 1 1 46%;
-    max-width: 34rem;
-    margin-inline: 0;
-    text-align: start;
-  }
-
-  .hero-atm--media-affianco .hero-atm__actions {
-    justify-content: flex-start;
-  }
-
-  .hero-atm--media-affianco .hero-atm__text {
-    margin-inline: 0;
-  }
-
-  .hero-atm--media-affianco .hero-atm__media {
-    flex: 0 1 auto;
-    width: calc(var(--ha-media-width, 70) * 0.55vw);
-  }
-}
-
-/* ── Immagine in primo piano (pensata per uno scontornato) ── */
-.hero-atm__media {
-  position: relative;
-  z-index: 0;
-  /* larghezza in vw: una scena può uscire dal contenitore del testo e
-     arrivare ai bordi dello schermo, come una foto a tutta pagina */
-  width: calc(var(--ha-media-width, 70) * 1vw);
-  max-width: none;
-  /* scostamento e parallasse in un'unica trasformazione: le percentuali
-     qui sono relative all'altezza dell'immagine, non alla pagina */
-  translate: 0 calc((var(--ha-media-offset, 0) * -1%) - (var(--ha-p) * var(--ha-media-parallax, 14) * 1%));
-}
-
-.hero-atm__media img {
-  position: relative;
-  z-index: 1;
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-}
-
-/* Immagine sotto al testo: l'hero diventa una griglia a due righe —
-   testo sopra, fascia dell'immagine sotto. Niente trucchi di
-   posizionamento: il testo resta sotto all'header e non si sovrappone
-   mai alla foto, qualunque sia l'altezza scelta. */
-.hero-atm--media-sotto {
-  grid-template-rows: minmax(0, 1fr) calc(var(--ha-media-height, 40) * 1svh);
-  row-gap: clamp(0.5rem, 2vh, 1.5rem);
-  padding-block-end: 0;
-}
-
-/* La fascia è in assoluto sull'hero: una scena larga 100vw non deve
-   gonfiare la griglia (spostava testo e bottoni fuori dallo schermo su
-   mobile). La riga 2 della griglia riserva comunque lo spazio. */
-.hero-atm--media-sotto .hero-atm__media {
-  position: absolute;
-  inset-inline: 0;
-  inset-block-end: 0;
-  height: calc(var(--ha-media-height, 40) * 1svh);
-  width: min(100vw, calc(var(--ha-media-width, 70) * 1vw));
-  margin-inline: auto;
-}
-
-/* Due modi di stare nella fascia: "intera" mostra tutta la scena
-   appoggiata in basso, "riempi" la ritaglia dal basso per occupare
-   tutta la fascia. */
-.hero-atm--media-sotto .hero-atm__media img {
-  height: 100%;
-  object-fit: contain;
-  object-position: 50% 100%;
-}
-
-.hero-atm--media-riempi .hero-atm__media img {
-  object-fit: cover;
-  object-position: 50% 0%;
-}
-
-/* Ombra ellittica: appoggia lo scontornato invece di lasciarlo sospeso */
-.hero-atm__media--shadow::after {
-  content: '';
-  position: absolute;
-  inset-block-end: 2%;
-  inset-inline: 10%;
-  height: 9%;
-  border-radius: 50%;
-  background: radial-gradient(closest-side, rgb(0 0 0 / 0.42), rgb(0 0 0 / 0));
-  filter: blur(6px);
-}
-
-.hero-atm--giorno .hero-atm__media--shadow::after {
-  background: radial-gradient(closest-side, rgb(70 70 70 / 0.28), rgb(70 70 70 / 0));
-}
-
-.hero-atm__media--float {
-  animation: hero-atm-float 9s ease-in-out infinite;
-}
-
-/* con il ritaglio "riempi" qualche pixel in più evita che il respiro
-   scopra una riga vuota sotto; con la scena intera non serve e
-   sposterebbe l'immagine oltre il bordo */
-.hero-atm--media-riempi .hero-atm__media--float img {
-  height: calc(100% + 14px);
-}
-
-/* ── Integrazione con l'atmosfera ──
-   Uno scontornato fotografato in studio è più luminoso del cielo che lo
-   ospita: senza trattamento sembra un adesivo. Qui un velo in multiply,
-   ritagliato sull'alpha dell'immagine stessa, raffredda le luci di notte
-   e le scalda all'alba senza snaturare l'incarnato; un alone morbido
-   stacca la scena dal fondale e l'ombra portata la àncora. Tutto via
-   classi: il cambio d'atmosfera a runtime porta con sé la gradazione. */
-.hero-atm--media-blend .hero-atm__media::before {
-  content: '';
-  position: absolute;
-  inset: -8% -12%;
-  z-index: 0;
-  background: radial-gradient(56% 62% at 50% 62%, var(--ha-glow, rgb(178 200 209 / 0.2)), transparent 74%);
-  pointer-events: none;
-}
-
-/* velo colore: stessa geometria dell'immagine (mask-size/position
-   rispecchiano object-fit/position), quindi copre solo i pixel opachi */
-.hero-atm--media-blend .hero-atm__media::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  background: var(--ha-wash, transparent);
-  mix-blend-mode: multiply;
-  pointer-events: none;
-  -webkit-mask: var(--ha-media-src) no-repeat 50% 100% / contain;
-  mask: var(--ha-media-src) no-repeat 50% 100% / contain;
-}
-
-.hero-atm--media-riempi .hero-atm__media::after {
-  -webkit-mask-position: 50% 0%;
-  mask-position: 50% 0%;
-  -webkit-mask-size: cover;
-  mask-size: cover;
-}
-
-.hero-atm--notte.hero-atm--media-blend .hero-atm__media {
-  --ha-glow: rgb(178 200 209 / 0.18);
-  --ha-wash: rgb(170 186 208 / 0.5);
-}
-
-.hero-atm--alba.hero-atm--media-blend .hero-atm__media {
-  --ha-glow: rgb(246 201 141 / 0.17);
-  --ha-wash: rgb(244 214 176 / 0.38);
-}
-
-.hero-atm--giorno.hero-atm--media-blend .hero-atm__media {
-  --ha-glow: rgb(255 255 255 / 0.35);
-  --ha-wash: transparent;
-}
-
-/* luce generale: appena attenuata, mai stravolta */
-.hero-atm--notte.hero-atm--media-blend .hero-atm__media img {
-  filter: brightness(0.88) saturate(0.94) contrast(1.02)
-    drop-shadow(0 18px 40px rgb(8 12 18 / 0.5));
-}
-
-.hero-atm--alba.hero-atm--media-blend .hero-atm__media img {
-  filter: brightness(0.95) saturate(1.02) drop-shadow(0 16px 36px rgb(44 40 36 / 0.38));
-}
-
-.hero-atm--giorno.hero-atm--media-blend .hero-atm__media img {
-  filter: brightness(0.99) saturate(0.97) drop-shadow(0 14px 32px rgb(70 70 70 / 0.25));
-}
-
-/* ── Banco di foschia ──
-   Tre nuvole basse e sfocate passano DAVANTI alla base della scena:
-   è il dettaglio che la lega al cielo invece di lasciarla appiccicata.
-   Stanno sotto al testo (z1 < z2) e sopra all'immagine (z1 > z0). */
-.hero-atm__mist {
-  position: absolute;
-  inset-inline: -12%;
-  inset-block-end: -2%;
-  height: 54%;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.hero-atm__mist span {
-  position: absolute;
-  inset-block-end: var(--b, 0%);
-  inset-inline-start: var(--l, 10%);
-  width: var(--w, 50%);
-  height: var(--h, 42%);
-  border-radius: 999px;
-  background: var(--ha-mist, rgb(214 224 235 / 0.26));
-  filter: blur(42px);
-  animation: hero-atm-mist var(--t, 26s) ease-in-out var(--d, 0s) infinite alternate;
-}
-
-.hero-atm--alba .hero-atm__mist span {
-  --ha-mist: rgb(240 216 190 / 0.28);
-}
-
-.hero-atm--giorno .hero-atm__mist span {
-  --ha-mist: rgb(255 255 255 / 0.55);
-}
-
-@keyframes hero-atm-mist {
-  from {
-    transform: translateX(-4%);
-  }
-
-  to {
-    transform: translateX(5%);
-  }
-}
-
-/* l'ombra portata e la foschia ancorano la scena: l'ellisse non serve */
-.hero-atm--media-blend .hero-atm__media--shadow::after {
-  display: none;
-}
-
-@keyframes hero-atm-float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-/* ── Contenuto ── */
-.hero-atm__content {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: var(--ha-content-width, 46rem);
-  margin-inline: var(--ha-content-margin, auto);
-  translate: 0 calc(var(--ha-p) * 26%);
-  opacity: calc(1 - var(--ha-p) * 0.9);
-}
-
-/* Velo morbido dietro al testo: garantisce la leggibilità anche quando
-   passa una nuvola dietro al titolo. */
-.hero-atm__content::before {
-  content: '';
-  position: absolute;
-  inset: -12% -8%;
-  z-index: -1;
-  background: radial-gradient(58% 58% at 50% 50%, var(--ha-scrim, rgb(0 0 0 / 0.18)), transparent 72%);
-  pointer-events: none;
-}
-
-.hero-atm--giorno .hero-atm__content::before {
-  --ha-scrim: rgb(255 255 255 / 0.45);
-}
-
-.hero-atm__eyebrow {
-  margin: 0 0 clamp(0.75rem, 2vh, 1.25rem);
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  opacity: 0.75;
-}
-
-.hero-atm__heading {
-  margin: 0;
-  font-family: var(--font-heading--family);
-  font-size: var(--ha-heading-size, clamp(2.4rem, 6vw, 5rem));
-  line-height: 1.02;
-  letter-spacing: -0.02em;
-  color: inherit;
-  text-wrap: balance;
-}
-
-.hero-atm__heading em {
-  font-style: normal;
-  opacity: 0.7;
-}
-
-.hero-atm__text {
-  margin: clamp(1rem, 2.4vh, 1.6rem) auto 0;
-  max-width: 34rem;
-  font-size: clamp(1rem, 1.3vw, 1.2rem);
-  line-height: 1.55;
-  opacity: 0.85;
-}
-
-.hero-atm--left .hero-atm__text {
-  margin-inline: 0;
-}
-
-.hero-atm__text > :first-child {
-  margin-block-start: 0;
-}
-
-.hero-atm__text > :last-child {
-  margin-block-end: 0;
-}
-
-.hero-atm__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  justify-content: var(--ha-justify, center);
-  margin-block-start: clamp(1.5rem, 3.5vh, 2.5rem);
-}
-
-.hero-atm__button {
-  text-decoration: none;
-  padding-block: 0.85rem;
-  padding-inline: 1.8rem;
-}
-
-/* Su cielo scuro il pulsante principale del tema (carbone su carbone)
-   sparirebbe: lo invertiamo in crema con testo scuro. */
-:is(.hero-atm--notte, .hero-atm--alba) .hero-atm__button:not(.hero-atm__button--ghost) {
-  background: var(--ha-cream);
-  color: var(--ha-charcoal);
-  box-shadow: none;
-}
-
-:is(.hero-atm--notte, .hero-atm--alba) .hero-atm__button:not(.hero-atm__button--ghost):hover {
-  background: var(--ha-white);
-  color: var(--ha-charcoal);
-}
-
-/* Su fondo scuro il bottone secondario deve restare leggibile */
-:is(.hero-atm--notte, .hero-atm--alba) .hero-atm__button--ghost {
-  background: rgb(244 239 232 / 0.14);
-  color: var(--ha-cream);
-  box-shadow: inset 0 0 0 1px rgb(244 239 232 / 0.7);
-}
-
-:is(.hero-atm--notte, .hero-atm--alba) .hero-atm__button--ghost:hover {
-  background: rgb(244 239 232 / 0.26);
-}
-
-/* ── Indicatore di scroll ── */
-.hero-atm__scroll {
-  position: absolute;
-  z-index: 2;
-  inset-block-end: clamp(1rem, 3vh, 2rem);
-  /* sta sopra la foschia, quindi prende il colore che ci si legge sopra */
-  color: var(--ha-scroll-ink, inherit);
-  inset-inline: 0;
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  align-items: center;
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  opacity: calc(0.7 - var(--ha-p) * 2);
-  pointer-events: none;
-}
-
-.hero-atm__scroll svg {
-  width: 16px;
-  height: 16px;
-  animation: hero-atm-nudge 2.4s ease-in-out infinite;
-}
-
-@keyframes hero-atm-nudge {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(4px);
-  }
-}
-
-/* ── Mobile ── */
 @media screen and (max-width: 749px) {
   .hero-atm {
-    min-height: var(--ha-height-mobile, 74svh);
-    text-align: center;
+    --ha-band-w: 100vw;
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
   }
 
   .hero-atm__content {
-    --ha-content-margin: auto;
+    max-width: none;
+    padding-block: 44px 36px;
   }
 
-  .hero-atm__actions {
-    --ha-justify: center;
-  }
-
-  .hero-atm__text {
-    margin-inline: auto;
-  }
-
-  /* su schermi stretti la luna finiva dietro al titolo: più piccola e più in alto */
-  .hero-atm__orb {
-    width: clamp(48px, 14vw, 76px);
-    inset-block-start: 4%;
-    inset-inline-end: 6%;
-  }
-
-  .hero-atm--orb-left .hero-atm__orb {
-    inset-inline-start: 6%;
-  }
-
-  .hero-atm__media,
-  .hero-atm--media-sotto .hero-atm__media {
-    width: min(100vw, calc((var(--ha-media-width, 70) + 25) * 1vw));
-  }
-
-  .hero-atm--media-desktop .hero-atm__media {
-    display: none;
+  .hero-atm__visual {
+    min-height: 0;
+    grid-template-rows: 46svh 22svh;
   }
 }
 
-/* ── Movimento ridotto: niente parallasse, niente derive ── */
-@media (prefers-reduced-motion: reduce) {
-  .hero-atm__sky,
-  .hero-atm__stars,
-  .hero-atm__clouds,
-  .hero-atm__orb,
-  .hero-atm__media,
-  .hero-atm__content {
-    translate: none;
-  }
+/* ── accessibilità: niente movimento, resta il giorno ────────────── */
 
-  .hero-atm__cloud,
+@media (prefers-reduced-motion: reduce) {
+  .hero-atm__layer,
+  .hero-atm__stars,
   .hero-atm__star,
-  .hero-atm__scroll svg,
-  .hero-atm__media--float,
-  .hero-atm__mist span {
+  .hero-atm__sun,
+  .hero-atm__moon,
+  .hero-atm__clouds,
+  .hero-atm__cloud {
     animation: none;
   }
 
-  .hero-atm__media {
-    translate: none;
+  .hero-atm__sun {
+    left: 20%;
+    top: 26%;
+    transform: translate(-50%, -50%);
   }
 
-  .hero-atm__content {
-    opacity: 1;
+  .hero-atm__cloud {
+    transform: translateX(calc(var(--ha-band-w, 50vw) * var(--sx, 0.3)));
   }
 }
