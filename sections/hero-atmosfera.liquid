@@ -1,0 +1,353 @@
+{%- comment -%}
+  Hero atmosfera (v2) — cielo animato nello stile della pagina
+  "Perché dormire comodi": notte stellata, alba o nuvole di giorno.
+
+  Tutto in CSS (nuvole che scorrono, stelle che pulsano) più una
+  parallasse leggera allo scroll: nessuna libreria, nessuna immagine
+  obbligatoria. L'immagine prodotto è facoltativa e sta in primo piano.
+{%- endcomment -%}
+
+{{ 'hero-atmosfera.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'hero-atmosfera.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign atmosfera = section.settings.atmosfera
+
+  assign is_dark = false
+  if atmosfera == 'notte' or atmosfera == 'alba'
+    assign is_dark = true
+  endif
+
+  assign show_stars = false
+  if section.settings.show_stars and is_dark
+    assign show_stars = true
+  endif
+
+  case section.settings.height
+    when 'piccola'
+      assign height = '62svh'
+      assign height_mobile = '60svh'
+    when 'grande'
+      assign height = '88svh'
+      assign height_mobile = '80svh'
+    when 'schermo'
+      assign height = '100svh'
+      assign height_mobile = '100svh'
+    else
+      assign height = '78svh'
+      assign height_mobile = '74svh'
+  endcase
+
+  assign ink = '#464646'
+  if is_dark
+    assign ink = '#f4efe8'
+  endif
+
+  # l'indicatore di scroll sta sopra la sfumatura: sceglie il colore
+  # che si legge sul colore della sezione successiva
+  assign scroll_ink = ink
+  if section.settings.show_haze
+    assign haze_brightness = section.settings.haze_color | color_brightness
+    if haze_brightness > 140
+      assign scroll_ink = '#464646'
+    else
+      assign scroll_ink = '#f4efe8'
+    endif
+  endif
+-%}
+
+<hero-atmosfera
+  class="hero-atm hero-atm--{{ atmosfera }} hero-atm--{{ section.settings.alignment }}{% if is_dark %} hero-atm--dark{% endif %}{% if section.settings.orb_position == 'left' %} hero-atm--orb-left{% endif %}"
+  style="
+    --ha-height: {{ height }};
+    --ha-height-mobile: {{ height_mobile }};
+    --ha-ink: {{ ink }};
+    --ha-haze: {{ section.settings.haze_color }};
+    --ha-scroll-ink: {{ scroll_ink }};
+    {% if section.settings.alignment == 'left' %}
+      --ha-align: start; --ha-justify: flex-start; --ha-content-margin: 0;
+    {% endif %}
+  "
+  {% if request.visual_preview_mode %}
+    data-shopify-visual-preview
+  {% endif %}
+>
+  <div class="hero-atm__sky" aria-hidden="true"></div>
+
+  {%- if show_stars -%}
+    <div class="hero-atm__stars" aria-hidden="true">
+      {%- for i in (1..section.settings.star_count) -%}
+        {%- liquid
+          # posizioni pseudo-casuali ma stabili: dipendono solo dall'indice
+          assign x = i | times: 37 | modulo: 98 | plus: 1
+          assign y = i | times: 61 | modulo: 66 | plus: 2
+          assign s = i | modulo: 3 | plus: 1
+          assign d = i | times: 137 | modulo: 4000
+          assign t = i | modulo: 4 | plus: 3
+        -%}
+        <span
+          class="hero-atm__star"
+          style="--x: {{ x }}%; --y: {{ y }}%; --s: {{ s }}px; --d: -{{ d }}ms; --t: {{ t }}s;"
+        ></span>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.show_orb -%}
+    <div class="hero-atm__orb" aria-hidden="true"></div>
+  {%- endif -%}
+
+  <div class="hero-atm__clouds" aria-hidden="true">
+    {%- for i in (1..section.settings.cloud_count) -%}
+      {%- liquid
+        assign top = i | times: 17 | modulo: 58 | plus: 4
+        assign w = i | times: 53 | modulo: 170 | plus: 150
+        assign speed = i | times: 29 | modulo: 70 | plus: 90
+        assign delay = i | times: 37 | modulo: 90
+        assign o = i | modulo: 4 | times: 12 | plus: 22
+      -%}
+      <span
+        class="hero-atm__cloud"
+        style="--top: {{ top }}%; --w: {{ w }}px; --speed: {{ speed }}s; --delay: -{{ delay }}s; --o: 0.{{ o }};"
+      ></span>
+    {%- endfor -%}
+  </div>
+
+  {%- if section.settings.image != blank -%}
+    <div class="hero-atm__media" aria-hidden="true">
+      {{
+        section.settings.image
+        | image_url: width: 1600
+        | image_tag: loading: 'eager', widths: '600, 900, 1200, 1600', alt: section.settings.image.alt
+      }}
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.show_haze -%}
+    <div class="hero-atm__haze" aria-hidden="true"></div>
+  {%- endif -%}
+
+  <div class="hero-atm__content">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="hero-atm__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+      <h2 class="hero-atm__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.text != blank -%}
+      <div class="hero-atm__text">{{ section.settings.text }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.button_label != blank or section.settings.button_2_label != blank -%}
+      <div class="hero-atm__actions">
+        {%- if section.settings.button_label != blank -%}
+          <a
+            class="hero-atm__button button"
+            {% if section.settings.button_link != blank %}
+              href="{{ section.settings.button_link }}"
+            {% endif %}
+          >
+            {{- section.settings.button_label -}}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.button_2_label != blank -%}
+          <a
+            class="hero-atm__button button button-secondary hero-atm__button--ghost"
+            {% if section.settings.button_2_link != blank %}
+              href="{{ section.settings.button_2_link }}"
+            {% endif %}
+          >
+            {{- section.settings.button_2_label -}}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.scroll_label != blank -%}
+    <div class="hero-atm__scroll" aria-hidden="true">
+      {{ section.settings.scroll_label }}
+      <svg viewBox="0 0 20 20" fill="none">
+        <path d="M10 4v12m0 0-5-5m5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  {%- endif -%}
+</hero-atmosfera>
+
+{% schema %}
+{
+  "name": "Hero atmosfera",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "atmosfera",
+      "label": "Atmosfera",
+      "options": [
+        { "value": "notte", "label": "Notte stellata" },
+        { "value": "alba", "label": "Alba" },
+        { "value": "giorno", "label": "Nuvole di giorno" }
+      ],
+      "default": "notte"
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Altezza",
+      "options": [
+        { "value": "piccola", "label": "Compatta" },
+        { "value": "media", "label": "Media" },
+        { "value": "grande", "label": "Grande" },
+        { "value": "schermo", "label": "Tutto lo schermo" }
+      ],
+      "default": "media"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Allineamento del testo",
+      "options": [
+        { "value": "center", "label": "Centrato" },
+        { "value": "left", "label": "A sinistra" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Testo"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Occhiello"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Titolo",
+      "default": "La tua nuova routine sarà <strong>dormire bene</strong>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Testo",
+      "default": "<p>Materassi pensati per il riposo vero: prova 100 notti, reso gratuito, garanzia 10 anni.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Pulsanti"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Pulsante principale",
+      "default": "Scopri Con comodo"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link del pulsante principale"
+    },
+    {
+      "type": "text",
+      "id": "button_2_label",
+      "label": "Pulsante secondario",
+      "default": "Fai il quiz"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "Link del pulsante secondario"
+    },
+    {
+      "type": "header",
+      "content": "Cielo"
+    },
+    {
+      "type": "range",
+      "id": "cloud_count",
+      "label": "Numero di nuvole",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stars",
+      "label": "Mostra le stelle",
+      "info": "Solo per le atmosfere notte e alba.",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "star_count",
+      "label": "Numero di stelle",
+      "min": 10,
+      "max": 120,
+      "step": 5,
+      "default": 60
+    },
+    {
+      "type": "checkbox",
+      "id": "show_orb",
+      "label": "Mostra luna o sole",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "orb_position",
+      "label": "Posizione di luna o sole",
+      "options": [
+        { "value": "right", "label": "A destra" },
+        { "value": "left", "label": "A sinistra" }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "header",
+      "content": "Raccordo con la sezione sotto"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_haze",
+      "label": "Sfuma il bordo inferiore",
+      "info": "Fa svanire il cielo nel colore della sezione successiva.",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "haze_color",
+      "label": "Colore della sfumatura",
+      "default": "#f4efe8"
+    },
+    {
+      "type": "header",
+      "content": "Immagine in primo piano"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Immagine",
+      "info": "Facoltativa: appare in basso al centro e si muove con la parallasse. Meglio se con sfondo trasparente."
+    },
+    {
+      "type": "header",
+      "content": "Extra"
+    },
+    {
+      "type": "text",
+      "id": "scroll_label",
+      "label": "Testo dell'indicatore di scroll",
+      "default": "Scorri"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero atmosfera"
+    }
+  ]
+}
+{% endschema %}
