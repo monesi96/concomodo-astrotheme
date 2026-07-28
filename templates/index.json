@@ -107,6 +107,7 @@
       "block_order": [
         "group_fCMeMm"
       ],
+      "disabled": true,
       "custom_css": [
         ".color-scheme-5 {background: linear-gradient( 0deg, rgba(178, 200, 209, 1) 50%, rgba(244, 239, 232, 1) 50% );}",
         "img {border-radius: 0 0 30px 30px;}"
@@ -143,6 +144,31 @@
         "reflection_opacity": 75,
         "padding-block-start": 100,
         "padding-block-end": 72
+      }
+    },
+    "hero_atmosfera_ALAf3q": {
+      "type": "hero-atmosfera",
+      "name": "Hero atmosfera",
+      "settings": {
+        "atmosfera": "alba",
+        "height": "media",
+        "alignment": "center",
+        "eyebrow": "",
+        "heading": "La tua nuova routine sarà <strong>dormire bene</strong>",
+        "text": "<p>Materassi pensati per il riposo vero: prova 100 notti, reso gratuito, garanzia 10 anni.</p>",
+        "button_label": "Scopri Con comodo",
+        "button_link": "",
+        "button_2_label": "Fai il quiz",
+        "button_2_link": "",
+        "cloud_count": 5,
+        "show_stars": true,
+        "star_count": 60,
+        "show_orb": true,
+        "orb_position": "right",
+        "show_haze": true,
+        "haze_color": "#f4efe8",
+        "image": "shopify://shop_images/M2-top.png",
+        "scroll_label": "Scorri"
       }
     },
     "section_kiCFcD": {
@@ -4078,6 +4104,7 @@
   },
   "order": [
     "hero_jVaWmY",
+    "hero_atmosfera_ALAf3q",
     "section_kiCFcD",
     "section_CUf3wJ",
     "section_Yt33in",
