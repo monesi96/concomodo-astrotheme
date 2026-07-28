@@ -398,6 +398,8 @@
                 aria-label="Il tuo indirizzo email"
               >
               <span class="cq__email-error">Inserisci un indirizzo email valido.</span>
+              {%- capture consent_id -%}cq-consent-{{ section.id }}{%- endcapture -%}
+              {% render 'newsletter-consent', id: consent_id, class: 'cq__consent' %}
               <div class="cq__actions" style="margin-top: 6px;">
                 <button type="submit" class="cq-btn">
                   {{ section.settings.email_cta }}

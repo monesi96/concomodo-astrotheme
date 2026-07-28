@@ -1903,6 +1903,29 @@
     ]
   },
   {
+    "name": "Privacy e newsletter",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Vale per tutti i form newsletter del tema: blocco iscrizione email, quiz materasso e popup fullscreen."
+      },
+      {
+        "type": "checkbox",
+        "id": "newsletter_consent_enabled",
+        "label": "Chiedi il consenso privacy",
+        "info": "Aggiunge una spunta obbligatoria prima dell'invio.",
+        "default": true
+      },
+      {
+        "type": "richtext",
+        "id": "newsletter_consent_text",
+        "label": "Testo del consenso",
+        "info": "Se lo lasci vuoto viene usato «Ho letto e accetto la privacy policy» con il link alla policy del negozio.",
+        "default": "<p>Ho letto e accetto la <a href=\"/policies/privacy-policy\" target=\"_blank\">privacy policy</a>.</p>"
+      }
+    ]
+  },
+  {
     "name": "t:names.input_fields",
     "settings": [
       {

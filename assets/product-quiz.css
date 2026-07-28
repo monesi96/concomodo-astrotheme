@@ -833,3 +833,14 @@
     align-items: center;
   }
 }
+
+/* consenso privacy (snippet condiviso newsletter-consent) */
+.cq__consent {
+  margin-block: 0;
+}
+
+.cq__consent .newsletter-consent__text {
+  color: var(--cq-ink-soft);
+  opacity: 1;
+  font-size: 0.8125rem;
+}

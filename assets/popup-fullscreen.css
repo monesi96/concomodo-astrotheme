@@ -366,3 +366,9 @@
     font-size: clamp(1.9rem, 8vw, 2.6rem);
   }
 }
+
+/* consenso privacy (snippet condiviso newsletter-consent) */
+.pfs__consent {
+  margin-block: 0;
+  justify-content: center;
+}
