@@ -158,11 +158,16 @@
         "button_link": "",
         "button_2_label": "Fai il quiz",
         "button_2_link": "",
+        "height": "schermo",
         "image": "shopify://shop_images/pnggmmmaa.png",
-        "photo_height": 70,
+        "scene_width": 100,
+        "scene_height": 48,
         "cycle_seconds": 10,
         "cloud_count": 5,
-        "show_stars": true
+        "show_stars": true,
+        "show_haze": true,
+        "haze_color": "#f4efe8",
+        "scroll_label": "Scorri"
       }
     },
     "section_kiCFcD": {
