@@ -144,20 +144,21 @@
   animation: ha-sole var(--ha-cycle, 10s) linear infinite;
 }
 
-/* il sole vive nel terzo sinistro (il testo sta al centro, la luna a
-   destra): sale da sinistra, culmina in alto a sinistra e tramonta
-   dietro la scena, sempre senza toccare il titolo */
+/* sole e luna condividono la stessa traiettoria: un arco completo che
+   copre tutta la larghezza della hero, dietro — sorge a sinistra,
+   culmina al centro in alto e cala a destra dietro la scena */
 @keyframes ha-sole {
-  0% { left: 12%; top: 26%; opacity: 1; }
-  20% { left: 20%; top: 10%; }
-  38% { left: 25%; top: 20%; }
-  50% { left: 19%; top: 48%; }
-  58% { left: 13%; top: 80%; opacity: 1; }
-  60% { left: 12%; top: 88%; opacity: 0; }
-  62% { left: 10%; top: 90%; opacity: 0; }
-  90% { left: 10%; top: 86%; opacity: 0; }
-  93% { left: 10%; top: 64%; opacity: 1; }
-  100% { left: 12%; top: 26%; opacity: 1; }
+  0% { left: 14%; top: 34%; opacity: 1; }
+  14% { left: 26%; top: 13%; }
+  27% { left: 50%; top: 6%; }
+  40% { left: 72%; top: 15%; }
+  50% { left: 84%; top: 44%; }
+  58% { left: 92%; top: 76%; opacity: 1; }
+  60% { left: 94%; top: 86%; opacity: 0; }
+  62% { left: 4%; top: 88%; opacity: 0; }
+  90% { left: 4%; top: 84%; opacity: 0; }
+  93% { left: 6%; top: 64%; opacity: 1; }
+  100% { left: 14%; top: 34%; opacity: 1; }
 }
 
 /* ── luna: disco morbido che accompagna la notte ─────────────────── */
@@ -165,22 +166,25 @@
 .hero-atm__moon {
   position: absolute;
   z-index: 1;
-  right: 13%;
-  top: 15%;
   width: clamp(56px, 6vw, 88px);
   aspect-ratio: 1;
   border-radius: 50%;
   background: radial-gradient(circle at 42% 38%, #fbf8ee 0%, #ece7d6 58%, rgb(236 231 214 / 0) 74%);
   box-shadow: 0 0 54px 20px rgb(226 231 224 / 0.3);
+  transform: translate(-50%, -50%);
   opacity: 0;
   pointer-events: none;
   animation: ha-luna var(--ha-cycle, 10s) linear infinite;
 }
 
+/* di notte la luna percorre lo stesso arco del sole, da sinistra a destra */
 @keyframes ha-luna {
-  0%, 66% { opacity: 0; transform: translateY(14px); }
-  74%, 85% { opacity: 1; transform: translateY(0); }
-  92%, 100% { opacity: 0; transform: translateY(-10px); }
+  0%, 62% { left: 6%; top: 78%; opacity: 0; }
+  67% { left: 18%; top: 26%; opacity: 1; }
+  76% { left: 44%; top: 6%; }
+  85% { left: 70%; top: 15%; opacity: 1; }
+  91% { left: 86%; top: 48%; opacity: 0; }
+  100% { left: 86%; top: 52%; opacity: 0; }
 }
 
 /* ── nuvole: haze morbida, un po' dietro e un po' davanti ────────── */
@@ -257,7 +261,7 @@
   inset-block-end: 0;
   block-size: calc(var(--ha-scene-h, 48) * 1%);
   inline-size: calc(var(--ha-scene-w, 100) * 1%);
-  margin-inline: auto;
+  margin-inline: auto 0;
   pointer-events: none;
 }
 
@@ -266,7 +270,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 0%;
+  object-position: 100% 0%;
   filter: drop-shadow(0 24px 48px rgb(10 14 20 / 0.35));
   animation: ha-soggetto-luce var(--ha-cycle, 10s) linear infinite;
 }
@@ -287,8 +291,8 @@
   mix-blend-mode: multiply;
   opacity: 0;
   pointer-events: none;
-  -webkit-mask: var(--ha-src) no-repeat 50% 0% / cover;
-  mask: var(--ha-src) no-repeat 50% 0% / cover;
+  -webkit-mask: var(--ha-src) no-repeat 100% 0% / cover;
+  mask: var(--ha-src) no-repeat 100% 0% / cover;
   animation: var(--ha-cycle, 10s) linear infinite;
 }
 
@@ -360,7 +364,7 @@
   flex-direction: column;
   align-items: center;
   gap: 16px;
-  max-width: 780px;
+  max-width: 980px;
   padding-block: 72px calc(var(--ha-scene-h, 48) * 1svh + 40px);
   padding-inline: clamp(24px, 6vw, 96px);
   text-align: center;
@@ -382,16 +386,17 @@ body:has(.header[transparent]) .hero-atm__content {
   color: rgb(244 239 232 / 0.85);
 }
 
+/* dimensionato per stare al massimo su due righe da desktop */
 .hero-atm__heading {
   margin: 0;
-  font-size: clamp(2.4rem, 1.4rem + 3.6vw, 4rem);
-  line-height: 1.06;
+  font-size: clamp(2.2rem, 1.3rem + 2.4vw, 3.2rem);
+  line-height: 1.08;
   color: var(--ha-crema);
   text-wrap: balance;
 }
 
 .hero-atm__text {
-  max-width: 46ch;
+  max-width: 62ch;
   font-size: 1.08rem;
   line-height: 1.55;
   color: rgb(244 239 232 / 0.92);
@@ -476,15 +481,23 @@ body:has(.header[transparent]) .hero-atm__content {
     block-size: 38%;
   }
 
-  /* sole e luna più piccoli e negli angoli: mai sopra il testo */
+  /* sole e luna più piccoli sullo schermo stretto */
   .hero-atm__sun {
     width: 46px;
   }
 
   .hero-atm__moon {
     width: 44px;
-    right: 6%;
-    top: 5%;
+  }
+
+  /* su mobile il taglio orizzontale tiene il viso in campo */
+  .hero-atm__soggetto img {
+    object-position: 45% 0%;
+  }
+
+  .hero-atm__wash {
+    -webkit-mask-position: 45% 0%;
+    mask-position: 45% 0%;
   }
 }
 
@@ -507,8 +520,12 @@ body:has(.header[transparent]) .hero-atm__content {
   }
 
   .hero-atm__sun {
-    left: 18%;
-    top: 24%;
+    left: 26%;
+    top: 18%;
+  }
+
+  .hero-atm__moon {
+    opacity: 0;
   }
 
   .hero-atm__cloud {
