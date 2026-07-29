@@ -107,7 +107,6 @@
       "block_order": [
         "group_fCMeMm"
       ],
-      "disabled": true,
       "custom_css": [
         ".color-scheme-5 {background: linear-gradient( 0deg, rgba(178, 200, 209, 1) 50%, rgba(244, 239, 232, 1) 50% );}",
         "img {border-radius: 0 0 30px 30px;}"
@@ -148,9 +147,11 @@
     },
     "hero_atmosfera_ALAf3q": {
       "type": "hero-atmosfera",
+      "disabled": true,
       "name": "Hero atmosfera",
       "settings": {
-        "height": "schermo",
+        "height": "grande",
+        "height_mobile": "media",
         "eyebrow": "",
         "heading": "La tua nuova routine sarà <strong>dormire bene</strong>",
         "text": "<p>Materassi pensati per il riposo vero: prova 100 notti, reso gratuito, garanzia 10 anni.</p>",
@@ -158,15 +159,14 @@
         "button_link": "",
         "button_2_label": "Fai il quiz",
         "button_2_link": "",
-        "height_mobile": "media",
         "image": "shopify://shop_images/heroscontornatoconcomodo.png",
-        "scene_width": 70,
-        "scene_height": 62,
+        "scene_width": 80,
+        "scene_height": 64,
         "scene_height_mobile": 32,
         "cycle_seconds": 19,
         "cloud_count": 2,
         "show_stars": true,
-        "show_haze": true,
+        "show_haze": false,
         "haze_color": "#f4efe8",
         "scroll_label": "Scorri"
       }
