@@ -1,9 +1,13 @@
 {%- comment -%}
-  Hero atmosfera (v3) — testo a sinistra, foto a destra a filo dei bordi
-  e, sopra la foto, una fascia di cielo animato: il ciclo
-  giorno → tramonto → sera → notte gira in loop (10 s di default),
-  graduale e uguale per tutti. Le nuvole entrano da sinistra e restano
-  visibili solo dentro la fascia. Tutto in CSS, nessuna libreria.
+  Hero atmosfera (v5) — il cielo animato riempie tutta la sezione e il
+  soggetto scontornato (su sfondo trasparente) sta davanti, a tutto
+  schermo, ancorato in basso. Il ciclo giorno → tramonto → sera → notte
+  gira in loop (10 s di default), graduale e uguale per tutti; il
+  soggetto viene virato insieme al cielo (lavaggi multiply mascherati
+  dalla sua stessa trasparenza, come la v2), le nuvole entrano sempre
+  da sinistra e passano un po' dietro e un po' davanti alla persona,
+  la nebbiolina e la sfumatura in basso raccordano tutto senza stacchi.
+  Tutto in CSS, nessuna libreria.
 {%- endcomment -%}
 
 {{ 'hero-atmosfera.css' | asset_url | stylesheet_tag }}
@@ -12,15 +16,30 @@
   case section.settings.height
     when 'piccola'
       assign height = '62svh'
+    when 'media'
+      assign height = '78svh'
     when 'grande'
       assign height = '88svh'
-    when 'schermo'
-      assign height = '100svh'
     else
-      assign height = '76svh'
+      assign height = '100svh'
   endcase
 
-  assign photo_frac = section.settings.photo_height | divided_by: 100.0
+  assign scene_url = ''
+  if section.settings.image != blank
+    assign scene_url = section.settings.image | image_url: width: 2000
+  endif
+
+  # l'indicatore di scroll sta sopra la sfumatura: sceglie il colore
+  # che si legge sul colore della sezione successiva
+  assign scroll_ink = ''
+  if section.settings.show_haze
+    assign haze_brightness = section.settings.haze_color | color_brightness
+    if haze_brightness > 140
+      assign scroll_ink = '#464646'
+    else
+      assign scroll_ink = '#f4efe8'
+    endif
+  endif
 -%}
 
 <div
@@ -28,13 +47,126 @@
   class="hero-atm"
   style="
     --ha-height: {{ height }};
-    --ha-photo: {{ photo_frac }};
     --ha-cycle: {{ section.settings.cycle_seconds }}s;
+    --ha-haze: {{ section.settings.haze_color }};
+    {% if scroll_ink != blank %}--ha-scroll-ink: {{ scroll_ink }};{% endif %}
+    {% if scene_url != blank %}
+      --ha-src: url('{{ scene_url }}');
+      --ha-scene-w: {{ section.settings.scene_width }};
+      --ha-scene-h: {{ section.settings.scene_height }};
+    {% endif %}
   "
   {% if request.visual_preview_mode %}
     data-shopify-visual-preview
   {% endif %}
 >
+  <div class="hero-atm__scene" aria-hidden="true">
+    {%- comment -%} cielo: base giorno + strati che sfumano col ciclo {%- endcomment -%}
+    <div class="hero-atm__sky hero-atm__sky--tramonto"></div>
+    <div class="hero-atm__sky hero-atm__sky--sera"></div>
+    <div class="hero-atm__sky hero-atm__sky--notte"></div>
+
+    {%- if section.settings.show_stars -%}
+      <div class="hero-atm__stars">
+        {%- for i in (1..54) -%}
+          {%- liquid
+            # posizioni pseudo-casuali ma stabili: dipendono solo dall'indice
+            assign x = i | times: 37 | modulo: 96 | plus: 2
+            assign y = i | times: 61 | modulo: 88 | plus: 3
+            assign s = i | modulo: 3 | plus: 1
+            assign d = i | times: 137 | modulo: 4000
+            assign t = i | modulo: 4 | plus: 3
+          -%}
+          <span
+            class="hero-atm__star"
+            style="--x: {{ x }}%; --y: {{ y }}%; --s: {{ s }}px; --d: -{{ d }}ms; --t: {{ t }}s;"
+          ></span>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div class="hero-atm__sun"></div>
+    <div class="hero-atm__moon"></div>
+
+    {%- if section.settings.cloud_count > 0 -%}
+      <div class="hero-atm__clouds hero-atm__clouds--dietro">
+        {%- for i in (1..section.settings.cloud_count) -%}
+          {%- liquid
+            assign slot = i | modulo: 3
+            if scene_url != blank and slot == 0
+              continue
+            endif
+            assign top = i | times: 17 | modulo: 46 | plus: 4
+            assign w = i | times: 71 | modulo: 240 | plus: 190
+            assign speed = i | times: 29 | modulo: 45 | plus: 55
+            assign delay = i | times: 37 | modulo: 90
+            assign o = i | modulo: 4 | times: 10 | plus: 32
+            assign sx = i | times: 23 | modulo: 70 | plus: 10
+          -%}
+          <span
+            class="hero-atm__cloud"
+            style="--top: {{ top }}%; --w: {{ w }}px; --speed: {{ speed }}s; --delay: -{{ delay }}s; --o: 0.{{ o }}; --sx: 0.{{ sx }};"
+          ></span>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if scene_url != blank -%}
+      <div class="hero-atm__soggetto">
+        {{
+          section.settings.image
+          | image_url: width: 2000
+          | image_tag:
+            loading: 'eager',
+            fetchpriority: 'high',
+            widths: '800, 1200, 1600, 2000',
+            sizes: '100vw',
+            alt: section.settings.image.alt
+        }}
+        {%- comment -%}
+          lavaggi di colore mascherati dall'alpha del soggetto: virano la
+          scena insieme al cielo senza toccare i toni della pelle
+        {%- endcomment -%}
+        <span class="hero-atm__wash hero-atm__wash--tramonto"></span>
+        <span class="hero-atm__wash hero-atm__wash--sera"></span>
+        <span class="hero-atm__wash hero-atm__wash--notte"></span>
+      </div>
+
+      {%- if section.settings.cloud_count > 0 -%}
+        <div class="hero-atm__clouds hero-atm__clouds--davanti">
+          {%- for i in (1..section.settings.cloud_count) -%}
+            {%- liquid
+              assign slot = i | modulo: 3
+              unless slot == 0
+                continue
+              endunless
+              assign top = i | times: 19 | modulo: 42 | plus: 20
+              assign w = i | times: 67 | modulo: 200 | plus: 260
+              assign speed = i | times: 31 | modulo: 40 | plus: 75
+              assign delay = i | times: 41 | modulo: 90
+              assign sx = i | times: 27 | modulo: 70 | plus: 12
+            -%}
+            <span
+              class="hero-atm__cloud"
+              style="--top: {{ top }}%; --w: {{ w }}px; --speed: {{ speed }}s; --delay: -{{ delay }}s; --o: 0.26; --sx: 0.{{ sx }};"
+            ></span>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      <div class="hero-atm__mist">
+        <span style="--l: -10%; --b: -10%; --w: 62%; --h: 52%; --t: 30s;"></span>
+        <span style="--l: 22%; --b: -18%; --w: 66%; --h: 58%; --t: 24s; --d: -9s;"></span>
+        <span style="--l: 60%; --b: -6%; --w: 54%; --h: 48%; --t: 34s; --d: -18s;"></span>
+        <span style="--l: 4%; --b: 6%; --w: 50%; --h: 40%; --t: 28s; --d: -14s;"></span>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.show_haze -%}
+      <div class="hero-atm__haze"></div>
+    {%- endif -%}
+  </div>
+
   <div class="hero-atm__content">
     {%- if section.settings.eyebrow != blank -%}
       <p class="hero-atm__eyebrow">{{ section.settings.eyebrow }}</p>
@@ -74,71 +206,14 @@
     {%- endif -%}
   </div>
 
-  <div class="hero-atm__visual">
-    <div class="hero-atm__sky" aria-hidden="true">
-      <div class="hero-atm__layer hero-atm__layer--tramonto"></div>
-      <div class="hero-atm__layer hero-atm__layer--sera"></div>
-      <div class="hero-atm__layer hero-atm__layer--notte"></div>
-
-      {%- if section.settings.show_stars -%}
-        <div class="hero-atm__stars">
-          {%- for i in (1..40) -%}
-            {%- liquid
-              # posizioni pseudo-casuali ma stabili: dipendono solo dall'indice
-              assign x = i | times: 37 | modulo: 96 | plus: 2
-              assign y = i | times: 61 | modulo: 62 | plus: 4
-              assign s = i | modulo: 3 | plus: 1
-              assign d = i | times: 137 | modulo: 4000
-              assign t = i | modulo: 4 | plus: 3
-            -%}
-            <span
-              class="hero-atm__star"
-              style="--x: {{ x }}%; --y: {{ y }}%; --s: {{ s }}px; --d: -{{ d }}ms; --t: {{ t }}s;"
-            ></span>
-          {%- endfor -%}
-        </div>
-      {%- endif -%}
-
-      <div class="hero-atm__sun"></div>
-      <div class="hero-atm__moon"></div>
-
-      {%- if section.settings.cloud_count > 0 -%}
-        <div class="hero-atm__clouds">
-          {%- for i in (1..section.settings.cloud_count) -%}
-            {%- liquid
-              assign top = i | times: 17 | modulo: 52 | plus: 6
-              assign w = i | times: 53 | modulo: 150 | plus: 130
-              assign speed = i | times: 29 | modulo: 40 | plus: 42
-              assign delay = i | times: 37 | modulo: 80
-              assign o = i | modulo: 4 | times: 14 | plus: 40
-              assign sx = i | times: 23 | modulo: 70 | plus: 10
-            -%}
-            <span
-              class="hero-atm__cloud"
-              style="--top: {{ top }}%; --w: {{ w }}px; --speed: {{ speed }}s; --delay: -{{ delay }}s; --o: 0.{{ o }}; --sx: 0.{{ sx }};"
-            ></span>
-          {%- endfor -%}
-        </div>
-      {%- endif -%}
+  {%- if section.settings.scroll_label != blank -%}
+    <div class="hero-atm__scroll" aria-hidden="true">
+      {{ section.settings.scroll_label }}
+      <svg viewBox="0 0 20 20" fill="none">
+        <path d="M10 4v12m0 0-5-5m5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
     </div>
-
-    <div class="hero-atm__photo">
-      {%- if section.settings.image != blank -%}
-        {{
-          section.settings.image
-          | image_url: width: 1800
-          | image_tag:
-            loading: 'eager',
-            fetchpriority: 'high',
-            widths: '600, 900, 1200, 1500, 1800',
-            sizes: '(min-width: 750px) 50vw, 100vw',
-            alt: section.settings.image.alt
-        }}
-      {%- else -%}
-        {{ 'hero-apparel-2' | placeholder_svg_tag: 'hero-atm__placeholder' }}
-      {%- endif -%}
-    </div>
-  </div>
+  {%- endif -%}
 </div>
 
 {% schema %}
@@ -156,7 +231,7 @@
         { "value": "grande", "label": "Grande" },
         { "value": "schermo", "label": "Tutto lo schermo" }
       ],
-      "default": "media"
+      "default": "schermo"
     },
     {
       "type": "header",
@@ -207,24 +282,35 @@
     },
     {
       "type": "header",
-      "content": "Foto"
+      "content": "Scena in primo piano"
     },
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Immagine",
-      "info": "Riempie la parte bassa della colonna destra, a filo dei bordi e senza tagli ai lati. Finché è vuota si vede un segnaposto."
+      "label": "Soggetto scontornato",
+      "info": "PNG su sfondo trasparente (persona + materasso): sta davanti al cielo, a tutto schermo, ancorato in basso. Le nuvole gli passano un po' dietro e un po' davanti."
     },
     {
       "type": "range",
-      "id": "photo_height",
-      "label": "Altezza della foto",
-      "info": "Quanta colonna destra occupa la foto: il resto, sopra, è il cielo animato.",
-      "min": 45,
-      "max": 75,
+      "id": "scene_width",
+      "label": "Larghezza della scena",
+      "info": "Al 100% i bordi laterali dell'immagine coincidono con lo schermo: i tagli non si vedono mai.",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "scene_height",
+      "label": "Altezza visibile",
+      "info": "Quanta scena si vede: il taglio parte dal basso e svanisce nella nebbiolina.",
+      "min": 25,
+      "max": 70,
       "step": 1,
       "unit": "%",
-      "default": 62
+      "default": 48
     },
     {
       "type": "header",
@@ -248,13 +334,40 @@
       "min": 0,
       "max": 8,
       "step": 1,
-      "default": 4
+      "default": 5
     },
     {
       "type": "checkbox",
       "id": "show_stars",
       "label": "Mostra le stelle di notte",
       "default": true
+    },
+    {
+      "type": "header",
+      "content": "Raccordo con la sezione sotto"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_haze",
+      "label": "Sfuma il bordo inferiore",
+      "info": "Fa svanire la scena nel colore della sezione successiva, senza stacchi.",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "haze_color",
+      "label": "Colore della sfumatura",
+      "default": "#f4efe8"
+    },
+    {
+      "type": "header",
+      "content": "Extra"
+    },
+    {
+      "type": "text",
+      "id": "scroll_label",
+      "label": "Testo dell'indicatore di scroll",
+      "default": "Scorri"
     }
   ],
   "presets": [
