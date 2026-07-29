@@ -24,6 +24,17 @@
       assign height = '100svh'
   endcase
 
+  case section.settings.height_mobile
+    when 'piccola'
+      assign height_mobile = '56svh'
+    when 'grande'
+      assign height_mobile = '84svh'
+    when 'schermo'
+      assign height_mobile = '100svh'
+    else
+      assign height_mobile = '72svh'
+  endcase
+
   assign scene_url = ''
   if section.settings.image != blank
     assign scene_url = section.settings.image | image_url: width: 2000
@@ -47,6 +58,7 @@
   class="hero-atm"
   style="
     --ha-height: {{ height }};
+    --ha-height-m: {{ height_mobile }};
     --ha-cycle: {{ section.settings.cycle_seconds }}s;
     --ha-haze: {{ section.settings.haze_color }};
     {% if scroll_ink != blank %}--ha-scroll-ink: {{ scroll_ink }};{% endif %}
@@ -54,6 +66,7 @@
       --ha-src: url('{{ scene_url }}');
       --ha-scene-w: {{ section.settings.scene_width }};
       --ha-scene-h: {{ section.settings.scene_height }};
+      --ha-scene-h-m: {{ section.settings.scene_height_mobile }};
     {% endif %}
   "
   {% if request.visual_preview_mode %}
@@ -234,6 +247,18 @@
       "default": "schermo"
     },
     {
+      "type": "select",
+      "id": "height_mobile",
+      "label": "Altezza su mobile",
+      "options": [
+        { "value": "piccola", "label": "Compatta" },
+        { "value": "media", "label": "Media" },
+        { "value": "grande", "label": "Grande" },
+        { "value": "schermo", "label": "Tutto lo schermo" }
+      ],
+      "default": "media"
+    },
+    {
       "type": "header",
       "content": "Testo"
     },
@@ -311,6 +336,16 @@
       "step": 1,
       "unit": "%",
       "default": 48
+    },
+    {
+      "type": "range",
+      "id": "scene_height_mobile",
+      "label": "Altezza visibile su mobile",
+      "min": 20,
+      "max": 60,
+      "step": 1,
+      "unit": "%",
+      "default": 32
     },
     {
       "type": "header",

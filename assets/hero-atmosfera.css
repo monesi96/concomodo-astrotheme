@@ -132,9 +132,10 @@
 
 /* ── sole: attraversa il giorno e tramonta dietro la scena ───────── */
 
+/* niente z-index: sole e luna stanno nell'ordine del DOM, quindi
+   sempre dietro al soggetto scontornato e alle nuvole */
 .hero-atm__sun {
   position: absolute;
-  z-index: 1;
   width: clamp(64px, 7vw, 104px);
   aspect-ratio: 1;
   border-radius: 50%;
@@ -165,7 +166,6 @@
 
 .hero-atm__moon {
   position: absolute;
-  z-index: 1;
   width: clamp(56px, 6vw, 88px);
   aspect-ratio: 1;
   border-radius: 50%;
@@ -365,7 +365,9 @@
   align-items: center;
   gap: 16px;
   max-width: 980px;
-  padding-block: 72px calc(var(--ha-scene-h, 48) * 1svh + 40px);
+  /* più in basso, verso il centro: il blocco scende ma i pulsanti
+     restano appena sopra la scena, senza coprirla troppo */
+  padding-block: 96px calc(var(--ha-scene-h, 48) * 0.62svh + 24px);
   padding-inline: clamp(24px, 6vw, 96px);
   text-align: center;
   text-shadow: 0 1px 22px rgb(16 24 34 / 0.5);
@@ -460,12 +462,14 @@ body:has(.header[transparent]) .hero-atm__content {
 /* ── mobile ──────────────────────────────────────────────────────── */
 
 @media screen and (max-width: 749px) {
+  /* dimensioni proprie del mobile: altezza della hero e della scena
+     separate da quelle desktop */
   .hero-atm {
-    min-height: min(var(--ha-height, 100svh), 94svh);
+    min-height: var(--ha-height-m, 72svh);
   }
 
   .hero-atm__content {
-    padding-block: 56px calc(var(--ha-scene-h, 48) * 0.72svh + 32px);
+    padding-block: 48px calc(var(--ha-scene-h-m, 32) * 0.5svh + 24px);
   }
 
   .hero-atm__heading {
@@ -474,7 +478,7 @@ body:has(.header[transparent]) .hero-atm__content {
 
   .hero-atm__soggetto {
     inline-size: 100%;
-    block-size: calc(var(--ha-scene-h, 48) * 0.72%);
+    block-size: calc(var(--ha-scene-h-m, 32) * 1%);
   }
 
   .hero-atm__mist {
