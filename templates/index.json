@@ -107,6 +107,7 @@
       "block_order": [
         "group_fCMeMm"
       ],
+      "disabled": true,
       "custom_css": [
         ".color-scheme-5 {background: linear-gradient( 0deg, rgba(178, 200, 209, 1) 50%, rgba(244, 239, 232, 1) 50% );}",
         "img {border-radius: 0 0 30px 30px;}"
@@ -115,7 +116,7 @@
       "settings": {
         "media_type_1": "image",
         "image_1": "shopify://shop_images/hero.jpg",
-        "image_border_radius": 0,
+        "image_border_radius": 61,
         "media_type_2": "image",
         "stack_media_on_mobile": false,
         "custom_mobile_media": false,
@@ -133,7 +134,7 @@
         "gap": 24,
         "section_width": "page-width",
         "section_height": "custom",
-        "section_height_custom": 70,
+        "section_height_custom": 66,
         "color_scheme": "scheme-5",
         "toggle_overlay": true,
         "overlay_color": "#12121266",
@@ -147,10 +148,9 @@
     },
     "hero_atmosfera_ALAf3q": {
       "type": "hero-atmosfera",
-      "disabled": true,
       "name": "Hero atmosfera",
       "settings": {
-        "height": "media",
+        "height": "schermo",
         "eyebrow": "",
         "heading": "La tua nuova routine sarà <strong>dormire bene</strong>",
         "text": "<p>Materassi pensati per il riposo vero: prova 100 notti, reso gratuito, garanzia 10 anni.</p>",
@@ -158,12 +158,11 @@
         "button_link": "",
         "button_2_label": "Fai il quiz",
         "button_2_link": "",
-        "height": "schermo",
-        "image": "shopify://shop_images/pnggmmmaa.png",
-        "scene_width": 100,
-        "scene_height": 48,
-        "cycle_seconds": 10,
-        "cloud_count": 5,
+        "image": "shopify://shop_images/heroscontornatoconcomodo.png",
+        "scene_width": 70,
+        "scene_height": 62,
+        "cycle_seconds": 19,
+        "cloud_count": 2,
         "show_stars": true,
         "show_haze": true,
         "haze_color": "#f4efe8",
@@ -1849,6 +1848,9 @@
             "show_sample_reviews": true,
             "reviews_selection": "all",
             "products": [],
+            "filter_pinned": false,
+            "filter_featured": false,
+            "filter_custom_tags": "",
             "star_rating": "all",
             "show_review_media": true,
             "display_order": "media_first",
