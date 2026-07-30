@@ -1,0 +1,775 @@
+{%- comment -%}
+  FILTRI LAB (test) — griglia collezione con filtri client-side basati su
+  tag e metafield `custom.comparison` dei materassi: pill per la tipologia
+  di comfort, slider per rigidità, freschezza e prezzo.
+
+  Pensata per il template collection.test-filtri: filtra le card già
+  renderizzate senza ricaricare la pagina, quindi funziona senza
+  configurare Search & Discovery. Da usare su collezioni piccole
+  (viene paginata a 50 prodotti).
+{%- endcomment -%}
+
+{%- liquid
+  assign ss = section.settings
+
+  assign min_price_all = 0
+  assign max_price_all = 0
+  assign feels = '|SEP|'
+  assign feel_count = 0
+
+  for product in collection.products limit: 50
+    assign p_min = product.price_min | divided_by: 100.0
+    if min_price_all == 0 or p_min < min_price_all
+      assign min_price_all = p_min
+    endif
+    if p_min > max_price_all
+      assign max_price_all = p_min
+    endif
+
+    assign spec = product.metafields.custom.comparison.value
+    assign feel = spec.feel_title | default: spec.firmness_label
+    if feel != blank
+      assign feel_token = '|SEP|' | append: feel | append: '|SEP|'
+      unless feels contains feel_token
+        assign feels = feels | append: feel | append: '|SEP|'
+        assign feel_count = feel_count | plus: 1
+      endunless
+    endif
+  endfor
+
+  assign feel_list = feels | split: '|SEP|'
+
+  assign price_floor = min_price_all | divided_by: 10.0 | floor | times: 10
+  assign price_ceil = max_price_all | divided_by: 10.0 | ceil | times: 10
+-%}
+
+<div class="section-background color-{{ ss.color_scheme }}"></div>
+<div
+  class="section section--page-width color-{{ ss.color_scheme }} flab spacing-style"
+  style="{% render 'spacing-style', settings: ss %}"
+  data-flab
+  {{ section.shopify_attributes }}
+>
+  {%- if ss.heading != blank or ss.subheading != blank -%}
+    <div class="flab__head">
+      {%- if ss.heading != blank -%}
+        <h2 class="flab__heading h3">{{ ss.heading }}</h2>
+      {%- endif -%}
+      {%- if ss.subheading != blank -%}
+        <p class="flab__subheading">{{ ss.subheading }}</p>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="flab__bar">
+    {%- if ss.enable_feel_pills and feel_count > 1 -%}
+      <div class="flab__group flab__group--pills">
+        {%- if ss.feel_label != blank -%}
+          <span class="flab__label">{{ ss.feel_label }}</span>
+        {%- endif -%}
+        <div class="flab__pills" role="group" aria-label="{{ ss.feel_label | default: 'Tipologia' | escape }}">
+          <button type="button" class="flab__pill flab__pill--active" data-feel-pill="" aria-pressed="true">
+            Tutti
+          </button>
+          {%- for feel in feel_list -%}
+            {%- if feel == blank -%}{%- continue -%}{%- endif -%}
+            <button type="button" class="flab__pill" data-feel-pill="{{ feel | escape }}" aria-pressed="false">
+              {{ feel }}
+            </button>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    <div class="flab__sliders">
+      {%- if ss.enable_firmness -%}
+        <div class="flab__group">
+          <span class="flab__label">
+            {{ ss.firmness_label | default: 'Rigidità' }}
+            <output class="flab__value" data-firmness-value>Tutte</output>
+          </span>
+          <div class="flab__range flab__range--dual" data-dual style="--lo: 0%; --hi: 100%;">
+            <div class="flab__range-track" aria-hidden="true"></div>
+            <input type="range" min="0" max="100" step="5" value="0" data-firmness-min aria-label="{{ ss.firmness_label | default: 'Rigidità' | escape }} minima">
+            <input type="range" min="0" max="100" step="5" value="100" data-firmness-max aria-label="{{ ss.firmness_label | default: 'Rigidità' | escape }} massima">
+          </div>
+          <div class="flab__range-ends" aria-hidden="true">
+            <span>{{ ss.firmness_min_label | default: 'Morbido' }}</span>
+            <span>{{ ss.firmness_max_label | default: 'Rigido' }}</span>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if ss.enable_cooling -%}
+        <div class="flab__group">
+          <span class="flab__label">
+            {{ ss.cooling_label | default: 'Freschezza minima' }}
+            <output class="flab__value" data-cooling-value>Qualsiasi</output>
+          </span>
+          <div class="flab__range" style="--hi: 0%;">
+            <div class="flab__range-track" aria-hidden="true"></div>
+            <input type="range" min="0" max="100" step="5" value="0" data-cooling-min aria-label="{{ ss.cooling_label | default: 'Freschezza minima' | escape }}">
+          </div>
+          <div class="flab__range-ends" aria-hidden="true">
+            <span>Qualsiasi</span>
+            <span>Molto fresco</span>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if ss.enable_price and price_ceil > price_floor -%}
+        <div class="flab__group">
+          <span class="flab__label">
+            {{ ss.price_label | default: 'Prezzo fino a' }}
+            <output class="flab__value" data-price-value>{{ price_ceil | round }} €</output>
+          </span>
+          <div class="flab__range" style="--hi: 100%;">
+            <div class="flab__range-track" aria-hidden="true"></div>
+            <input
+              type="range"
+              min="{{ price_floor | round }}"
+              max="{{ price_ceil | round }}"
+              step="10"
+              value="{{ price_ceil | round }}"
+              data-price-max
+              aria-label="{{ ss.price_label | default: 'Prezzo fino a' | escape }}"
+            >
+          </div>
+          <div class="flab__range-ends" aria-hidden="true">
+            <span>{{ price_floor | round }} €</span>
+            <span>{{ price_ceil | round }} €</span>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="flab__meta">
+      <span class="flab__count"><strong data-count>0</strong> <span data-count-word>materassi</span></span>
+      <button type="button" class="flab__reset button-unstyled" data-reset hidden>
+        Azzera i filtri
+      </button>
+    </div>
+  </div>
+
+  {%- paginate collection.products by 50 -%}
+    <ul class="flab__grid" role="list">
+      {%- for product in collection.products -%}
+        {%- liquid
+          assign spec = product.metafields.custom.comparison.value
+          assign feel = spec.feel_title | default: spec.firmness_label
+          assign p_min = product.price_min | divided_by: 100.0 | round
+        -%}
+        <li
+          class="flab__item"
+          data-item
+          data-feel="{{ feel | escape }}"
+          data-firmness="{{ spec.firmness_value }}"
+          data-cooling="{{ spec.cooling_value }}"
+          data-support="{{ spec.support_value }}"
+          data-price="{{ p_min }}"
+        >
+          {% # theme-check-disable %}
+          {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: product %}
+          {% # theme-check-enable %}
+        </li>
+      {%- endfor -%}
+    </ul>
+  {%- endpaginate -%}
+
+  <div class="flab__empty" data-empty hidden>
+    <p class="flab__empty-title">{{ ss.empty_title | default: 'Nessun materasso con questi filtri' }}</p>
+    <p class="flab__empty-text">{{ ss.empty_text | default: 'Prova ad allargare la ricerca, oppure azzera i filtri.' }}</p>
+    <button type="button" class="button button-secondary" data-reset>Azzera i filtri</button>
+  </div>
+</div>
+
+{% stylesheet %}
+  .flab {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-lg);
+  }
+
+  .flab__head {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .flab__heading {
+    margin: 0;
+  }
+
+  .flab__subheading {
+    margin: 0;
+    color: var(--color-foreground-muted);
+  }
+
+  /* ---- Barra filtri ---- */
+  .flab__bar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+    padding: var(--padding-lg);
+    border: 1px solid rgb(var(--color-foreground-rgb) / 0.12);
+    border-radius: 24px;
+    background-color: rgb(var(--color-foreground-rgb) / 0.03);
+  }
+
+  .flab__label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--gap-sm);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-foreground-muted);
+  }
+
+  .flab__value {
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: normal;
+    color: var(--color-foreground);
+  }
+
+  /* Segmented pills, come lo screenshot di riferimento */
+  .flab__group--pills {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .flab__pills {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    width: fit-content;
+    max-width: 100%;
+    padding: 4px;
+    border-radius: 100vmax;
+    background-color: rgb(var(--color-foreground-rgb) / 0.08);
+  }
+
+  .flab__pill {
+    border: none;
+    background: transparent;
+    color: var(--color-foreground);
+    font: inherit;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    padding: 0.5em 1.1em;
+    border-radius: 100vmax;
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+      background-color var(--animation-speed) var(--animation-easing),
+      color var(--animation-speed) var(--animation-easing);
+  }
+
+  .flab__pill:hover {
+    background-color: rgb(var(--color-foreground-rgb) / 0.08);
+  }
+
+  .flab__pill--active,
+  .flab__pill--active:hover {
+    background-color: var(--color-foreground);
+    color: var(--color-background);
+  }
+
+  /* ---- Slider ---- */
+  .flab__sliders {
+    display: grid;
+    gap: var(--gap-lg);
+
+    @media screen and (min-width: 750px) {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--gap-xl);
+    }
+  }
+
+  .flab__group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .flab__range {
+    position: relative;
+    height: 24px;
+  }
+
+  .flab__range-track {
+    position: absolute;
+    inset-inline: 0;
+    top: 50%;
+    height: 4px;
+    transform: translateY(-50%);
+    border-radius: 100vmax;
+    background-color: rgb(var(--color-foreground-rgb) / 0.15);
+  }
+
+  /* Segmento attivo: da --lo a --hi per il dual, da 0 a --hi per il singolo */
+  .flab__range-track::before {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    left: var(--lo, 0%);
+    right: calc(100% - var(--hi, 100%));
+    border-radius: inherit;
+    background-color: var(--color-foreground);
+  }
+
+  .flab__range input[type='range'] {
+    -webkit-appearance: none;
+    appearance: none;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background: transparent;
+    pointer-events: none;
+  }
+
+  .flab__range input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    pointer-events: auto;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--color-background);
+    border: 2px solid var(--color-foreground);
+    box-shadow: 0 1px 4px rgb(0 0 0 / 0.15);
+    cursor: grab;
+  }
+
+  .flab__range input[type='range']::-moz-range-thumb {
+    pointer-events: auto;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--color-background);
+    border: 2px solid var(--color-foreground);
+    box-shadow: 0 1px 4px rgb(0 0 0 / 0.15);
+    cursor: grab;
+  }
+
+  .flab__range input[type='range']:active::-webkit-slider-thumb {
+    cursor: grabbing;
+  }
+
+  .flab__range-ends {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--color-foreground-muted);
+  }
+
+  /* ---- Contatore e reset ---- */
+  .flab__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--gap-md);
+    border-top: 1px solid rgb(var(--color-foreground-rgb) / 0.1);
+    padding-block-start: var(--padding-sm);
+  }
+
+  .flab__count {
+    font-size: 0.9375rem;
+    color: var(--color-foreground-muted);
+  }
+
+  .flab__count strong {
+    color: var(--color-foreground);
+  }
+
+  .flab__reset {
+    font-size: 0.9375rem;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    color: var(--color-foreground);
+  }
+
+  /* ---- Griglia ---- */
+  .flab__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap-lg);
+
+    @media screen and (min-width: 750px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media screen and (min-width: 750px) and (max-width: 1100px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .flab__item {
+    min-width: 0;
+    animation: flab-item-in 320ms var(--animation-easing) both;
+  }
+
+  .flab__item[hidden] {
+    display: none;
+  }
+
+  @keyframes flab-item-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px) scale(0.985);
+    }
+
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flab__item {
+      animation: none;
+    }
+  }
+
+  /* ---- Stato vuoto ---- */
+  .flab__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap-sm);
+    text-align: center;
+    padding: var(--padding-3xl) var(--padding-lg);
+    border: 1px dashed rgb(var(--color-foreground-rgb) / 0.2);
+    border-radius: 24px;
+  }
+
+  .flab__empty[hidden] {
+    display: none;
+  }
+
+  .flab__empty-title {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.125rem;
+  }
+
+  .flab__empty-text {
+    margin: 0;
+    color: var(--color-foreground-muted);
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  document.querySelectorAll('[data-flab]').forEach((root) => {
+    if (root.dataset.flabInit) return;
+    root.dataset.flabInit = 'true';
+
+    const items = Array.from(root.querySelectorAll('[data-item]'));
+    const pills = Array.from(root.querySelectorAll('[data-feel-pill]'));
+    const firmnessMin = root.querySelector('[data-firmness-min]');
+    const firmnessMax = root.querySelector('[data-firmness-max]');
+    const coolingMin = root.querySelector('[data-cooling-min]');
+    const priceMax = root.querySelector('[data-price-max]');
+    const countEl = root.querySelector('[data-count]');
+    const countWordEl = root.querySelector('[data-count-word]');
+    const emptyEl = root.querySelector('[data-empty]');
+    const resetButtons = Array.from(root.querySelectorAll('[data-reset]'));
+
+    const state = { feel: '' };
+
+    const num = (value) => {
+      const parsed = parseFloat(value);
+      return Number.isFinite(parsed) ? parsed : null;
+    };
+
+    const isDefault = () => {
+      if (state.feel) return false;
+      if (firmnessMin && (num(firmnessMin.value) > num(firmnessMin.min) || num(firmnessMax.value) < num(firmnessMax.max))) return false;
+      if (coolingMin && num(coolingMin.value) > num(coolingMin.min)) return false;
+      if (priceMax && num(priceMax.value) < num(priceMax.max)) return false;
+      return true;
+    };
+
+    const syncRangeVisuals = () => {
+      if (firmnessMin && firmnessMax) {
+        // I due cursori non possono incrociarsi
+        if (num(firmnessMin.value) > num(firmnessMax.value)) {
+          firmnessMin.value = firmnessMax.value;
+        }
+        const wrap = firmnessMin.closest('.flab__range');
+        wrap.style.setProperty('--lo', `${firmnessMin.value}%`);
+        wrap.style.setProperty('--hi', `${firmnessMax.value}%`);
+        const output = root.querySelector('[data-firmness-value]');
+        if (output) {
+          const lo = num(firmnessMin.value);
+          const hi = num(firmnessMax.value);
+          output.textContent = lo === 0 && hi === 100 ? 'Tutte' : `${lo}–${hi}`;
+        }
+      }
+      if (coolingMin) {
+        const wrap = coolingMin.closest('.flab__range');
+        wrap.style.setProperty('--hi', `${coolingMin.value}%`);
+        const output = root.querySelector('[data-cooling-value]');
+        if (output) {
+          output.textContent = num(coolingMin.value) === 0 ? 'Qualsiasi' : `≥ ${coolingMin.value}`;
+        }
+      }
+      if (priceMax) {
+        const wrap = priceMax.closest('.flab__range');
+        const min = num(priceMax.min);
+        const max = num(priceMax.max);
+        const percent = max > min ? ((num(priceMax.value) - min) / (max - min)) * 100 : 100;
+        wrap.style.setProperty('--hi', `${percent}%`);
+        const output = root.querySelector('[data-price-value]');
+        if (output) output.textContent = `${priceMax.value} €`;
+      }
+    };
+
+    const matches = (item) => {
+      const data = item.dataset;
+      if (state.feel && data.feel !== state.feel) return false;
+
+      const firmness = num(data.firmness);
+      if (firmnessMin && firmness !== null) {
+        if (firmness < num(firmnessMin.value) || firmness > num(firmnessMax.value)) return false;
+      }
+
+      const cooling = num(data.cooling);
+      if (coolingMin && cooling !== null && cooling < num(coolingMin.value)) return false;
+
+      const price = num(data.price);
+      if (priceMax && price !== null && price > num(priceMax.value)) return false;
+
+      return true;
+    };
+
+    const apply = () => {
+      syncRangeVisuals();
+
+      let visible = 0;
+      items.forEach((item) => {
+        const show = matches(item);
+        if (show) {
+          if (item.hidden) {
+            item.hidden = false;
+            // riparte la piccola animazione di ingresso
+            item.style.animation = 'none';
+            void item.offsetWidth;
+            item.style.animation = '';
+          }
+          visible += 1;
+        } else {
+          item.hidden = true;
+        }
+      });
+
+      if (countEl) countEl.textContent = visible;
+      if (countWordEl) countWordEl.textContent = visible === 1 ? 'materasso' : 'materassi';
+      if (emptyEl) emptyEl.hidden = visible > 0;
+
+      const defaults = isDefault();
+      resetButtons.forEach((button) => {
+        if (button.closest('.flab__meta')) button.hidden = defaults;
+      });
+    };
+
+    pills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        state.feel = pill.dataset.feelPill;
+        pills.forEach((p) => {
+          const active = p === pill;
+          p.classList.toggle('flab__pill--active', active);
+          p.setAttribute('aria-pressed', String(active));
+        });
+        apply();
+      });
+    });
+
+    [firmnessMin, firmnessMax, coolingMin, priceMax].forEach((input) => {
+      if (input) input.addEventListener('input', apply);
+    });
+
+    resetButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        state.feel = '';
+        pills.forEach((p) => {
+          const active = p.dataset.feelPill === '';
+          p.classList.toggle('flab__pill--active', active);
+          p.setAttribute('aria-pressed', String(active));
+        });
+        if (firmnessMin) firmnessMin.value = firmnessMin.min;
+        if (firmnessMax) firmnessMax.value = firmnessMax.max;
+        if (coolingMin) coolingMin.value = coolingMin.min;
+        if (priceMax) priceMax.value = priceMax.max;
+        apply();
+      });
+    });
+
+    apply();
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Filtri lab (test)",
+  "class": "section-wrapper",
+  "enabled_on": {
+    "templates": ["collection"]
+  },
+  "blocks": [
+    {
+      "type": "_product-card"
+    }
+  ],
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Sezione di test: filtra le card della collezione direttamente nel browser usando i metafield custom.comparison (rigidità, freschezza) e il prezzo. Massimo 50 prodotti."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titolo",
+      "default": "Trova il tuo materasso"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Sottotitolo",
+      "default": "Filtra per comfort, freschezza e prezzo: la griglia si aggiorna subito."
+    },
+    {
+      "type": "header",
+      "content": "Filtri attivi"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_feel_pills",
+      "label": "Pill tipologia di comfort",
+      "info": "Le voci vengono create dai valori «feel» dei materassi in collezione.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "feel_label",
+      "label": "Etichetta pill",
+      "default": "Comfort"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_firmness",
+      "label": "Slider rigidità",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "firmness_label",
+      "label": "Etichetta rigidità",
+      "default": "Rigidità"
+    },
+    {
+      "type": "text",
+      "id": "firmness_min_label",
+      "label": "Estremo sinistro",
+      "default": "Morbido"
+    },
+    {
+      "type": "text",
+      "id": "firmness_max_label",
+      "label": "Estremo destro",
+      "default": "Rigido"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_cooling",
+      "label": "Slider freschezza",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "cooling_label",
+      "label": "Etichetta freschezza",
+      "default": "Freschezza minima"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_price",
+      "label": "Slider prezzo",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "price_label",
+      "label": "Etichetta prezzo",
+      "default": "Prezzo fino a"
+    },
+    {
+      "type": "header",
+      "content": "Stato vuoto"
+    },
+    {
+      "type": "text",
+      "id": "empty_title",
+      "label": "Titolo",
+      "default": "Nessun materasso con questi filtri"
+    },
+    {
+      "type": "text",
+      "id": "empty_text",
+      "label": "Testo",
+      "default": "Prova ad allargare la ricerca, oppure azzera i filtri."
+    },
+    {
+      "type": "header",
+      "content": "Stile"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "Filtri lab (test)",
+      "category": "t:categories.collection"
+    }
+  ]
+}
+{% endschema %}

@@ -31,6 +31,8 @@
           "static": true,
           "settings": {
             "menu": "main-menu",
+            "highlight_link_title": "Esplora",
+            "highlight_show_icon": true,
             "color_scheme": "",
             "type_font_primary_size": "1rem",
             "menu_font_style": "inverse",

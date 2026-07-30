@@ -16,7 +16,7 @@
           "type": "text",
           "name": "t:names.title",
           "settings": {
-            "text": "<h1>{{ closest.page.title }}</h1>",
+            "text": "<h1>Hai bisogno di aiuto?</h1>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "center",
@@ -43,7 +43,7 @@
           "type": "text",
           "name": "t:names.content",
           "settings": {
-            "text": "{{ closest.page.content }}",
+            "text": "<p>Siamo qui per te. Dai un’occhiata alle risposte rapide oppure scegli il canale che preferisci: ti rispondiamo di solito entro un giorno lavorativo.</p>",
             "width": "100%",
             "max_width": "narrow",
             "alignment": "center",
@@ -79,9 +79,529 @@
         "padding-block-end": 0
       }
     },
+    "self_service": {
+      "type": "vuoi-parlare-con-noi",
+      "blocks": {
+        "card_ordine": {
+          "type": "card",
+          "settings": {
+            "icon": "box",
+            "title": "Dov’è il mio ordine?",
+            "text": "<p>Controlla lo stato della spedizione e i tempi di consegna previsti dal tuo account.</p>",
+            "link": "/account",
+            "open_in_new_tab": false
+          }
+        },
+        "card_reso": {
+          "type": "card",
+          "settings": {
+            "icon": "return",
+            "title": "Vuoi fare un reso?",
+            "text": "<p>Le 100 notti di prova, il ritiro gratuito a casa e il rimborso completo: ecco come funziona.</p>",
+            "link": "/pages/resi",
+            "open_in_new_tab": false
+          }
+        },
+        "card_garanzia": {
+          "type": "card",
+          "settings": {
+            "icon": "shield",
+            "title": "Domande sul prodotto?",
+            "text": "<p>Garanzia 10 anni, rodaggio del materasso e consigli per prendertene cura.</p>",
+            "link": "/pages/garanzie",
+            "open_in_new_tab": false
+          }
+        }
+      },
+      "block_order": [
+        "card_ordine",
+        "card_reso",
+        "card_garanzia"
+      ],
+      "name": "Risposte rapide",
+      "settings": {
+        "heading": "Risposte rapide",
+        "subheading": "<p>Forse la tua domanda ha già una risposta: parti da qui.</p>",
+        "corner_radius": 24,
+        "section_width": "page-width",
+        "color_scheme": "scheme-2",
+        "padding-block-start": 24,
+        "padding-block-end": 24,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
+      }
+    },
+    "channels": {
+      "type": "vuoi-parlare-con-noi",
+      "blocks": {
+        "card_phone": {
+          "type": "card",
+          "settings": {
+            "icon": "phone",
+            "title": "Chiamaci",
+            "text": "<p>Dal lunedì al venerdì, 9:00–18:00. Siamo qui per aiutarti a dormire meglio.</p>",
+            "link": "",
+            "open_in_new_tab": false
+          }
+        },
+        "card_chat": {
+          "type": "card",
+          "settings": {
+            "icon": "chat",
+            "title": "Chatta con noi",
+            "text": "<p>Apri la chat e ottieni subito l’assistenza di cui hai bisogno, senza perdite di tempo.</p>",
+            "link": "",
+            "open_in_new_tab": false
+          }
+        },
+        "card_email": {
+          "type": "card",
+          "settings": {
+            "icon": "email",
+            "title": "Scrivici",
+            "text": "<p>Compila il modulo qui sotto: ti rispondiamo prima che tu possa dire «fate Concomodo».</p>",
+            "link": "",
+            "open_in_new_tab": false
+          }
+        }
+      },
+      "block_order": [
+        "card_phone",
+        "card_chat",
+        "card_email"
+      ],
+      "name": "Vorresti parlare con noi?",
+      "settings": {
+        "heading": "Vorresti parlare con noi?",
+        "subheading": "<p>Scegli il canale che preferisci: la qualità della risposta non cambia.</p>",
+        "corner_radius": 24,
+        "section_width": "page-width",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 48,
+        "padding-block-end": 48,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
+      }
+    },
+    "faq": {
+      "type": "section",
+      "blocks": {
+        "faq_wrap": {
+          "type": "group",
+          "name": "t:names.group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 40,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "faq_h": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<h2>Domande frequenti</h2>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h2",
+                "font": "var(--font-body--family)",
+                "weight": "",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "faq_body": {
+              "type": "group",
+              "name": "t:names.group",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 12,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "background_media": "none",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "link": "",
+                "open_in_new_tab": false,
+                "placeholder": "",
+                "padding-block-start": 40,
+                "padding-block-end": 40,
+                "padding-inline-start": 30,
+                "padding-inline-end": 30
+              },
+              "blocks": {
+                "faq_acc": {
+                  "type": "accordion",
+                  "name": "t:names.accordion",
+                  "settings": {
+                    "icon": "caret",
+                    "dividers": true,
+                    "type_preset": "h4",
+                    "inherit_color_scheme": true,
+                    "color_scheme": "",
+                    "border": "none",
+                    "border_width": 1,
+                    "border_opacity": 100,
+                    "border_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {
+                    "faq_r1": {
+                      "type": "_accordion-row",
+                      "settings": {
+                        "heading": "Come faccio a sapere dove si trova il mio ordine?",
+                        "open_by_default": true,
+                        "icon": "none",
+                        "width": 30
+                      },
+                      "blocks": {
+                        "faq_r1_t": {
+                          "type": "text",
+                          "settings": {
+                            "text": "<p>Appena l’ordine parte ti inviamo un’email con il link di tracciamento. Puoi controllare lo stato in ogni momento anche dal tuo account.</p>",
+                            "width": "100%",
+                            "max_width": "none",
+                            "alignment": "left",
+                            "type_preset": "rte",
+                            "font": "var(--font-body--family)",
+                            "weight": "",
+                            "font_size": "1rem",
+                            "line_height": "normal",
+                            "letter_spacing": "normal",
+                            "case": "none",
+                            "wrap": "pretty",
+                            "color": "var(--color-foreground)",
+                            "background": false,
+                            "background_color": "#00000026",
+                            "corner_radius": 0,
+                            "padding-block-start": 0,
+                            "padding-block-end": 0,
+                            "padding-inline-start": 0,
+                            "padding-inline-end": 0
+                          },
+                          "blocks": {}
+                        }
+                      },
+                      "block_order": [
+                        "faq_r1_t"
+                      ]
+                    },
+                    "faq_r2": {
+                      "type": "_accordion-row",
+                      "settings": {
+                        "heading": "Come funzionano le 100 notti di prova?",
+                        "open_by_default": false,
+                        "icon": "none",
+                        "width": 30
+                      },
+                      "blocks": {
+                        "faq_r2_t": {
+                          "type": "text",
+                          "settings": {
+                            "text": "<p>Acquisti il tuo materasso e lo provi a casa fino a 100 notti. Se non ti convince, organizziamo il ritiro gratuito e ti rimborsiamo l’intero importo.</p>",
+                            "width": "100%",
+                            "max_width": "none",
+                            "alignment": "left",
+                            "type_preset": "rte",
+                            "font": "var(--font-body--family)",
+                            "weight": "",
+                            "font_size": "1rem",
+                            "line_height": "normal",
+                            "letter_spacing": "normal",
+                            "case": "none",
+                            "wrap": "pretty",
+                            "color": "var(--color-foreground)",
+                            "background": false,
+                            "background_color": "#00000026",
+                            "corner_radius": 0,
+                            "padding-block-start": 0,
+                            "padding-block-end": 0,
+                            "padding-inline-start": 0,
+                            "padding-inline-end": 0
+                          },
+                          "blocks": {}
+                        }
+                      },
+                      "block_order": [
+                        "faq_r2_t"
+                      ]
+                    },
+                    "faq_r3": {
+                      "type": "_accordion-row",
+                      "settings": {
+                        "heading": "Come attivo la garanzia di 10 anni?",
+                        "open_by_default": false,
+                        "icon": "none",
+                        "width": 30
+                      },
+                      "blocks": {
+                        "faq_r3_t": {
+                          "type": "text",
+                          "settings": {
+                            "text": "<p>Non serve nessuna registrazione: basta il numero d’ordine. Se noti un difetto, scrivici dal modulo in fondo alla pagina e ce ne occupiamo noi.</p>",
+                            "width": "100%",
+                            "max_width": "none",
+                            "alignment": "left",
+                            "type_preset": "rte",
+                            "font": "var(--font-body--family)",
+                            "weight": "",
+                            "font_size": "1rem",
+                            "line_height": "normal",
+                            "letter_spacing": "normal",
+                            "case": "none",
+                            "wrap": "pretty",
+                            "color": "var(--color-foreground)",
+                            "background": false,
+                            "background_color": "#00000026",
+                            "corner_radius": 0,
+                            "padding-block-start": 0,
+                            "padding-block-end": 0,
+                            "padding-inline-start": 0,
+                            "padding-inline-end": 0
+                          },
+                          "blocks": {}
+                        }
+                      },
+                      "block_order": [
+                        "faq_r3_t"
+                      ]
+                    },
+                    "faq_r4": {
+                      "type": "_accordion-row",
+                      "settings": {
+                        "heading": "La consegna è gratuita?",
+                        "open_by_default": false,
+                        "icon": "none",
+                        "width": 30
+                      },
+                      "blocks": {
+                        "faq_r4_t": {
+                          "type": "text",
+                          "settings": {
+                            "text": "<p>Sì. La spedizione è sempre gratuita in tutta Italia e i materassi arrivano compressi in scatola, facili da portare in camera.</p>",
+                            "width": "100%",
+                            "max_width": "none",
+                            "alignment": "left",
+                            "type_preset": "rte",
+                            "font": "var(--font-body--family)",
+                            "weight": "",
+                            "font_size": "1rem",
+                            "line_height": "normal",
+                            "letter_spacing": "normal",
+                            "case": "none",
+                            "wrap": "pretty",
+                            "color": "var(--color-foreground)",
+                            "background": false,
+                            "background_color": "#00000026",
+                            "corner_radius": 0,
+                            "padding-block-start": 0,
+                            "padding-block-end": 0,
+                            "padding-inline-start": 0,
+                            "padding-inline-end": 0
+                          },
+                          "blocks": {}
+                        }
+                      },
+                      "block_order": [
+                        "faq_r4_t"
+                      ]
+                    },
+                    "faq_r5": {
+                      "type": "_accordion-row",
+                      "settings": {
+                        "heading": "Posso pagare a rate?",
+                        "open_by_default": false,
+                        "icon": "none",
+                        "width": 30
+                      },
+                      "blocks": {
+                        "faq_r5_t": {
+                          "type": "text",
+                          "settings": {
+                            "text": "<p>Sì, al checkout puoi scegliere il pagamento in 3, 4 o 6 rate senza interessi con Klarna o PagoLight.</p>",
+                            "width": "100%",
+                            "max_width": "none",
+                            "alignment": "left",
+                            "type_preset": "rte",
+                            "font": "var(--font-body--family)",
+                            "weight": "",
+                            "font_size": "1rem",
+                            "line_height": "normal",
+                            "letter_spacing": "normal",
+                            "case": "none",
+                            "wrap": "pretty",
+                            "color": "var(--color-foreground)",
+                            "background": false,
+                            "background_color": "#00000026",
+                            "corner_radius": 0,
+                            "padding-block-start": 0,
+                            "padding-block-end": 0,
+                            "padding-inline-start": 0,
+                            "padding-inline-end": 0
+                          },
+                          "blocks": {}
+                        }
+                      },
+                      "block_order": [
+                        "faq_r5_t"
+                      ]
+                    }
+                  },
+                  "block_order": [
+                    "faq_r1",
+                    "faq_r2",
+                    "faq_r3",
+                    "faq_r4",
+                    "faq_r5"
+                  ]
+                }
+              },
+              "block_order": [
+                "faq_acc"
+              ]
+            }
+          },
+          "block_order": [
+            "faq_h",
+            "faq_body"
+          ]
+        }
+      },
+      "block_order": [
+        "faq_wrap"
+      ],
+      "custom_css": [
+        "> div {max-width: 1000px; margin: auto;}",
+        "summary .svg-wrapper {width: 24px;}",
+        ".accordion .details__header {padding: 30px 0;}",
+        ".accordion--dividers accordion-custom:last-child .details {border-block-end: none;}",
+        ".accordion--dividers accordion-custom:first-child .details {border-block-start: none;}"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 20,
+        "section_width": "full-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-2",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 80,
+        "padding-block-end": 80
+      }
+    },
     "form": {
       "type": "section",
       "blocks": {
+        "form_heading": {
+          "type": "text",
+          "name": "Titolo modulo",
+          "settings": {
+            "text": "<h2>Non hai trovato la risposta? Scrivici</h2>",
+            "width": "100%",
+            "max_width": "narrow",
+            "alignment": "center",
+            "type_preset": "h3",
+            "font": "var(--font-primary--family)",
+            "weight": "",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
         "contact_form_UwiCkQ": {
           "type": "contact-form",
           "settings": {
@@ -112,10 +632,32 @@
             }
           },
           "block_order": []
+        },
+        "company_legal_info": {
+          "type": "company-legal-info",
+          "name": "Dati azienda",
+          "settings": {
+            "layout": "stacked",
+            "show_legal_name": true,
+            "show_vat": true,
+            "show_rea": true,
+            "show_pec": true,
+            "alignment": "center",
+            "gap": 4,
+            "font_size": "0.875rem",
+            "case": "none",
+            "padding-block-start": 24,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
         }
       },
       "block_order": [
-        "contact_form_UwiCkQ"
+        "form_heading",
+        "contact_form_UwiCkQ",
+        "company_legal_info"
       ],
       "name": "t:names.contact_form",
       "settings": {
@@ -149,6 +691,9 @@
   },
   "order": [
     "main",
+    "self_service",
+    "channels",
+    "faq",
     "form"
   ]
 }

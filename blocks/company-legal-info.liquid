@@ -1,0 +1,223 @@
+{% assign block_settings = block.settings %}
+<div
+  class="
+    company-legal-info-block
+    custom-typography
+    {% if block_settings.font_size != "" %}custom-font-size{% endif %}
+  "
+  style="
+    {% render 'spacing-padding', settings: block_settings %}
+    {% render 'typography-style', preset: 'custom', settings: block_settings %}
+    --company-legal-info-align: {{ block_settings.alignment }};
+    --company-legal-info-gap: {{ block_settings.gap }}px;
+  "
+  {{ block.shopify_attributes }}
+>
+  {% render 'company-legal-info',
+    layout: block_settings.layout,
+    show_legal_name: block_settings.show_legal_name,
+    show_vat: block_settings.show_vat,
+    show_rea: block_settings.show_rea,
+    show_pec: block_settings.show_pec
+  %}
+</div>
+
+{% stylesheet %}
+  .company-legal-info-block {
+    width: 100%;
+    text-align: var(--company-legal-info-align, left);
+  }
+
+  .company-legal-info-block .company-legal-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--company-legal-info-gap, 4px);
+  }
+
+  .company-legal-info-block .company-legal-info--inline {
+    display: inline;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Dati azienda",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "I valori si modificano in Impostazioni tema → Dati azienda, così restano uguali ovunque siano mostrati."
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Disposizione",
+      "options": [
+        {
+          "value": "stacked",
+          "label": "Su più righe"
+        },
+        {
+          "value": "inline",
+          "label": "Su una riga"
+        }
+      ],
+      "default": "stacked"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_legal_name",
+      "label": "Mostra ragione sociale",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vat",
+      "label": "Mostra partita IVA e codice fiscale",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rea",
+      "label": "Mostra numero REA",
+      "info": "Ignorato quando la disposizione è su una riga.",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pec",
+      "label": "Mostra PEC",
+      "info": "Ignorato quando la disposizione è su una riga.",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:content.layout"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "t:settings.alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:options.left"
+        },
+        {
+          "value": "center",
+          "label": "t:options.center"
+        },
+        {
+          "value": "right",
+          "label": "t:options.right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "t:settings.gap",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "font_size",
+      "label": "t:settings.size",
+      "options": [
+        {
+          "value": "0.625rem",
+          "label": "10px"
+        },
+        {
+          "value": "0.75rem",
+          "label": "12px"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        },
+        {
+          "value": "1.125rem",
+          "label": "18px"
+        }
+      ],
+      "default": "1rem"
+    },
+    {
+      "type": "select",
+      "id": "case",
+      "label": "t:settings.case",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.default"
+        },
+        {
+          "value": "uppercase",
+          "label": "t:options.uppercase"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Dati azienda",
+      "category": "t:categories.footer"
+    }
+  ]
+}
+{% endschema %}
