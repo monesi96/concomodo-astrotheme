@@ -522,7 +522,8 @@
             "show_for": "m1",
             "title": "Topper CC Memory",
             "subtitle": "Aggiungi accoglienza al sostegno deciso delle molle",
-            "product": "",
+            "image": "shopify://shop_images/topperambientatomemory-1.png",
+            "product": "topper-memory",
             "link": ""
           }
         },
