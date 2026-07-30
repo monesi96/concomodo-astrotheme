@@ -164,7 +164,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2>Iscriviti alle nostre email</h2>",
+            "text": "<h2>Iscriviti alla nostra lista comoda</h2>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "center",
