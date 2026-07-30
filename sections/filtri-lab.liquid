@@ -184,10 +184,11 @@
 </div>
 
 {% stylesheet %}
+  /* Il root è anche .section: la griglia a 3 colonne del tema (margine |
+     contenuto | margine) crea i margini pagina, quindi niente display
+     custom qui — solo lo spazio verticale tra le righe. */
   .flab {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-lg);
+    row-gap: var(--gap-lg);
   }
 
   .flab__head {
