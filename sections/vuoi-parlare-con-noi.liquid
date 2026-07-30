@@ -2,6 +2,9 @@
 {%- capture icon_chat -%}<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 5.5h16v10H9l-4 3.5v-3.5H4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="9" cy="10.5" r="1" fill="currentColor"/><circle cx="12" cy="10.5" r="1" fill="currentColor"/><circle cx="15" cy="10.5" r="1" fill="currentColor"/></svg>{%- endcapture -%}
 {%- capture icon_email -%}<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>{%- endcapture -%}
 {%- capture icon_arrow -%}<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="m9 6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>{%- endcapture -%}
+{%- capture icon_box -%}<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 3 4 7v10l8 4 8-4V7l-8-4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m4 7 8 4 8-4M12 11v10" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>{%- endcapture -%}
+{%- capture icon_return -%}<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 5 4.5 9.5 9 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.5 9.5H15a4.5 4.5 0 0 1 0 9H8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>{%- endcapture -%}
+{%- capture icon_shield -%}<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 3 5 5.5v6c0 4.2 2.9 7.6 7 9 4.1-1.4 7-4.8 7-9v-6L12 3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m8.8 11.8 2.3 2.3 4.2-4.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>{%- endcapture -%}
 
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <div
@@ -32,6 +35,12 @@
               assign icon_markup = icon_chat
             when 'email'
               assign icon_markup = icon_email
+            when 'box'
+              assign icon_markup = icon_box
+            when 'return'
+              assign icon_markup = icon_return
+            when 'shield'
+              assign icon_markup = icon_shield
           endcase
         -%}
         {%- capture tag_open -%}
@@ -278,6 +287,9 @@
             { "value": "phone", "label": "Telefono" },
             { "value": "chat", "label": "Chat" },
             { "value": "email", "label": "Email" },
+            { "value": "box", "label": "Pacco / ordine" },
+            { "value": "return", "label": "Reso" },
+            { "value": "shield", "label": "Garanzia" },
             { "value": "none", "label": "Nessuna" }
           ],
           "default": "phone"
