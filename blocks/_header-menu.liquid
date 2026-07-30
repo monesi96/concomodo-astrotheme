@@ -9,6 +9,7 @@
 {% liquid
   assign block_settings = block.settings
   assign animation_speed = 200
+  assign highlight_title = block_settings.highlight_link_title | strip | downcase
 %}
 
 {% case variant %}
@@ -37,16 +38,26 @@
             role="list"
           >
             {% for link in block_settings.menu.links %}
+              {%- liquid
+                assign link_title_down = link.title | strip | downcase
+                assign is_highlight = false
+                if highlight_title != blank and link_title_down == highlight_title
+                  assign is_highlight = true
+                endif
+              -%}
               <li>
                 <a
                   href="{{ link.url }}"
                   id="MenuItem-{{ link.handle }}"
-                  class="menu-list__item"
+                  class="menu-list__item{% if is_highlight %} menu-list__item--highlight{% endif %}"
                   {% if link.current %}
                     aria-current="page"
                   {% endif %}
                 >
                   {{- link.title -}}
+                  {%- if is_highlight and block_settings.highlight_show_icon -%}
+                    <span class="menu-list__zzz">{{ 'icon-zzz.svg' | inline_asset_content }}</span>
+                  {%- endif -%}
                 </a>
               </li>
             {% endfor %}
@@ -82,6 +93,13 @@
 
     {% capture children %}
       {% for link in block_settings.menu.links %}
+        {%- liquid
+          assign link_title_down = link.title | strip | downcase
+          assign is_highlight = false
+          if highlight_title != blank and link_title_down == highlight_title
+            assign is_highlight = true
+          endif
+        -%}
         <li
           role="presentation"
           class="menu-list__list-item"
@@ -93,7 +111,7 @@
           <a
             href="{{ link.url }}"
             data-skip-node-update="true"
-            class="menu-list__link{% if link.active %} menu-list__link--active{% endif %}"
+            class="menu-list__link{% if link.active %} menu-list__link--active{% endif %}{% if is_highlight %} menu-list__link--highlight{% endif %}"
             {%- if link.links != blank -%}
               aria-controls="submenu-{{ forloop.index }}"
               aria-haspopup="true"
@@ -102,6 +120,9 @@
             ref="menuitem"
           >
             <span class="menu-list__link-title">{{- link.title -}}</span>
+            {%- if is_highlight and block_settings.highlight_show_icon -%}
+              <span class="menu-list__zzz">{{ 'icon-zzz.svg' | inline_asset_content }}</span>
+            {%- endif -%}
           </a>
           {%- if link.links != blank -%}
             <div class="menu-list__submenu{{ color_scheme_classes }}" ref="submenu[]">
@@ -696,6 +717,91 @@
     /* preserves the inherited grid layout when this submenu wrapper is used */
     display: contents;
   }
+
+  /* Highlighted menu item (e.g. "Esplora"): outlined pill with zzz icon */
+  .menu-list__link--highlight {
+    gap: 0.45em;
+    border: 1.5px solid rgb(var(--menu-top-level-font-color-rgb) / 0.85);
+    border-radius: 100vmax;
+    padding-inline: 1.1em;
+    min-height: calc(var(--minimum-touch-target) - 6px);
+    margin-block: auto;
+    transition:
+      background-color var(--animation-speed) var(--animation-easing),
+      color var(--animation-speed) var(--animation-easing);
+  }
+
+  .menu-list__zzz {
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.05em;
+  }
+
+  .menu-list__zzz svg {
+    width: 1em;
+    height: 1em;
+    display: block;
+  }
+
+  .menu-list__zzz svg path {
+    animation: zzz-pulse 2.6s var(--animation-easing) infinite;
+  }
+
+  .menu-list__zzz svg path:nth-child(2) {
+    animation-delay: 0.35s;
+  }
+
+  .menu-list__zzz svg path:nth-child(3) {
+    animation-delay: 0.7s;
+  }
+
+  @keyframes zzz-pulse {
+    0%,
+    100% {
+      opacity: 0.35;
+    }
+
+    30% {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .menu-list__zzz svg path {
+      animation: none;
+    }
+  }
+
+  /* Filled state on hover/focus/current — also wins over the subdued-links rule above */
+  .menu-list .menu-list__link--highlight:hover,
+  .menu-list .menu-list__link--highlight:focus,
+  .menu-list .menu-list__link--highlight.menu-list__link--active {
+    background-color: rgb(var(--menu-top-level-font-color-rgb));
+    border-color: rgb(var(--menu-top-level-font-color-rgb));
+    color: var(--color-background);
+  }
+
+  /* Keep the pill readable when a sibling item is hovered */
+  .menu-list:where(:has(.menu-list__list-item:hover)) .menu-list__link--highlight,
+  .menu-list:where(:has(.menu-list__list-item:focus-within)) .menu-list__link--highlight {
+    color: var(--menu-top-level-font-color);
+  }
+
+  .menu-list .menu-list__list-item:hover .menu-list__link--highlight,
+  .menu-list .menu-list__list-item:focus-within .menu-list__link--highlight {
+    color: var(--color-background);
+  }
+
+  /* Mobile navigation bar variant */
+  .menu-list__item--highlight {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    border: 1.5px solid currentColor;
+    border-radius: 100vmax;
+    padding-inline: 0.9em;
+    padding-block: 0.25em;
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -708,6 +814,23 @@
       "id": "menu",
       "label": "t:settings.menu",
       "default": "main-menu"
+    },
+    {
+      "type": "header",
+      "content": "Voce in evidenza"
+    },
+    {
+      "type": "text",
+      "id": "highlight_link_title",
+      "label": "Titolo della voce da evidenziare",
+      "info": "Scrivi il titolo esatto della voce di menu (es. «Esplora»). Viene mostrata come pill con bordo. Lascia vuoto per disattivare.",
+      "default": "Esplora"
+    },
+    {
+      "type": "checkbox",
+      "id": "highlight_show_icon",
+      "label": "Mostra icona zzz",
+      "default": true
     },
     {
       "type": "color_scheme",
