@@ -531,7 +531,7 @@
           "type": "cross_sell",
           "settings": {
             "show_for": "m1,m2,m3a,m3b",
-            "title": "Cuscino CC",
+            "title": "Cuscino in memory",
             "subtitle": "Completa il riposo con il supporto giusto per il collo",
             "image": "shopify://shop_images/cuscini2.png",
             "product": "cuscino-test",
