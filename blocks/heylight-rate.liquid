@@ -1,0 +1,133 @@
+{%- doc -%}
+  Rata minima HeyLight (PagoLight): mostra "Pagalo da X €/mese" calcolato
+  dividendo il prezzo della variante selezionata per il numero di rate
+  impostato in Impostazioni tema → Rate HeyLight. Sotto il prezzo minimo
+  configurato il blocco non viene mostrato.
+{%- enddoc -%}
+
+{%- liquid
+  assign hl_product = closest.product
+  assign hl_variant = hl_product.selected_or_first_available_variant
+  assign hl_price = hl_variant.price
+
+  assign hl_installments = settings.heylight_installments | default: 4
+  assign hl_installments_f = hl_installments | times: 1.0
+  assign hl_min_cents = settings.heylight_min_price | default: 0 | times: 100
+-%}
+
+{%- if hl_price > 0 and hl_price >= hl_min_cents -%}
+  {%- liquid
+    assign hl_rate = hl_price | divided_by: hl_installments_f | round | money
+    assign hl_note = block.settings.note | replace: '[n]', hl_installments
+  -%}
+  <div
+    class="heylight-rate spacing-style"
+    style="{% render 'spacing-style', settings: block.settings %}"
+    {{ block.shopify_attributes }}
+  >
+    <span class="heylight-rate__chip">{{ block.settings.brand_label }}</span>
+    <span class="heylight-rate__text">
+      {{ block.settings.text_before }}
+      <strong>{{ hl_rate }}{{ block.settings.per_month_label }}</strong>
+      {%- if hl_note != blank %}
+        <span class="heylight-rate__note">{{ hl_note }}</span>
+      {%- endif %}
+    </span>
+  </div>
+{%- elsif request.design_mode -%}
+  <div class="heylight-rate heylight-rate--placeholder" {{ block.shopify_attributes }}>
+    Rata HeyLight nascosta: il prezzo del prodotto è sotto il minimo impostato in Impostazioni tema → Rate HeyLight.
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .heylight-rate {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    width: fit-content;
+    max-width: 100%;
+    padding: 0.6rem 0.9rem;
+    border: 1px solid rgb(var(--color-foreground-rgb) / 0.15);
+    border-radius: 12px;
+    background-color: rgb(var(--color-foreground-rgb) / 0.03);
+    font-size: 0.9375rem;
+    line-height: 1.45;
+  }
+
+  .heylight-rate__chip {
+    flex-shrink: 0;
+    padding: 0.25em 0.6em;
+    border: 1px solid rgb(var(--color-foreground-rgb) / 0.25);
+    border-radius: 8px;
+    background-color: var(--color-background);
+    font-size: 0.8em;
+    font-weight: 700;
+  }
+
+  .heylight-rate__text strong {
+    font-weight: 700;
+  }
+
+  .heylight-rate__note {
+    opacity: 0.7;
+  }
+
+  .heylight-rate--placeholder {
+    border-style: dashed;
+    opacity: 0.7;
+    font-size: 0.8125rem;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Rata HeyLight",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "La rata è calcolata sul prezzo della variante selezionata. Numero di rate e prezzo minimo si impostano in Impostazioni tema → Rate HeyLight."
+    },
+    {
+      "type": "text",
+      "id": "brand_label",
+      "label": "Etichetta badge",
+      "default": "HeyLight"
+    },
+    {
+      "type": "text",
+      "id": "text_before",
+      "label": "Testo prima della rata",
+      "default": "Pagalo da"
+    },
+    {
+      "type": "text",
+      "id": "per_month_label",
+      "label": "Suffisso della rata",
+      "default": "/mese"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Nota",
+      "info": "Usa [n] come segnaposto per il numero di rate.",
+      "default": "in [n] rate, senza interessi"
+    },
+    {
+      "type": "header",
+      "content": "Spaziatura"
+    },
+    { "type": "range", "id": "padding-block-start", "label": "Sopra", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-block-end", "label": "Sotto", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-inline-start", "label": "Sinistra", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-inline-end", "label": "Destra", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 0 }
+  ],
+  "presets": [
+    {
+      "name": "Rata HeyLight",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

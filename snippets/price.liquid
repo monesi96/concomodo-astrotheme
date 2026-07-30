@@ -64,6 +64,18 @@
     assign use_currency = true
   endif
 
+  # Rata minima HeyLight nelle card (calcolata sui centesimi, prima della formattazione)
+  assign heylight_show = false
+  if is_product_card and settings.heylight_cards_enabled and product_resource != blank
+    assign heylight_base = product_resource.price_min
+    assign heylight_min_cents = settings.heylight_min_price | default: 0 | times: 100
+    if heylight_base > 0 and heylight_base >= heylight_min_cents
+      assign heylight_n = settings.heylight_installments | default: 4 | times: 1.0
+      assign heylight_rate = heylight_base | divided_by: heylight_n | round | money
+      assign heylight_show = true
+    endif
+  endif
+
   # Format all prices
   if use_currency
     assign price = price | money_with_currency
@@ -129,4 +141,8 @@
 </div>
 {%- if has_volume_pricing -%}
   <small class="volume-pricing-note">{{ 'content.volume_pricing_available' | t }}</small>
+{%- endif -%}
+{%- if heylight_show -%}
+  {%- capture heylight_rate_html -%}<strong>{{ heylight_rate }}</strong>{%- endcapture -%}
+  <small class="price__heylight">{{ settings.heylight_card_text | replace: '[rata]', heylight_rate_html }}</small>
 {%- endif -%}
