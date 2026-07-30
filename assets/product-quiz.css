@@ -811,6 +811,22 @@
     min-height: calc(100dvh - var(--header-group-height, 64px) - var(--cq-footer-gap, 48px));
   }
 
+  /* border-radius: 0 presuppone il full-bleed: senza questa regola la
+     card resterebbe nella colonna centrale, squadrata ma staccata dai
+     bordi dello schermo */
+  .cq-section > * {
+    grid-column: 1 / -1;
+  }
+
+  /* nowrap + padding 34px dentro la result card lasciano ~245px al
+     bottone: le etichette di default vengono tagliate dall'overflow
+     hidden della sezione */
+  .cq-btn {
+    padding: 14px 20px;
+    white-space: normal;
+    max-width: 100%;
+  }
+
   .cq__options--pictures {
     grid-template-columns: repeat(2, 1fr);
   }

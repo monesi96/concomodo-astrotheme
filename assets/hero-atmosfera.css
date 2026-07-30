@@ -472,8 +472,23 @@ body:has(.header[transparent]) .hero-atm__content {
     padding-block: 48px calc(var(--ha-scene-h-m, 32) * 0.5svh + 24px);
   }
 
+  /* La regola :has() fuori media query ha specificità più alta e
+     vincerebbe sul padding mobile: va ribadita qui con lo stesso
+     selettore, altrimenti sotto header trasparente restano ~150px
+     di vuoto sopra il titolo. */
+  body:has(.header[transparent]) .hero-atm__content {
+    padding-block-start: calc(var(--header-group-height, 0px) + 16px);
+  }
+
   .hero-atm__heading {
     font-size: clamp(2rem, 8.4vw, 2.6rem);
+  }
+
+  /* Le nuvole generate arrivano a 430px: su 360px diventano una fascia
+     bianca sfocata a tutta larghezza */
+  .hero-atm__cloud {
+    width: min(var(--w, 280px), 62vw);
+    height: calc(min(var(--w, 280px), 62vw) * 0.3);
   }
 
   .hero-atm__soggetto {

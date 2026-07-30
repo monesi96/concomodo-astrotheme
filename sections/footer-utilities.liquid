@@ -21,7 +21,6 @@
     flex-direction: column;
     align-items: center;
     gap: var(--gap);
-    text-wrap: nowrap;
     border-top: var(--border-width) solid var(--color-border);
     color: var(--color-foreground-muted);
 
@@ -32,6 +31,9 @@
       gap: var(--gap);
       align-items: center;
       text-align: left;
+      /* solo desktop: su mobile il copyright deve poter andare a capo,
+         altrimenti allarga la pagina e compare lo scroll orizzontale */
+      text-wrap: nowrap;
     }
   }
 

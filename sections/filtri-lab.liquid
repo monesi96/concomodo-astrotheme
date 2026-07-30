@@ -184,10 +184,11 @@
 </div>
 
 {% stylesheet %}
+  /* Il root è anche .section: la griglia a 3 colonne del tema (margine |
+     contenuto | margine) crea i margini pagina, quindi niente display
+     custom qui — solo lo spazio verticale tra le righe. */
   .flab {
-    display: flex;
-    flex-direction: column;
-    gap: var(--gap-lg);
+    row-gap: var(--gap-lg);
   }
 
   .flab__head {
@@ -361,6 +362,24 @@
 
   .flab__range input[type='range']:active::-webkit-slider-thumb {
     cursor: grabbing;
+  }
+
+  /* Su touch i thumb da 20px sono difficili da afferrare, specie i due
+     sovrapposti del range doppio */
+  @media screen and (max-width: 749px) {
+    .flab__range {
+      height: 32px;
+    }
+
+    .flab__range input[type='range']::-webkit-slider-thumb {
+      width: 26px;
+      height: 26px;
+    }
+
+    .flab__range input[type='range']::-moz-range-thumb {
+      width: 22px;
+      height: 22px;
+    }
   }
 
   .flab__range-ends {

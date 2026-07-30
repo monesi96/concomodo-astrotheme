@@ -513,6 +513,42 @@
       transition: none;
     }
   }
+
+  /* ── Solo schermi stretti: stesso design, meno costrizione.
+     Le colonne da ~135px su 360px schiacciavano titoli e CTA. ── */
+  @media screen and (max-width: 749px) {
+    .mattress-comparison__heading {
+      margin-block-end: 2rem;
+    }
+
+    /* gap identico su griglia e barra sticky, altrimenti si disallineano */
+    .mattress-comparison__grid,
+    .mattress-comparison__info-row {
+      column-gap: 0.625rem;
+    }
+
+    .mattress-comparison__head-title {
+      font-size: 1.05em;
+    }
+
+    /* la descrizione da 22 parole rendeva la barra sticky alta ~220px */
+    .mattress-comparison__head-desc {
+      display: none;
+    }
+
+    .mattress-comparison__pill {
+      font-size: 1em;
+      padding: 0.5em 0.9em;
+    }
+
+    .mattress-comparison__footer {
+      grid-column: 1 / -1;
+    }
+
+    .mattress-comparison__cta {
+      width: 100%;
+    }
+  }
 {% endstylesheet %}
 
 {% schema %}
