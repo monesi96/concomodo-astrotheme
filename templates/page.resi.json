@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "guide": {
@@ -16,14 +25,18 @@
           "type": "chapter",
           "settings": {
             "heading": "Organizziamo il ritiro a casa tua",
-            "content": "<p>Concordiamo insieme giorno e modalità del ritiro: non devi procurarti scatoloni né riportare il materasso da nessuna parte. Se possibile tienilo protetto con il suo coprimaterasso nel periodo di prova: va restituito in condizioni igieniche adeguate.</p><p>I materassi resi in buone condizioni non vengono buttati: dove possibile, vengono donati o avviati al recupero.</p>"
+            "content": "<p>Concordiamo insieme giorno e modalità del ritiro: non devi procurarti scatoloni né riportare il materasso da nessuna parte. Se possibile tienilo protetto con il suo coprimaterasso nel periodo di prova: va restituito in condizioni igieniche adeguate.</p><p>I materassi resi in buone condizioni non vengono buttati: dove possibile, vengono donati o avviati al recupero.</p>",
+            "link_label": "",
+            "link": ""
           }
         },
         "step_3": {
           "type": "chapter",
           "settings": {
             "heading": "Ricevi il rimborso completo",
-            "content": "<p>Una volta ritirato il materasso, avviamo il rimborso dell'intero importo pagato, sullo stesso metodo di pagamento dell'ordine. Nessun costo di ritiro, nessuna trattenuta, nessun buono al posto dei soldi.</p>"
+            "content": "<p>Una volta ritirato il materasso, avviamo il rimborso dell'intero importo pagato, sullo stesso metodo di pagamento dell'ordine. Nessun costo di ritiro, nessuna trattenuta, nessun buono al posto dei soldi.</p>",
+            "link_label": "",
+            "link": ""
           }
         },
         "faq_head": {
@@ -66,22 +79,204 @@
             "heading": "Provalo con comodo, decidi con calma",
             "text": "<p>100 notti a casa tua, reso gratuito e rimborso completo. L'unico rischio è dormire meglio.</p>",
             "button_label": "Scopri i materassi",
-            "button_link": "/collections/materassi"
+            "button_link": "/collections/materassi",
+            "color_scheme": "scheme-2"
           }
         }
       },
-      "block_order": ["step_1", "step_2", "step_3", "faq_head", "faq_1", "faq_2", "faq_3", "faq_4", "cta_finale"],
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "faq_head",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "cta_finale"
+      ],
       "settings": {
         "eyebrow": "Resi e rimborsi",
         "title": "Rendere un materasso non deve essere un'impresa",
         "intro": "<p>Hai 100 notti per provare il tuo materasso Concomodo a casa tua. Se non è quello giusto, il reso è semplice, gratuito e senza domande scomode: ecco come funziona, in tre passi.</p>",
         "show_toc": true,
-        "toc_title": "Come funziona"
+        "toc_title": "Come funziona",
+        "color_scheme": "",
+        "padding-block-start": 48,
+        "padding-block-end": 64
       }
     },
     "parla": {
-      "type": "vuoi-parlare-con-noi"
+      "type": "vuoi-parlare-con-noi",
+      "blocks": {
+        "card_P7DQRe": {
+          "type": "card",
+          "settings": {
+            "icon": "phone",
+            "title": "Chiamaci",
+            "text": "<p>Siamo qui per aiutarti a ritrovare il piacere di un sonno sereno e di qualità.</p>",
+            "link": "",
+            "open_in_new_tab": false
+          }
+        },
+        "card_CKPhgC": {
+          "type": "card",
+          "settings": {
+            "icon": "email",
+            "title": "Contattaci",
+            "text": "<p>Siamo qui per aiutarti a ritrovare il piacere di un sonno sereno e di qualità.</p>",
+            "link": "",
+            "open_in_new_tab": false
+          }
+        },
+        "card_D4ajGE": {
+          "type": "card",
+          "settings": {
+            "icon": "chat",
+            "title": "Scrivici",
+            "text": "<p>Siamo qui per aiutarti a ritrovare il piacere di un sonno sereno e di qualità.</p>",
+            "link": "",
+            "open_in_new_tab": false
+          }
+        }
+      },
+      "block_order": [
+        "card_P7DQRe",
+        "card_CKPhgC",
+        "card_D4ajGE"
+      ],
+      "settings": {
+        "heading": "Vuoi parlare con noi?",
+        "subheading": "<p>Parla con un esperto del sonno e trova la soluzione di riposo più adatta a te.</p>",
+        "corner_radius": 24,
+        "section_width": "page-width",
+        "color_scheme": "",
+        "padding-block-start": 48,
+        "padding-block-end": 48,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
+      }
+    },
+    "section_D9mpjM": {
+      "type": "section",
+      "blocks": {
+        "text_ULFNKW": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<h2>Iscriviti alle nostre email</h2>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "weight": "",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "text_m6NWcL": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Sii il primo a scoprire le nuove collezioni e le offerte speciali. </p>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "paragraph",
+            "font": "var(--font-body--family)",
+            "weight": "",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "email_signup_RkeA7H": {
+          "type": "email-signup",
+          "settings": {
+            "width": "custom",
+            "custom_width": 50,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "heading": "",
+            "heading_preset": "h3",
+            "border_style": "all",
+            "border_width": 1,
+            "border_radius": 100,
+            "input_type_preset": "paragraph",
+            "style_class": "button-unstyled",
+            "display_type": "arrow",
+            "label": "Iscriviti",
+            "integrated_button": true,
+            "button_type_preset": "paragraph",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_ULFNKW",
+        "text_m6NWcL",
+        "email_signup_RkeA7H"
+      ],
+      "name": "t:names.email_signup",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 16,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-2",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 40,
+        "padding-block-end": 40
+      }
     }
   },
-  "order": ["guide", "parla"]
+  "order": [
+    "guide",
+    "parla",
+    "section_D9mpjM"
+  ]
 }
