@@ -119,9 +119,15 @@
             {%- endif -%}
             ref="menuitem"
           >
-            <span class="menu-list__link-title">{{- link.title -}}</span>
-            {%- if is_highlight and block_settings.highlight_show_icon -%}
-              <span class="menu-list__zzz">{{ 'icon-zzz.svg' | inline_asset_content }}</span>
+            {%- if is_highlight -%}
+              <span class="menu-list__pill">
+                <span class="menu-list__link-title">{{- link.title -}}</span>
+                {%- if block_settings.highlight_show_icon -%}
+                  <span class="menu-list__zzz">{{ 'icon-zzz.svg' | inline_asset_content }}</span>
+                {%- endif -%}
+              </span>
+            {%- else -%}
+              <span class="menu-list__link-title">{{- link.title -}}</span>
             {%- endif -%}
           </a>
           {%- if link.links != blank -%}
@@ -718,23 +724,26 @@
     display: contents;
   }
 
-  /* Highlighted menu item (e.g. "Esplora"): outlined pill with zzz icon */
-  .menu-list__link--highlight {
+  /* Highlighted menu item (e.g. "Esplora"): outlined pill with zzz icon.
+     The pill is drawn on an inner span — never on the link itself, whose
+     box is stretched invisibly by the hover-area extension in header.liquid. */
+  .menu-list__pill {
+    display: inline-flex;
+    align-items: center;
     gap: 0.45em;
-    border: 1.5px solid rgb(var(--menu-top-level-font-color-rgb) / 0.85);
+    border: 1.5px solid currentColor;
     border-radius: 100vmax;
-    padding-inline: 1.1em;
-    min-height: calc(var(--minimum-touch-target) - 6px);
-    margin-block: auto;
+    padding: 0.35em 1em;
     transition:
       background-color var(--animation-speed) var(--animation-easing),
+      border-color var(--animation-speed) var(--animation-easing),
       color var(--animation-speed) var(--animation-easing);
   }
 
   .menu-list__zzz {
     display: inline-flex;
     align-items: center;
-    font-size: 1.05em;
+    font-size: 1.1em;
   }
 
   .menu-list__zzz svg {
@@ -773,22 +782,11 @@
   }
 
   /* Filled state on hover/focus/current — also wins over the subdued-links rule above */
-  .menu-list .menu-list__link--highlight:hover,
-  .menu-list .menu-list__link--highlight:focus,
-  .menu-list .menu-list__link--highlight.menu-list__link--active {
+  .menu-list .menu-list__link--highlight:hover .menu-list__pill,
+  .menu-list .menu-list__link--highlight:focus .menu-list__pill,
+  .menu-list .menu-list__link--highlight.menu-list__link--active .menu-list__pill {
     background-color: rgb(var(--menu-top-level-font-color-rgb));
     border-color: rgb(var(--menu-top-level-font-color-rgb));
-    color: var(--color-background);
-  }
-
-  /* Keep the pill readable when a sibling item is hovered */
-  .menu-list:where(:has(.menu-list__list-item:hover)) .menu-list__link--highlight,
-  .menu-list:where(:has(.menu-list__list-item:focus-within)) .menu-list__link--highlight {
-    color: var(--menu-top-level-font-color);
-  }
-
-  .menu-list .menu-list__list-item:hover .menu-list__link--highlight,
-  .menu-list .menu-list__list-item:focus-within .menu-list__link--highlight {
     color: var(--color-background);
   }
 
