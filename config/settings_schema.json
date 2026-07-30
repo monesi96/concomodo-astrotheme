@@ -1967,6 +1967,48 @@
     ]
   },
   {
+    "name": "Rate HeyLight",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Pagamento a rate HeyLight (PagoLight). La rata minima è calcolata dividendo il prezzo per il numero di rate. Usata dal blocco «Rata HeyLight» in pagina prodotto e dalla riga sotto il prezzo nelle card."
+      },
+      {
+        "type": "range",
+        "id": "heylight_installments",
+        "label": "Numero minimo di rate",
+        "min": 2,
+        "max": 12,
+        "step": 1,
+        "default": 4
+      },
+      {
+        "type": "number",
+        "id": "heylight_min_price",
+        "label": "Prezzo minimo (EUR)",
+        "info": "Sotto questo prezzo la rata non viene mostrata. Lascia 0 per mostrarla sempre.",
+        "default": 100
+      },
+      {
+        "type": "header",
+        "content": "Card prodotto (collezione, ricerca)"
+      },
+      {
+        "type": "checkbox",
+        "id": "heylight_cards_enabled",
+        "label": "Mostra la rata nelle card prodotto",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "heylight_card_text",
+        "label": "Testo nelle card",
+        "info": "Usa [rata] come segnaposto per l'importo.",
+        "default": "Pagalo da [rata]/mese con HeyLight"
+      }
+    ]
+  },
+  {
     "name": "t:names.input_fields",
     "settings": [
       {

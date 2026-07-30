@@ -2217,6 +2217,20 @@ product-price.text-block:is(.h1, .h2, .h3, .h4, .h5, .h6) > *:not(.tax-note) {
   color: #ff8752;
 }
 
+/* Rata minima HeyLight nelle card prodotto */
+.price__heylight {
+  display: block;
+  margin-block-start: 2px;
+  font-size: 0.8em;
+  line-height: 1.4;
+  white-space: normal;
+  opacity: 0.85;
+}
+
+.price__heylight strong {
+  font-weight: 700;
+}
+
 .card-gallery {
   position: relative;
 }
