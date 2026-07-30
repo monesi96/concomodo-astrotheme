@@ -533,7 +533,8 @@
             "show_for": "m1,m2,m3a,m3b",
             "title": "Cuscino CC",
             "subtitle": "Completa il riposo con il supporto giusto per il collo",
-            "product": "",
+            "image": "shopify://shop_images/cuscini2.png",
+            "product": "cuscino-test",
             "link": ""
           }
         }
