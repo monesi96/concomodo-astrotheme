@@ -3301,7 +3301,7 @@
           "name": "t:names.button",
           "settings": {
             "label": "Scopri la nostra filosofia",
-            "link": "shopify://pages/dormire-comodi",
+            "link": "shopify://pages/perche-dormire-con-comodo",
             "open_in_new_tab": false,
             "style_class": "button",
             "weight": "",
