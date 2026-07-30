@@ -510,11 +510,21 @@
             "case": "none"
           },
           "blocks": {}
+        },
+        "footer_policy_list_bR7Vc3": {
+          "type": "footer-policy-list",
+          "name": "t:names.policy_list",
+          "settings": {
+            "font_size": "0.75rem",
+            "case": "none"
+          },
+          "blocks": {}
         }
       },
       "block_order": [
         "footer_copyright_jweRK8",
-        "footer_policy_list_VCdnpa"
+        "footer_policy_list_VCdnpa",
+        "footer_policy_list_bR7Vc3"
       ],
       "custom_css": [
         "> div {border-top: 1px solid #f4efe8;}"
