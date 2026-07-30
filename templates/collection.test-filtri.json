@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "section": {
@@ -89,83 +98,6 @@
         "gradient_direction": "to top",
         "padding-block-start": 48,
         "padding-block-end": 48
-      }
-    },
-    "text_slider_64NyLh": {
-      "type": "text-slider",
-      "blocks": {
-        "item_L9emBW": {
-          "type": "item",
-          "settings": {
-            "text": "Prova 100 notti",
-            "link": "",
-            "color_mode": "auto",
-            "custom_color": "#464646"
-          }
-        },
-        "item_Y4Mqje": {
-          "type": "item",
-          "settings": {
-            "text": "Garanzia 10 anni",
-            "link": "",
-            "color_mode": "auto",
-            "custom_color": "#464646"
-          }
-        },
-        "item_Fd3Ynq": {
-          "type": "item",
-          "settings": {
-            "text": "Spedizione e reso gratuiti",
-            "link": "",
-            "color_mode": "auto",
-            "custom_color": "#464646"
-          }
-        },
-        "item_jYq6eR": {
-          "type": "item",
-          "settings": {
-            "text": "Pagamento in 3 rate",
-            "link": "",
-            "color_mode": "auto",
-            "custom_color": "#464646"
-          }
-        },
-        "item_yyBEVd": {
-          "type": "item",
-          "settings": {
-            "text": "Made in Italy",
-            "link": "",
-            "color_mode": "auto",
-            "custom_color": "#464646"
-          }
-        }
-      },
-      "block_order": [
-        "item_L9emBW",
-        "item_Y4Mqje",
-        "item_Fd3Ynq",
-        "item_jYq6eR",
-        "item_yyBEVd"
-      ],
-      "name": "Slider testuale",
-      "settings": {
-        "speed": 60,
-        "direction": "left",
-        "pause_on_hover": true,
-        "text_size": 20,
-        "font_weight": "500",
-        "uppercase": false,
-        "alternate_colors": true,
-        "accent_color": "#4a6f7d",
-        "separator": "none",
-        "separator_text": "—",
-        "gap": 48,
-        "show_borders": false,
-        "color_scheme": "",
-        "padding-block-start": 20,
-        "padding-block-end": 20,
-        "padding-inline-start": 0,
-        "padding-inline-end": 0
       }
     },
     "main": {
@@ -498,7 +430,6 @@
           ]
         }
       },
-      "block_order": [],
       "settings": {
         "heading": "Trova il tuo materasso",
         "subheading": "Filtra per comfort, freschezza e prezzo: la griglia si aggiorna subito.",
@@ -1312,8 +1243,86 @@
         "padding-inline-end": 0
       }
     },
+    "text_slider_64NyLh": {
+      "type": "text-slider",
+      "blocks": {
+        "item_L9emBW": {
+          "type": "item",
+          "settings": {
+            "text": "Prova 100 notti",
+            "link": "",
+            "color_mode": "auto",
+            "custom_color": "#464646"
+          }
+        },
+        "item_Y4Mqje": {
+          "type": "item",
+          "settings": {
+            "text": "Garanzia 10 anni",
+            "link": "",
+            "color_mode": "auto",
+            "custom_color": "#464646"
+          }
+        },
+        "item_Fd3Ynq": {
+          "type": "item",
+          "settings": {
+            "text": "Spedizione e reso gratuiti",
+            "link": "",
+            "color_mode": "auto",
+            "custom_color": "#464646"
+          }
+        },
+        "item_jYq6eR": {
+          "type": "item",
+          "settings": {
+            "text": "Pagamento in 3 rate",
+            "link": "",
+            "color_mode": "auto",
+            "custom_color": "#464646"
+          }
+        },
+        "item_yyBEVd": {
+          "type": "item",
+          "settings": {
+            "text": "Made in Italy",
+            "link": "",
+            "color_mode": "auto",
+            "custom_color": "#464646"
+          }
+        }
+      },
+      "block_order": [
+        "item_L9emBW",
+        "item_Y4Mqje",
+        "item_Fd3Ynq",
+        "item_jYq6eR",
+        "item_yyBEVd"
+      ],
+      "name": "Slider testuale",
+      "settings": {
+        "speed": 60,
+        "direction": "left",
+        "pause_on_hover": true,
+        "text_size": 20,
+        "font_weight": "500",
+        "uppercase": false,
+        "alternate_colors": true,
+        "accent_color": "#4a6f7d",
+        "separator": "none",
+        "separator_text": "—",
+        "gap": 48,
+        "show_borders": false,
+        "color_scheme": "",
+        "padding-block-start": 20,
+        "padding-block-end": 20,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
+      }
+    },
     "mattress_quick_compare_ptWQmR": {
       "type": "mattress-quick-compare",
+      "disabled": true,
       "name": "Comparatore materassi",
       "settings": {
         "heading": "Confronta i nostri materassi",
@@ -1322,6 +1331,8 @@
         "product_2": "morbido",
         "product_3": "cc-completo-molle",
         "product_4": "materasso-1",
+        "show_image": true,
+        "image_ratio": "4 / 3",
         "show_firmness": true,
         "firmness_label": "Durezza",
         "show_support": true,
@@ -1334,8 +1345,8 @@
         "layers_label": "Strati",
         "price_prefix": "da",
         "cta_label": "Scopri",
-        "highlight": 3,
-        "highlight_badge": "Più venduto",
+        "highlight": 4,
+        "highlight_badge": "",
         "corner_radius": 28,
         "section_width": "full-width",
         "color_scheme": "scheme-2",
@@ -2577,6 +2588,8 @@
         "product_2": "morbido",
         "product_3": "cc-completo-molle",
         "product_4": "materasso-1",
+        "show_image": true,
+        "image_ratio": "4 / 3",
         "show_firmness": true,
         "firmness_label": "Durezza",
         "show_support": true,
