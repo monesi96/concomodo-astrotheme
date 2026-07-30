@@ -616,6 +616,21 @@
                 "padding-inline-end": 30
               },
               "blocks": {
+                "heylight_rate_HVFKmr": {
+                  "type": "heylight-rate",
+                  "name": "Rata HeyLight",
+                  "settings": {
+                    "brand_label": "HeyLight",
+                    "text_before": "Pagalo da",
+                    "per_month_label": "/mese",
+                    "note": "in [n] rate, senza interessi",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
                 "group_rm3y8g": {
                   "type": "group",
                   "name": "t:names.group",
@@ -673,21 +688,6 @@
                         "case": "none",
                         "color": "var(--color-foreground)",
                         "padding-block-start": 0,
-                        "padding-block-end": 0,
-                        "padding-inline-start": 0,
-                        "padding-inline-end": 0
-                      },
-                      "blocks": {}
-                    },
-                    "heylight_rate": {
-                      "type": "heylight-rate",
-                      "name": "Rata HeyLight",
-                      "settings": {
-                        "brand_label": "HeyLight",
-                        "text_before": "Pagalo da",
-                        "per_month_label": "/mese",
-                        "note": "in [n] rate, senza interessi",
-                        "padding-block-start": 4,
                         "padding-block-end": 0,
                         "padding-inline-start": 0,
                         "padding-inline-end": 0
@@ -781,7 +781,6 @@
                   },
                   "block_order": [
                     "price_8qL6AA",
-                    "heylight_rate",
                     "group_hw4AkW"
                   ]
                 },
@@ -823,6 +822,7 @@
                 }
               },
               "block_order": [
+                "heylight_rate_HVFKmr",
                 "group_rm3y8g",
                 "buy_buttons_VLi7An"
               ]
