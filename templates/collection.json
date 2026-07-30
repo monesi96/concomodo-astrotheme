@@ -100,83 +100,6 @@
         "padding-block-end": 48
       }
     },
-    "text_slider_64NyLh": {
-      "type": "text-slider",
-      "blocks": {
-        "item_L9emBW": {
-          "type": "item",
-          "settings": {
-            "text": "Prova 100 notti",
-            "link": "",
-            "color_mode": "auto",
-            "custom_color": "#464646"
-          }
-        },
-        "item_Y4Mqje": {
-          "type": "item",
-          "settings": {
-            "text": "Garanzia 10 anni",
-            "link": "",
-            "color_mode": "auto",
-            "custom_color": "#464646"
-          }
-        },
-        "item_Fd3Ynq": {
-          "type": "item",
-          "settings": {
-            "text": "Spedizione e reso gratuiti",
-            "link": "",
-            "color_mode": "auto",
-            "custom_color": "#464646"
-          }
-        },
-        "item_jYq6eR": {
-          "type": "item",
-          "settings": {
-            "text": "Pagamento in 3 rate",
-            "link": "",
-            "color_mode": "auto",
-            "custom_color": "#464646"
-          }
-        },
-        "item_yyBEVd": {
-          "type": "item",
-          "settings": {
-            "text": "Made in Italy",
-            "link": "",
-            "color_mode": "auto",
-            "custom_color": "#464646"
-          }
-        }
-      },
-      "block_order": [
-        "item_L9emBW",
-        "item_Y4Mqje",
-        "item_Fd3Ynq",
-        "item_jYq6eR",
-        "item_yyBEVd"
-      ],
-      "name": "Slider testuale",
-      "settings": {
-        "speed": 60,
-        "direction": "left",
-        "pause_on_hover": true,
-        "text_size": 20,
-        "font_weight": "500",
-        "uppercase": false,
-        "alternate_colors": true,
-        "accent_color": "#4a6f7d",
-        "separator": "none",
-        "separator_text": "—",
-        "gap": 48,
-        "show_borders": false,
-        "color_scheme": "",
-        "padding-block-start": 20,
-        "padding-block-end": 20,
-        "padding-inline-start": 0,
-        "padding-inline-end": 0
-      }
-    },
     "main": {
       "type": "main-collection",
       "blocks": {
@@ -2337,6 +2260,83 @@
         "padding-block-end": 80
       }
     },
+    "text_slider_64NyLh": {
+      "type": "text-slider",
+      "blocks": {
+        "item_L9emBW": {
+          "type": "item",
+          "settings": {
+            "text": "Prova 100 notti",
+            "link": "",
+            "color_mode": "auto",
+            "custom_color": "#464646"
+          }
+        },
+        "item_Y4Mqje": {
+          "type": "item",
+          "settings": {
+            "text": "Garanzia 10 anni",
+            "link": "",
+            "color_mode": "auto",
+            "custom_color": "#464646"
+          }
+        },
+        "item_Fd3Ynq": {
+          "type": "item",
+          "settings": {
+            "text": "Spedizione e reso gratuiti",
+            "link": "",
+            "color_mode": "auto",
+            "custom_color": "#464646"
+          }
+        },
+        "item_jYq6eR": {
+          "type": "item",
+          "settings": {
+            "text": "Pagamento in 3 rate",
+            "link": "",
+            "color_mode": "auto",
+            "custom_color": "#464646"
+          }
+        },
+        "item_yyBEVd": {
+          "type": "item",
+          "settings": {
+            "text": "Made in Italy",
+            "link": "",
+            "color_mode": "auto",
+            "custom_color": "#464646"
+          }
+        }
+      },
+      "block_order": [
+        "item_L9emBW",
+        "item_Y4Mqje",
+        "item_Fd3Ynq",
+        "item_jYq6eR",
+        "item_yyBEVd"
+      ],
+      "name": "Slider testuale",
+      "settings": {
+        "speed": 60,
+        "direction": "left",
+        "pause_on_hover": true,
+        "text_size": 20,
+        "font_weight": "500",
+        "uppercase": false,
+        "alternate_colors": true,
+        "accent_color": "#4a6f7d",
+        "separator": "none",
+        "separator_text": "—",
+        "gap": 48,
+        "show_borders": false,
+        "color_scheme": "",
+        "padding-block-start": 20,
+        "padding-block-end": 20,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
+      }
+    },
     "vuoi_parlare_con_noi_cc": {
       "type": "vuoi-parlare-con-noi",
       "blocks": {
@@ -2638,11 +2638,11 @@
     "main",
     "section_bundle",
     "section_bundlebuilder",
-    "text_slider_64NyLh",
-    "mattress_quick_compare_ptWQmR",
     "collection_list_pxN4wG",
+    "mattress_quick_compare_ptWQmR",
     "section_promo",
     "section_faq",
+    "text_slider_64NyLh",
     "vuoi_parlare_con_noi_cc",
     "section_newsletter",
     "mattress_quick_compare_7RTFVm"
