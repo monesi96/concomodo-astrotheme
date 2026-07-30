@@ -41,6 +41,13 @@
     scrollbar-width: none;
   }
 
+  /* In variante full-width la lista arriva a filo dei bordi schermo:
+     il primo e l'ultimo link hanno bisogno del margine pagina */
+  .section-nav.section--full-width .section-nav__list {
+    padding-inline: var(--page-margin, 16px);
+    scroll-padding-inline: var(--page-margin, 16px);
+  }
+
   .section-nav__list::-webkit-scrollbar { display: none; }
 
   /* Hidden until JS populates it, to avoid an empty bar flashing */

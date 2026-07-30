@@ -58,7 +58,8 @@ class ProductSectionNav extends HTMLElement {
   }
 
   offset() {
-    const header = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 0;
+    // --header-height è impostata su <body>, non su <html>
+    const header = parseInt(getComputedStyle(document.body).getPropertyValue('--header-height')) || 0;
     return header + this.getBoundingClientRect().height + 8;
   }
 

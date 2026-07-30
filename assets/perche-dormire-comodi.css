@@ -263,10 +263,13 @@
 .pdc-disclaimer {
   position: absolute;
   bottom: clamp(1.2rem, 3.5vh, 2.5rem);
-  left: 50%;
-  translate: -50% 0;
+  /* left/right insieme: senza width esplicita, left:50% da solo
+     restringerebbe lo shrink-to-fit a metà container su mobile */
+  left: 0;
+  right: 0;
+  margin-inline: auto;
   z-index: 2;
-  margin: 0;
+  margin-block: 0;
   max-width: 52ch;
   font-size: 0.75rem;
   line-height: 1.5;
@@ -894,6 +897,29 @@
   .pdc-table__row [role='rowheader'] { grid-area: label; opacity: 0.6; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; }
   .pdc-yes { grid-area: yes; }
   .pdc-no { grid-area: no; }
+
+  /* Anelli badge: sotto 613px il clamp() teneva il raggio fisso a 184px
+     e i badge orizzontali finivano fuori dallo schermo */
+  .pdc-ring--outer { --r: 38vw; }
+  .pdc-ring--inner { --r: 22vw; }
+  .pdc-badge { font-size: 0.7rem; padding: 0.45em 0.8em; }
+
+  /* I due badge a 0°/180° restano comunque a filo dei bordi: via su mobile */
+  .pdc-ring--outer .pdc-badge:nth-child(1),
+  .pdc-ring--outer .pdc-badge:nth-child(4) { display: none; }
+
+  /* Il percorso a ostacoli si centrava esattamente dietro il titolo */
+  .pdc-course {
+    inset: auto 0 4%;
+    height: 44%;
+  }
+
+  /* Il clamp() desktop teneva il titolo di chiusura a 38px fissi:
+     con il nowrap sull'em veniva tagliato sotto i 340px */
+  .pdc-chiusa__title { font-size: clamp(1.9rem, 9vw, 2.6rem); }
+
+  /* Break forzato pensato per il desktop */
+  .pdc-br { display: none; }
 }
 
 /* ═══ Modalità statica (no JS / reduced motion / no WebGL) ═══ */

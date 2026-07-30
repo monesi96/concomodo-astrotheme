@@ -581,6 +581,39 @@
     .bundle-builder__summary {
       position: static;
     }
+
+    /* La riga a 3 colonne (80px | testo | prezzo) lasciava ~110px al
+       testo su 360px: immagine più piccola e prezzo sotto il testo */
+    .bundle-builder__row {
+      grid-template-columns: 56px 1fr;
+      gap: 12px;
+      padding: 12px;
+    }
+
+    .bundle-builder__row-price {
+      grid-column: 2;
+    }
+
+    .bundle-builder__row-media img,
+    .bundle-builder__row-placeholder {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+    }
+
+    .bundle-builder__row-title {
+      white-space: normal;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+  }
+
+  /* Ruolo + badge «In omaggio» devono poter andare a capo: senza wrap
+     il badge sfonda la card sugli schermi stretti */
+  .bundle-builder__row-role {
+    flex-wrap: wrap;
+    row-gap: 4px;
   }
 {% endstylesheet %}
 

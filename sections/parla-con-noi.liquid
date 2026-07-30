@@ -82,6 +82,24 @@
     opacity: 0.9;
   }
 
+  /* Su mobile il nowrap renderebbe il bottone incomprimibile: con
+     etichette lunghe sfonderebbe il contenitore e farebbe scorrere
+     l'intera pagina in orizzontale */
+  @media screen and (max-width: 749px) {
+    .parla-con-noi__inner {
+      justify-content: center;
+      text-align: center;
+      padding-inline: 1rem;
+    }
+
+    .parla-con-noi__button {
+      white-space: normal;
+      max-width: 100%;
+      justify-content: center;
+      text-align: center;
+    }
+  }
+
   .parla-con-noi__icon {
     display: inline-flex;
     width: 22px;

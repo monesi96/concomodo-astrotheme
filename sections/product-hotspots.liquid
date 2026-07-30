@@ -108,6 +108,14 @@
     product-hotspot-component .hotspot-dialog {
       display: none;
     }
+
+    /* Il pin da 36px è pensato per il box desktop: su un 21/9 alto
+       ~140px copre un terzo dell'altezza e i pin vicini si accavallano.
+       La variabile è nello style inline del root, quindi va ridefinita
+       qui sul contenitore: i pin la ereditano. */
+    .section-product-hotspots__content {
+      --hotspot-size: 26px;
+    }
   }
 
   /* Hotspot button - positioned element with clickable area */

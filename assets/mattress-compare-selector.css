@@ -348,6 +348,23 @@
     --mcs-min-col: 138px;
   }
 
+  /* La bolla centrata sul "?" partirebbe prima dell'origine dello
+     scroller orizzontale, dove il contenuto è irraggiungibile: su
+     mobile la ancoriamo alla riga, allineata a sinistra */
+  .mcs__row-label {
+    position: relative;
+  }
+
+  .mcs__tip {
+    position: static;
+  }
+
+  .mcs__tip-bubble {
+    inset-inline: 0 auto;
+    translate: 0 0;
+    max-width: min(260px, 100%);
+  }
+
   .mcs__select {
     padding: 0.6rem 2rem 0.6rem 0.8rem;
     font-size: 0.9rem;
