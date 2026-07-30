@@ -140,25 +140,19 @@
                   },
                   "blocks": {}
                 },
-                "text_njKzVX": {
-                  "type": "text",
+                "company_legal_info_njKzVX": {
+                  "type": "company-legal-info",
+                  "name": "Dati azienda",
                   "settings": {
-                    "text": "<p>Via aaaaaaaa<br/>70000 Bari<br/><br/>P.IVA 00000000000<br/>PEC xxxxxx@pec.it</p>",
-                    "width": "100%",
-                    "max_width": "normal",
+                    "layout": "stacked",
+                    "show_legal_name": true,
+                    "show_vat": true,
+                    "show_rea": true,
+                    "show_pec": true,
                     "alignment": "left",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
-                    "weight": "",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
+                    "gap": 12,
+                    "font_size": "0.875rem",
                     "case": "none",
-                    "wrap": "pretty",
-                    "color": "var(--color-foreground)",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
@@ -169,7 +163,7 @@
               },
               "block_order": [
                 "logo_4qrxkB",
-                "text_njKzVX"
+                "company_legal_info_njKzVX"
               ]
             },
             "group_XN4aKk": {

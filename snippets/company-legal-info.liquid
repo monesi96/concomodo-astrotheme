@@ -1,0 +1,126 @@
+{%- doc -%}
+  Renders the legal identification data of the company (ragione sociale, P.IVA,
+  REA, PEC). Values come from the theme settings so there is a single source of
+  truth for every place that has to show them.
+
+  @param {string} [layout] - 'stacked' (one item per line, default) or 'inline'
+  @param {string} [separator] - separator used by the inline layout, defaults to '·'
+  @param {string} [class] - extra class added to the wrapper
+  @param {boolean} [show_legal_name] - defaults to true
+  @param {boolean} [show_vat] - defaults to true
+  @param {boolean} [show_rea] - defaults to true, ignored by the inline layout
+  @param {boolean} [show_pec] - defaults to true, ignored by the inline layout
+
+  @example
+  {% render 'company-legal-info' %}
+  {% render 'company-legal-info', layout: 'inline' %}
+{%- enddoc -%}
+
+{% liquid
+  assign legal_name = settings.company_legal_name | strip
+  assign vat = settings.company_vat_number | strip
+  assign tax_code = settings.company_tax_code | strip
+  assign rea = settings.company_rea | strip
+  assign pec = settings.company_pec | strip
+
+  assign wants_legal_name = true
+  if show_legal_name == false
+    assign wants_legal_name = false
+  endif
+  assign wants_vat = true
+  if show_vat == false
+    assign wants_vat = false
+  endif
+  assign wants_rea = true
+  if show_rea == false
+    assign wants_rea = false
+  endif
+  assign wants_pec = true
+  if show_pec == false
+    assign wants_pec = false
+  endif
+
+  unless wants_legal_name
+    assign legal_name = ''
+  endunless
+  unless wants_vat
+    assign vat = ''
+    assign tax_code = ''
+  endunless
+  unless wants_rea
+    assign rea = ''
+  endunless
+  unless wants_pec
+    assign pec = ''
+  endunless
+
+  comment
+    For Italian companies the codice fiscale usually matches the VAT number: when
+    that is the case a single combined line is shown instead of two identical ones.
+  endcomment
+  assign vat_label = 'P. IVA'
+  if tax_code != blank and tax_code == vat
+    assign vat_label = 'P. IVA e C.F.'
+  endif
+
+  assign has_content = false
+  if legal_name != blank or vat != blank or tax_code != blank or rea != blank or pec != blank
+    assign has_content = true
+  endif
+
+  assign inline_separator = separator | default: '·'
+%}
+
+{%- if has_content -%}
+  {%- if layout == 'inline' -%}
+    <span class="company-legal-info company-legal-info--inline {{ class }}">
+      {%- assign inline_parts = '' -%}
+      {%- if legal_name != blank -%}
+        {%- assign inline_parts = inline_parts | append: legal_name | append: '<>' -%}
+      {%- endif -%}
+      {%- if vat != blank -%}
+        {%- assign inline_parts = inline_parts | append: vat_label | append: ' ' | append: vat | append: '<>' -%}
+      {%- elsif tax_code != blank -%}
+        {%- assign inline_parts = inline_parts | append: 'C.F. ' | append: tax_code | append: '<>' -%}
+      {%- endif -%}
+      {%- assign inline_parts = inline_parts | split: '<>' -%}
+      {%- for part in inline_parts -%}
+        {{ part }}
+        {%- unless forloop.last %} {{ inline_separator }} {% endunless -%}
+      {%- endfor -%}
+    </span>
+  {%- else -%}
+    <div class="company-legal-info {{ class }}">
+      {%- if legal_name != blank -%}
+        <p class="company-legal-info__name">{{ legal_name }}</p>
+      {%- endif -%}
+      {%- if vat != blank or tax_code != blank or rea != blank -%}
+        <p class="company-legal-info__ids">
+          {%- if vat != blank -%}
+            {{ vat_label }} {{ vat }}
+            {%- if tax_code != blank and tax_code != vat %}<br>C.F. {{ tax_code }}{% endif -%}
+          {%- elsif tax_code != blank -%}
+            C.F. {{ tax_code }}
+          {%- endif -%}
+          {%- if rea != blank %}<br>REA {{ rea }}{% endif -%}
+        </p>
+      {%- endif -%}
+      {%- if pec != blank -%}
+        <p class="company-legal-info__pec">
+          PEC <a href="mailto:{{ pec }}">{{ pec }}</a>
+        </p>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+{%- endif -%}
+
+{% stylesheet %}
+  .company-legal-info > * {
+    margin-block: 0;
+  }
+
+  .company-legal-info__ids,
+  .company-legal-info__pec {
+    color: var(--color-foreground-muted, inherit);
+  }
+{% endstylesheet %}

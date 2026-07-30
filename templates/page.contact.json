@@ -112,10 +112,31 @@
             }
           },
           "block_order": []
+        },
+        "company_legal_info": {
+          "type": "company-legal-info",
+          "name": "Dati azienda",
+          "settings": {
+            "layout": "stacked",
+            "show_legal_name": true,
+            "show_vat": true,
+            "show_rea": true,
+            "show_pec": true,
+            "alignment": "center",
+            "gap": 4,
+            "font_size": "0.875rem",
+            "case": "none",
+            "padding-block-start": 24,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
         }
       },
       "block_order": [
-        "contact_form_UwiCkQ"
+        "contact_form_UwiCkQ",
+        "company_legal_info"
       ],
       "name": "t:names.contact_form",
       "settings": {

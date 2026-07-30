@@ -9,6 +9,11 @@
  */
 {
   "current": {
+    "company_legal_name": "EMME Z S.r.l.s.",
+    "company_vat_number": "09198510720",
+    "company_tax_code": "09198510720",
+    "company_rea": "BA - 678647",
+    "company_pec": "emme.z@pec.it",
     "logo": "shopify://shop_images/CC-black.svg",
     "logo_inverse": "shopify://shop_images/CC-white.svg",
     "logo_height": 36,

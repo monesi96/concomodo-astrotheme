@@ -1926,6 +1926,47 @@
     ]
   },
   {
+    "name": "Dati azienda",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Dati identificativi mostrati nel footer, nei dati strutturati del sito e ovunque sia inserito il blocco «Dati azienda». Compilali qui una volta sola."
+      },
+      {
+        "type": "text",
+        "id": "company_legal_name",
+        "label": "Ragione sociale",
+        "info": "Denominazione completa come risulta al Registro Imprese.",
+        "default": "EMME Z S.r.l.s."
+      },
+      {
+        "type": "text",
+        "id": "company_vat_number",
+        "label": "Partita IVA",
+        "default": "09198510720"
+      },
+      {
+        "type": "text",
+        "id": "company_tax_code",
+        "label": "Codice fiscale",
+        "info": "Per le società coincide di norma con la partita IVA: in quel caso viene mostrata un'unica riga «P. IVA e C.F.».",
+        "default": "09198510720"
+      },
+      {
+        "type": "text",
+        "id": "company_rea",
+        "label": "Numero REA",
+        "default": "BA - 678647"
+      },
+      {
+        "type": "text",
+        "id": "company_pec",
+        "label": "PEC",
+        "default": "emme.z@pec.it"
+      }
+    ]
+  },
+  {
     "name": "t:names.input_fields",
     "settings": [
       {
