@@ -82,7 +82,7 @@
                 "product_breadcrumb_custom_text": "",
                 "product_middle_truncate": 0,
                 "product_title_truncate": 0,
-                "text_color": "#8C8C8F",
+                "text_color": "#8c8c8f",
                 "main_text_color": "#303031",
                 "font_size": 14,
                 "font_weight": "500",
@@ -4410,64 +4410,6 @@
         "padding-block-end": 80
       }
     },
-    "comodi_in_20_secondi_QBfaTJ": {
-      "type": "comodi-in-20-secondi",
-      "blocks": {
-        "pro_DzEQtA": {
-          "type": "pro",
-          "settings": {
-            "text": "Cerchi un materasso che ti sostiene, notte dopo notte, senza farti sprofondare."
-          }
-        },
-        "pro_8ndPGU": {
-          "type": "pro",
-          "settings": {
-            "text": "Dormi di schiena o a pancia in giù e vuoi la colonna vertebrale allineata."
-          }
-        },
-        "pro_bJwMci": {
-          "type": "pro",
-          "settings": {
-            "text": "Ti sveglivi con la schiena indolenzita su un materasso troppo morbido."
-          }
-        },
-        "con_YPApyE": {
-          "type": "con",
-          "settings": {
-            "text": "Cerchi la sensazione avvolgente e molto morbida del memory più spesso."
-          }
-        },
-        "con_xAXaTh": {
-          "type": "con",
-          "settings": {
-            "text": "Dormi quasi sempre di fianco e preferisci un appoggio soffice sulle spalle."
-          }
-        }
-      },
-      "block_order": [
-        "pro_DzEQtA",
-        "pro_8ndPGU",
-        "pro_bJwMci",
-        "con_YPApyE",
-        "con_xAXaTh"
-      ],
-      "disabled": true,
-      "name": "Comodi in 20 secondi",
-      "settings": {
-        "eyebrow": "COMODI IN 20 SECONDI",
-        "heading": "Questo materasso fa per te?",
-        "subheading": "<p>In poche righe: quando è la scelta giusta e quando forse è meglio un altro modello.</p>",
-        "pro_title": "Fa per te se…",
-        "con_title": "Forse non fa per te se…",
-        "corner_radius": 24,
-        "section_width": "page-width",
-        "color_scheme": "",
-        "padding-block-start": 40,
-        "padding-block-end": 40,
-        "padding-inline-start": 0,
-        "padding-inline-end": 0
-      }
-    },
     "178540771402f1992e": {
       "type": "_blocks",
       "settings": {
@@ -4497,6 +4439,63 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "comodi_in_20_secondi_BFrFyR": {
+      "type": "comodi-in-20-secondi",
+      "blocks": {
+        "pro_KYkQT8": {
+          "type": "pro",
+          "settings": {
+            "text": "Cerchi un materasso che ti sostiene, notte dopo notte, senza farti sprofondare."
+          }
+        },
+        "pro_6QGUiU": {
+          "type": "pro",
+          "settings": {
+            "text": "Dormi di schiena o a pancia in giù e vuoi la colonna vertebrale allineata."
+          }
+        },
+        "pro_bGLefB": {
+          "type": "pro",
+          "settings": {
+            "text": "Ti sveglivi con la schiena indolenzita su un materasso troppo morbido."
+          }
+        },
+        "con_pEFQPa": {
+          "type": "con",
+          "settings": {
+            "text": "Cerchi la sensazione avvolgente e molto morbida del memory più spesso."
+          }
+        },
+        "con_HQiELn": {
+          "type": "con",
+          "settings": {
+            "text": "Dormi quasi sempre di fianco e preferisci un appoggio soffice sulle spalle."
+          }
+        }
+      },
+      "block_order": [
+        "pro_KYkQT8",
+        "pro_6QGUiU",
+        "pro_bGLefB",
+        "con_pEFQPa",
+        "con_HQiELn"
+      ],
+      "name": "Comodi in 20 secondi",
+      "settings": {
+        "eyebrow": "COMODI IN 20 SECONDI",
+        "heading": "Questo materasso fa per te?",
+        "subheading": "<p>In poche righe: quando è la scelta giusta e quando forse è meglio un altro modello.</p>",
+        "pro_title": "Fa per te se…",
+        "con_title": "Forse non fa per te se…",
+        "corner_radius": 24,
+        "section_width": "page-width",
+        "color_scheme": "scheme-2",
+        "padding-block-start": 40,
+        "padding-block-end": 40,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
+      }
     }
   },
   "order": [
@@ -4514,7 +4513,7 @@
     "installment_payments_tC9BhM",
     "section_chbtyY",
     "section_VL9fDV",
-    "comodi_in_20_secondi_QBfaTJ",
-    "178540771402f1992e"
+    "178540771402f1992e",
+    "comodi_in_20_secondi_BFrFyR"
   ]
 }
