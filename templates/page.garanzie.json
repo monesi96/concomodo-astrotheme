@@ -84,6 +84,43 @@
     },
     "parla": {
       "type": "vuoi-parlare-con-noi",
+      "blocks": {
+        "card_LzKLpA": {
+          "type": "card",
+          "settings": {
+            "icon": "chat",
+            "title": "Chiamaci",
+            "text": "<p>Siamo qui per aiutarti a ritrovare il piacere di un sonno sereno e di qualità.</p>",
+            "link": "",
+            "open_in_new_tab": false
+          }
+        },
+        "card_8DmgJe": {
+          "type": "card",
+          "settings": {
+            "icon": "phone",
+            "title": "Chiamaci",
+            "text": "<p>Siamo qui per aiutarti a ritrovare il piacere di un sonno sereno e di qualità.</p>",
+            "link": "",
+            "open_in_new_tab": false
+          }
+        },
+        "card_dWY7pC": {
+          "type": "card",
+          "settings": {
+            "icon": "email",
+            "title": "Chiamaci",
+            "text": "<p>Siamo qui per aiutarti a ritrovare il piacere di un sonno sereno e di qualità.</p>",
+            "link": "",
+            "open_in_new_tab": false
+          }
+        }
+      },
+      "block_order": [
+        "card_LzKLpA",
+        "card_8DmgJe",
+        "card_dWY7pC"
+      ],
       "settings": {
         "heading": "Vuoi parlare con noi?",
         "subheading": "<p>Parla con un esperto del sonno e trova la soluzione di riposo più adatta a te.</p>",
