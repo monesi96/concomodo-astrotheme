@@ -1542,9 +1542,9 @@
       "settings": {
         "collection": "materassi",
         "layout_type": "grid",
-        "carousel_on_mobile": false,
+        "carousel_on_mobile": true,
         "max_products": 4,
-        "columns": 4,
+        "columns": 2,
         "mobile_columns": "1",
         "mobile_card_size": "60cqw",
         "columns_gap": 10,
