@@ -78,16 +78,11 @@
   endif
 
   comment
-    Con un solo materasso confrontabile il selettore non serve: al suo posto
-    torna il titolo del prodotto, come nella versione statica.
+    Con un solo materasso confrontabile il selettore non serve.
   endcomment
   assign show_picker = false
   if use_single == false and candidate_count > 1
     assign show_picker = true
-  endif
-  assign show_title_b = true
-  if show_picker
-    assign show_title_b = false
   endif
 -%}
 
@@ -106,6 +101,61 @@
   >
     {%- if section.settings.heading != blank -%}
       <h2 class="mattress-comparison__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- comment -%}
+      Il selettore sta fuori dalla card, sopra le due colonne: dentro la barra
+      sticky prendeva il posto del titolo del secondo materasso e non era
+      chiaro cosa comandasse.
+    {%- endcomment -%}
+    {%- if show_picker -%}
+      <div class="mattress-comparison__picker">
+        {%- if section.settings.picker_label != blank -%}
+          <label class="mattress-comparison__picker-label" for="mc-picker-{{ section.id }}">
+            {{- section.settings.picker_label -}}
+          </label>
+        {%- endif -%}
+        <div class="mattress-comparison__picker-field">
+          <select
+            id="mc-picker-{{ section.id }}"
+            class="mattress-comparison__picker-select"
+            ref="picker"
+            on:change="/handleSelect"
+            {% if section.settings.picker_label == blank %}
+              aria-label="{{ 'Confronta con' | escape }}"
+            {% endif %}
+          >
+            {%- for candidate in source.products limit: fetch_limit -%}
+              {%- if candidate.id == product_a.id -%}
+                {%- continue -%}
+              {%- endif -%}
+              <option
+                value="{{ candidate.handle }}"
+                {% if candidate.handle == selected_handle %}
+                  selected
+                {% endif %}
+              >
+                {{- candidate.title | strip_html | escape -}}
+              </option>
+            {%- endfor -%}
+          </select>
+          <svg
+            class="mattress-comparison__picker-chevron"
+            viewBox="0 0 12 8"
+            fill="none"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M1 1.5 6 6.5 11 1.5"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
     {%- endif -%}
 
     <div class="mattress-comparison__card">
@@ -155,65 +205,7 @@
             {%- endif -%}
           </div>
 
-          <div class="mattress-comparison__info mattress-comparison__info--picker">
-            {%- comment -%}
-              Il selettore sta dentro la barra sticky: resta a portata di mano
-              mentre si scorrono le righe del confronto.
-            {%- endcomment -%}
-            {%- if show_picker -%}
-              {%- comment -%}
-                L'etichetta è un aria-label e non un <label>: su mobile la
-                caption visibile sparisce per non gonfiare la barra sticky,
-                ma il campo deve restare comunque annunciato.
-              {%- endcomment -%}
-              {%- assign picker_a11y = section.settings.picker_label | default: 'Confronta con' -%}
-              <div class="mattress-comparison__picker">
-                {%- if section.settings.picker_label != blank -%}
-                  <span class="mattress-comparison__picker-label" aria-hidden="true">
-                    {{- section.settings.picker_label -}}
-                  </span>
-                {%- endif -%}
-                <div class="mattress-comparison__picker-field">
-                  <select
-                    id="mc-picker-{{ section.id }}"
-                    class="mattress-comparison__picker-select"
-                    ref="picker"
-                    on:change="/handleSelect"
-                    aria-label="{{ picker_a11y | strip_html | escape }}"
-                  >
-                    {%- for candidate in source.products limit: fetch_limit -%}
-                      {%- if candidate.id == product_a.id -%}
-                        {%- continue -%}
-                      {%- endif -%}
-                      <option
-                        value="{{ candidate.handle }}"
-                        {% if candidate.handle == selected_handle %}
-                          selected
-                        {% endif %}
-                      >
-                        {{- candidate.title | strip_html | escape -}}
-                      </option>
-                    {%- endfor -%}
-                  </select>
-                  <svg
-                    class="mattress-comparison__picker-chevron"
-                    viewBox="0 0 12 8"
-                    fill="none"
-                    aria-hidden="true"
-                    focusable="false"
-                  >
-                    <path
-                      d="M1 1.5 6 6.5 11 1.5"
-                      stroke="currentColor"
-                      stroke-width="1.6"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </div>
-              </div>
-            {%- endif -%}
-
+          <div class="mattress-comparison__info">
             {% render 'comparison-slot',
               row: 'info',
               products: source.products,
@@ -222,7 +214,7 @@
               selected: selected_handle,
               use_single: use_single,
               single_product: compare_with,
-              show_title: show_title_b
+              show_title: true
             %}
           </div>
         </div>
@@ -390,6 +382,11 @@
     text-align: center;
   }
 
+  /* Col selettore in mezzo, titolo e campo devono leggersi come un blocco solo */
+  .mattress-comparison__heading:has(+ .mattress-comparison__picker) {
+    margin-block-end: 1.5rem;
+  }
+
   .mattress-comparison__card {
     position: relative;
     max-width: 1000px;
@@ -514,20 +511,21 @@
     display: none;
   }
 
+  /* Selettore sopra le colonne: etichetta e campo su una riga centrata */
   .mattress-comparison__picker {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 0.25rem;
+    justify-content: center;
+    gap: 0.5rem 0.75rem;
     max-width: 100%;
+    margin: 0 auto 2.5rem;
   }
 
   .mattress-comparison__picker-label {
-    font-size: 0.7em;
+    font-size: 0.95em;
     font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    opacity: 0.55;
+    opacity: 0.7;
   }
 
   /* La dimensione vive qui così il chevron scala insieme al testo */
@@ -536,22 +534,21 @@
     display: flex;
     align-items: center;
     max-width: 100%;
-    font-size: clamp(1.25em, 2.5vw, 1.75em);
+    font-size: 1em;
   }
 
   .mattress-comparison__picker-select {
     appearance: none;
     max-width: 100%;
     margin: 0;
-    padding: 0.15em 1.5em 0.15em 0.7em;
+    padding: 0.65em 2.6em 0.65em 1.2em;
     border: 1px solid var(--cmp-line);
     border-radius: 999px;
-    background: transparent;
+    background: var(--color-background);
     color: inherit;
     font: inherit;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 1.3;
-    text-align: center;
     text-overflow: ellipsis;
     cursor: pointer;
     transition: border-color 0.2s ease, background-color 0.2s ease;
@@ -569,8 +566,8 @@
 
   .mattress-comparison__picker-chevron {
     position: absolute;
-    inset-inline-end: 0.6em;
-    width: 0.45em;
+    inset-inline-end: 1.2em;
+    width: 0.7em;
     height: auto;
     opacity: 0.55;
     pointer-events: none;
@@ -808,8 +805,7 @@
       column-gap: 0.625rem;
     }
 
-    .mattress-comparison__head-title,
-    .mattress-comparison__picker-field {
+    .mattress-comparison__head-title {
       font-size: 1.05em;
     }
 
@@ -818,8 +814,8 @@
       display: none;
     }
 
-    .mattress-comparison__picker-label {
-      display: none;
+    .mattress-comparison__picker {
+      margin-block-end: 1.5rem;
     }
 
     .mattress-comparison__pill {
@@ -880,7 +876,7 @@
       "id": "picker_label",
       "label": "Selector caption",
       "default": "Confronta con",
-      "info": "Shown above the selector on desktop. Leave empty to hide it."
+      "info": "Shown next to the selector, above the two columns. Leave empty to hide it."
     },
     {
       "type": "header",
