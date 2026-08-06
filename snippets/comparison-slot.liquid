@@ -1,0 +1,45 @@
+{%- doc -%}
+  Renders column B of one comparison row: every selectable mattress is
+  pre-rendered as a pane and only the selected one is visible.
+
+  Single source of truth for "which mattresses are selectable": every slot
+  loops the same list with the same exclusion, so panes, rows and the picker
+  options always line up.
+
+  @param {object} products - Products of the source collection
+  @param {object} exclude - Product to skip (the one on the page)
+  @param {number} max_items - How many products to read from the collection
+  @param {string} selected - Handle of the mattress that starts visible
+  @param {string} row - 'media' | 'info' | 'feel' | 'support' | 'cooling' | 'height' | 'layers'
+  @param {boolean} [use_single] - Fall back to a single mattress (no collection candidates)
+  @param {object} [single_product] - The mattress used when `use_single` is true
+  @param {boolean} [show_title] - Show the product title (only when there is no selector)
+  @param {string} [min_label] - Left end label of the scale/meter
+  @param {string} [max_label] - Right end label of the scale/meter
+{%- enddoc -%}
+<div class="mattress-comparison__slot mattress-comparison__slot--{{ row }}">
+  {%- if use_single -%}
+    {% render 'comparison-pane',
+      product: single_product,
+      row: row,
+      selected: selected,
+      show_title: show_title,
+      min_label: min_label,
+      max_label: max_label
+    %}
+  {%- else -%}
+    {%- for candidate in products limit: max_items -%}
+      {%- if candidate.id == exclude.id -%}
+        {%- continue -%}
+      {%- endif -%}
+      {% render 'comparison-pane',
+        product: candidate,
+        row: row,
+        selected: selected,
+        show_title: show_title,
+        min_label: min_label,
+        max_label: max_label
+      %}
+    {%- endfor -%}
+  {%- endif -%}
+</div>

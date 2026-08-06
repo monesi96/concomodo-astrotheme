@@ -1,6 +1,10 @@
 {%- doc -%}
   Renders one mattress's value cell for a comparison row.
 
+  Quando il dato manca la cella mostra un trattino invece di sparire: i
+  materassi della collezione senza metaobject `custom.comparison` restano
+  selezionabili senza rompere l'allineamento delle righe.
+
   @param {string} type - 'feel' | 'meter' | 'value'
   @param {object} [spec] - The mattress_comparison metaobject (used by 'feel')
   @param {string} [title] - Short label above the meter (used by 'meter')
@@ -9,31 +13,50 @@
   @param {string} [min_label] - Left end label of the scale/meter (used by 'feel' and 'meter')
   @param {string} [max_label] - Right end label of the scale/meter (used by 'feel' and 'meter')
 {%- enddoc -%}
+{%- liquid
+  assign has_value = true
+  case type
+    when 'feel'
+      if spec.firmness_value == blank and spec.firmness_label == blank and spec.feel_title == blank
+        assign has_value = false
+      endif
+    else
+      if value == blank
+        assign has_value = false
+      endif
+  endcase
+-%}
 <div class="mattress-comparison__cell mattress-comparison__cell--{{ type }}">
-  {%- case type -%}
-    {%- when 'feel' -%}
-      {%- if spec.firmness_label != blank -%}
-        <div class="mattress-comparison__scale-label">{{ spec.firmness_label }}</div>
-      {%- endif -%}
-      <div class="mattress-comparison__scale" style="--v: {{ spec.firmness_value | default: 50 }};">
-        <span class="mattress-comparison__scale-fill"></span>
-        <span class="mattress-comparison__scale-knob"></span>
-      </div>
-      {%- if min_label != blank or max_label != blank -%}
-        <div class="mattress-comparison__scale-ends">
-          <span>{{ min_label }}</span>
-          <span>{{ max_label }}</span>
-        </div>
-      {%- endif -%}
-      {%- if spec.feel_title != blank -%}
-        <div class="mattress-comparison__value-title">{{ spec.feel_title }}</div>
-      {%- endif -%}
+  {%- if has_value == false -%}
+    <div class="mattress-comparison__empty">
+      <span aria-hidden="true">—</span>
+      <span class="visually-hidden">Dato non disponibile</span>
+    </div>
 
-    {%- when 'meter' -%}
-      {%- if title != blank -%}
-        <div class="mattress-comparison__scale-label">{{ title }}</div>
-      {%- endif -%}
-      {%- if value != blank -%}
+  {%- else -%}
+    {%- case type -%}
+      {%- when 'feel' -%}
+        {%- if spec.firmness_label != blank -%}
+          <div class="mattress-comparison__scale-label">{{ spec.firmness_label }}</div>
+        {%- endif -%}
+        <div class="mattress-comparison__scale" style="--v: {{ spec.firmness_value | default: 50 }};">
+          <span class="mattress-comparison__scale-fill"></span>
+          <span class="mattress-comparison__scale-knob"></span>
+        </div>
+        {%- if min_label != blank or max_label != blank -%}
+          <div class="mattress-comparison__scale-ends">
+            <span>{{ min_label }}</span>
+            <span>{{ max_label }}</span>
+          </div>
+        {%- endif -%}
+        {%- if spec.feel_title != blank -%}
+          <div class="mattress-comparison__value-title">{{ spec.feel_title }}</div>
+        {%- endif -%}
+
+      {%- when 'meter' -%}
+        {%- if title != blank -%}
+          <div class="mattress-comparison__scale-label">{{ title }}</div>
+        {%- endif -%}
         <div
           class="mattress-comparison__meter"
           role="img"
@@ -60,12 +83,12 @@
             <span>{{ max_label }}</span>
           </div>
         {%- endif -%}
-      {%- endif -%}
 
-    {%- when 'value' -%}
-      <div class="mattress-comparison__value-big">{{ value }}</div>
-      {%- if subtext != blank -%}
-        <div class="mattress-comparison__value-sub">{{ subtext }}</div>
-      {%- endif -%}
-  {%- endcase -%}
+      {%- when 'value' -%}
+        <div class="mattress-comparison__value-big">{{ value }}</div>
+        {%- if subtext != blank -%}
+          <div class="mattress-comparison__value-sub">{{ subtext }}</div>
+        {%- endif -%}
+    {%- endcase -%}
+  {%- endif -%}
 </div>

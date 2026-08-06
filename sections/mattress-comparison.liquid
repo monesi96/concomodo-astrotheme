@@ -1,12 +1,93 @@
 {%- liquid
   assign product_a = product
-  assign product_b = product.metafields.custom.compare_with.value
   assign spec_a = product_a.metafields.custom.comparison.value
-  assign spec_b = product_b.metafields.custom.comparison.value
+  assign compare_with = product_a.metafields.custom.compare_with.value
 
+  comment
+    Materassi selezionabili: la collezione scelta nelle impostazioni,
+    altrimenti la prima collezione del prodotto in pagina.
+  endcomment
+  assign source = section.settings.compare_collection
+  if source == blank
+    assign source = product_a.collections.first
+  endif
+
+  comment
+    Un posto in più nel limite: il prodotto in pagina fa parte della sua
+    collezione e viene scartato dall'elenco dei candidati.
+  endcomment
+  assign fetch_limit = section.settings.max_products | plus: 1
+
+  comment
+    Primo giro: conta i candidati e decide quale mostrare all'apertura.
+    Preferiamo il materasso di `custom.compare_with` se è nella collezione,
+    così le pagine già configurate continuano a partire dallo stesso confronto.
+  endcomment
+  assign candidate_count = 0
+  assign first_handle = ''
+  assign compare_with_available = false
+  for candidate in source.products limit: fetch_limit
+    if candidate.id == product_a.id
+      continue
+    endif
+    assign candidate_count = candidate_count | plus: 1
+    if first_handle == ''
+      assign first_handle = candidate.handle
+    endif
+    if compare_with != blank and candidate.id == compare_with.id
+      assign compare_with_available = true
+    endif
+  endfor
+
+  comment
+    Collezione senza altri materassi: si ricade sul singolo prodotto del
+    metafield, cioè il comportamento statico di prima, senza selettore.
+  endcomment
+  assign use_single = false
+  if candidate_count == 0 and compare_with != blank
+    assign use_single = true
+  endif
+
+  assign selected_handle = first_handle
+  if compare_with_available or use_single
+    assign selected_handle = compare_with.handle
+  endif
+
+  comment
+    URL iniziale della CTA quando non è stato impostato un link fisso.
+  endcomment
+  assign selected_url = ''
+  if use_single
+    assign selected_url = compare_with.url
+  else
+    for candidate in source.products limit: fetch_limit
+      if candidate.handle == selected_handle
+        assign selected_url = candidate.url
+        break
+      endif
+    endfor
+  endif
+
+  comment
+    Il prodotto in pagina deve avere i propri dati di confronto: senza,
+    la sezione resta nascosta invece di mostrare due colonne vuote.
+  endcomment
   assign has_data = false
-  if product_b != blank and spec_a != blank and spec_b != blank
+  if spec_a != blank and selected_handle != ''
     assign has_data = true
+  endif
+
+  comment
+    Con un solo materasso confrontabile il selettore non serve: al suo posto
+    torna il titolo del prodotto, come nella versione statica.
+  endcomment
+  assign show_picker = false
+  if use_single == false and candidate_count > 1
+    assign show_picker = true
+  endif
+  assign show_title_b = true
+  if show_picker
+    assign show_title_b = false
   endif
 -%}
 
@@ -31,127 +112,230 @@
       <div class="mattress-comparison__divider" aria-hidden="true"></div>
       <div class="mattress-comparison__grid">
         {%- comment -%} ── Product images (scroll away) ── {%- endcomment -%}
-        {%- for i in (1..2) -%}
-          {%- liquid
-            if forloop.first
-              assign p = product_a
-              assign s = spec_a
-            else
-              assign p = product_b
-              assign s = spec_b
-            endif
-            assign head_img = s.card_image | default: p.featured_image
-          -%}
-          <a href="{{ p.url }}" class="mattress-comparison__head-media">
-            {%- if s.badge != blank -%}
-              <span class="mattress-comparison__badge">{{ s.badge }}</span>
-            {%- endif -%}
-            {% render 'image', image: head_img, class: 'mattress-comparison__head-image' %}
-          </a>
-        {%- endfor -%}
+        {%- liquid
+          assign head_img_a = spec_a.card_image | default: product_a.featured_image
+        -%}
+        <a href="{{ product_a.url }}" class="mattress-comparison__head-media">
+          {%- if spec_a.badge != blank -%}
+            <span class="mattress-comparison__badge">{{ spec_a.badge }}</span>
+          {%- endif -%}
+          {% render 'image', image: head_img_a, class: 'mattress-comparison__head-image' %}
+        </a>
+        {% render 'comparison-slot',
+          row: 'media',
+          products: source.products,
+          exclude: product_a,
+          max_items: fetch_limit,
+          selected: selected_handle,
+          use_single: use_single,
+          single_product: compare_with
+        %}
 
         {%- comment -%} ── Product info (sticky bar: title + desc + price) ── {%- endcomment -%}
         <div class="mattress-comparison__info-row" ref="stickyBar">
-          {%- for i in (1..2) -%}
-            {%- liquid
-              if forloop.first
-                assign p = product_a
-                assign s = spec_a
-              else
-                assign p = product_b
-                assign s = spec_b
-              endif
-              assign head_desc = s.short_description | default: p.description
+          {%- liquid
+            assign head_desc_a = spec_a.short_description | default: product_a.description
 
-              assign min_price = 0
-              for v in p.variants
-                if v.price > 0 and min_price == 0
-                  assign min_price = v.price
-                elsif v.price > 0 and v.price < min_price
-                  assign min_price = v.price
-                endif
-              endfor
-            -%}
-            <div class="mattress-comparison__info">
-              <a href="{{ p.url }}" class="mattress-comparison__head-title">{{ p.title }}</a>
-              {%- if head_desc != blank -%}
-                <div class="mattress-comparison__head-desc">{{ head_desc | strip_html | truncatewords: 22 }}</div>
-              {%- endif -%}
-              {%- if min_price > 0 -%}
-                <div class="mattress-comparison__head-price">{{ min_price | money }}</div>
-              {%- endif -%}
-            </div>
-          {%- endfor -%}
+            assign min_price_a = 0
+            for v in product_a.variants
+              if v.price > 0 and min_price_a == 0
+                assign min_price_a = v.price
+              elsif v.price > 0 and v.price < min_price_a
+                assign min_price_a = v.price
+              endif
+            endfor
+          -%}
+          <div class="mattress-comparison__info">
+            <a href="{{ product_a.url }}" class="mattress-comparison__head-title">{{ product_a.title }}</a>
+            {%- if head_desc_a != blank -%}
+              <div class="mattress-comparison__head-desc">{{ head_desc_a | strip_html | truncatewords: 22 }}</div>
+            {%- endif -%}
+            {%- if min_price_a > 0 -%}
+              <div class="mattress-comparison__head-price">{{ min_price_a | money }}</div>
+            {%- endif -%}
+          </div>
+
+          <div class="mattress-comparison__info mattress-comparison__info--picker">
+            {%- comment -%}
+              Il selettore sta dentro la barra sticky: resta a portata di mano
+              mentre si scorrono le righe del confronto.
+            {%- endcomment -%}
+            {%- if show_picker -%}
+              {%- comment -%}
+                L'etichetta è un aria-label e non un <label>: su mobile la
+                caption visibile sparisce per non gonfiare la barra sticky,
+                ma il campo deve restare comunque annunciato.
+              {%- endcomment -%}
+              {%- assign picker_a11y = section.settings.picker_label | default: 'Confronta con' -%}
+              <div class="mattress-comparison__picker">
+                {%- if section.settings.picker_label != blank -%}
+                  <span class="mattress-comparison__picker-label" aria-hidden="true">
+                    {{- section.settings.picker_label -}}
+                  </span>
+                {%- endif -%}
+                <div class="mattress-comparison__picker-field">
+                  <select
+                    id="mc-picker-{{ section.id }}"
+                    class="mattress-comparison__picker-select"
+                    ref="picker"
+                    on:change="/handleSelect"
+                    aria-label="{{ picker_a11y | strip_html | escape }}"
+                  >
+                    {%- for candidate in source.products limit: fetch_limit -%}
+                      {%- if candidate.id == product_a.id -%}
+                        {%- continue -%}
+                      {%- endif -%}
+                      <option
+                        value="{{ candidate.handle }}"
+                        {% if candidate.handle == selected_handle %}
+                          selected
+                        {% endif %}
+                      >
+                        {{- candidate.title | strip_html | escape -}}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                  <svg
+                    class="mattress-comparison__picker-chevron"
+                    viewBox="0 0 12 8"
+                    fill="none"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <path
+                      d="M1 1.5 6 6.5 11 1.5"
+                      stroke="currentColor"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+              </div>
+            {%- endif -%}
+
+            {% render 'comparison-slot',
+              row: 'info',
+              products: source.products,
+              exclude: product_a,
+              max_items: fetch_limit,
+              selected: selected_handle,
+              use_single: use_single,
+              single_product: compare_with,
+              show_title: show_title_b
+            %}
+          </div>
         </div>
 
         {%- comment -%} ── Row: Sensazione (scale + title/description) ── {%- endcomment -%}
         {%- if section.settings.show_feel -%}
           {% render 'comparison-tooltip', label: section.settings.feel_label, tooltip: section.settings.feel_tooltip %}
-          {%- for i in (1..2) -%}
-            {%- if forloop.first %}{% assign s = spec_a %}{% else %}{% assign s = spec_b %}{% endif -%}
-            {% render 'comparison-cell',
-              type: 'feel',
-              spec: s,
-              min_label: section.settings.firmness_min_label,
-              max_label: section.settings.firmness_max_label
-            %}
-          {%- endfor -%}
+          {% render 'comparison-cell',
+            type: 'feel',
+            spec: spec_a,
+            min_label: section.settings.firmness_min_label,
+            max_label: section.settings.firmness_max_label
+          %}
+          {% render 'comparison-slot',
+            row: 'feel',
+            products: source.products,
+            exclude: product_a,
+            max_items: fetch_limit,
+            selected: selected_handle,
+            use_single: use_single,
+            single_product: compare_with,
+            min_label: section.settings.firmness_min_label,
+            max_label: section.settings.firmness_max_label
+          %}
         {%- endif -%}
 
         {%- comment -%} ── Row: Supporto ergonomico (meter a tacche) ── {%- endcomment -%}
         {%- if section.settings.show_support -%}
           {% render 'comparison-tooltip', label: section.settings.support_label, tooltip: section.settings.support_tooltip %}
-          {%- for i in (1..2) -%}
-            {%- if forloop.first %}{% assign s = spec_a %}{% else %}{% assign s = spec_b %}{% endif -%}
-            {% render 'comparison-cell',
-              type: 'meter',
-              title: s.support_title,
-              value: s.support_value,
-              min_label: section.settings.support_min_label,
-              max_label: section.settings.support_max_label
-            %}
-          {%- endfor -%}
+          {% render 'comparison-cell',
+            type: 'meter',
+            title: spec_a.support_title,
+            value: spec_a.support_value,
+            min_label: section.settings.support_min_label,
+            max_label: section.settings.support_max_label
+          %}
+          {% render 'comparison-slot',
+            row: 'support',
+            products: source.products,
+            exclude: product_a,
+            max_items: fetch_limit,
+            selected: selected_handle,
+            use_single: use_single,
+            single_product: compare_with,
+            min_label: section.settings.support_min_label,
+            max_label: section.settings.support_max_label
+          %}
         {%- endif -%}
 
         {%- comment -%} ── Row: Raffreddamento e traspirabilità (meter a tacche) ── {%- endcomment -%}
         {%- if section.settings.show_cooling -%}
           {% render 'comparison-tooltip', label: section.settings.cooling_label, tooltip: section.settings.cooling_tooltip %}
-          {%- for i in (1..2) -%}
-            {%- if forloop.first %}{% assign s = spec_a %}{% else %}{% assign s = spec_b %}{% endif -%}
-            {% render 'comparison-cell',
-              type: 'meter',
-              title: s.cooling_title,
-              value: s.cooling_value,
-              min_label: section.settings.cooling_min_label,
-              max_label: section.settings.cooling_max_label
-            %}
-          {%- endfor -%}
+          {% render 'comparison-cell',
+            type: 'meter',
+            title: spec_a.cooling_title,
+            value: spec_a.cooling_value,
+            min_label: section.settings.cooling_min_label,
+            max_label: section.settings.cooling_max_label
+          %}
+          {% render 'comparison-slot',
+            row: 'cooling',
+            products: source.products,
+            exclude: product_a,
+            max_items: fetch_limit,
+            selected: selected_handle,
+            use_single: use_single,
+            single_product: compare_with,
+            min_label: section.settings.cooling_min_label,
+            max_label: section.settings.cooling_max_label
+          %}
         {%- endif -%}
 
         {%- comment -%} ── Row: Altezza del materasso ── {%- endcomment -%}
         {%- if section.settings.show_height -%}
           {% render 'comparison-tooltip', label: section.settings.height_label, tooltip: section.settings.height_tooltip %}
-          {%- for i in (1..2) -%}
-            {%- if forloop.first %}{% assign s = spec_a %}{% else %}{% assign s = spec_b %}{% endif -%}
-            {% render 'comparison-cell', type: 'value', value: s.height_value, subtext: s.height_subtext %}
-          {%- endfor -%}
+          {% render 'comparison-cell', type: 'value', value: spec_a.height_value, subtext: spec_a.height_subtext %}
+          {% render 'comparison-slot',
+            row: 'height',
+            products: source.products,
+            exclude: product_a,
+            max_items: fetch_limit,
+            selected: selected_handle,
+            use_single: use_single,
+            single_product: compare_with
+          %}
         {%- endif -%}
 
         {%- comment -%} ── Row: Strati del materasso ── {%- endcomment -%}
         {%- if section.settings.show_layers -%}
           {% render 'comparison-tooltip', label: section.settings.layers_label, tooltip: section.settings.layers_tooltip %}
-          {%- for i in (1..2) -%}
-            {%- if forloop.first %}{% assign s = spec_a %}{% else %}{% assign s = spec_b %}{% endif -%}
-            {% render 'comparison-cell', type: 'value', value: s.layers_count, subtext: s.layers_subtext %}
-          {%- endfor -%}
+          {% render 'comparison-cell', type: 'value', value: spec_a.layers_count, subtext: spec_a.layers_subtext %}
+          {% render 'comparison-slot',
+            row: 'layers',
+            products: source.products,
+            exclude: product_a,
+            max_items: fetch_limit,
+            selected: selected_handle,
+            use_single: use_single,
+            single_product: compare_with
+          %}
         {%- endif -%}
 
-        {%- comment -%} ── CTA ── {%- endcomment -%}
+        {%- comment -%} ── CTA: segue il materasso selezionato ── {%- endcomment -%}
         {%- if section.settings.cta_label != blank -%}
           <div class="mattress-comparison__footer">
             <a
               class="mattress-comparison__cta button"
-              {% if section.settings.cta_link != blank %}href="{{ section.settings.cta_link }}"{% else %}href="{{ product_b.url }}"{% endif %}
+              {% if section.settings.cta_link != blank %}
+                href="{{ section.settings.cta_link }}"
+              {% else %}
+                href="{{ selected_url }}"
+                ref="cta"
+              {% endif %}
             >
               {{ section.settings.cta_label }}
             </a>
@@ -166,9 +350,20 @@
     <div class="mattress-comparison__placeholder">
       <p>To display the comparison, this product needs:</p>
       <ul>
-        <li>a <code>custom.compare_with</code> product reference — {% if product_b != blank %}✓ set{% else %}✗ missing{% endif %}</li>
-        <li>a <code>custom.comparison</code> metaobject on this product — {% if spec_a != blank %}✓ set{% else %}✗ missing{% endif %}</li>
-        <li>a <code>custom.comparison</code> metaobject on the compared product — {% if spec_b != blank %}✓ set{% else %}✗ missing{% endif %}</li>
+        <li>
+          a <code>custom.comparison</code> metaobject on this product —
+          {% if spec_a != blank %}✓ set{% else %}✗ missing{% endif %}
+        </li>
+        <li>
+          at least one other mattress to compare with —
+          {% if candidate_count > 0 %}
+            ✓ {{ candidate_count }} in “{{ source.title }}”
+          {% elsif use_single %}
+            ✓ 1 from <code>custom.compare_with</code>
+          {% else %}
+            ✗ pick a collection in the section settings, or set <code>custom.compare_with</code>
+          {% endif %}
+        </li>
       </ul>
     </div>
   </div>
@@ -300,6 +495,92 @@
     font-size: 0.9em;
     opacity: 0.7;
     max-width: 32ch;
+  }
+
+  /* ── Colonna selezionabile ──
+     Ogni materasso candidato è già nel DOM: il cambio di selezione mostra il
+     pannello giusto e nasconde gli altri, quindi il confronto è immediato. */
+  .mattress-comparison__info .mattress-comparison__slot,
+  .mattress-comparison__info .mattress-comparison__pane {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  /* Deve battere il display:flex qui sopra, non solo lo stile di default di [hidden] */
+  .mattress-comparison__pane[hidden] {
+    display: none;
+  }
+
+  .mattress-comparison__picker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    max-width: 100%;
+  }
+
+  .mattress-comparison__picker-label {
+    font-size: 0.7em;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.55;
+  }
+
+  /* La dimensione vive qui così il chevron scala insieme al testo */
+  .mattress-comparison__picker-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    font-size: clamp(1.25em, 2.5vw, 1.75em);
+  }
+
+  .mattress-comparison__picker-select {
+    appearance: none;
+    max-width: 100%;
+    margin: 0;
+    padding: 0.15em 1.5em 0.15em 0.7em;
+    border: 1px solid var(--cmp-line);
+    border-radius: 999px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: center;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .mattress-comparison__picker-select:hover {
+    border-color: rgb(var(--color-foreground-rgb) / 0.35);
+    background: var(--cmp-muted);
+  }
+
+  .mattress-comparison__picker-select:focus-visible {
+    outline: 2px solid currentcolor;
+    outline-offset: 2px;
+  }
+
+  .mattress-comparison__picker-chevron {
+    position: absolute;
+    inset-inline-end: 0.6em;
+    width: 0.45em;
+    height: auto;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  /* Dato mancante: la riga resta allineata invece di collassare */
+  .mattress-comparison__empty {
+    font-size: 1.6em;
+    line-height: 1.6;
+    opacity: 0.3;
   }
 
   /* ── Row header pill (spans both columns) ── */
@@ -527,12 +808,17 @@
       column-gap: 0.625rem;
     }
 
-    .mattress-comparison__head-title {
+    .mattress-comparison__head-title,
+    .mattress-comparison__picker-field {
       font-size: 1.05em;
     }
 
     /* la descrizione da 22 parole rendeva la barra sticky alta ~220px */
     .mattress-comparison__head-desc {
+      display: none;
+    }
+
+    .mattress-comparison__picker-label {
       display: none;
     }
 
@@ -561,13 +847,40 @@
   "settings": [
     {
       "type": "paragraph",
-      "content": "Compares the current product with the one set in its 'custom.compare_with' metafield. Both products need a 'custom.comparison' metaobject filled in."
+      "content": "Compares the current product — which needs a 'custom.comparison' metaobject — with any other mattress from the collection below, picked by the shopper."
     },
     {
       "type": "inline_richtext",
       "id": "heading",
       "label": "Heading",
       "default": "Confronta questo materasso"
+    },
+    {
+      "type": "header",
+      "content": "Compare selector"
+    },
+    {
+      "type": "collection",
+      "id": "compare_collection",
+      "label": "Collection",
+      "info": "Mattresses the shopper can compare with. Leave empty to use the product's first collection."
+    },
+    {
+      "type": "range",
+      "id": "max_products",
+      "label": "Max mattresses in the list",
+      "min": 2,
+      "max": 20,
+      "step": 1,
+      "default": 12,
+      "info": "Every option is pre-rendered, so switching is instant — keep the list short."
+    },
+    {
+      "type": "text",
+      "id": "picker_label",
+      "label": "Selector caption",
+      "default": "Confronta con",
+      "info": "Shown above the selector on desktop. Leave empty to hide it."
     },
     {
       "type": "header",

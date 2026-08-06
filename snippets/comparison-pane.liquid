@@ -1,0 +1,111 @@
+{%- doc -%}
+  Renders one candidate mattress inside a comparison slot (column B).
+
+  Every candidate is pre-rendered and all but the selected one are hidden, so
+  switching mattress is instant and needs no network request.
+
+  @param {object} product - The candidate mattress
+  @param {string} row - 'media' | 'info' | 'feel' | 'support' | 'cooling' | 'height' | 'layers'
+  @param {string} selected - Handle of the mattress that starts visible
+  @param {boolean} [show_title] - Show the product title (only when there is no selector)
+  @param {string} [min_label] - Left end label of the scale/meter
+  @param {string} [max_label] - Right end label of the scale/meter
+{%- enddoc -%}
+{%- liquid
+  assign spec = product.metafields.custom.comparison.value
+
+  assign is_selected = false
+  if product.handle == selected
+    assign is_selected = true
+  endif
+-%}
+<div
+  class="mattress-comparison__pane"
+  data-pane
+  data-handle="{{ product.handle }}"
+  data-url="{{ product.url }}"
+  {% unless is_selected %}
+    hidden
+  {% endunless %}
+>
+  {%- case row -%}
+    {%- when 'media' -%}
+      {%- assign head_img = spec.card_image | default: product.featured_image -%}
+      <a href="{{ product.url }}" class="mattress-comparison__head-media">
+        {%- if spec.badge != blank -%}
+          <span class="mattress-comparison__badge">{{ spec.badge }}</span>
+        {%- endif -%}
+        {%- comment -%}
+          Non usiamo lo snippet 'image': i pannelli nascosti devono essere lazy,
+          altrimenti la sezione scarica l'immagine di ogni materasso candidato.
+        {%- endcomment -%}
+        {%- if head_img != blank -%}
+          {{
+            head_img
+            | image_url: width: 900
+            | image_tag:
+              class: 'mattress-comparison__head-image',
+              loading: 'lazy',
+              widths: '300, 500, 700, 900',
+              sizes: '(min-width: 750px) 40vw, 45vw',
+              alt: product.title
+          }}
+        {%- endif -%}
+      </a>
+
+    {%- when 'info' -%}
+      {%- liquid
+        assign head_desc = spec.short_description | default: product.description
+
+        assign min_price = 0
+        for v in product.variants
+          if v.price > 0 and min_price == 0
+            assign min_price = v.price
+          elsif v.price > 0 and v.price < min_price
+            assign min_price = v.price
+          endif
+        endfor
+      -%}
+      {%- if show_title -%}
+        <a href="{{ product.url }}" class="mattress-comparison__head-title">{{ product.title }}</a>
+      {%- endif -%}
+      {%- if head_desc != blank -%}
+        <div class="mattress-comparison__head-desc">{{ head_desc | strip_html | truncatewords: 22 }}</div>
+      {%- endif -%}
+      {%- if min_price > 0 -%}
+        <div class="mattress-comparison__head-price">{{ min_price | money }}</div>
+      {%- endif -%}
+
+    {%- when 'feel' -%}
+      {% render 'comparison-cell',
+        type: 'feel',
+        spec: spec,
+        min_label: min_label,
+        max_label: max_label
+      %}
+
+    {%- when 'support' -%}
+      {% render 'comparison-cell',
+        type: 'meter',
+        title: spec.support_title,
+        value: spec.support_value,
+        min_label: min_label,
+        max_label: max_label
+      %}
+
+    {%- when 'cooling' -%}
+      {% render 'comparison-cell',
+        type: 'meter',
+        title: spec.cooling_title,
+        value: spec.cooling_value,
+        min_label: min_label,
+        max_label: max_label
+      %}
+
+    {%- when 'height' -%}
+      {% render 'comparison-cell', type: 'value', value: spec.height_value, subtext: spec.height_subtext %}
+
+    {%- when 'layers' -%}
+      {% render 'comparison-cell', type: 'value', value: spec.layers_count, subtext: spec.layers_subtext %}
+  {%- endcase -%}
+</div>
