@@ -1440,9 +1440,61 @@
                   },
                   "blocks": {}
                 },
+                "product_features_eYFAVL": {
+                  "type": "product-features",
+                  "name": "Caratteristiche prodotto",
+                  "settings": {
+                    "gap": 10,
+                    "icon_size": 22,
+                    "value_font_size": 16,
+                    "show_dividers": false,
+                    "padding-block-start": 4,
+                    "padding-block-end": 4,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {
+                    "product_feature_item_LQEyH3": {
+                      "type": "_product-feature-item",
+                      "settings": {
+                        "icon": "silhouette",
+                        "metafield": "custom.sensazione",
+                        "text": "",
+                        "label": ""
+                      },
+                      "blocks": {}
+                    },
+                    "product_feature_item_pcCbax": {
+                      "type": "_product-feature-item",
+                      "settings": {
+                        "icon": "ruler",
+                        "metafield": "custom.altezza",
+                        "text": "",
+                        "label": ""
+                      },
+                      "blocks": {}
+                    },
+                    "product_feature_item_4PrkFk": {
+                      "type": "_product-feature-item",
+                      "settings": {
+                        "icon": "box",
+                        "metafield": "custom.costruzione",
+                        "text": "",
+                        "label": ""
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "product_feature_item_LQEyH3",
+                    "product_feature_item_pcCbax",
+                    "product_feature_item_4PrkFk"
+                  ]
+                },
                 "text_WCkBqp": {
                   "type": "text",
                   "name": "t:names.text",
+                  "disabled": true,
                   "settings": {
                     "text": "{{ closest.product.description }}",
                     "width": "fit-content",
@@ -1472,6 +1524,7 @@
                 "judge_me_reviews_preview_badge_YpKcAg",
                 "product_title_WBaE6G",
                 "price_Hf7f9r",
+                "product_features_eYFAVL",
                 "text_WCkBqp"
               ]
             }
@@ -1492,7 +1545,7 @@
         "carousel_on_mobile": false,
         "max_products": 4,
         "columns": 4,
-        "mobile_columns": "2",
+        "mobile_columns": "1",
         "mobile_card_size": "60cqw",
         "columns_gap": 10,
         "rows_gap": 60,
