@@ -1,0 +1,80 @@
+/* ─────────────────────────────────────────────────────────────
+   Perché dormire comodi · V2 — integrazioni al CSS base
+   (perche-dormire-comodi.css resta il foglio principale: qui solo
+   le scene nuove — notte, domande, promesse — e la lista promesse)
+   ───────────────────────────────────────────────────────────── */
+
+/* ── Scene su fondo notte ── */
+.pdc-scene--notte,
+.pdc-scene--domande {
+  color: var(--pdc-cream);
+}
+
+.pdc-notte__inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── Scena promesse (stesso respiro del confronto V1) ── */
+.pdc-scene--promesse {
+  padding: clamp(5rem, 12vh, 9rem) clamp(1rem, 4vw, 3rem) clamp(7rem, 14vh, 11rem);
+}
+
+.pdc-promesse {
+  text-align: left;
+}
+
+.pdc-promessa {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: start;
+  padding: 1.25rem 0.25rem;
+  border-bottom: 1px solid rgb(70 70 70 / 0.08);
+}
+
+.pdc-promessa:last-child {
+  border-bottom: none;
+}
+
+.pdc-promessa__check {
+  display: grid;
+  place-items: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  margin-top: 0.15rem;
+  border-radius: 50%;
+  background: var(--pdc-sky);
+  color: var(--pdc-charcoal);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.pdc-promessa h3 {
+  margin: 0;
+  font-family: var(--pdc-display);
+  font-weight: 800;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.pdc-promessa p {
+  margin: 0.4rem 0 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  opacity: 0.75;
+}
+
+/* ── Modalità statica (no JS / reduced motion / no WebGL) ── */
+.pdc--static .pdc-scene--notte,
+.pdc--static .pdc-scene--domande {
+  background: linear-gradient(180deg, var(--pdc-night) 0%, #2e343b 100%);
+}
+
+.pdc--static .pdc-scene--promesse {
+  background: linear-gradient(180deg, var(--pdc-sky) 0%, #c9d8de 100%);
+}
