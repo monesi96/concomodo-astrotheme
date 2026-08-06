@@ -2371,6 +2371,63 @@
         "padding-inline-end": 0
       }
     },
+    "comodi_in_20_secondi_BFrFyR": {
+      "type": "comodi-in-20-secondi",
+      "blocks": {
+        "pro_KYkQT8": {
+          "type": "pro",
+          "settings": {
+            "text": "Cerchi un materasso che ti sostiene, notte dopo notte, senza farti sprofondare."
+          }
+        },
+        "pro_6QGUiU": {
+          "type": "pro",
+          "settings": {
+            "text": "Dormi di schiena o a pancia in giù e vuoi la colonna vertebrale allineata."
+          }
+        },
+        "pro_bGLefB": {
+          "type": "pro",
+          "settings": {
+            "text": "Ti sveglivi con la schiena indolenzita su un materasso troppo morbido."
+          }
+        },
+        "con_pEFQPa": {
+          "type": "con",
+          "settings": {
+            "text": "Cerchi la sensazione avvolgente e molto morbida del memory più spesso."
+          }
+        },
+        "con_HQiELn": {
+          "type": "con",
+          "settings": {
+            "text": "Dormi quasi sempre di fianco e preferisci un appoggio soffice sulle spalle."
+          }
+        }
+      },
+      "block_order": [
+        "pro_KYkQT8",
+        "pro_6QGUiU",
+        "pro_bGLefB",
+        "con_pEFQPa",
+        "con_HQiELn"
+      ],
+      "name": "Comodi in 20 secondi",
+      "settings": {
+        "eyebrow": "COMODI IN 20 SECONDI",
+        "heading": "Questo materasso fa per te?",
+        "subheading": "<p>In poche righe: quando è la scelta giusta e quando forse è meglio un altro modello.</p>",
+        "pro_title": "Fa per te se…",
+        "con_title": "Forse non fa per te se…",
+        "corner_radius": 24,
+        "section_width": "page-width",
+        "color_scheme": "scheme-2",
+        "padding-block-start": 40,
+        "padding-block-end": 40,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
+      }
+    },
     "section_3xrTMJ": {
       "type": "section",
       "blocks": {
@@ -4439,63 +4496,6 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
-    },
-    "comodi_in_20_secondi_BFrFyR": {
-      "type": "comodi-in-20-secondi",
-      "blocks": {
-        "pro_KYkQT8": {
-          "type": "pro",
-          "settings": {
-            "text": "Cerchi un materasso che ti sostiene, notte dopo notte, senza farti sprofondare."
-          }
-        },
-        "pro_6QGUiU": {
-          "type": "pro",
-          "settings": {
-            "text": "Dormi di schiena o a pancia in giù e vuoi la colonna vertebrale allineata."
-          }
-        },
-        "pro_bGLefB": {
-          "type": "pro",
-          "settings": {
-            "text": "Ti sveglivi con la schiena indolenzita su un materasso troppo morbido."
-          }
-        },
-        "con_pEFQPa": {
-          "type": "con",
-          "settings": {
-            "text": "Cerchi la sensazione avvolgente e molto morbida del memory più spesso."
-          }
-        },
-        "con_HQiELn": {
-          "type": "con",
-          "settings": {
-            "text": "Dormi quasi sempre di fianco e preferisci un appoggio soffice sulle spalle."
-          }
-        }
-      },
-      "block_order": [
-        "pro_KYkQT8",
-        "pro_6QGUiU",
-        "pro_bGLefB",
-        "con_pEFQPa",
-        "con_HQiELn"
-      ],
-      "name": "Comodi in 20 secondi",
-      "settings": {
-        "eyebrow": "COMODI IN 20 SECONDI",
-        "heading": "Questo materasso fa per te?",
-        "subheading": "<p>In poche righe: quando è la scelta giusta e quando forse è meglio un altro modello.</p>",
-        "pro_title": "Fa per te se…",
-        "con_title": "Forse non fa per te se…",
-        "corner_radius": 24,
-        "section_width": "page-width",
-        "color_scheme": "scheme-2",
-        "padding-block-start": 40,
-        "padding-block-end": 40,
-        "padding-inline-start": 0,
-        "padding-inline-end": 0
-      }
     }
   },
   "order": [
@@ -4506,6 +4506,7 @@
     "section_kHXYc3",
     "section_7KrxGG",
     "mattress_comparison_tYh7VN",
+    "comodi_in_20_secondi_BFrFyR",
     "section_3xrTMJ",
     "1783587914afdecf46",
     "section_KyfGGw",
@@ -4513,7 +4514,6 @@
     "installment_payments_tC9BhM",
     "section_chbtyY",
     "section_VL9fDV",
-    "178540771402f1992e",
-    "comodi_in_20_secondi_BFrFyR"
+    "178540771402f1992e"
   ]
 }

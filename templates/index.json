@@ -3463,7 +3463,7 @@
       "settings": {
         "eyebrow": "PAGAMENTO FLESSIBILE",
         "heading": "Dormi ora, paga Con Comodo",
-        "subheading": "<p>Pagamenti rateizzati a 3, 4 o 6 rate senza interessi con Klarna e HeyLight. Scegli come pagare direttamente al checkout.</p>",
+        "subheading": "<p>Pagamenti rateizzati a 3, 4 o 6 rate senza interessi con Klarna e PagoLight. Scegli come pagare direttamente al checkout.</p>",
         "show_rates": false,
         "rates": "3, 4, 6",
         "rate_word": "rate",
