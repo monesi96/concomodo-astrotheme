@@ -9,11 +9,6 @@
  */
 {
   "current": {
-    "company_legal_name": "EMME Z S.r.l.s.",
-    "company_vat_number": "09198510720",
-    "company_tax_code": "09198510720",
-    "company_rea": "BA - 678647",
-    "company_pec": "emme.z@pec.it",
     "logo": "shopify://shop_images/CC-black.svg",
     "logo_inverse": "shopify://shop_images/CC-white.svg",
     "logo_height": 36,
@@ -71,6 +66,11 @@
     "show_add_discount_code": true,
     "drawer_drop_shadow": true,
     "icon_stroke": "default",
+    "company_legal_name": "EMME Z S.r.l.s.",
+    "company_vat_number": "09198510720",
+    "company_tax_code": "09198510720",
+    "company_rea": "BA - 678647",
+    "company_pec": "emme.z@pec.it",
     "input_border_width": 1,
     "inputs_border_radius": 4,
     "popover_border_radius": 16,
@@ -154,7 +154,7 @@
           "foreground_heading": "#464646",
           "foreground": "#464646",
           "primary": "#464646",
-          "primary_hover": "#A9A6A4",
+          "primary_hover": "#a9a6a4",
           "border": "#464646",
           "shadow": "#464646",
           "primary_button_background": "{{ shop.brand.colors.primary[0].background }}",
@@ -192,7 +192,7 @@
           "background": "#b2c8d1",
           "foreground_heading": "#464646",
           "foreground": "#464646",
-          "primary": "#6B6A6A",
+          "primary": "#6b6a6a",
           "primary_hover": "#464646",
           "border": "rgba(0,0,0,0)",
           "shadow": "{{ shop.brand.colors.primary[0].background }}",
@@ -779,5 +779,10 @@
         }
       }
     }
+  },
+  "platform_customizations": {
+    "custom_css": [
+      ".sticky-add-to-cart__bar {z-index: 10;}"
+    ]
   }
 }
