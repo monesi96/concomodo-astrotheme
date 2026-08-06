@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -24,7 +33,9 @@
             "tag": "La durata",
             "title": "10 anni di garanzia",
             "text": "<p>I nostri materassi sono fatti per durare, e ce ne prendiamo la responsabilità: la garanzia copre i difetti di conformità e i cedimenti strutturali dei materiali per 10 anni dall'acquisto.</p>",
-            "points": "Copre difetti di produzione e cedimenti anomali degli strati interni\nNon copre la normale usura o l'uso su una base non adeguata\nPer attivarla basta il numero d'ordine: niente moduli infiniti"
+            "points": "Copre difetti di produzione e cedimenti anomali degli strati interni\nNon copre la normale usura o l'uso su una base non adeguata\nPer attivarla basta il numero d'ordine: niente moduli infiniti",
+            "link_label": "",
+            "link": ""
           }
         },
         "g_consegna": {
@@ -35,7 +46,9 @@
             "tag": "La consegna",
             "title": "Consegna gratuita",
             "text": "<p>Il prezzo che vedi è il prezzo che paghi: la consegna a casa tua è inclusa, senza sorprese al checkout.</p>",
-            "points": "Nessun costo aggiunto all'ordine\nIl materasso arriva compresso in scatola, facile da portare in camera\nTi aggiorniamo noi sui tempi di consegna previsti"
+            "points": "Nessun costo aggiunto all'ordine\nIl materasso arriva compresso in scatola, facile da portare in camera\nTi aggiorniamo noi sui tempi di consegna previsti",
+            "link_label": "",
+            "link": ""
           }
         },
         "g_cambio": {
@@ -52,12 +65,40 @@
           }
         }
       },
-      "block_order": ["g_prova", "g_garanzia", "g_consegna", "g_cambio"],
-      "settings": {}
+      "block_order": [
+        "g_prova",
+        "g_garanzia",
+        "g_consegna",
+        "g_cambio"
+      ],
+      "settings": {
+        "eyebrow": "Le nostre garanzie",
+        "title": "Le nostre garanzie.",
+        "intro": "",
+        "color_scheme": "",
+        "padding-block-start": 56,
+        "padding-block-end": 72,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
+      }
     },
     "parla": {
-      "type": "vuoi-parlare-con-noi"
+      "type": "vuoi-parlare-con-noi",
+      "settings": {
+        "heading": "Vuoi parlare con noi?",
+        "subheading": "<p>Parla con un esperto del sonno e trova la soluzione di riposo più adatta a te.</p>",
+        "corner_radius": 24,
+        "section_width": "page-width",
+        "color_scheme": "",
+        "padding-block-start": 48,
+        "padding-block-end": 48,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
+      }
     }
   },
-  "order": ["main", "parla"]
+  "order": [
+    "main",
+    "parla"
+  ]
 }
