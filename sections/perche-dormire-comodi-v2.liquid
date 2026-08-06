@@ -1,0 +1,288 @@
+{%- liquid
+  assign cta_url = section.settings.cta_url | default: '/collections/all'
+  assign quiz_url = section.settings.quiz_url | default: '/pages/quiz'
+
+  comment
+    Prezzo «a partire da»: se non è impostato un testo manuale, viene
+    calcolato dal prezzo minimo reale dei prodotti della collezione
+    scelta (o della collezione 'materassi' se presente).
+  endcomment
+  assign price_coll = section.settings.price_collection
+  if price_coll == blank
+    assign price_coll = collections['materassi']
+  endif
+  assign min_price = 0
+  if price_coll != blank
+    for p in price_coll.products limit: 50
+      if p.price_min > 0
+        if min_price == 0 or p.price_min < min_price
+          assign min_price = p.price_min
+        endif
+      endif
+    endfor
+  endif
+  assign price_label = section.settings.price_text
+  if price_label == blank and min_price > 0
+    assign formatted_price = min_price | money
+    assign price_label = 'a partire da ' | append: formatted_price
+  endif
+-%}
+
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,500;0,700;0,800;0,900;1,700;1,900&display=swap" rel="stylesheet">
+{{ 'perche-dormire-comodi.css' | asset_url | stylesheet_tag }}
+{{ 'perche-dormire-comodi-v2.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'gsap.min.js' | asset_url }}" defer></script>
+<script src="{{ 'gsap-scrolltrigger.min.js' | asset_url }}" defer></script>
+<script
+  src="{{ 'perche-dormire-comodi-v2.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+
+{%- comment -%}
+  Variante V2 della pagina narrativa: stesso impianto visivo (cielo three.js,
+  scene pinnate GSAP, CSS base condiviso), ma arco in positivo — si parte dal
+  cliente e dal valore del sonno, la notte è il sonno (non la tempesta), i
+  dubbi di chi sceglie prendono il posto della parodia dei competitor e la
+  tabella-confronto diventa «Le nostre promesse».
+{%- endcomment -%}
+
+<div
+  class="pdc"
+  data-pdc
+  data-three-url="{{ 'three.module.min.js' | asset_url }}"
+>
+  <div class="pdc__backdrop is-cream" data-pdc-backdrop aria-hidden="true"></div>
+  <canvas class="pdc__sky" data-pdc-sky aria-hidden="true"></canvas>
+
+  {%- comment -%} ── Scena 1 · Hero ── {%- endcomment -%}
+  <section class="pdc-scene pdc-scene--hero" data-pdc-scene="hero">
+    <div class="pdc-scene__pin" data-pdc-pin>
+      <div class="pdc-hero__inner" data-pdc-hero-inner>
+        <p class="pdc-eyebrow" data-pdc-hero-item>Perché dormire comodi?</p>
+        <h1 class="pdc-hero__title" data-pdc-hero-item>
+          Le giornate migliori<br>
+          iniziano da una <em class="pdc-accent">buona notte</em>.
+        </h1>
+        <p class="pdc-hero__sub" data-pdc-hero-item>Scorri. Con comodo, ovviamente.</p>
+      </div>
+      <div class="pdc-zzz" data-pdc-zzz aria-hidden="true">
+        <span>Z</span><span>z</span><span>z</span>
+      </div>
+      <div class="pdc-scroll-cue" data-pdc-cue aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 4v14m0 0-6-6m6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ── Scena 2 · La notte / il valore del sonno ── {%- endcomment -%}
+  <section class="pdc-scene pdc-scene--notte" data-pdc-scene="notte">
+    <div class="pdc-scene__pin" data-pdc-pin>
+      <div class="pdc-notte__inner" data-pdc-notte-inner>
+        <h2 class="pdc-storm__title" data-pdc-notte-item>
+          Un terzo della vita lo passiamo dormendo.
+        </h2>
+        <p class="pdc-storm__sub" data-pdc-notte-item>
+          E dalle nostre notti dipendono le giornate: l'energia, l'umore, perfino la schiena. Per questo dormire comodi conta così tanto.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ── Scena 3 · Le domande di chi sceglie → l'alba ── {%- endcomment -%}
+  <section class="pdc-scene pdc-scene--domande" data-pdc-scene="domande">
+    <div class="pdc-scene__pin" data-pdc-pin>
+      <div class="pdc-rings" data-pdc-rings aria-hidden="true">
+        <div class="pdc-ring pdc-ring--outer">
+          <span class="pdc-badge">Memory o molle?</span>
+          <span class="pdc-badge pdc-badge--fill">Morbido o sostenuto?</span>
+          <span class="pdc-badge">Sarà fresco d'estate?</span>
+          <span class="pdc-badge pdc-badge--fill">Andrà bene per la schiena?</span>
+          <span class="pdc-badge">Quanto deve durare?</span>
+          <span class="pdc-badge pdc-badge--fill">Matrimoniale o singolo?</span>
+        </div>
+        <div class="pdc-ring pdc-ring--inner">
+          <span class="pdc-badge pdc-badge--fill">E se poi non mi trovo?</span>
+          <span class="pdc-badge">Meglio provarlo prima?</span>
+          <span class="pdc-badge pdc-badge--fill">Si può lavare?</span>
+          <span class="pdc-badge">Quanto dovrei spendere?</span>
+        </div>
+      </div>
+      <div class="pdc-storm__step" data-pdc-domande-a>
+        <h2 class="pdc-storm__title">
+          Lo sappiamo: scegliere un materasso fa venire mille domande.
+        </h2>
+      </div>
+      <div class="pdc-storm__step pdc-storm__step--b" data-pdc-domande-b>
+        <h2 class="pdc-storm__title pdc-storm__title--big">
+          E se bastasse…<br><em>mettersi comodi?</em>
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ── Scena 4 · La filosofia Concomodo ── {%- endcomment -%}
+  <section class="pdc-scene pdc-scene--filosofia" data-pdc-scene="filosofia">
+    <div class="pdc-drift" aria-hidden="true">
+      <span class="pdc-cloud pdc-cloud--d1"></span>
+      <span class="pdc-cloud pdc-cloud--d2"></span>
+      <span class="pdc-cloud pdc-cloud--d3"></span>
+    </div>
+    <div class="pdc-filosofia__head" data-pdc-reveal>
+      <p class="pdc-eyebrow">La filosofia Concomodo</p>
+      <h2 class="pdc-h2">Dormire comodi si sceglie con comodo.</h2>
+    </div>
+    <div class="pdc-cards">
+      <article class="pdc-card" data-pdc-card>
+        <span class="pdc-card__num">01</span>
+        <h3>Parliamo chiaro</h3>
+        <p>Ogni materasso raccontato strato per strato, in italiano semplice. Capire è il primo passo per scegliere bene.</p>
+      </article>
+      <article class="pdc-card" data-pdc-card>
+        <span class="pdc-card__num">02</span>
+        <h3>Pochi modelli, scelti bene</h3>
+        <p>Solo i materassi che sceglieremmo per casa nostra, ognuno pensato per un modo diverso di dormire.</p>
+      </article>
+      <article class="pdc-card" data-pdc-card>
+        <span class="pdc-card__num">03</span>
+        <h3>Tutto alla luce del sole</h3>
+        <p>Materiali, centimetri e zone di portanza dichiarati, nero su bianco. Sai esattamente cosa porti in camera.</p>
+      </article>
+      <article class="pdc-card" data-pdc-card>
+        <span class="pdc-card__num">04</span>
+        <h3>Il prezzo giusto, sempre</h3>
+        <p>Costa quello che vale, tutto l'anno. Così decidi quando ti senti pronto: con comodo.</p>
+      </article>
+    </div>
+  </section>
+
+  {%- comment -%} ── Scena 5 · Le nostre promesse ── {%- endcomment -%}
+  <section class="pdc-scene pdc-scene--promesse" data-pdc-scene="promesse">
+    <div class="pdc-confronto__panel" data-pdc-reveal>
+      <p class="pdc-eyebrow">Nero su bianco</p>
+      <h2 class="pdc-h2">Le nostre promesse.</h2>
+      <div class="pdc-promesse">
+        <div class="pdc-promessa" data-pdc-row>
+          <span class="pdc-promessa__check" aria-hidden="true">✓</span>
+          <div>
+            <h3>100 notti di prova</h3>
+            <p>Un materasso si conosce dormendoci: provalo a casa tua, con tutta la calma che serve.</p>
+          </div>
+        </div>
+        <div class="pdc-promessa" data-pdc-row>
+          <span class="pdc-promessa__check" aria-hidden="true">✓</span>
+          <div>
+            <h3>10 anni di garanzia</h3>
+            <p>Perché un buon materasso ti accompagna a lungo. E noi pure.</p>
+          </div>
+        </div>
+        <div class="pdc-promessa" data-pdc-row>
+          <span class="pdc-promessa__check" aria-hidden="true">✓</span>
+          <div>
+            <h3>Consegna gratuita</h3>
+            <p>Arriva direttamente a casa tua, senza costi a sorpresa.</p>
+          </div>
+        </div>
+        <div class="pdc-promessa" data-pdc-row>
+          <span class="pdc-promessa__check" aria-hidden="true">✓</span>
+          <div>
+            <h3>Prezzo chiaro, tutto l'anno</h3>
+            <p>Sempre lo stesso: decidi quando ti senti pronto, con comodo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ── Scena 6 · Chiusa ── {%- endcomment -%}
+  <section class="pdc-scene pdc-scene--chiusa" data-pdc-scene="chiusa">
+    <div class="pdc-scene__pin" data-pdc-pin>
+      <div class="pdc-halo" data-pdc-halo aria-hidden="true"></div>
+      <div class="pdc-chiusa__inner">
+        <p class="pdc-chiusa__lead" data-pdc-chiusa-item>In fondo…</p>
+        <h2 class="pdc-chiusa__title" data-pdc-chiusa-item>
+          L'unica cosa importante<br>è <em>dormire comodi</em>.
+        </h2>
+        <p class="pdc-chiusa__sub" data-pdc-chiusa-item>Per questo è il nostro unico obiettivo.</p>
+        <div class="pdc-chiusa__cta" data-pdc-chiusa-item>
+          <a href="{{ cta_url }}" class="pdc-btn pdc-btn--primary">
+            {{ section.settings.cta_label }}
+            {%- if price_label != blank -%}
+              <span class="pdc-btn__price">{{ price_label }}</span>
+            {%- endif -%}
+          </a>
+          <a href="{{ quiz_url }}" class="pdc-btn pdc-btn--ghost">{{ section.settings.quiz_label }}</a>
+        </div>
+        <ul class="pdc-chips" data-pdc-chiusa-item>
+          <li>100 notti di prova</li>
+          <li>10 anni di garanzia</li>
+          <li>Consegna gratuita</li>
+        </ul>
+      </div>
+      <div class="pdc-chiusa__clouds" aria-hidden="true">
+        <span class="pdc-cloud pdc-cloud--f1"></span>
+        <span class="pdc-cloud pdc-cloud--f2"></span>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Perché dormire comodi V2",
+  "tag": "section",
+  "class": "pdc-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Variante V2 della pagina narrativa «Perché dormire comodi»: tono più caldo e vicino al cliente, senza confronto con i competitor. Testi e animazioni sono curati nel codice della sezione; qui trovi solo le impostazioni della chiusa."
+    },
+    {
+      "type": "header",
+      "content": "Chiusa e call to action"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Testo bottone principale",
+      "default": "Scegli Concomodo"
+    },
+    {
+      "type": "collection",
+      "id": "price_collection",
+      "label": "Collezione per il prezzo «a partire da»",
+      "info": "Il prezzo mostrato è il minimo reale tra i prodotti di questa collezione. Se vuota, viene usata la collezione «materassi» (se esiste)."
+    },
+    {
+      "type": "text",
+      "id": "price_text",
+      "label": "Testo prezzo manuale",
+      "info": "Se compilato, sostituisce il prezzo calcolato dalla collezione. Es: «a partire da 390€»"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Link bottone principale",
+      "info": "Se vuoto: /collections/all"
+    },
+    {
+      "type": "text",
+      "id": "quiz_label",
+      "label": "Testo bottone quiz",
+      "default": "Non sai quale? Fai il quiz"
+    },
+    {
+      "type": "url",
+      "id": "quiz_url",
+      "label": "Link bottone quiz",
+      "info": "Se vuoto: /pages/quiz"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Perché dormire comodi V2"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "main": {
+      "type": "perche-dormire-comodi-v2",
+      "settings": {
+        "cta_label": "Scegli Concomodo",
+        "price_collection": "",
+        "price_text": "",
+        "cta_url": "shopify://collections/materassi",
+        "quiz_label": "Non sai quale? Scegli il più adatto in 5 step",
+        "quiz_url": "shopify://pages/quiz"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
