@@ -312,7 +312,7 @@
                   "name": "t:names.icon",
                   "settings": {
                     "icon": "price_tag",
-                    "image_upload": "shopify://shop_images/sonno.svg",
+                    "image_upload": "shopify://shop_images/sleep_12515535_1.svg",
                     "width": 56,
                     "link": "",
                     "open_in_new_tab": false
@@ -425,7 +425,7 @@
                   "name": "t:names.icon",
                   "settings": {
                     "icon": "price_tag",
-                    "image_upload": "shopify://shop_images/consegna.svg",
+                    "image_upload": "shopify://shop_images/delivery_709790_1.svg",
                     "width": 56,
                     "link": "",
                     "open_in_new_tab": false
@@ -538,7 +538,7 @@
                   "name": "t:names.icon",
                   "settings": {
                     "icon": "price_tag",
-                    "image_upload": "shopify://shop_images/garanzia.svg",
+                    "image_upload": "shopify://shop_images/Quality_Assurance.svg",
                     "width": 56,
                     "link": "",
                     "open_in_new_tab": false
