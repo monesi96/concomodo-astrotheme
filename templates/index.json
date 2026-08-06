@@ -3374,6 +3374,7 @@
       ],
       "custom_css": [
         "> div > div {margin: 0 30px;}",
+        "a {font-size: 1.3rem;}",
         "@media screen and (max-width: 749px) {> div > div {margin: 0; }}"
       ],
       "name": "t:names.custom_section",
