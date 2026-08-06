@@ -3362,7 +3362,7 @@
             "font_size_mobile": "",
             "width": "fit-content",
             "custom_width": 100,
-            "width_mobile": "fit-content",
+            "width_mobile": "custom",
             "custom_width_mobile": 100
           },
           "blocks": {}
@@ -3385,7 +3385,7 @@
         "align_baseline": false,
         "horizontal_alignment_flex_direction_column": "center",
         "vertical_alignment_flex_direction_column": "center",
-        "gap": 16,
+        "gap": 50,
         "section_width": "page-width",
         "section_height": "",
         "section_height_custom": 50,
