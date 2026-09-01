@@ -11,6 +11,7 @@
   "sections": {
     "main": {
       "type": "perche-dormire-comodi",
+      "disabled": true,
       "settings": {
         "cta_label": "Scegli Concomodo",
         "price_collection": "",
@@ -19,9 +20,22 @@
         "quiz_label": "Non sai quale? Scegli il più adatto in 5 step",
         "quiz_url": "shopify://pages/quiz"
       }
+    },
+    "perche_dormire_comodi_v2_H8KQiQ": {
+      "type": "perche-dormire-comodi-v2",
+      "name": "Perché dormire comodi V2",
+      "settings": {
+        "cta_label": "Scegli Concomodo",
+        "price_collection": "",
+        "price_text": "",
+        "cta_url": "",
+        "quiz_label": "Non sai quale? Fai il quiz",
+        "quiz_url": ""
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "perche_dormire_comodi_v2_H8KQiQ"
   ]
 }
