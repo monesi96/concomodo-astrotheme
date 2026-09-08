@@ -1971,7 +1971,7 @@
     "settings": [
       {
         "type": "paragraph",
-        "content": "Pagamento a rate HeyLight (PagoLight). La rata minima è calcolata dividendo il prezzo per il numero di rate. Usata dal blocco «Rata HeyLight» in pagina prodotto e dalla riga sotto il prezzo nelle card."
+        "content": "Pagamento a rate HeyLight. La rata minima è calcolata dividendo il prezzo per il numero di rate. Usata dal blocco «Rata HeyLight» in pagina prodotto e dalla riga sotto il prezzo nelle card."
       },
       {
         "type": "range",
