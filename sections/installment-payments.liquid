@@ -39,7 +39,7 @@
       </ul>
     {%- endif -%}
 
-    {%- if section.settings.show_klarna or section.settings.show_pagolight -%}
+    {%- if section.settings.show_klarna or section.settings.show_heylight -%}
       <div class="installment-payments__providers">
         {%- if section.settings.with_provider_label and section.settings.provider_label != blank -%}
           <span class="installment-payments__providers-label">{{ section.settings.provider_label }}</span>
@@ -53,12 +53,9 @@
               </svg>
             </span>
           {%- endif -%}
-          {%- if section.settings.show_pagolight -%}
-            <span class="installment-payments__logo installment-payments__logo--pagolight" aria-label="PagoLight">
-              <svg viewBox="0 0 110 34" role="img" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
-                <rect width="110" height="34" rx="6" fill="#00A88E"/>
-                <text x="55" y="23" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF" letter-spacing="0.2">PagoLight</text>
-              </svg>
+          {%- if section.settings.show_heylight -%}
+            <span class="installment-payments__logo installment-payments__logo--heylight">
+              {%- render 'heylight-logo', class: 'installment-payments__heylight-svg' -%}
             </span>
           {%- endif -%}
         </div>
@@ -204,6 +201,22 @@
     width: auto;
   }
 
+  .installment-payments__logo--heylight {
+    box-sizing: border-box;
+    align-items: center;
+    height: 30px;
+    padding-inline: 10px;
+    border: 1px solid rgb(from currentcolor r g b / 15%);
+    border-radius: 6px;
+    background: #fff;
+    color: #000;
+  }
+
+  .installment-payments__logo--heylight .installment-payments__heylight-svg {
+    height: 13px;
+    width: auto;
+  }
+
   .installment-payments__disclaimer {
     margin: 0;
     max-width: 60ch;
@@ -252,7 +265,7 @@
       "type": "richtext",
       "id": "subheading",
       "label": "Testo",
-      "default": "<p>Pagamenti rateizzati a 3, 4 o 6 rate senza interessi con Klarna e PagoLight. Scegli come pagare direttamente al checkout.</p>"
+      "default": "<p>Pagamenti rateizzati a 3, 4 o 6 rate senza interessi con Klarna e HeyLight. Scegli come pagare direttamente al checkout.</p>"
     },
     {
       "type": "header",
@@ -288,8 +301,8 @@
     },
     {
       "type": "checkbox",
-      "id": "show_pagolight",
-      "label": "Mostra PagoLight",
+      "id": "show_heylight",
+      "label": "Mostra HeyLight",
       "default": true
     },
     {

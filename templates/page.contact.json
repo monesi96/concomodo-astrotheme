@@ -484,7 +484,7 @@
                         "faq_r5_t": {
                           "type": "text",
                           "settings": {
-                            "text": "<p>Sì, al checkout puoi scegliere il pagamento in 3, 4 o 6 rate senza interessi con Klarna o PagoLight.</p>",
+                            "text": "<p>Sì, al checkout puoi scegliere il pagamento in 3, 4 o 6 rate senza interessi con Klarna o HeyLight.</p>",
                             "width": "100%",
                             "max_width": "none",
                             "alignment": "left",

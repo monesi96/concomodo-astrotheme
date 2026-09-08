@@ -1,5 +1,5 @@
 {%- doc -%}
-  Rata minima HeyLight (PagoLight): mostra "Pagalo da X €/mese" calcolato
+  Rata minima HeyLight: mostra "Pagalo da X €/mese" calcolato
   dividendo il prezzo della variante selezionata per il numero di rate
   impostato in Impostazioni tema → Rate HeyLight. Sotto il prezzo minimo
   configurato il blocco non viene mostrato.
@@ -25,7 +25,9 @@
     style="{% render 'spacing-style', settings: block.settings %}"
     {{ block.shopify_attributes }}
   >
-    <span class="heylight-rate__chip">{{ block.settings.brand_label }}</span>
+    <span class="heylight-rate__chip">
+      {%- render 'heylight-logo', class: 'heylight-rate__logo', label: block.settings.brand_label -%}
+    </span>
     <span class="heylight-rate__text">
       {{ block.settings.text_before }}
       <strong>{{ hl_rate }}{{ block.settings.per_month_label }}</strong>
@@ -56,13 +58,21 @@
   }
 
   .heylight-rate__chip {
+    display: inline-flex;
+    align-items: center;
     flex-shrink: 0;
-    padding: 0.25em 0.6em;
+    padding: 0.4em 0.6em;
     border: 1px solid rgb(var(--color-foreground-rgb) / 0.25);
     border-radius: 8px;
-    background-color: var(--color-background);
-    font-size: 0.8em;
-    font-weight: 700;
+    background-color: #fff;
+    color: #000;
+    line-height: 1;
+  }
+
+  .heylight-rate__logo {
+    display: block;
+    height: 0.9em;
+    width: auto;
   }
 
   .heylight-rate__text strong {
@@ -92,7 +102,8 @@
     {
       "type": "text",
       "id": "brand_label",
-      "label": "Etichetta badge",
+      "label": "Testo alternativo del logo",
+      "info": "Il badge mostra il logo HeyLight; questo testo è usato per l'accessibilità.",
       "default": "HeyLight"
     },
     {
