@@ -16,7 +16,7 @@
           "type": "chapter",
           "settings": {
             "heading": "Perché il materasso nuovo sembra \"diverso\"",
-            "content": "<p>Le prime notti su un materasso nuovo possono sorprendere: sembra più rigido, più \"presente\" di quello a cui eri abituato. È normale, e succede per due motivi.</p><p>Il primo: i materiali sono nuovi davvero. Memory e poliuretani escono dalla produzione compatti e raggiungono la loro portanza definitiva solo dopo qualche settimana di utilizzo.</p><p>Il secondo è il tuo corpo: dopo anni sullo stesso materasso — magari afflosciato — schiena e spalle si sono adattate a una superficie che non li sosteneva più. Serve qualche notte perché \"disimparino\" le vecchie abitudini.</p>",
+            "content": "<p>Le prime notti su un materasso nuovo possono sorprendere: la sensazione quasi sempre diversa rispetto a cui eri abituato. È normale, e succede per due motivi.</p><p>Il primo: i nostri materiali sono nuovi davvero. Memory e poliuretani escono dalla produzione compatti e raggiungono la loro portanza definitiva solo dopo qualche settimana di utilizzo.</p><p>Il secondo è il tuo corpo: dopo anni sul precedente materasso, schiena e spalle si sono adattate a una superficie che non li sosteneva più come il primo giorno. Serve qualche notte finché \"disimparino\" le vecchie abitudini.</p>",
             "link_label": "",
             "link": ""
           }
@@ -94,7 +94,7 @@
         "cta_finale": {
           "type": "cta",
           "settings": {
-            "heading": "Il materasso giusto si sceglie con comodo",
+            "heading": "Il materasso giusto si sceglie Concomodo",
             "text": "<p>Non ce l'hai ancora? Rispondi a poche domande e ti consigliamo il modello più adatto a come dormi. E poi hai 100 notti per provarlo, rodaggio compreso.</p>",
             "button_label": "Fai il quiz",
             "button_link": "/pages/quiz",
@@ -118,7 +118,7 @@
       "settings": {
         "eyebrow": "Guida Concomodo",
         "title": "Come \"rodare\" il materasso nuovo (e perché serve tempo)",
-        "intro": "<p>Un materasso nuovo non dà il meglio la prima notte: come le scarpe buone, ha bisogno di un po' di rodaggio. Ecco cosa succede nelle prime settimane, come accelerare l'adattamento e quando preoccuparsi (spoiler: quasi mai).</p>",
+        "intro": "<p>Un materasso nuovo può richiedere qualche giorno di adattamento, anche quando è perfetto per le proprie esigenze. Ecco cosa succede nelle prime settimane, come accelerare l'adattamento e perché, se non ti convince, non resti mai da solo.</p>",
         "show_toc": true,
         "toc_title": "In questa guida",
         "color_scheme": "",
@@ -165,6 +165,7 @@
         "card_w7aT7z",
         "card_MGVMER"
       ],
+      "disabled": true,
       "settings": {
         "heading": "Vuoi parlare con noi?",
         "subheading": "<p>Parla con un esperto del sonno e trova la soluzione di riposo più adatta a te.</p>",
@@ -176,10 +177,63 @@
         "padding-inline-start": 0,
         "padding-inline-end": 0
       }
+    },
+    "vuoi_parlare_con_noi_TbgkRU": {
+      "type": "vuoi-parlare-con-noi",
+      "blocks": {
+        "card_7xTXj9": {
+          "type": "card",
+          "disabled": true,
+          "settings": {
+            "icon": "phone",
+            "title": "Chiamaci",
+            "text": "<p>Siamo qui per aiutarti a ritrovare il piacere di un sonno sereno e di qualità.</p>",
+            "link": "",
+            "open_in_new_tab": false
+          }
+        },
+        "card_e44DBA": {
+          "type": "card",
+          "settings": {
+            "icon": "chat",
+            "title": "Chatta con noi",
+            "text": "<p>Apri la chat e ottieni subito l'assistenza di cui hai bisogno, senza perdite di tempo.</p>",
+            "link": "",
+            "open_in_new_tab": false
+          }
+        },
+        "card_9xLkJB": {
+          "type": "card",
+          "settings": {
+            "icon": "email",
+            "title": "Inviaci un'email",
+            "text": "<p>Scrivici e ti risponderemo prima che tu possa dire \"fate Concomodo\".</p>",
+            "link": "mailto:info@concomodo.it",
+            "open_in_new_tab": false
+          }
+        }
+      },
+      "block_order": [
+        "card_7xTXj9",
+        "card_e44DBA",
+        "card_9xLkJB"
+      ],
+      "settings": {
+        "heading": "Vuoi parlare con noi?",
+        "subheading": "<p>Parla con un esperto del sonno e trova la soluzione di riposo più adatta a te.</p>",
+        "corner_radius": 24,
+        "section_width": "page-width",
+        "color_scheme": "scheme-2",
+        "padding-block-start": 48,
+        "padding-block-end": 48,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
+      }
     }
   },
   "order": [
     "guide",
-    "parla"
+    "parla",
+    "vuoi_parlare_con_noi_TbgkRU"
   ]
 }
