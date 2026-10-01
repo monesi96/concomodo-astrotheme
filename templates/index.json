@@ -3412,6 +3412,7 @@
       "blocks": {
         "card_phone": {
           "type": "card",
+          "disabled": true,
           "settings": {
             "icon": "phone",
             "title": "Chiamaci",
@@ -3436,7 +3437,7 @@
             "icon": "email",
             "title": "Inviaci un'email",
             "text": "<p>Scrivici e ti risponderemo prima che tu possa dire \"fate Concomodo\".</p>",
-            "link": "",
+            "link": "mailto:info@concomodo.it",
             "open_in_new_tab": false
           }
         }
@@ -3460,6 +3461,7 @@
     },
     "installment_payments_aUaDcf": {
       "type": "installment-payments",
+      "disabled": true,
       "name": "Pagamenti rateizzati",
       "settings": {
         "eyebrow": "PAGAMENTO FLESSIBILE",
