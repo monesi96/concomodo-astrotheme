@@ -946,7 +946,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Dormici sopra notte dopo notte. Dai al tuo corpo il tempo di abituarsi: consigliamo almeno 3-4 settimane prima di giudicare.</p>",
+                    "text": "<p>Dormici sopra notte dopo notte. Dai al tuo corpo il tempo di abituarsi: consigliamo almeno 2-3 settimane prima di giudicare.</p>",
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
@@ -1074,7 +1074,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Se entro 100 notti non è il materasso giusto per te, lo ritiriamo e ti rimborsiamo. Ci pensiamo noi, senza costi per te.</p>",
+                    "text": "<p>Se entro 100 notti non è il materasso giusto per te, lo ritiriamo o sostituiamo. Ci pensiamo noi, senza costi per te.</p>",
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
@@ -1158,7 +1158,7 @@
           "type": "faq",
           "settings": {
             "question": "Come funzionano esattamente le 100 notti di prova?",
-            "answer": "<p>Ricevi il materasso a casa e lo provi per un massimo di 100 notti. Se entro questo periodo decidi che non fa per te, ci contatti e organizziamo il ritiro: ti rimborsiamo l'intero importo del materasso.</p>"
+            "answer": "<p>Ricevi il materasso a casa e lo provi per un massimo di 100 notti. Se entro questo periodo decidi che non fa per te, ci contatti e organizziamo il ritiro o la sostituzione senza costi aggiuntivi: in caso di ritiro riceverai un rimborso completo.</p>"
           }
         },
         "faq_2": {
@@ -1179,7 +1179,7 @@
           "type": "faq",
           "settings": {
             "question": "Quanto devo aspettare prima di capire se è il materasso giusto?",
-            "answer": "<p>Consigliamo di provarlo per almeno 3-4 settimane: al corpo serve tempo per adattarsi a un nuovo supporto. È proprio per questo che la prova dura 100 notti e non pochi giorni.</p>"
+            "answer": "<p>Consigliamo di provarlo per almeno 2-3 settimane: al corpo serve tempo per adattarsi a un nuovo supporto. È proprio per questo che la prova dura 100 notti e non pochi giorni.</p>"
           }
         },
         "faq_5": {
