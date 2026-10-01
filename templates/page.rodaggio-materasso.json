@@ -73,29 +73,29 @@
         "faq_2": {
           "type": "faq",
           "settings": {
-            "question": "Mi fa male la schiena le prime notti: è un problema?",
-            "answer": "<p>Un po' di indolenzimento nelle prime notti può capitare, soprattutto se arrivi da un materasso molto diverso (ad esempio molto più morbido): il corpo si sta riallineando. Se dopo le prime settimane non ti senti ancora a tuo agio, scrivici: ti aiutiamo a capire se il modello è quello giusto per te.</p>"
+            "question": "Le prime notti mi fa male la schiena: è normale?",
+            "answer": "<p>Può capitare, soprattutto se arrivi da un materasso molto diverso, per esempio molto più morbido: il corpo sta prendendo confidenza con un nuovo sostegno e di solito trova il suo equilibrio nel giro di qualche settimana. Se dopo il rodaggio non ti senti ancora a tuo agio, scrivici: troviamo insieme il modello giusto per te, con reso o sostituzione gratuita.<br/><br/>Se il dolore è intenso o dura nel tempo, parlane anche con il tuo medico.</p>"
           }
         },
         "faq_3": {
           "type": "faq",
           "settings": {
-            "question": "Le 100 notti partono dalla consegna o dal primo utilizzo?",
-            "answer": "<p>Dalla consegna. Ti consigliamo di iniziare a dormirci da subito: così il rodaggio avviene tutto dentro il periodo di prova e hai tutto il tempo per un giudizio sereno.</p>"
+            "question": "Da quando partono reso e sostituzione?",
+            "answer": "<p>Dalla consegna. Ti consigliamo di dormirci da subito, così il rodaggio si completa con tutto il tempo per decidere.</p>"
           }
         },
         "faq_4": {
           "type": "faq",
           "settings": {
-            "question": "Il topper aiuta durante il rodaggio?",
-            "answer": "<p>Se il materasso nuovo ti sembra più sostenuto del previsto, un topper può addolcire la superficie mentre i materiali si assestano — e resta utile anche dopo, per proteggere il materasso e regolare il comfort.</p>"
+            "question": "Il topper può aiutare durante il rodaggio?",
+            "answer": "<p>Sì: se il materasso nuovo ti sembra più sostenuto di quanto ti aspettavi, un topper rende la superficie più morbida fin da subito, mentre i materiali si assestano con meno stress meccanico. Resta utile anche dopo, per regolare il comfort come e dove preferisci.</p>"
           }
         },
         "cta_finale": {
           "type": "cta",
           "settings": {
             "heading": "Il materasso giusto si sceglie Concomodo",
-            "text": "<p>Non ce l'hai ancora? Rispondi a poche domande e ti consigliamo il modello più adatto a come dormi. E poi hai 100 notti per provarlo, rodaggio compreso.</p>",
+            "text": "<p>Non l'hai ancora scelto? Rispondi a poche domande e ti consigliamo il modello più adatto a come dormi. E se non è quello giusto, hai reso o sostituzione gratuiti.</p>",
             "button_label": "Fai il quiz",
             "button_link": "/pages/quiz",
             "color_scheme": "scheme-2"

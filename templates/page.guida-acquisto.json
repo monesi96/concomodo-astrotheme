@@ -16,7 +16,7 @@
           "type": "chapter",
           "settings": {
             "heading": "Parti dal budget",
-            "content": "<p>Un buon materasso è un investimento su circa <strong>un terzo della tua vita</strong>. La gamma concomodo parte da <strong>€259</strong> per il materasso a molle Compatto e cresce con i modelli in memory e ibridi premium: prezzi diretti, senza intermediari, con <strong>consegna gratuita in tutta Italia</strong>.</p><p>Qualunque modello tu scelga, hai <strong>100 notti di prova</strong> (soddisfatti o rimborsati) e una <strong>garanzia fino a 10 anni</strong>: il rischio di sbagliare acquisto, in pratica, non esiste.</p>",
+            "content": "<p>Un buon materasso è un investimento su circa <strong>un terzo della tua vita</strong>. La gamma Concomodo parte da <strong>€259 </strong>e cresce con i modelli in memory e ibridi premium: prezzi diretti, senza intermediari, con <strong>consegna gratuita in tutta Italia</strong>.</p><p>Qualunque modello tu scelga, hai <strong>100 notti di prova</strong> e una <strong>garanzia di 5 o 10 anni</strong>: il rischio di sbagliare acquisto, in pratica, non esiste.</p>",
             "link_label": "",
             "link": ""
           }
@@ -25,7 +25,7 @@
           "type": "chapter",
           "settings": {
             "heading": "Scegli la misura giusta",
-            "content": "<p>Nella scelta della misura contano due cose: <strong>lo spazio che hai a disposizione</strong> e <strong>chi ci dorme</strong>.</p><ul><li><strong>Singolo</strong> — per una persona, camerette e letti di servizio.</li><li><strong>Una piazza e mezza (francese)</strong> — per chi dorme solo ma ama muoversi, o per ospiti occasionali in coppia.</li><li><strong>Matrimoniale</strong> — per la coppia: più larghezza significa meno disturbi reciproci durante la notte.</li></ul><p>Controlla anche la lunghezza: la regola è <strong>almeno 15–20 cm in più della tua altezza</strong>. Qui sotto trovi tutte le misure disponibili nella gamma concomodo.</p>",
+            "content": "<p>Nella scelta della misura contano due cose: <strong>lo spazio che hai a disposizione</strong> e <strong>chi ci dorme</strong>.</p><ul><li><strong>Singolo</strong> — per una persona, camerette e letti di servizio.</li><li><strong>Una piazza e mezza (francese)</strong> — per chi dorme solo ma ama muoversi, o per ospiti occasionali in coppia.</li><li><strong>Matrimoniale</strong> — per la coppia: più larghezza significa meno disturbi reciproci durante la notte.</li></ul><p>Controlla anche la lunghezza: la regola è <strong>almeno 10 cm in più della tua altezza</strong>. Qui sotto trovi tutte le misure disponibili nella gamma concomodo.</p>",
             "link_label": "",
             "link": ""
           }
@@ -61,7 +61,7 @@
           "type": "chapter",
           "settings": {
             "heading": "L'altezza conta",
-            "content": "<p>L'altezza del materasso dipende dagli strati che lo compongono e incide su comfort e durata. I materassi concomodo vanno dai <strong>20 ai 25 cm</strong>:</p><ul><li><strong>20–22 cm</strong> — la linea base: essenziale ma completa, ideale per camerette, letti ospiti e budget contenuti.</li><li><strong>23–25 cm</strong> — la linea premium: più strati, più materiale, maggiore capacità di adattamento al corpo.</li></ul><p>Ricorda di verificare che l'altezza totale (materasso + rete) sia comoda per sedersi e alzarsi, e che eventuali lenzuola con angoli siano della misura giusta.</p>",
+            "content": "<p>L'altezza di un materasso dipende da quanti strati lo compongono e da come lavorano insieme. I materassi Concomodo sono alti da <strong>22 a 27 cm</strong>, rivestimento compreso:</p><ul><li><strong>[22–24] cm</strong>: Carezza e Sostegno. Una costruzione funzionale, con tutto quello che serve per dormire bene.</li><li><strong>[25–27] cm</strong>: Abbraccio e Abbraccio Plus. Più strati di comfort, per un'accoglienza ancora più ricca.</li></ul><p>Un consiglio pratico: controlla che l'altezza totale di rete e materasso sia comoda per sederti e alzarti, e che le lenzuola con angoli siano della misura giusta.</p>",
             "link_label": "",
             "link": ""
           }
@@ -70,7 +70,7 @@
           "type": "chapter",
           "settings": {
             "heading": "Sostegno e allineamento della colonna",
-            "content": "<p>Un materasso fa bene il suo lavoro quando mantiene la <strong>colonna vertebrale allineata</strong>: spalle e fianchi devono affondare quel tanto che basta, mentre la zona lombare resta sostenuta.</p><p>Per questo i nostri modelli a molle usano <strong>molle insacchettate a 7 zone di portanza differenziata</strong>: ogni area del corpo riceve il sostegno di cui ha bisogno, e i movimenti di chi dorme accanto a te non si trasmettono dall'altra parte del letto. Nei modelli in memory, gli strati <strong>sagomati e bugnati</strong> accompagnano le forme del corpo distribuendo la pressione.</p>",
+            "content": "<p>Un materasso fa bene il suo lavoro quando mantiene la <strong>colonna vertebrale allineata</strong>: spalle e fianchi devono affondare quel tanto che basta, mentre la zona lombare resta sostenuta.</p><p>Per questo i nostri modelli a molle usano <strong>molle insacchettate a 7 zone di portanza differenziata</strong>: ogni area del corpo riceve il sostegno di cui ha bisogno, e i movimenti di chi dorme accanto a te non si trasmettono dall'altra parte del letto. Nei <strong>modelli in memory con strati strati sagomati e bugnati</strong>, si accompagnano le forme del corpo distribuendo la pressione.</p>",
             "link_label": "",
             "link": ""
           }
@@ -79,7 +79,7 @@
           "type": "chapter",
           "settings": {
             "heading": "La durezza giusta per te",
-            "content": "<p>La durezza non è qualità: è <strong>preferenza personale</strong>. La gamma concomodo copre tutta la scala:</p><ul><li><strong>Morbido</strong> — accogliente, ti avvolge: il nostro <strong>Morbido</strong> (memory).</li><li><strong>Medio</strong> — l'equilibrio per la maggior parte delle persone: <strong>Sostegno</strong> (premium memory).</li><li><strong>Medio-duro</strong> — sostegno deciso con accoglienza in superficie: <strong>Sostegno ibrido</strong> (molle + memory).</li><li><strong>Duro</strong> — rigido e asciutto: <strong>Compatto</strong> (molle).</li></ul><p>In caso di dubbio tra due durezze, chi pesa di più o dorme a pancia in giù stia sulla più sostenuta; chi è minuto o dorme di fianco sulla più morbida.</p>",
+            "content": "<p>La durezza non è una questione di qualità, ma di <strong>preferenza personale</strong>. La gamma Concomodo parte dal medio-morbido e si divide in tre fasce:</p><ul><li><strong>Medio-morbido</strong>: <a href=\"/products/carezza\" title=\"Carezza\"><strong>Carezza</strong></a>. Memory a zone, per chi ama sentirsi accolto e avvolto.</li><li><strong>Medio</strong>: <a href=\"/products/abbraccio\" title=\"Abbraccio\"><strong>Abbraccio</strong></a> e <a href=\"/products/abbraccio-plus\" title=\"Abbraccio Plus\"><strong>Abbraccio Plus</strong></a>. La nostra linea premium, l'equilibrio giusto per la maggior parte delle persone: accoglienza in superficie e sostegno deciso. Abbraccio è in memory e WaterFoam, Abbraccio Plus è ibrido, con molle a 7 zone e memory.</li><li><strong>Medio-rigido</strong>: <a href=\"/products/sostegno\" title=\"Sostegno\"><strong>Sostegno</strong></a>. Molle insacchettate a 7 zone, per chi ama una superficie più compatta.</li></ul><p>Se sei indeciso tra due fasce: con una corporatura più robusta o se dormi a pancia in giù, scegli la più sostenuta; se sei minuto o dormi di fianco, la più morbida. E ricorda che con un <a href=\"/collections/topper\" title=\"Topper\"><strong>topper</strong></a> puoi sempre rendere il comfort più morbido, anche in un secondo momento.</p>",
             "link_label": "",
             "link": ""
           }
@@ -97,7 +97,7 @@
           "type": "chapter",
           "settings": {
             "heading": "Memory, molle o ibrido?",
-            "content": "<p><strong>Memory</strong> — strati in schiuma che reagiscono al calore e al peso del corpo, prendendo la tua forma. Massima accoglienza e distribuzione della pressione. Nei nostri modelli il memory è <strong>sagomato o bugnato</strong> per favorire il ricircolo d'aria.</p><p><strong>Molle insacchettate</strong> — sostegno elastico e tanta traspirazione: l'aria circola tra le molle e il calore va via. Con le <strong>7 zone di portanza</strong> il sostegno è mirato dove serve.</p><p><strong>Ibrido</strong> — molle insacchettate sotto, memory sopra: sostegno deciso e accoglienza in superficie. La scelta di chi non vuole rinunciare a niente.</p><p>Tutti i materassi concomodo hanno il rivestimento in tessuto stretch con fascia <strong>3D Air</strong> per la traspirazione, e i modelli in memory e premium sono <strong>sfoderabili e lavabili</strong>: un dettaglio che fa la differenza per igiene e durata. Tutto <strong>100% Made in Italy</strong>.</p>",
+            "content": "<p><strong>Memory</strong> — strati in schiuma che reagiscono al calore e al peso del corpo, prendendo la tua forma. Massima accoglienza e distribuzione della pressione. Nei nostri modelli il memory è <strong>sagomato o bugnato</strong> per favorire la distribuzione del peso e il ricircolo d'aria.</p><p><strong>Molle insacchettate</strong> — sostegno elastico e reattivo, tanta traspirazione: l'aria circola tra le molle e il calore va via. Con le <strong>7 zone di portanza</strong> il sostegno è mirato dove serve.</p><p><strong>Ibrido</strong> — molle insacchettate sotto, memory sopra: sostegno deciso e accoglienza in superficie. La scelta di chi non vuole rinunciare a niente.</p><p>Tutti i materassi Concomodo hanno il rivestimento in tessuto stretch con fascia <strong>3D Air</strong> per la traspirazione e sono <strong>sfoderabili e lavabili</strong>: un dettaglio che fa la differenza per igiene e durata. Tutto <strong>100% Made in Italy</strong>.</p>",
             "link_label": "",
             "link": ""
           }
@@ -151,28 +151,28 @@
           "type": "faq",
           "settings": {
             "question": "Ogni quanto va sostituito il materasso?",
-            "answer": "<p>In media ogni 8–10 anni. Se ti svegli indolenzito, noti avvallamenti o il materasso ha perso elasticità, è il momento di cambiarlo. I materassi concomodo sono garantiti fino a 10 anni.</p>"
+            "answer": "<p>In media ogni 6–10 anni. Se ti svegli indolenzito, noti avvallamenti o il materasso ha perso elasticità, è il momento di cambiarlo. I materassi concomodo sono garantiti fino a 10 anni.</p>"
           }
         },
         "faq_prova": {
           "type": "faq",
           "settings": {
             "question": "Come funzionano le 100 notti di prova?",
-            "answer": "<p>Dormi sul tuo nuovo materasso per 100 notti: al corpo servono alcune settimane per adattarsi. Se entro i 100 giorni non sei convinto, ti rimborsiamo. Semplice, senza rischi.</p>"
+            "answer": "<p>Dormi sul tuo nuovo materasso per 100 notti: al corpo servono alcune settimane per adattarsi. Se entro i 100 giorni non sei convinto, hai reso o sostituzione gratuiti. Semplice, senza rischi.</p>"
           }
         },
         "faq_sfoderabile": {
           "type": "faq",
           "settings": {
             "question": "I materassi sono sfoderabili e lavabili?",
-            "answer": "<p>I modelli Morbido, Sostegno e Sostegno ibrido sono completamente sfoderabili e il rivestimento è lavabile. Il Compatto ha un rivestimento fisso in tessuto traspirante 3D Air.</p>"
+            "answer": "<p>Sì: <a href=\"/products/carezza\" title=\"Carezza\"><strong>Carezza</strong></a>, <a href=\"/products/sostegno\" title=\"Sostegno\"><strong>Sostegno</strong></a>, <a href=\"/products/abbraccio\" title=\"Abbraccio\"><strong>Abbraccio</strong></a> e <a href=\"/products/abbraccio-plus\" title=\"Abbraccio Plus\"><strong>Abbraccio Plus</strong></a> hanno tutti il rivestimento sfoderabile e lavabile, così puoi tenerlo sempre fresco e pulito. Su Abbraccio e Abbraccio Plus il tessuto è arricchito con filamenti d'argento.</p>"
           }
         },
         "faq_rete": {
           "type": "faq",
           "settings": {
             "question": "Su quale rete posso usarli?",
-            "answer": "<p>Su qualsiasi rete a doghe in buono stato, fissa o motorizzata. L'importante è che le doghe siano ravvicinate e non cedevoli, per dare al materasso una base uniforme.</p>"
+            "answer": "<p>Su qualsiasi rete a doghe in buono stato. L'importante è che le doghe siano ravvicinate e non cedevoli, per dare al materasso una base uniforme.</p>"
           }
         },
         "faq_posizione_mal_schiena": {

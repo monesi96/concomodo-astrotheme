@@ -1074,7 +1074,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Se entro 100 notti non è il materasso giusto per te, lo ritiriamo o lo sostituiamo. Ci pensiamo noi, senza costi per te.</p>",
+                    "text": "<p>Se entro 100 notti non è il materasso giusto per te, puoi renderlo o sostituirlo. Ci pensiamo noi, senza costi per te.</p>",
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
@@ -1186,7 +1186,7 @@
           "type": "faq",
           "settings": {
             "question": "La prova vale su tutti i prodotti?",
-            "answer": "<p>La prova di 100 notti si applica ai materassi. Per topper e cuscini valgono le normali condizioni di reso: scrivici e ti aiutiamo a trovare la soluzione migliore.</p>"
+            "answer": "<p>La prova di 100 notti si applica a tutti i materassi. Per topper e cuscini valgono le normali condizioni di reso: scrivici e ti aiutiamo a trovare la soluzione migliore.</p>"
           }
         },
         "faq_6": {
