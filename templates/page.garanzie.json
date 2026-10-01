@@ -32,8 +32,8 @@
             "icon": "shield",
             "tag": "La durata",
             "title": "10 anni di garanzia",
-            "text": "<p>I nostri materassi sono fatti per durare, e ce ne prendiamo la responsabilità: la garanzia copre i difetti di conformità e i cedimenti strutturali dei materiali per 10 anni dall'acquisto.</p>",
-            "points": "Copre difetti di produzione e cedimenti anomali degli strati interni\nNon copre la normale usura o l'uso su una base non adeguata\nPer attivarla basta il numero d'ordine: niente moduli infiniti",
+            "text": "<p>I nostri materassi sono fatti per durare, e ce ne prendiamo la responsabilità: la garanzia copre i difetti di conformità e i cedimenti strutturali dei materiali fino a 10 anni dall'acquisto.</p>",
+            "points": "Copre difetti di produzione e cedimenti anomali degli strati interni\nNon copre la normale usura o l'uso su una base non adeguata\nPer attivarla basta fornire il numero d'ordine",
             "link_label": "",
             "link": ""
           }
@@ -58,7 +58,7 @@
             "icon": "swap",
             "tag": "Il ripensamento",
             "title": "Cambio modello durante la prova",
-            "text": "<p>A volte il materasso è buono, ma la durezza non è quella giusta per te. Se durante le 100 notti capisci che ti serve un modello diverso, organizziamo la sostituzione invece del reso.</p>",
+            "text": "<p>Se durante le 100 notti capisci che ti serve un modello diverso, organizziamo la sostituzione senza costi aggiuntivi.</p>",
             "points": "Ti aiutiamo a scegliere il modello più adatto in base alla prova\nRitiro del materasso e consegna del nuovo, senza ricominciare da zero",
             "link_label": "Come funziona il reso",
             "link": "/pages/resi"
