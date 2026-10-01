@@ -112,7 +112,7 @@
         "prodotto_compatto": {
           "type": "product_rec",
           "settings": {
-            "product": "compatto",
+            "product": "sostegno",
             "tagline": "Essenziale · Duro",
             "note": "Molle insacchettate a 7 zone, 22 cm. Il punto di partenza della gamma, perfetto per chi ama dormire sul sodo."
           }
@@ -120,7 +120,7 @@
         "prodotto_morbido": {
           "type": "product_rec",
           "settings": {
-            "product": "morbido",
+            "product": "carezza",
             "tagline": "Il più accogliente · Morbido",
             "note": "Memory sagomato su base soft, 20 cm, sfoderabile. Per chi ama sentirsi avvolto."
           }
@@ -128,7 +128,7 @@
         "prodotto_sostegno": {
           "type": "product_rec",
           "settings": {
-            "product": "cc-completo-molle",
+            "product": "abbraccio",
             "tagline": "L'equilibrato · Medio",
             "note": "La linea premium in memory, 23 cm, sfoderabile. L'equilibrio giusto per la maggior parte delle persone."
           }
@@ -136,7 +136,7 @@
         "prodotto_sostegno_ibrido": {
           "type": "product_rec",
           "settings": {
-            "product": "materasso-1",
+            "product": "abbraccio-plus",
             "tagline": "Il completo · Medio-duro",
             "note": "Molle a 7 zone + memory, 25 cm, sfoderabile. Il top di gamma per coppie e per chi cerca il massimo."
           }
@@ -235,10 +235,10 @@
       "settings": {
         "heading": "Confronta i nostri materassi",
         "subheading": "<p>Quattro modelli, una sola cosa in comune: dormire meglio. Trova quello giusto per te.</p>",
-        "product_1": "compatto",
-        "product_2": "morbido",
-        "product_3": "materasso-1",
-        "product_4": "cc-completo-molle",
+        "product_1": "sostegno",
+        "product_2": "carezza",
+        "product_3": "abbraccio-plus",
+        "product_4": "abbraccio",
         "show_image": false,
         "image_ratio": "4 / 3",
         "show_firmness": true,
