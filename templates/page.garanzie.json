@@ -82,21 +82,12 @@
         "padding-inline-end": 0
       }
     },
-    "parla": {
+    "vuoi_parlare_con_noi_7bwWtW": {
       "type": "vuoi-parlare-con-noi",
       "blocks": {
-        "card_LzKLpA": {
+        "card_Yh7frw": {
           "type": "card",
-          "settings": {
-            "icon": "chat",
-            "title": "Chiamaci",
-            "text": "<p>Siamo qui per aiutarti a ritrovare il piacere di un sonno sereno e di qualità.</p>",
-            "link": "",
-            "open_in_new_tab": false
-          }
-        },
-        "card_8DmgJe": {
-          "type": "card",
+          "disabled": true,
           "settings": {
             "icon": "phone",
             "title": "Chiamaci",
@@ -105,28 +96,38 @@
             "open_in_new_tab": false
           }
         },
-        "card_dWY7pC": {
+        "card_6QFz6T": {
+          "type": "card",
+          "settings": {
+            "icon": "chat",
+            "title": "Chatta con noi",
+            "text": "<p>Apri la chat e ottieni subito l'assistenza di cui hai bisogno, senza perdite di tempo.</p>",
+            "link": "",
+            "open_in_new_tab": false
+          }
+        },
+        "card_zgTNGx": {
           "type": "card",
           "settings": {
             "icon": "email",
-            "title": "Chiamaci",
-            "text": "<p>Siamo qui per aiutarti a ritrovare il piacere di un sonno sereno e di qualità.</p>",
-            "link": "",
+            "title": "Inviaci un'email",
+            "text": "<p>Scrivici e ti risponderemo prima che tu possa dire \"fate Concomodo\".</p>",
+            "link": "mailto:info@concomodo.it",
             "open_in_new_tab": false
           }
         }
       },
       "block_order": [
-        "card_LzKLpA",
-        "card_8DmgJe",
-        "card_dWY7pC"
+        "card_Yh7frw",
+        "card_6QFz6T",
+        "card_zgTNGx"
       ],
       "settings": {
         "heading": "Vuoi parlare con noi?",
         "subheading": "<p>Parla con un esperto del sonno e trova la soluzione di riposo più adatta a te.</p>",
         "corner_radius": 24,
         "section_width": "page-width",
-        "color_scheme": "",
+        "color_scheme": "scheme-2",
         "padding-block-start": 48,
         "padding-block-end": 48,
         "padding-inline-start": 0,
@@ -136,6 +137,6 @@
   },
   "order": [
     "main",
-    "parla"
+    "vuoi_parlare_con_noi_7bwWtW"
   ]
 }
