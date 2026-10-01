@@ -1110,7 +1110,7 @@
                     "upsell_card_comfort": {
                       "type": "_product-upsell-card",
                       "settings": {
-                        "product": "topper-comfort",
+                        "product": "topper-carezza",
                         "badge": "Più morbidezza",
                         "benefit": "Se il materasso è troppo rigido e lo vuoi più morbido, senza effetto sprofondo.",
                         "add_label": "Aggiungi al carrello"
