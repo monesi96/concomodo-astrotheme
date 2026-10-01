@@ -1074,7 +1074,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Se entro 100 notti non è il materasso giusto per te, lo ritiriamo o sostituiamo. Ci pensiamo noi, senza costi per te.</p>",
+                    "text": "<p>Se entro 100 notti non è il materasso giusto per te, lo ritiriamo o lo sostituiamo. Ci pensiamo noi, senza costi per te.</p>",
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
