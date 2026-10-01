@@ -1120,7 +1120,7 @@
                     "upsell_card_memory": {
                       "type": "_product-upsell-card",
                       "settings": {
-                        "product": "topper-memory",
+                        "product": "topper-abbraccio",
                         "badge": "Più sostegno",
                         "benefit": "Allunga la vita del materasso e dà più rigidità a quello che sprofonda.",
                         "add_label": "Aggiungi al carrello"
