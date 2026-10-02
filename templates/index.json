@@ -3410,23 +3410,22 @@
     "vuoi_parlare_con_noi_cc": {
       "type": "vuoi-parlare-con-noi",
       "blocks": {
-        "card_phone": {
-          "type": "card",
-          "disabled": true,
-          "settings": {
-            "icon": "phone",
-            "title": "Chiamaci",
-            "text": "<p>Siamo qui per aiutarti a ritrovare il piacere di un sonno sereno e di qualità.</p>",
-            "link": "",
-            "open_in_new_tab": false
-          }
-        },
         "card_chat": {
           "type": "card",
           "settings": {
             "icon": "chat",
             "title": "Chatta con noi",
             "text": "<p>Apri la chat e ottieni subito l'assistenza di cui hai bisogno, senza perdite di tempo.</p>",
+            "link": "",
+            "open_in_new_tab": false
+          }
+        },
+        "card_phone": {
+          "type": "card",
+          "settings": {
+            "icon": "phone",
+            "title": "Chiamaci",
+            "text": "<p>Siamo qui per aiutarti a ritrovare il piacere di un sonno sereno e di qualità.</p>",
             "link": "",
             "open_in_new_tab": false
           }
@@ -3443,8 +3442,8 @@
         }
       },
       "block_order": [
-        "card_phone",
         "card_chat",
+        "card_phone",
         "card_email"
       ],
       "settings": {
