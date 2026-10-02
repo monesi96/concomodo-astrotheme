@@ -1743,7 +1743,6 @@
     },
     "mattress_layers_R9pXPi": {
       "type": "mattress-layers",
-      "disabled": true,
       "custom_css": [
         "h2 {margin-bottom: 40px;}",
         "> div {border-radius: 40px;}"
@@ -1914,6 +1913,9 @@
       "name": "Mattress comparison",
       "settings": {
         "heading": "Confronta questo topper",
+        "compare_collection": "",
+        "max_products": 12,
+        "picker_label": "Confronta con",
         "show_feel": true,
         "feel_label": "Sensazione del topper",
         "feel_tooltip": "Quanto il materasso risulta morbido o rigido al primo contatto. Non è un voto ma una caratteristica: la sensazione giusta dipende dalle tue abitudini e dalla posizione in cui dormi.",
@@ -2306,6 +2308,9 @@
                 "show_sample_reviews": true,
                 "review_selection": "all",
                 "products": [],
+                "filter_pinned": false,
+                "filter_featured": false,
+                "filter_custom_tags": "",
                 "show_media_only": false,
                 "display_order": "media_first",
                 "card_grouping": "per_media",
