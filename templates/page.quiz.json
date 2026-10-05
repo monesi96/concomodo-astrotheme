@@ -128,7 +128,7 @@
             "hint": "Scegli fino a 3 opzioni",
             "layout": "list",
             "multi": true,
-            "max": 2,
+            "max": 3,
             "key": "complaint"
           }
         },
