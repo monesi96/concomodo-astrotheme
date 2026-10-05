@@ -98,7 +98,7 @@
             "icon": "return",
             "title": "Vuoi fare un reso?",
             "text": "<p>Le 100 notti di prova, il ritiro gratuito a casa e il rimborso completo: ecco come funziona.</p>",
-            "link": "/pages/resi",
+            "link": "shopify://pages/informative-su-resi-rimborsi",
             "open_in_new_tab": false
           }
         },
@@ -108,7 +108,7 @@
             "icon": "shield",
             "title": "Domande sul prodotto?",
             "text": "<p>Garanzia 10 anni, rodaggio del materasso e consigli per prendertene cura.</p>",
-            "link": "/pages/garanzie",
+            "link": "shopify://pages/garanzie-materasso",
             "open_in_new_tab": false
           }
         }
