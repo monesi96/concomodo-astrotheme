@@ -144,7 +144,7 @@
                   "type": "company-legal-info",
                   "name": "Dati azienda",
                   "settings": {
-                    "layout": "stacked",
+                    "layout": "inline",
                     "show_legal_name": true,
                     "show_vat": true,
                     "show_rea": true,
