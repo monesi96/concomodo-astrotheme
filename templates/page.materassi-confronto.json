@@ -50,7 +50,7 @@
     "comparatore": {
       "type": "mattress-compare-selector",
       "settings": {
-        "heading": "Confronta i materassi Con comodo",
+        "heading": "Confronta i materassi Concomodo",
         "subheading": "<p>Scegli i modelli che ti interessano: differenze di sensazione, supporto, traspirabilità e altezza, una accanto all'altra.</p>",
         "max_products": 8,
         "columns": "3",

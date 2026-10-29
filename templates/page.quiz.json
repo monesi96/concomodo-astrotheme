@@ -449,7 +449,7 @@
           "settings": {
             "key": "m1",
             "badge": "Consigliato per te",
-            "title": "CC Rigido",
+            "title": "Sostegno",
             "subtitle": "Materasso a molle insacchettate · 7 zone",
             "description": "Stabile, reattivo e con un sostegno deciso. Il rivestimento imbottito aggiunge comfort al primo contatto, ma la sensazione resta ferma e solida: ideale per chi ama dormire “sopra” il materasso.",
             "tag_1": "Sostegno deciso",
@@ -457,7 +457,7 @@
             "feat_1": "Molle insacchettate a 7 zone di portanza differenziata",
             "feat_2": "Fascia perimetrale 3D Air che disperde calore e umidità",
             "feat_3": "Ribaltabile e modulare: abbinalo a un topper per più comfort",
-            "product": "abbraccio",
+            "product": "sostegno",
             "link": "",
             "cta_label": "Scopri il materasso"
           }
@@ -467,7 +467,7 @@
           "settings": {
             "key": "m2",
             "badge": "Consigliato per te",
-            "title": "CC Morbido",
+            "title": "Carezza",
             "subtitle": "Materasso in memory sagomato · sfoderabile",
             "description": "Il più morbido e accogliente della gamma. Pensato per chi vuole un materasso comodo fin da subito, con una sensazione avvolgente ma comunque equilibrata.",
             "tag_1": "Morbido e avvolgente",
@@ -485,7 +485,7 @@
           "settings": {
             "key": "m3a",
             "badge": "Consigliato per te",
-            "title": "CC Completo",
+            "title": "Abbraccio",
             "subtitle": "Memory bugnato + strato di rinforzo · sfoderabile",
             "description": "Comfort evoluto e strutturato: superficie accogliente grazie al memory bugnato e più sostegno grazie allo strato strutturale. Rivestimento premium con filamenti d’argento.",
             "tag_1": "Comfort strutturato",
@@ -503,7 +503,7 @@
           "settings": {
             "key": "m3b",
             "badge": "Consigliato per te",
-            "title": "CC Ibrido",
+            "title": "Abbraccio Plus",
             "subtitle": "Molle a 7 zone + memory bugnato · sfoderabile",
             "description": "Stabile sotto, accogliente sopra. Il modello più completo della gamma: comfort, sostegno, traspirabilità e durata in un’unica soluzione.",
             "tag_1": "Ibrido premium",
@@ -520,10 +520,10 @@
           "type": "cross_sell",
           "settings": {
             "show_for": "m1",
-            "title": "Topper CC Memory",
-            "subtitle": "Aggiungi accoglienza al sostegno deciso delle molle",
+            "title": "Topper Carezza",
+            "subtitle": "Aggiunge morbidezza al sostegno deciso delle molle",
             "image": "shopify://shop_images/topperambientatomemory-1.png",
-            "product": "topper-abbraccio",
+            "product": "topper-carezza",
             "link": ""
           }
         },
@@ -531,10 +531,10 @@
           "type": "cross_sell",
           "settings": {
             "show_for": "m1,m2,m3a,m3b",
-            "title": "Cuscino in memory",
+            "title": "Cuscino Concomodo",
             "subtitle": "Completa il riposo con il supporto giusto per il collo",
             "image": "shopify://shop_images/cuscini2.png",
-            "product": "cuscino-test",
+            "product": "cuscino-concomodo",
             "link": ""
           }
         }
@@ -586,14 +586,14 @@
       "settings": {
         "color_scheme": "scheme-2",
         "intro_heading": "Troviamo il materasso perfetto per te",
-        "intro_text": "Rispondi a 7 domande veloci sul tuo modo di dormire: ti consigliamo il materasso Con comodo più adatto alle tue reali esigenze di riposo.",
+        "intro_text": "Rispondi a 7 domande veloci sul tuo modo di dormire: ti consigliamo il materasso Concomodo più adatto alle tue reali esigenze di riposo.",
         "intro_cta": "Inizia il quiz",
         "multi_max": 2,
         "enable_email": true,
         "email_heading": "Il tuo abbinamento è pronto!",
-        "email_text": "Lascia la tua email per ricevere il risultato del quiz e le offerte riservate Con comodo.",
+        "email_text": "Lascia la tua email per ricevere il risultato del quiz e le offerte riservate Concomodo.",
         "email_cta": "Mostrami il risultato",
-        "email_privacy": "Iscrivendoti accetti di ricevere comunicazioni da Con comodo. Puoi disiscriverti quando vuoi. Maggiori informazioni nella",
+        "email_privacy": "Iscrivendoti accetti di ricevere comunicazioni da Concomodo. Puoi disiscriverti quando vuoi. Maggiori informazioni nella",
         "privacy_link": "",
         "result_kicker": "Risultato del quiz",
         "result_heading": "Il tuo abbinamento perfetto è qui!",

@@ -61,7 +61,7 @@
           "type": "chapter",
           "settings": {
             "heading": "L'altezza conta",
-            "content": "<p>L'altezza di un materasso dipende da quanti strati lo compongono e da come lavorano insieme. I materassi Concomodo sono alti da <strong>22 a 27 cm</strong>, rivestimento compreso:</p><ul><li><strong>[22–24] cm</strong>: Carezza e Sostegno. Una costruzione funzionale, con tutto quello che serve per dormire bene.</li><li><strong>[25–27] cm</strong>: Abbraccio e Abbraccio Plus. Più strati di comfort, per un'accoglienza ancora più ricca.</li></ul><p>Un consiglio pratico: controlla che l'altezza totale di rete e materasso sia comoda per sederti e alzarti, e che le lenzuola con angoli siano della misura giusta.</p>",
+            "content": "<p>L'altezza di un materasso dipende da quanti strati lo compongono e da come lavorano insieme. I materassi Concomodo sono alti da <strong>22 a 28 cm</strong>, rivestimento compreso:</p><ul><li><strong>22 e 24 cm</strong>: Carezza e Sostegno. Una costruzione funzionale, con tutto quello che serve per dormire bene.</li><li><strong>26 e 28 cm</strong>: Abbraccio e Abbraccio Plus. Più strati di comfort, per un'accoglienza ancora più ricca.</li></ul><p>Un consiglio pratico: controlla che l'altezza totale di rete e materasso sia comoda per sederti e alzarti, e che le lenzuola con angoli siano della misura giusta.</p>",
             "link_label": "",
             "link": ""
           }
@@ -70,7 +70,7 @@
           "type": "chapter",
           "settings": {
             "heading": "Sostegno e allineamento della colonna",
-            "content": "<p>Un materasso fa bene il suo lavoro quando mantiene la <strong>colonna vertebrale allineata</strong>: spalle e fianchi devono affondare quel tanto che basta, mentre la zona lombare resta sostenuta.</p><p>Per questo i nostri modelli a molle usano <strong>molle insacchettate a 7 zone di portanza differenziata</strong>: ogni area del corpo riceve il sostegno di cui ha bisogno, e i movimenti di chi dorme accanto a te non si trasmettono dall'altra parte del letto. Nei <strong>modelli in memory con strati strati sagomati e bugnati</strong>, si accompagnano le forme del corpo distribuendo la pressione.</p>",
+            "content": "<p>Un materasso fa bene il suo lavoro quando mantiene la <strong>colonna vertebrale allineata</strong>: spalle e fianchi devono affondare quel tanto che basta, mentre la zona lombare resta sostenuta.</p><p>Per questo i nostri modelli a molle usano <strong>molle insacchettate a 7 zone di portanza differenziata</strong>: ogni area del corpo riceve il sostegno di cui ha bisogno, e i movimenti di chi dorme accanto a te non si trasmettono dall'altra parte del letto. Nei <strong>modelli in memory con strati sagomati e bugnati</strong> si accompagnano le forme del corpo distribuendo la pressione.</p>",
             "link_label": "",
             "link": ""
           }
@@ -113,16 +113,16 @@
           "type": "product_rec",
           "settings": {
             "product": "sostegno",
-            "tagline": "Essenziale · Duro",
-            "note": "Molle insacchettate a 7 zone, 22 cm. Il punto di partenza della gamma, perfetto per chi ama dormire sul sodo."
+            "tagline": "Essenziale · Medio-rigido",
+            "note": "Molle insacchettate a 7 zone, 24 cm, sfoderabile. Il punto di partenza della gamma, per chi ama un sostegno deciso."
           }
         },
         "prodotto_morbido": {
           "type": "product_rec",
           "settings": {
             "product": "carezza",
-            "tagline": "Il più accogliente · Morbido",
-            "note": "Memory sagomato su base soft, 20 cm, sfoderabile. Per chi ama sentirsi avvolto."
+            "tagline": "Il più accogliente · Medio-morbido",
+            "note": "Memory a zone su base soft, 22 cm, sfoderabile. Per chi ama sentirsi avvolto."
           }
         },
         "prodotto_sostegno": {
@@ -130,15 +130,15 @@
           "settings": {
             "product": "abbraccio",
             "tagline": "L'equilibrato · Medio",
-            "note": "La linea premium in memory, 23 cm, sfoderabile. L'equilibrio giusto per la maggior parte delle persone."
+            "note": "La linea premium in memory e WaterFoam, 26 cm, sfoderabile. L'equilibrio giusto per la maggior parte delle persone."
           }
         },
         "prodotto_sostegno_ibrido": {
           "type": "product_rec",
           "settings": {
             "product": "abbraccio-plus",
-            "tagline": "Il completo · Medio-duro",
-            "note": "Molle a 7 zone + memory, 25 cm, sfoderabile. Il top di gamma per coppie e per chi cerca il massimo."
+            "tagline": "Il completo · Medio",
+            "note": "Molle a 7 zone e memory, 28 cm, sfoderabile. Il top di gamma per le coppie e per chi cerca il massimo."
           }
         },
         "faq_heading": {

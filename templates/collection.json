@@ -1070,7 +1070,7 @@
                       "name": "t:names.button",
                       "settings": {
                         "label": "Scopri i cuscini",
-                        "link": "/collections/topper-copia",
+                        "link": "/collections/cuscini",
                         "open_in_new_tab": false,
                         "style_class": "button",
                         "weight": "600",
@@ -1253,7 +1253,7 @@
         "mattress_label": "Materasso",
         "topper": "topper-abbraccio",
         "topper_label": "Topper",
-        "pillow": "cuscino-test",
+        "pillow": "cuscino-concomodo",
         "pillow_label": "Cuscino",
         "size_option_name": "Misure",
         "cushion_free": true,
