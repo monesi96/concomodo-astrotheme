@@ -250,7 +250,7 @@
               "static": true,
               "settings": {
                 "show_date": true,
-                "show_author": true,
+                "show_author": false,
                 "type_preset": "",
                 "alignment": "left",
                 "show_alignment": false,
