@@ -302,9 +302,6 @@
   data-skip-node-update
   data-scroll-direction="none"
 >
-  {%- if request.page_type == 'index' -%}
-    <h1 class="visually-hidden">{{ shop.name }}</h1>
-  {%- endif -%}
   {% for row in rows %}
     {% liquid
       assign scheme = 'color_scheme_' | append: row
