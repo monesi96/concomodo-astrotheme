@@ -154,6 +154,14 @@ class ProductUpsell extends HTMLElement {
     return Number(this.dataset.soloPercent ?? 0);
   }
 
+  /**
+   * Pillows included: 2 for a matrimoniale bed, 1 otherwise. Backed by the
+   * "2 cuscini" automatic discounts configured for Matrimoniale variants.
+   */
+  get #giftQuantity() {
+    return readMainSelection()?.dimensione === 'Matrimoniale' ? 2 : 1;
+  }
+
   get #topperKeyword() {
     return (this.dataset.topperKeyword ?? '').trim().toLowerCase();
   }
@@ -386,7 +394,9 @@ class ProductUpsell extends HTMLElement {
     if (bundleInCart && giftLines.length === 0 && !this.#giftDeclined && gift.matched?.available) {
       this.#setBusy(true);
       try {
-        await this.#add([{ id: gift.matched.id, quantity: 1, properties: this.#giftProperties() }]);
+        await this.#add([
+          { id: gift.matched.id, quantity: this.#giftQuantity, properties: this.#giftProperties() },
+        ]);
         await this.#refreshCart({ announce: true });
       } catch (error) {
         console.error(error);
@@ -493,7 +503,7 @@ class ProductUpsell extends HTMLElement {
       const gift = this.#gift;
 
       if (this.#giftEnabled && gift?.matched?.available && this.#itemsOf(gift).length === 0 && !this.#giftDeclined) {
-        items.push({ id: gift.matched.id, quantity: 1, properties: this.#giftProperties() });
+        items.push({ id: gift.matched.id, quantity: this.#giftQuantity, properties: this.#giftProperties() });
       }
 
       await this.#addWithMain(items, this.#mainBundleItem());
@@ -551,7 +561,7 @@ class ProductUpsell extends HTMLElement {
 
     try {
       const bundleInCart = this.#bundleInCart();
-      const item = { id: row.matched.id, quantity: 1 };
+      const item = { id: row.matched.id, quantity: this.#giftQuantity };
 
       if (this.#giftEnabled && bundleInCart) {
         item.properties = this.#giftProperties();
