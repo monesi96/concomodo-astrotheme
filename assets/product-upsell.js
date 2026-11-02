@@ -317,6 +317,16 @@ class ProductUpsell extends HTMLElement {
           metaElement.hidden = !sizeText;
         }
 
+        const savingElement = element.querySelector('[data-upsell-saving]');
+        if (savingElement instanceof HTMLElement) {
+          const saving = row.matched?.saving;
+          const pillows = this.#giftQuantity === 2 ? savingElement.dataset.pillowTwo : savingElement.dataset.pillowOne;
+          savingElement.hidden = !saving;
+          savingElement.textContent = saving
+            ? (savingElement.dataset.template ?? '').replace('{amount}', String(saving)).replace('{pillows}', pillows ?? '')
+            : '';
+        }
+
         if (row.matched) {
           if (priceElement) priceElement.textContent = row.matched.price;
           if (compareElement instanceof HTMLElement) {

@@ -22,7 +22,8 @@
   @param {string} solo_badge - Gift only: badge shown when bought alone
   @param {string} gift_badge - Gift only: badge shown when a topper is selected
   @param {string} gift_free_label - Gift only: price label when free
-  @param {number} discount_percent - Topper only: display discount % (topper bought with the mattress)
+  @param {string} discounts - Topper only: lines "misura=euro" (e.g. 80x190=40), the fixed € discount when bought with the mattress
+  @param {string} saving_label - Topper only: saving text, {amount} and {pillows} are replaced
 {%- enddoc -%}
 
 {%- liquid
@@ -75,16 +76,9 @@
       assign initial_compare = first_variant.compare_at_price | money
     endif
 
-    assign topper_percent = 0
-    if role == 'topper'
-      assign topper_percent = discount_percent | default: 0
-    endif
-
-    if topper_percent > 0
-      assign topper_keep = 100 | minus: topper_percent
-      assign promo_cents = first_variant.price | times: topper_keep | divided_by: 100
-      assign initial_compare = first_variant.price | money
-      assign initial_price = promo_cents | money
+    assign discount_lines = ''
+    if role == 'topper' and discounts != blank
+      assign discount_lines = discounts | newline_to_br | split: '<br />'
     endif
 
     if role == 'gift'
@@ -151,14 +145,24 @@
               "misure": {{ variant_misure | json }},
               "sizeLabel": {{ variant.title | json }},
               "available": {{ variant.available }},
-              {%- if topper_percent > 0 -%}
-                {%- assign variant_promo = variant.price | times: topper_keep | divided_by: 100 -%}
+              {%- liquid
+                assign variant_saving = 0
+                for discount_line in discount_lines
+                  assign discount_parts = discount_line | strip | split: '='
+                  if discount_parts[0] | strip == variant_misure
+                    assign variant_saving = discount_parts[1] | strip | plus: 0
+                  endif
+                endfor
+              -%}
+              {%- if variant_saving > 0 -%}
+                {%- assign variant_promo = variant_saving | times: 100 | minus: variant.price | abs -%}
                 "price": {{ variant_promo | money | json }},
-                "compareAt": {{ variant.price | money | json }}
+                "compareAt": {{ variant.price | money | json }},
+                "saving": {{ variant_saving }}
               {%- else -%}
               "price": {{ variant.price | money | json }}
               {%- endif -%}
-              {%- if topper_percent == 0 and variant.compare_at_price > variant.price -%}
+              {%- if variant_saving == 0 and variant.compare_at_price > variant.price -%}
                 , "compareAt": {{ variant.compare_at_price | money | json }}
               {%- endif -%}
             }{% unless forloop.last %},{% endunless %}
@@ -197,6 +201,17 @@
           <span class="product-upsell__amount" data-upsell-price>{{ initial_price }}</span>
         </p>
       </div>
+
+      {%- if role == 'topper' and saving_label != blank -%}
+        <p
+          class="product-upsell__saving"
+          data-upsell-saving
+          data-template="{{ saving_label | escape }}"
+          data-pillow-one="{{ 'cuscino' }}"
+          data-pillow-two="{{ '2 cuscini' }}"
+          hidden
+        ></p>
+      {%- endif -%}
 
       {%- if benefit != blank -%}
         <div class="product-upsell__benefit">{{ benefit }}</div>

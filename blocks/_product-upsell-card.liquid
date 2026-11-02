@@ -13,7 +13,8 @@
     badge: block.settings.badge,
     benefit: block.settings.benefit,
     add_label: block.settings.add_label,
-    discount_percent: block.settings.discount_percent,
+    discounts: block.settings.discounts,
+    saving_label: block.settings.saving_label,
     shopify_attributes: block.shopify_attributes
   %}
 {%- elsif request.design_mode -%}
@@ -45,15 +46,17 @@
       "label": "Testo beneficio"
     },
     {
-      "type": "range",
-      "id": "discount_percent",
-      "label": "Sconto con il materasso (%)",
-      "info": "Solo visualizzazione: lo sconto reale è l'automatico Shopify 'TOPPER-15-CON-MATERASSO'.",
-      "min": 0,
-      "max": 50,
-      "step": 5,
-      "unit": "%",
-      "default": 15
+      "type": "textarea",
+      "id": "discounts",
+      "label": "Sconto in € per misura",
+      "info": "Una riga per misura, formato misura=euro (es. 80x190=40). Solo visualizzazione: lo sconto reale sono gli sconti automatici Shopify 'TOPPER-…-CON-MATERASSO'."
+    },
+    {
+      "type": "text",
+      "id": "saving_label",
+      "label": "Testo risparmio",
+      "info": "{amount} = euro di sconto, {pillows} = cuscino/2 cuscini.",
+      "default": "-{amount}€ di sconto + {pillows} in omaggio"
     },
     {
       "type": "text",
