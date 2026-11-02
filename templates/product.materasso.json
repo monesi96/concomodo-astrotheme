@@ -1115,9 +1115,9 @@
                         "product": "topper-carezza",
                         "badge": "Più morbidezza",
                         "benefit": "Se il materasso è troppo rigido e lo vuoi più morbido, senza effetto sprofondo.",
-                        "add_label": "Aggiungi al carrello",
                         "discounts": "80x190=40\n85x190=40\n90x190=40\n120x190=50\n140x190=50\n160x190=50\n165x190=50\n170x190=50\n180x190=50\n80x195=40\n85x195=40\n90x195=40\n120x195=50\n140x195=50\n160x195=50\n165x195=50\n170x195=50\n180x195=50\n80x200=40\n85x200=40\n90x200=40\n120x200=50\n140x200=50\n160x200=50\n165x200=50\n170x200=50\n180x200=50",
-                        "saving_label": "-{amount}€ di sconto + {pillows} in omaggio"
+                        "saving_label": "-{amount}€ di sconto + {pillows} in omaggio",
+                        "add_label": "Aggiungi al carrello"
                       },
                       "blocks": {}
                     },
@@ -1127,9 +1127,9 @@
                         "product": "topper-abbraccio",
                         "badge": "Più sostegno",
                         "benefit": "Allunga la vita del materasso e dà più rigidità a quello che sprofonda.",
-                        "add_label": "Aggiungi al carrello",
                         "discounts": "80x190=60\n85x190=60\n90x190=50\n120x190=70\n140x190=70\n160x190=70\n165x190=70\n170x190=70\n180x190=70\n80x195=50\n85x195=60\n90x195=60\n120x195=70\n140x195=70\n160x195=70\n165x195=70\n170x195=70\n180x195=70\n80x200=50\n85x200=50\n90x200=50\n120x200=70\n140x200=70\n160x200=70\n165x200=70\n170x200=70\n180x200=70",
-                        "saving_label": "-{amount}€ di sconto + {pillows} in omaggio"
+                        "saving_label": "-{amount}€ di sconto + {pillows} in omaggio",
+                        "add_label": "Aggiungi al carrello"
                       },
                       "blocks": {}
                     }
@@ -2066,7 +2066,7 @@
                         "text_DLbezB": {
                           "type": "text",
                           "settings": {
-                            "text": "<p>I materassi Concomodo sono progettati e prodotti interamente in Italia da un produttore specializzato in sistemi per il riposo, e arrivano a casa tua senza intermediari.</p><p><strong>I materiali</strong></p><ul><li><strong>Memory a zone</strong>: sagomato o bugnato, accoglie il corpo e distribuisce la pressione dove serve</li><li><strong>Schiume di supporto (WaterFoam e poliuretano)</strong>: lastre portanti e strati strutturali che danno stabilità e sostegno</li><li><strong>Molle insacchettate a 7 zone</strong>: su Sostegno e Abbraccio Plus, con circa 800 molle indipendenti nella misura matrimoniale</li><li><strong>Tessuti traspiranti</strong>: rivestimento stretch imbottito in fibra di poliestere con fascia perimetrale in 3D Air, che favorisce il ricircolo dell'aria; su Abbraccio e Abbraccio Plus il tessuto ha <strong>filamenti d'argento</strong> che aiutano a disperdere il calore</li><li><strong>Rivestimento sfoderabile e lavabile</strong> su tutti i modelli</li></ul><p><strong>Le certificazioni</strong></p><ul><li><strong>100% Made in Italy, ITPI (sistema IT01)</strong>: certifica che i prodotti sono ideati e costruiti interamente in Italia, con componenti italiani, piena tracciabilità delle lavorazioni e tecniche artigianali tradizionali, nel rispetto delle norme su lavoro, igiene e sicurezza</li><li><strong>OEKO-TEX® STANDARD 100, Classe II</strong>: tessuti e imbottiture testati contro le sostanze nocive e sicuri anche a contatto diretto con la pelle</li></ul>",
+                            "text": "<p>I materassi Concomodo sono progettati e prodotti interamente in Italia da una linea di produzione specializzata in sistemi per il riposo, e arrivano a casa tua senza intermediari.</p><p><strong>I materiali</strong></p><ul><li><strong>Memory a zone</strong>: sagomato su Carezza, o bugnato su Abbraccio e Abbraccio Plus, accoglie il corpo e distribuisce la pressione dove serve</li><li><strong>Schiume di supporto (WaterFoam e poliuretano)</strong>: lastre portanti e strati strutturali a diverse densità che danno stabilità e sostegno</li><li><strong>Molle insacchettate a 7 zone</strong>: su Sostegno e Abbraccio Plus, con circa 800 molle indipendenti nella misura matrimoniale</li><li><strong>Tessuti traspiranti</strong>: rivestimento stretch imbottito in fibra di poliestere con fascia perimetrale in 3D Air, che favorisce il ricircolo dell'aria; su Abbraccio e Abbraccio Plus il tessuto ha <strong>filamenti d'argento</strong> che aiutano a disperdere il calore</li><li><strong>Rivestimento sfoderabile e lavabile</strong> su tutti i modelli</li></ul><p><strong>Le certificazioni</strong></p><ul><li><strong>100% Made in Italy, ITPI (sistema IT01)</strong>: certifica che i prodotti sono ideati e costruiti interamente in Italia, con componenti italiani, piena tracciabilità delle lavorazioni e tecniche artigianali tradizionali, nel rispetto delle norme su lavoro, igiene e sicurezza</li><li><strong>OEKO-TEX® STANDARD 100, Classe II</strong>: tessuti e imbottiture testati contro le sostanze nocive e sicuri anche a contatto diretto con la pelle</li></ul>",
                             "width": "100%",
                             "max_width": "none",
                             "alignment": "left",
@@ -2107,7 +2107,7 @@
                         "text_jrcKBC": {
                           "type": "text",
                           "settings": {
-                            "text": "<p><strong>Spedizione</strong></p><ul><li>Consegna <strong>gratuita in tutta Italia per </strong>ordini superiori a 500€</li><li>Per le isole minori e le località difficilmente raggiungibili la consegna può richiedere qualche giorno in più; eventuali supplementi vengono comunicati <strong>prima</strong> della conferma dell'ordine</li></ul><p><strong>Prova e reso</strong></p><ul><li>Hai <strong>100 notti di prova</strong>: al corpo servono alcune settimane per abituarsi a un materasso nuovo, per questo ti chiediamo di provarlo per almeno <strong>30 notti</strong> prima di richiedere il reso</li><li>Se non ti trovi bene, organizziamo noi il ritiro: <strong>reso gratuito e rimborso completo</strong></li><li>Resta sempre valido il diritto di recesso entro 14 giorni dalla consegna previsto dalla legge</li></ul><p><strong>Garanzia</strong></p><ul><li><strong>10 anni di garanzia</strong> sulla struttura interna del materasso (lastra e molleggio), contro difetti di produzione e cedimenti anomali</li><li>In più, tutti i prodotti sono coperti dalla <strong>garanzia legale di conformità di 24 mesi</strong></li><li>La garanzia non copre la normale usura, le variazioni di comfort percepito o i danni da uso improprio</li></ul><p>Per qualsiasi domanda su spedizioni, resi o garanzia scrivici a <strong>[email assistenza]</strong>: ti rispondiamo entro un giorno lavorativo.</p>",
+                            "text": "<p><strong>Spedizione</strong></p><ul><li>Consegna&nbsp;<strong>gratuita in tutta Italia</strong></li><li>Per le isole minori e le località difficilmente raggiungibili la consegna può richiedere qualche giorno in più; eventuali supplementi vengono comunicati&nbsp;<strong>prima</strong>&nbsp;della conferma dell'ordine</li></ul><p><strong>Prova e reso</strong></p><ul><li>Hai&nbsp;<strong>100 notti di prova</strong>: al corpo servono alcune settimane per abituarsi a un materasso nuovo, per questo ti chiediamo di provarlo per almeno&nbsp;<strong>15-20 notti</strong>&nbsp;prima di richiedere il reso o il cambio</li><li>Se non ti trovi bene, organizziamo noi il cambio o il ritiro <strong>senza costi aggiuntivi</strong>:&nbsp;in caso di reso, hai diritto al<strong> rimborso completo della somma spesa</strong></li><li>Al diritto di recesso per i consumatori entro 14 giorni previsto dalla legge, aggiungiamo 16 giorni in più per un totale di <strong>30 giorni</strong>, per provare i materassi <strong>veramente Concomodo</strong></li></ul><p><strong>Garanzia</strong></p><ul><li><strong>Fino a 10 anni di garanzia</strong>&nbsp;sui materassi, contro difetti di produzione e cedimenti anomali</li><li>In più, tutti i prodotti sono coperti dalla&nbsp;<strong>garanzia legale di conformità di 24 mesi</strong></li><li>La garanzia non copre la normale usura, le variazioni di comfort percepito o i danni da uso improprio</li></ul><p>Per qualsiasi domanda su spedizioni, resi o garanzia scrivici a <strong>info@concomodo.it</strong>.</p>",
                             "width": "100%",
                             "max_width": "none",
                             "alignment": "left",
@@ -3286,6 +3286,54 @@
         "padding-inline-end": 0
       }
     },
+    "fatti_in_italia": {
+      "type": "fatti-in-italia",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/concomodo-produzione-reparto.png",
+            "caption": ""
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/concomodo-produzione-magazzino.png",
+            "caption": ""
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/concomodo-produzione-linea.png",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "slide_2",
+        "slide_3"
+      ],
+      "settings": {
+        "show_flag": true,
+        "heading": "I nostri materassi li facciamo noi, in Italia.",
+        "text": "<p>Tagliamo le schiume su misura, cuciamo i rivestimenti nel nostro reparto e controlliamo ogni materasso prima di imballarlo. Da qui parte direttamente verso casa tua, dal produttore a te senza intermediari.</p><p>Seguire tutto da vicino ci permette di curare ogni dettaglio e di tenere un prezzo onesto.</p>",
+        "button_label": "",
+        "button_link": "",
+        "image_position": "right",
+        "autoplay": true,
+        "autoplay_speed": 5,
+        "corner_radius": 24,
+        "section_width": "page-width",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 56,
+        "padding-block-end": 56,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
+      }
+    },
     "section_chbtyY": {
       "type": "section",
       "blocks": {
@@ -3714,54 +3762,6 @@
         "gradient_direction": "to top",
         "padding-block-start": 0,
         "padding-block-end": 0
-      }
-    },
-    "fatti_in_italia": {
-      "type": "fatti-in-italia",
-      "blocks": {
-        "slide_1": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/concomodo-produzione-reparto.png",
-            "caption": ""
-          }
-        },
-        "slide_2": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/concomodo-produzione-magazzino.png",
-            "caption": ""
-          }
-        },
-        "slide_3": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/concomodo-produzione-linea.png",
-            "caption": ""
-          }
-        }
-      },
-      "block_order": [
-        "slide_1",
-        "slide_2",
-        "slide_3"
-      ],
-      "settings": {
-        "show_flag": true,
-        "heading": "I nostri materassi li facciamo noi, in Italia.",
-        "text": "<p>Tagliamo le schiume su misura, cuciamo i rivestimenti nel nostro reparto e controlliamo ogni materasso prima di imballarlo. Da qui parte direttamente verso casa tua, dal produttore a te senza intermediari.</p><p>Seguire tutto da vicino ci permette di curare ogni dettaglio e di tenere un prezzo onesto.</p>",
-        "button_label": "",
-        "button_link": "",
-        "image_position": "right",
-        "autoplay": true,
-        "autoplay_speed": 5,
-        "corner_radius": 24,
-        "section_width": "page-width",
-        "color_scheme": "scheme-1",
-        "padding-block-start": 56,
-        "padding-block-end": 56,
-        "padding-inline-start": 0,
-        "padding-inline-end": 0
       }
     }
   },
