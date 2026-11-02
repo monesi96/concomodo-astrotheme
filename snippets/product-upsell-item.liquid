@@ -22,6 +22,7 @@
   @param {string} solo_badge - Gift only: badge shown when bought alone
   @param {string} gift_badge - Gift only: badge shown when a topper is selected
   @param {string} gift_free_label - Gift only: price label when free
+  @param {number} discount_percent - Topper only: display discount % (topper bought with the mattress)
 {%- enddoc -%}
 
 {%- liquid
@@ -72,6 +73,18 @@
     assign initial_compare = ''
     if first_variant.compare_at_price > first_variant.price
       assign initial_compare = first_variant.compare_at_price | money
+    endif
+
+    assign topper_percent = 0
+    if role == 'topper'
+      assign topper_percent = discount_percent | default: 0
+    endif
+
+    if topper_percent > 0
+      assign topper_keep = 100 | minus: topper_percent
+      assign promo_cents = first_variant.price | times: topper_keep | divided_by: 100
+      assign initial_compare = first_variant.price | money
+      assign initial_price = promo_cents | money
     endif
 
     if role == 'gift'
@@ -138,8 +151,14 @@
               "misure": {{ variant_misure | json }},
               "sizeLabel": {{ variant.title | json }},
               "available": {{ variant.available }},
+              {%- if topper_percent > 0 -%}
+                {%- assign variant_promo = variant.price | times: topper_keep | divided_by: 100 -%}
+                "price": {{ variant_promo | money | json }},
+                "compareAt": {{ variant.price | money | json }}
+              {%- else -%}
               "price": {{ variant.price | money | json }}
-              {%- if variant.compare_at_price > variant.price -%}
+              {%- endif -%}
+              {%- if topper_percent == 0 and variant.compare_at_price > variant.price -%}
                 , "compareAt": {{ variant.compare_at_price | money | json }}
               {%- endif -%}
             }{% unless forloop.last %},{% endunless %}
