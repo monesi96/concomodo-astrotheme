@@ -431,13 +431,22 @@
               {%- liquid
                 assign b = block.settings
                 assign result_url = '#'
+                assign size_map = ''
                 if b.product != blank
                   assign result_url = b.product.url
+                  assign seen = ','
+                  for v in b.product.variants
+                    assign sk = v.option1 | handleize | append: ','
+                    unless seen contains sk
+                      assign seen = seen | append: sk
+                      assign size_map = size_map | append: v.option1 | handleize | append: ':' | append: v.id | append: ','
+                    endunless
+                  endfor
                 elsif b.link != blank
                   assign result_url = b.link
                 endif
               -%}
-              <article class="cq__result-card" data-key="{{ b.key }}" {{ block.shopify_attributes }}>
+              <article class="cq__result-card" data-key="{{ b.key }}" data-title="{{ b.title | escape }}" data-url="{{ result_url }}" data-variants="{{ size_map }}" {{ block.shopify_attributes }}>
                 <div class="cq__result-media{% if b.image == blank and b.product.featured_image == blank %} cq__result-media--placeholder{% endif %}">
                   {%- if b.image != blank -%}
                     {{ b.image | image_url: width: 900 | image_tag: loading: 'lazy', alt: b.title }}
@@ -498,13 +507,22 @@
                     {%- liquid
                       assign xb = block.settings
                       assign xsell_url = '#'
+                      assign xsize_map = ''
                       if xb.product != blank
                         assign xsell_url = xb.product.url
+                        assign xseen = ','
+                        for v in xb.product.variants
+                          assign xsk = v.option1 | handleize | append: ','
+                          unless xseen contains xsk
+                            assign xseen = xseen | append: xsk
+                            assign xsize_map = xsize_map | append: v.option1 | handleize | append: ':' | append: v.id | append: ','
+                          endunless
+                        endfor
                       elsif xb.link != blank
                         assign xsell_url = xb.link
                       endif
                     -%}
-                    <a class="cq__xsell-card" href="{{ xsell_url }}" data-cross-for="{{ xb.show_for }}" {{ block.shopify_attributes }}>
+                    <a class="cq__xsell-card" href="{{ xsell_url }}" data-cross-for="{{ xb.show_for }}" data-variants="{{ xsize_map }}" {{ block.shopify_attributes }}>
                       <span class="cq__xsell-thumb">
                         {%- if xb.image != blank -%}
                           {{ xb.image | image_url: width: 200 | image_tag: loading: 'lazy', alt: xb.title }}

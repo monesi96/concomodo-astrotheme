@@ -309,8 +309,87 @@
           returnInput.value = window.location.pathname + '?quiz_result=' + winner;
         }
       }
+      this.saveProfile(winner, this.computeWinner().scores);
       this.track('quiz_email_submitted', { result: winner });
       return true;
+    }
+
+    /* ------------------------------------------------ collegamento ai prodotti reali */
+    applySizeToLinks() {
+      const size = (this.answers.size || [])[0];
+      if (!size || size === 'unknown') return;
+      const cards = this.root.querySelectorAll('.cq__result-card.is-visible, .cq__xsell-card.is-visible');
+      cards.forEach((card) => {
+        const map = {};
+        (card.dataset.variants || '').split(',').forEach((pair) => {
+          const [k, id] = pair.split(':');
+          if (k && id) map[k] = id;
+        });
+        card.querySelectorAll('a[href]').forEach((a) => this.decorateLink(a, size, map[size]));
+        if (card.tagName === 'A') this.decorateLink(card, size, map[size]);
+      });
+    }
+
+    decorateLink(a, size, variantId) {
+      try {
+        const url = new URL(a.getAttribute('href'), window.location.origin);
+        url.searchParams.set('quiz_size', size);
+        if (variantId) url.searchParams.set('variant', variantId);
+        a.setAttribute('href', url.pathname + url.search);
+      } catch (e) {
+        /* URL non valido: lascia com'è */
+      }
+    }
+
+    /* ------------------------------------------------ salvataggio informazioni */
+    readableAnswers() {
+      const out = [];
+      this.questionSteps.forEach((step) => {
+        const title = (step.querySelector('.cq__title') || {}).textContent;
+        const labels = Array.from(step.querySelectorAll('.cq-opt[aria-checked="true"] .cq-opt__label')).map((l) =>
+          l.textContent.trim()
+        );
+        if (title && labels.length) out.push({ q: title.trim(), a: labels.join(' + ') });
+      });
+      return out;
+    }
+
+    saveProfile(winner, scores) {
+      const card = this.resultCards.find((c) => c.dataset.key === winner);
+      const profile = {
+        winner: winner,
+        product: card ? card.dataset.title : winner,
+        url: card ? card.dataset.url : '',
+        answers: this.answers,
+        scores: scores,
+        ts: Date.now(),
+      };
+      // 1) browser: ritrovi il risultato anche tornando sul sito
+      try {
+        localStorage.setItem('cq_profile', JSON.stringify(profile));
+      } catch (e) {
+        /* storage non disponibile */
+      }
+      if (DESIGN_MODE) return;
+
+      // 2) carrello: gli attributi finiscono sull'ordine (Admin -> Ordini -> Dettagli aggiuntivi)
+      const attributes = {
+        'Quiz - materasso consigliato': profile.product,
+      };
+      this.readableAnswers().forEach((r, i) => {
+        attributes['Quiz - ' + (i + 1) + '. ' + r.q] = r.a;
+      });
+      const root = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
+      try {
+        fetch(root + 'cart/update.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ attributes: attributes }),
+          keepalive: true,
+        }).catch(() => {});
+      } catch (e) {
+        /* ignora */
+      }
     }
 
     /* ------------------------------------------------ risultato */
@@ -338,19 +417,10 @@
       });
       if (this.xsellWrap) this.xsellWrap.style.display = anyXsell ? '' : 'none';
 
-      // aggiunge la taglia scelta ai link risultato (utile per preselezionare la variante)
-      const size = (this.answers.size || [])[0];
-      if (size && size !== 'unknown') {
-        this.root.querySelectorAll('.cq__result-card.is-visible a[href]').forEach((a) => {
-          try {
-            const url = new URL(a.href, window.location.origin);
-            url.searchParams.set('quiz_size', size);
-            a.href = url.toString();
-          } catch (e) {
-            /* URL non valido: lascia com'è */
-          }
-        });
-      }
+      // collega i link ai veri prodotti: preseleziona la variante in base alla
+      // misura scelta (?variant=ID, nativo Shopify) e passa quiz_size
+      this.applySizeToLinks();
+      this.saveProfile(winner, scores);
 
       this.show(resultIndex);
       this.track('quiz_completed', { result: winner, scores });
@@ -435,7 +505,20 @@
           });
           if (this.xsellWrap) this.xsellWrap.style.display = anyXsell ? '' : 'none';
           this.current = this.steps.findIndex((s) => s.dataset.stepType === 'result');
+          this.restoreAnswers();
         }
+      } catch (e) {
+        /* ignora */
+      }
+    }
+
+    /* ripristina le risposte salvate (ritorno da captcha / link condiviso) per preselezionare la misura */
+    restoreAnswers() {
+      try {
+        const p = JSON.parse(localStorage.getItem('cq_profile') || 'null');
+        if (!p || !p.answers) return;
+        this.answers = p.answers;
+        this.applySizeToLinks();
       } catch (e) {
         /* ignora */
       }
@@ -450,6 +533,7 @@
       this.resultCards.forEach((c) => c.classList.remove('is-visible'));
       try {
         sessionStorage.removeItem('cq_pending');
+        localStorage.removeItem('cq_profile');
       } catch (e) {
         /* ignora */
       }
