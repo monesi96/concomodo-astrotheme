@@ -1084,6 +1084,7 @@
                     "heading": "Completa il tuo letto <strong>con</strong>",
                     "hint": "Scegli il topper più adatto a te: puoi aggiungerne solo uno.",
                     "gift_product": "cuscino-concomodo",
+                    "gift_free_product": "cuscino-concomodo-omaggio",
                     "gift_enabled": true,
                     "gift_badge": "In regalo",
                     "gift_free_label": "Gratis",

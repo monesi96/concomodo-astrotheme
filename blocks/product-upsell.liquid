@@ -65,7 +65,8 @@
         solo_percent: block.settings.solo_discount_percent,
         solo_badge: block.settings.solo_badge,
         gift_badge: block.settings.gift_badge,
-        gift_free_label: block.settings.gift_free_label
+        gift_free_label: block.settings.gift_free_label,
+        free_product: block.settings.gift_free_product
       %}
     {%- elsif request.design_mode -%}
       <p class="product-upsell__setup">
@@ -216,6 +217,27 @@
   .product-upsell__amount {
     font-size: 1rem;
     font-weight: 500;
+  }
+
+  .product-upsell__qty {
+    display: inline-flex;
+    gap: 6px;
+  }
+
+  .product-upsell__qty-option {
+    padding: 4px 12px;
+    border: 1px solid rgb(var(--color-foreground-rgb) / 0.25);
+    border-radius: 100px;
+    background: transparent;
+    color: inherit;
+    font-size: var(--font-size--xs);
+    cursor: pointer;
+  }
+
+  .product-upsell__qty-option[aria-pressed='true'] {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 1px var(--color-primary);
+    font-weight: 600;
   }
 
   .product-upsell__saving {
@@ -406,6 +428,12 @@
       "type": "product",
       "id": "gift_product",
       "label": "Prodotto"
+    },
+    {
+      "type": "product",
+      "id": "gift_free_product",
+      "label": "Prodotto cuscino in omaggio",
+      "info": "Gemello nascosto del cuscino ('Cuscino Concomodo (omaggio)'): è quello che viene aggiunto gratis insieme al topper, grazie allo sconto automatico CUSCINO-OMAGGIO-100."
     },
     {
       "type": "checkbox",

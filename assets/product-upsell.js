@@ -94,6 +94,9 @@ class ProductUpsell extends HTMLElement {
 
   #busy = false;
 
+  /** Pillows wanted on a matrimoniale bed: the customer can lower it to 1. */
+  #giftChoice = 2;
+
   /** Set when the customer removes the gift while a topper is in the cart, so we stop re-adding it. */
   #giftDeclined = false;
 
@@ -115,6 +118,7 @@ class ProductUpsell extends HTMLElement {
           element,
           role: element.dataset.upsellRole === 'gift' ? 'gift' : 'topper',
           productId: Number(element.dataset.productId),
+          freeProductId: Number(element.dataset.freeProductId) || null,
           linked: element.dataset.linked === 'true',
           variants,
           matched: null,
@@ -159,7 +163,12 @@ class ProductUpsell extends HTMLElement {
    * "2 cuscini" automatic discounts configured for Matrimoniale variants.
    */
   get #giftQuantity() {
-    return readMainSelection()?.dimensione === 'Matrimoniale' ? 2 : 1;
+    return this.#canChooseGiftQuantity ? this.#giftChoice : 1;
+  }
+
+  /** Two pillows can be picked only with a matrimoniale bed. */
+  get #canChooseGiftQuantity() {
+    return readMainSelection()?.dimensione === 'Matrimoniale';
   }
 
   get #topperKeyword() {
@@ -190,7 +199,9 @@ class ProductUpsell extends HTMLElement {
 
   /** @param {Object} row */
   #itemsOf(row) {
-    return this.#items().filter((item) => item.product_id === row.productId);
+    return this.#items().filter(
+      (item) => item.product_id === row.productId || (row.freeProductId && item.product_id === row.freeProductId)
+    );
   }
 
   /**
@@ -348,6 +359,14 @@ class ProductUpsell extends HTMLElement {
 
       element.hidden = false;
 
+      const qtyElement = element.querySelector('[data-upsell-qty]');
+      if (qtyElement instanceof HTMLElement) {
+        qtyElement.hidden = !this.#canChooseGiftQuantity;
+        for (const option of qtyElement.querySelectorAll('[data-upsell-qty-option]')) {
+          option.setAttribute('aria-pressed', String(Number(option.dataset.upsellQtyOption) === this.#giftQuantity));
+        }
+      }
+
       const isFree = bundleInCart && this.#giftEnabled;
       const hasSoloDiscount = this.#soloPercent > 0;
       const struckPrice = variant.compareAt ?? variant.price;
@@ -405,7 +424,7 @@ class ProductUpsell extends HTMLElement {
       this.#setBusy(true);
       try {
         await this.#add([
-          { id: gift.matched.id, quantity: this.#giftQuantity, properties: this.#giftProperties() },
+          { id: gift.matched.freeId ?? gift.matched.id, quantity: this.#giftQuantity, properties: this.#giftProperties() },
         ]);
         await this.#refreshCart({ announce: true });
       } catch (error) {
@@ -440,6 +459,13 @@ class ProductUpsell extends HTMLElement {
 
     const row = this.#rows.find((candidate) => candidate.element === rowElement);
     if (!row) return;
+
+    const qtyOption = target?.closest('[data-upsell-qty-option]');
+    if (qtyOption instanceof HTMLElement && row.role === 'gift') {
+      event.preventDefault();
+      this.#setGiftChoice(row, Number(qtyOption.dataset.upsellQtyOption) === 1 ? 1 : 2);
+      return;
+    }
 
     if (target?.closest('[data-upsell-add]')) {
       event.preventDefault();
@@ -513,7 +539,7 @@ class ProductUpsell extends HTMLElement {
       const gift = this.#gift;
 
       if (this.#giftEnabled && gift?.matched?.available && this.#itemsOf(gift).length === 0 && !this.#giftDeclined) {
-        items.push({ id: gift.matched.id, quantity: this.#giftQuantity, properties: this.#giftProperties() });
+        items.push({ id: gift.matched.freeId ?? gift.matched.id, quantity: this.#giftQuantity, properties: this.#giftProperties() });
       }
 
       await this.#addWithMain(items, this.#mainBundleItem());
@@ -574,6 +600,7 @@ class ProductUpsell extends HTMLElement {
       const item = { id: row.matched.id, quantity: this.#giftQuantity };
 
       if (this.#giftEnabled && bundleInCart) {
+        item.id = row.matched.freeId ?? row.matched.id;
         item.properties = this.#giftProperties();
         this.#giftDeclined = false;
         await this.#add([item]);
@@ -581,6 +608,33 @@ class ProductUpsell extends HTMLElement {
         await this.#addWithMain([item], this.#mainBundleItem());
       }
 
+      await this.#refreshCart({ announce: true });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      this.#setBusy(false);
+    }
+  }
+
+  /**
+   * Changes how many pillows are wanted; if the gift is already in the cart
+   * its line follows the choice.
+   *
+   * @param {Object} row
+   * @param {number} quantity
+   */
+  async #setGiftChoice(row, quantity) {
+    if (this.#busy) return;
+    this.#giftChoice = quantity;
+    this.#render();
+
+    const lines = this.#itemsOf(row);
+    if (lines.length === 0 || !this.#canChooseGiftQuantity) return;
+
+    this.#setBusy(true);
+
+    try {
+      await this.#change(lines[0].key, quantity);
       await this.#refreshCart({ announce: true });
     } catch (error) {
       console.error(error);

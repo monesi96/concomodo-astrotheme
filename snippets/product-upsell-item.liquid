@@ -22,6 +22,7 @@
   @param {string} solo_badge - Gift only: badge shown when bought alone
   @param {string} gift_badge - Gift only: badge shown when a topper is selected
   @param {string} gift_free_label - Gift only: price label when free
+  @param {object} free_product - Gift only: hidden twin of the gift product, added when the pillow is free (backed by a 100% automatic discount)
   @param {string} discounts - Topper only: lines "misura=euro" (e.g. 80x190=40), the fixed € discount when bought with the mattress
   @param {string} saving_label - Topper only: saving text, {amount} and {pillows} are replaced
 {%- enddoc -%}
@@ -81,6 +82,13 @@
       assign discount_lines = discounts | newline_to_br | split: '<br />'
     endif
 
+    assign free_variant_id = ''
+    if role == 'gift' and free_product != blank
+      assign free_variant = free_product.variants | where: 'title', first_variant.title | first
+      assign free_variant = free_variant | default: free_product.selected_or_first_available_variant
+      assign free_variant_id = free_variant.id
+    endif
+
     if role == 'gift'
       assign solo_percent = solo_percent | default: 0
       assign keep_percent = 100 | minus: solo_percent
@@ -97,6 +105,7 @@
     data-upsell-row
     data-upsell-role="{{ role }}"
     data-product-id="{{ product.id }}"
+    {% if role == 'gift' and free_product != blank %}data-free-product-id="{{ free_product.id }}"{% endif %}
     data-linked="{{ is_linked }}"
     {% if role == 'gift' %}
       data-gift-badge="{{ gift_badge | escape }}"
@@ -110,6 +119,7 @@
         {%- if role == 'gift' -%}
           {
             "id": {{ first_variant.id }},
+            "freeId": {{ free_variant_id | default: first_variant.id }},
             "available": {{ first_variant.available }},
             "price": {{ first_variant.price | money | json }},
             "soloPrice": {{ solo_cents | money | json }}
@@ -149,7 +159,8 @@
                 assign variant_saving = 0
                 for discount_line in discount_lines
                   assign discount_parts = discount_line | strip | split: '='
-                  if discount_parts[0] | strip == variant_misure
+                  assign discount_size = discount_parts[0] | strip
+                  if discount_size == variant_misure
                     assign variant_saving = discount_parts[1] | strip | plus: 0
                   endif
                 endfor
@@ -222,6 +233,13 @@
           <span data-upsell-size></span>
         </p>
       {%- endunless -%}
+
+      {%- if role == 'gift' -%}
+        <div class="product-upsell__qty" data-upsell-qty role="group" aria-label="Quantità cuscini" hidden>
+          <button type="button" class="product-upsell__qty-option" data-upsell-qty-option="1" aria-pressed="false">1 cuscino</button>
+          <button type="button" class="product-upsell__qty-option" data-upsell-qty-option="2" aria-pressed="true">2 cuscini</button>
+        </div>
+      {%- endif -%}
 
       <div class="product-upsell__actions">
         <button
