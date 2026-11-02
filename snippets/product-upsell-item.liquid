@@ -149,7 +149,8 @@
                 assign variant_saving = 0
                 for discount_line in discount_lines
                   assign discount_parts = discount_line | strip | split: '='
-                  if discount_parts[0] | strip == variant_misure
+                  assign discount_size = discount_parts[0] | strip
+                  if discount_size == variant_misure
                     assign variant_saving = discount_parts[1] | strip | plus: 0
                   endif
                 endfor
