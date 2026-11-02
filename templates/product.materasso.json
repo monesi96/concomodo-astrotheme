@@ -3715,6 +3715,54 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "fatti_in_italia": {
+      "type": "fatti-in-italia",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/concomodo-produzione-reparto.png",
+            "caption": ""
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/concomodo-produzione-magazzino.png",
+            "caption": ""
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/concomodo-produzione-linea.png",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "slide_2",
+        "slide_3"
+      ],
+      "settings": {
+        "show_flag": true,
+        "heading": "I nostri materassi li facciamo noi, in Italia.",
+        "text": "<p>Tagliamo le schiume su misura, cuciamo i rivestimenti nel nostro reparto e controlliamo ogni materasso prima di imballarlo. Da qui parte direttamente verso casa tua, dal produttore a te senza intermediari.</p><p>Seguire tutto da vicino ci permette di curare ogni dettaglio e di tenere un prezzo onesto.</p>",
+        "button_label": "",
+        "button_link": "",
+        "image_position": "right",
+        "autoplay": true,
+        "autoplay_speed": 5,
+        "corner_radius": 24,
+        "section_width": "page-width",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 56,
+        "padding-block-end": 56,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
+      }
     }
   },
   "order": [
@@ -3728,6 +3776,7 @@
     "section_KyfGGw",
     "section_XndPc9",
     "installment_payments_tC9BhM",
+    "fatti_in_italia",
     "section_chbtyY",
     "vuoi_parlare_con_noi_YckWRF",
     "1790954386f337fffd"
