@@ -412,7 +412,7 @@
                           "type": "social-links",
                           "name": "t:names.social_media_links",
                           "settings": {
-                            "facebook_url": "#",
+                            "facebook_url": "https://www.facebook.com/concomodomaterassi/",
                             "instagram_url": "https://www.instagram.com/concomodo/",
                             "youtube_url": "#",
                             "tiktok_url": "#",
