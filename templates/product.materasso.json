@@ -1098,7 +1098,7 @@
                     "add_label": "Aggiungi",
                     "remove_label": "Rimuovi",
                     "unavailable_label": "Non disponibile",
-                    "card_scheme": "scheme-1",
+                    "card_scheme": "scheme-2",
                     "card_radius": 30,
                     "inherit_color_scheme": true,
                     "color_scheme": "scheme-1",
