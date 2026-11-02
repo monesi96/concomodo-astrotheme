@@ -815,7 +815,9 @@
                         "product": "topper-carezza",
                         "badge": "Più morbidezza",
                         "benefit": "Se il materasso è troppo rigido e lo vuoi più morbido, senza effetto sprofondo.",
-                        "add_label": "Aggiungi al carrello"
+                        "add_label": "Aggiungi al carrello",
+                        "discounts": "80x190=40\n85x190=40\n90x190=40\n120x190=50\n140x190=50\n160x190=50\n165x190=50\n170x190=50\n180x190=50\n80x195=40\n85x195=40\n90x195=40\n120x195=50\n140x195=50\n160x195=50\n165x195=50\n170x195=50\n180x195=50\n80x200=40\n85x200=40\n90x200=40\n120x200=50\n140x200=50\n160x200=50\n165x200=50\n170x200=50\n180x200=50",
+                        "saving_label": "-{amount}€ di sconto + {pillows} in omaggio"
                       },
                       "blocks": {}
                     },
@@ -825,7 +827,9 @@
                         "product": "topper-abbraccio",
                         "badge": "Più sostegno",
                         "benefit": "Allunga la vita del materasso e dà più rigidità a quello che sprofonda.",
-                        "add_label": "Aggiungi al carrello"
+                        "add_label": "Aggiungi al carrello",
+                        "discounts": "80x190=60\n85x190=60\n90x190=50\n120x190=70\n140x190=70\n160x190=70\n165x190=70\n170x190=70\n180x190=70\n80x195=50\n85x195=60\n90x195=60\n120x195=70\n140x195=70\n160x195=70\n165x195=70\n170x195=70\n180x195=70\n80x200=50\n85x200=50\n90x200=50\n120x200=70\n140x200=70\n160x200=70\n165x200=70\n170x200=70\n180x200=70",
+                        "saving_label": "-{amount}€ di sconto + {pillows} in omaggio"
                       },
                       "blocks": {}
                     }
