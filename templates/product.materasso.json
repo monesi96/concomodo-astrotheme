@@ -3515,7 +3515,7 @@
                         "text_wUpPUY": {
                           "type": "text",
                           "settings": {
-                            "text": "<p>I nostri prodotti sono realizzati sia a livello locale che globale. Selezioniamo attentamente i nostri partner di produzione per garantire prodotti di alta qualità a un prezzo equo.</p>",
+                            "text": "<p>Ogni prodotto Concomodo viene <strong>realizzato su ordinazione</strong> con cura e attenzione ai dettagli, per offrirti qualità e comfort nel tempo. Grazie a questa politica, i materassi&nbsp;rimangono compressi per il minor tempo possibile e <strong>sono pronti entro 12-24 ore</strong></p>",
                             "width": "100%",
                             "max_width": "normal",
                             "alignment": "left",
@@ -3555,7 +3555,7 @@
                         "text_KGkUtJ": {
                           "type": "text",
                           "settings": {
-                            "text": "<p>Lavoreremo rapidamente per spedire il tuo ordine il prima possibile. Una volta spedito l'ordine, riceverai un'email con ulteriori informazioni. I tempi di consegna variano a seconda della tua posizione.</p>",
+                            "text": "<p>I materassi Concomodo sono garantiti <strong>fino a 10 anni</strong>.<br/>La durata dei prodotti può variare in base alla frequenza d’uso e alla cura quotidiana. Per conservarli al meglio nel tempo, segui le indicazioni di manutenzione specifiche riportate per ciascun articolo.</p>",
                             "width": "100%",
                             "max_width": "normal",
                             "alignment": "left",
@@ -3582,53 +3582,12 @@
                       "block_order": [
                         "text_KGkUtJ"
                       ]
-                    },
-                    "accordion_row_Eew7wc": {
-                      "type": "_accordion-row",
-                      "settings": {
-                        "heading": "Avvertenze",
-                        "open_by_default": false,
-                        "icon": "none",
-                        "width": 30
-                      },
-                      "blocks": {
-                        "text_e3JkYt": {
-                          "type": "text",
-                          "settings": {
-                            "text": "<p>I nostri prodotti sono realizzati sia a livello locale che globale. Selezioniamo attentamente i nostri partner di produzione per garantire prodotti di alta qualità a un prezzo equo.</p>",
-                            "width": "100%",
-                            "max_width": "normal",
-                            "alignment": "left",
-                            "type_preset": "rte",
-                            "font": "var(--font-body--family)",
-                            "weight": "",
-                            "font_size": "1rem",
-                            "line_height": "normal",
-                            "letter_spacing": "normal",
-                            "case": "none",
-                            "wrap": "pretty",
-                            "color": "var(--color-foreground)",
-                            "background": false,
-                            "background_color": "#00000026",
-                            "corner_radius": 0,
-                            "padding-block-start": 0,
-                            "padding-block-end": 0,
-                            "padding-inline-start": 0,
-                            "padding-inline-end": 0
-                          },
-                          "blocks": {}
-                        }
-                      },
-                      "block_order": [
-                        "text_e3JkYt"
-                      ]
                     }
                   },
                   "block_order": [
                     "accordion_row_7AjxBK",
                     "accordion_row_q8WmUg",
-                    "accordion_row_kUgjtd",
-                    "accordion_row_Eew7wc"
+                    "accordion_row_kUgjtd"
                   ]
                 }
               },

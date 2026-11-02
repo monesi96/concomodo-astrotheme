@@ -413,7 +413,7 @@
                           "name": "t:names.social_media_links",
                           "settings": {
                             "facebook_url": "#",
-                            "instagram_url": "#",
+                            "instagram_url": "https://www.instagram.com/concomodo/",
                             "youtube_url": "#",
                             "tiktok_url": "#",
                             "twitter_url": "#",
