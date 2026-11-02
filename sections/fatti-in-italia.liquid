@@ -1,0 +1,511 @@
+{%- capture icon_prev -%}<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="m15 6-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>{%- endcapture -%}
+{%- capture icon_next -%}<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="m9 6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>{%- endcapture -%}
+
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--{{ section.settings.section_width }} made-italy color-{{ section.settings.color_scheme }} spacing-style{% if section.settings.image_position == 'left' %} made-italy--media-left{% endif %}"
+  style="{% render 'spacing-style', settings: section.settings %} --mi-radius: {{ section.settings.corner_radius }}px;"
+  {% if request.visual_preview_mode %}data-shopify-visual-preview{% endif %}
+>
+  <div class="made-italy__inner">
+    <div class="made-italy__content">
+      {%- if section.settings.show_flag -%}
+        <span class="made-italy__flag" aria-hidden="true"><i></i><i></i><i></i></span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="made-italy__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="made-italy__text">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+        <a href="{{ section.settings.button_link }}" class="made-italy__button button">{{ section.settings.button_label }}</a>
+      {%- endif -%}
+    </div>
+
+    <div class="made-italy__media">
+      {%- if section.blocks.size > 0 -%}
+        <made-italy-carousel
+          class="made-italy__carousel"
+          data-autoplay="{{ section.settings.autoplay }}"
+          data-speed="{{ section.settings.autoplay_speed | times: 1000 }}"
+        >
+          <div class="made-italy__track" tabindex="0" aria-label="{{ section.settings.heading | strip_html | escape }}">
+            {%- for block in section.blocks -%}
+              <figure class="made-italy__slide" {{ block.shopify_attributes }}>
+                {%- if block.settings.image != blank -%}
+                  {%- liquid
+                    assign img_loading = 'lazy'
+                    if forloop.first and section.index < 3
+                      assign img_loading = 'eager'
+                    endif
+                  -%}
+                  {{
+                    block.settings.image
+                    | image_url: width: 1600
+                    | image_tag:
+                      loading: img_loading,
+                      widths: '600, 900, 1200, 1600',
+                      sizes: '(min-width: 990px) 55vw, 100vw',
+                      class: 'made-italy__img'
+                  }}
+                {%- else -%}
+                  {{ 'lifestyle-1' | placeholder_svg_tag: 'made-italy__img made-italy__img--placeholder' }}
+                {%- endif -%}
+                {%- if block.settings.caption != blank -%}
+                  <figcaption class="made-italy__caption">{{ block.settings.caption }}</figcaption>
+                {%- endif -%}
+              </figure>
+            {%- endfor -%}
+          </div>
+
+          {%- if section.blocks.size > 1 -%}
+            <div class="made-italy__controls">
+              <button type="button" class="made-italy__arrow" data-dir="-1" aria-label="Foto precedente">{{ icon_prev }}</button>
+              <div class="made-italy__dots">
+                {%- for block in section.blocks -%}
+                  <button type="button" class="made-italy__dot{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Vai alla foto {{ forloop.index }}"></button>
+                {%- endfor -%}
+              </div>
+              <button type="button" class="made-italy__arrow" data-dir="1" aria-label="Foto successiva">{{ icon_next }}</button>
+            </div>
+          {%- endif -%}
+        </made-italy-carousel>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<script>
+  if (!customElements.get('made-italy-carousel')) {
+    customElements.define(
+      'made-italy-carousel',
+      class extends HTMLElement {
+        connectedCallback() {
+          this.track = this.querySelector('.made-italy__track');
+          this.slides = Array.from(this.querySelectorAll('.made-italy__slide'));
+          this.dots = Array.from(this.querySelectorAll('.made-italy__dot'));
+          if (!this.track || this.slides.length < 2) return;
+          this.index = 0;
+
+          this.querySelectorAll('.made-italy__arrow').forEach((btn) =>
+            btn.addEventListener('click', () => {
+              this.go(this.index + Number(btn.dataset.dir));
+              this.stop();
+            })
+          );
+          this.dots.forEach((dot) =>
+            dot.addEventListener('click', () => {
+              this.go(Number(dot.dataset.index));
+              this.stop();
+            })
+          );
+
+          let raf;
+          this.track.addEventListener('scroll', () => {
+            cancelAnimationFrame(raf);
+            raf = requestAnimationFrame(() => {
+              const i = Math.round(this.track.scrollLeft / this.track.clientWidth);
+              this.setActive(i);
+            });
+          }, { passive: true });
+
+          this.track.addEventListener('pointerdown', () => this.stop(), { passive: true });
+          this.track.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') { this.go(this.index + 1); this.stop(); }
+            if (e.key === 'ArrowLeft') { this.go(this.index - 1); this.stop(); }
+          });
+
+          const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if (this.dataset.autoplay === 'true' && !reduce && !(window.Shopify && window.Shopify.designMode)) {
+            this.observer = new IntersectionObserver((entries) => {
+              entries.forEach((entry) => (entry.isIntersecting ? this.play() : this.pause()));
+            }, { threshold: 0.4 });
+            this.observer.observe(this);
+          }
+        }
+
+        disconnectedCallback() {
+          this.pause();
+          if (this.observer) this.observer.disconnect();
+        }
+
+        go(i) {
+          const total = this.slides.length;
+          const next = (i + total) % total;
+          this.track.scrollTo({ left: next * this.track.clientWidth, behavior: 'smooth' });
+          this.setActive(next);
+        }
+
+        setActive(i) {
+          this.index = i;
+          this.dots.forEach((d, n) => d.classList.toggle('is-active', n === i));
+        }
+
+        play() {
+          if (this.stopped || this.timer) return;
+          this.timer = setInterval(() => this.go(this.index + 1), Number(this.dataset.speed) || 5000);
+        }
+
+        pause() {
+          clearInterval(this.timer);
+          this.timer = null;
+        }
+
+        stop() {
+          this.stopped = true;
+          this.pause();
+        }
+      }
+    );
+  }
+</script>
+
+{% stylesheet %}
+  .made-italy {
+    --mi-radius: 24px;
+  }
+
+  .made-italy__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1.75rem, 4vw, 4rem);
+    align-items: center;
+    max-width: 1200px;
+    margin-inline: auto;
+  }
+
+  @media screen and (min-width: 990px) {
+    .made-italy__inner {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    }
+
+    .made-italy--media-left .made-italy__content {
+      order: 2;
+    }
+  }
+
+  .made-italy__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .made-italy__flag {
+    display: inline-flex;
+    gap: 4px;
+  }
+
+  .made-italy__flag i {
+    display: block;
+    width: 22px;
+    height: 4px;
+    border-radius: 2px;
+  }
+
+  .made-italy__flag i:nth-child(1) { background: #009246; }
+  .made-italy__flag i:nth-child(2) { background: rgb(var(--color-foreground-rgb) / 0.15); }
+  .made-italy__flag i:nth-child(3) { background: #ce2b37; }
+
+  .made-italy__heading {
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .made-italy__text {
+    line-height: 1.6;
+    opacity: 0.85;
+    max-width: 52ch;
+  }
+
+  .made-italy__text > :first-child { margin-block-start: 0; }
+  .made-italy__text > :last-child { margin-block-end: 0; }
+
+  .made-italy__button {
+    margin-block-start: 0.5rem;
+  }
+
+  .made-italy__media {
+    min-width: 0;
+  }
+
+  .made-italy__carousel {
+    display: block;
+    position: relative;
+  }
+
+  .made-italy__track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    border-radius: var(--mi-radius);
+    outline-offset: 4px;
+  }
+
+  .made-italy__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .made-italy__slide {
+    position: relative;
+    flex: 0 0 100%;
+    margin: 0;
+    scroll-snap-align: start;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+  }
+
+  .made-italy__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .made-italy__img--placeholder {
+    background: rgb(var(--color-foreground-rgb) / 0.06);
+  }
+
+  .made-italy__caption {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-size: 0.85rem;
+    line-height: 1.3;
+  }
+
+  .made-italy__controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-block-start: 1rem;
+  }
+
+  .made-italy__arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid rgb(var(--color-foreground-rgb) / 0.2);
+    border-radius: 50%;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .made-italy__arrow:hover {
+    background: rgb(var(--color-foreground-rgb) / 0.06);
+  }
+
+  .made-italy__arrow svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .made-italy__dots {
+    display: flex;
+    gap: 8px;
+  }
+
+  .made-italy__dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: rgb(var(--color-foreground-rgb) / 0.25);
+    cursor: pointer;
+    transition: width 0.25s ease, background-color 0.25s ease;
+  }
+
+  .made-italy__dot.is-active {
+    width: 24px;
+    background: rgb(var(--color-foreground-rgb) / 0.8);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .made-italy__dot,
+    .made-italy__arrow {
+      transition: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Fatti in Italia",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_flag",
+      "label": "Mostra linea tricolore",
+      "default": true
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Titolo",
+      "default": "I nostri materassi li facciamo noi, in Italia."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Testo",
+      "default": "<p>Tagliamo le schiume su misura, cuciamo i rivestimenti nel nostro reparto e controlliamo ogni materasso prima di imballarlo. Da qui parte direttamente verso casa tua, dal produttore a te senza intermediari.</p><p>Seguire tutto da vicino ci permette di curare ogni dettaglio e di tenere un prezzo onesto.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Testo pulsante"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link pulsante"
+    },
+    {
+      "type": "header",
+      "content": "Carosello"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Posizione foto su desktop",
+      "options": [
+        { "value": "right", "label": "Destra" },
+        { "value": "left", "label": "Sinistra" }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Scorrimento automatico",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Secondi per foto",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "Raggio angoli",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Sezione"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Larghezza sezione",
+      "options": [
+        { "value": "page-width", "label": "Pagina" },
+        { "value": "full-width", "label": "Piena" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Schema colore",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Spaziatura"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Sopra",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Sotto",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "Sinistra",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "Destra",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Foto",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Immagine"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Didascalia (facoltativa)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fatti in Italia",
+      "blocks": [
+        { "type": "slide" },
+        { "type": "slide" },
+        { "type": "slide" }
+      ]
+    }
+  ]
+}
+{% endschema %}
