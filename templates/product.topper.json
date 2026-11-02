@@ -2401,7 +2401,7 @@
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
-                    "text": "<p>Guarda cosa pensano i sognatori ConComodo! </p>",
+                    "text": "<p>Guarda cosa pensano i sognatori Concomodo!&nbsp;</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -2483,6 +2483,7 @@
       "block_order": [
         "group_JNHTB4"
       ],
+      "disabled": true,
       "custom_css": [
         ".border-style.custom-section-content > div > div {border-radius: 30px 30px 0 0;}"
       ],
@@ -2878,6 +2879,54 @@
         "gradient_direction": "to top",
         "padding-block-start": 80,
         "padding-block-end": 80
+      }
+    },
+    "fatti_in_italia": {
+      "type": "fatti-in-italia",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/concomodo-produzione-reparto.png",
+            "caption": ""
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/concomodo-produzione-magazzino.png",
+            "caption": ""
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/concomodo-produzione-linea.png",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "slide_2",
+        "slide_3"
+      ],
+      "settings": {
+        "show_flag": true,
+        "heading": "Fatti da noi, in Italia.",
+        "text": "<p>Materassi, topper e cuscini Concomodo nascono nel nostro reparto: tagliamo le schiume, cuciamo i rivestimenti e controlliamo ogni pezzo prima di imballarlo. Da qui parte direttamente verso casa tua, dal produttore a te senza intermediari.</p><p>Seguire tutto da vicino ci permette di curare ogni dettaglio e di tenere un prezzo onesto.</p>",
+        "button_label": "",
+        "button_link": "",
+        "image_position": "right",
+        "autoplay": true,
+        "autoplay_speed": 5,
+        "corner_radius": 24,
+        "section_width": "page-width",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 56,
+        "padding-block-end": 56,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
       }
     },
     "section_VL9fDV": {
@@ -3924,54 +3973,6 @@
         "gradient_direction": "to top",
         "padding-block-start": 100,
         "padding-block-end": 40
-      }
-    },
-    "fatti_in_italia": {
-      "type": "fatti-in-italia",
-      "blocks": {
-        "slide_1": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/concomodo-produzione-reparto.png",
-            "caption": ""
-          }
-        },
-        "slide_2": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/concomodo-produzione-magazzino.png",
-            "caption": ""
-          }
-        },
-        "slide_3": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/concomodo-produzione-linea.png",
-            "caption": ""
-          }
-        }
-      },
-      "block_order": [
-        "slide_1",
-        "slide_2",
-        "slide_3"
-      ],
-      "settings": {
-        "show_flag": true,
-        "heading": "Fatti da noi, in Italia.",
-        "text": "<p>Materassi, topper e cuscini Concomodo nascono nel nostro reparto: tagliamo le schiume, cuciamo i rivestimenti e controlliamo ogni pezzo prima di imballarlo. Da qui parte direttamente verso casa tua, dal produttore a te senza intermediari.</p><p>Seguire tutto da vicino ci permette di curare ogni dettaglio e di tenere un prezzo onesto.</p>",
-        "button_label": "",
-        "button_link": "",
-        "image_position": "right",
-        "autoplay": true,
-        "autoplay_speed": 5,
-        "corner_radius": 24,
-        "section_width": "page-width",
-        "color_scheme": "scheme-1",
-        "padding-block-start": 56,
-        "padding-block-end": 56,
-        "padding-inline-start": 0,
-        "padding-inline-end": 0
       }
     }
   },
