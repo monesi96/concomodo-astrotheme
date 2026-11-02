@@ -134,16 +134,6 @@
     "channels": {
       "type": "vuoi-parlare-con-noi",
       "blocks": {
-        "card_phone": {
-          "type": "card",
-          "settings": {
-            "icon": "phone",
-            "title": "Chiamaci",
-            "text": "<p>Dal lunedì al venerdì, 9:00–18:00. Siamo qui per aiutarti a dormire meglio.</p>",
-            "link": "",
-            "open_in_new_tab": false
-          }
-        },
         "card_chat": {
           "type": "card",
           "settings": {
@@ -154,20 +144,30 @@
             "open_in_new_tab": false
           }
         },
+        "card_phone": {
+          "type": "card",
+          "settings": {
+            "icon": "phone",
+            "title": "Chiamaci",
+            "text": "<p>Dal lunedì al venerdì, 9:00–18:00. Siamo qui per aiutarti a dormire meglio.</p>",
+            "link": "https://wa.me/+393937105726",
+            "open_in_new_tab": false
+          }
+        },
         "card_email": {
           "type": "card",
           "settings": {
             "icon": "email",
             "title": "Scrivici",
             "text": "<p>Compila il modulo qui sotto: ti rispondiamo prima che tu possa dire «fate Concomodo».</p>",
-            "link": "",
+            "link": "mailto:info@concomodo.it",
             "open_in_new_tab": false
           }
         }
       },
       "block_order": [
-        "card_phone",
         "card_chat",
+        "card_phone",
         "card_email"
       ],
       "name": "Vorresti parlare con noi?",
@@ -364,7 +364,7 @@
                         "faq_r2_t": {
                           "type": "text",
                           "settings": {
-                            "text": "<p>Acquisti il tuo materasso e lo provi a casa fino a 100 notti. Se non ti convince, organizziamo il ritiro gratuito e ti rimborsiamo l’intero importo.</p>",
+                            "text": "<p>Acquisti il tuo materasso e lo provi a casa fino a 100 notti. Se non ti convince, puoi cambiare modello gratis, oppure organizziamo il reso gratuitamente e ti rimborsiamo l’intero importo.</p>",
                             "width": "100%",
                             "max_width": "none",
                             "alignment": "left",
@@ -484,7 +484,7 @@
                         "faq_r5_t": {
                           "type": "text",
                           "settings": {
-                            "text": "<p>Sì, al checkout puoi scegliere il pagamento in 3, 4 o 6 rate senza interessi con Klarna o HeyLight.</p>",
+                            "text": "<p>Sì, al checkout puoi scegliere tra diversi provider.</p>",
                             "width": "100%",
                             "max_width": "none",
                             "alignment": "left",
