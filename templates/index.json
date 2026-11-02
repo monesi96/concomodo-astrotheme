@@ -3426,8 +3426,8 @@
             "icon": "phone",
             "title": "Chiamaci",
             "text": "<p>Siamo qui per aiutarti a ritrovare il piacere di un sonno sereno e di qualità.</p>",
-            "link": "",
-            "open_in_new_tab": false
+            "link": "https://wa.me/+393937105726",
+            "open_in_new_tab": true
           }
         },
         "card_email": {
