@@ -492,7 +492,7 @@
                       "type": "text",
                       "name": "t:names.heading",
                       "settings": {
-                        "text": "<p>100 notti di prova*</p>",
+                        "text": "<p>100 notti di prova</p>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "center",
@@ -650,7 +650,7 @@
                       "type": "text",
                       "name": "t:names.heading",
                       "settings": {
-                        "text": "<p>Garanzia fino a 10 anni*</p>",
+                        "text": "<p>Garanzia fino a 10 anni</p><p></p>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "center",
@@ -966,7 +966,7 @@
                       "type": "text",
                       "name": "t:names.heading",
                       "settings": {
-                        "text": "<p>Recensioni verificate*</p>",
+                        "text": "<p>Recensioni autentiche</p>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "center",
@@ -3407,6 +3407,54 @@
         "padding-block-end": 100
       }
     },
+    "fatti_in_italia": {
+      "type": "fatti-in-italia",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/concomodo-produzione-reparto.png",
+            "caption": ""
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/concomodo-produzione-magazzino.png",
+            "caption": ""
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/concomodo-produzione-linea.png",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "slide_2",
+        "slide_3"
+      ],
+      "settings": {
+        "show_flag": true,
+        "heading": "I nostri materassi li facciamo noi, in Italia.",
+        "text": "<p>Tagliamo le schiume su misura, cuciamo i rivestimenti nel nostro reparto e controlliamo ogni materasso prima di imballarlo. Da qui parte direttamente verso casa tua, dal produttore a te senza intermediari.</p><p>Seguire tutto da vicino ci permette di curare ogni dettaglio e di tenere un prezzo onesto.</p>",
+        "button_label": "Scopri i materassi",
+        "button_link": "shopify://collections/materassi",
+        "image_position": "right",
+        "autoplay": true,
+        "autoplay_speed": 5,
+        "corner_radius": 24,
+        "section_width": "page-width",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 56,
+        "padding-block-end": 56,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
+      }
+    },
     "vuoi_parlare_con_noi_cc": {
       "type": "vuoi-parlare-con-noi",
       "blocks": {
@@ -4218,54 +4266,6 @@
         "gradient_direction": "to top",
         "padding-block-start": 0,
         "padding-block-end": 0
-      }
-    },
-    "fatti_in_italia": {
-      "type": "fatti-in-italia",
-      "blocks": {
-        "slide_1": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/concomodo-produzione-reparto.png",
-            "caption": ""
-          }
-        },
-        "slide_2": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/concomodo-produzione-magazzino.png",
-            "caption": ""
-          }
-        },
-        "slide_3": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/concomodo-produzione-linea.png",
-            "caption": ""
-          }
-        }
-      },
-      "block_order": [
-        "slide_1",
-        "slide_2",
-        "slide_3"
-      ],
-      "settings": {
-        "show_flag": true,
-        "heading": "I nostri materassi li facciamo noi, in Italia.",
-        "text": "<p>Tagliamo le schiume su misura, cuciamo i rivestimenti nel nostro reparto e controlliamo ogni materasso prima di imballarlo. Da qui parte direttamente verso casa tua, dal produttore a te senza intermediari.</p><p>Seguire tutto da vicino ci permette di curare ogni dettaglio e di tenere un prezzo onesto.</p>",
-        "button_label": "Scopri i materassi",
-        "button_link": "shopify://collections/materassi",
-        "image_position": "right",
-        "autoplay": true,
-        "autoplay_speed": 5,
-        "corner_radius": 24,
-        "section_width": "page-width",
-        "color_scheme": "scheme-1",
-        "padding-block-start": 56,
-        "padding-block-end": 56,
-        "padding-inline-start": 0,
-        "padding-inline-end": 0
       }
     }
   },
