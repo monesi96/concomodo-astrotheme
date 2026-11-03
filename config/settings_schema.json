@@ -20,6 +20,12 @@
         "label": "t:settings.default_logo"
       },
       {
+        "type": "textarea",
+        "id": "organization_same_as",
+        "label": "Profili social (sameAs)",
+        "info": "Un URL per riga (Instagram, Facebook, TikTok, YouTube, LinkedIn...). Usati nei dati strutturati Organization."
+      },
+      {
         "type": "image_picker",
         "id": "logo_inverse",
         "label": "t:settings.inverse_logo",
