@@ -265,29 +265,7 @@
   {% endif %}
 {% endcapture %}
 
-<script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "Organization",
-    "name": {{ shop.name | json }},
-    {% if settings.company_legal_name != blank %}
-      "legalName": {{ settings.company_legal_name | json }},
-    {% endif %}
-    {% if settings.company_vat_number != blank %}
-      "vatID": {{ settings.company_vat_number | json }},
-    {% endif %}
-    {% if settings.company_tax_code != blank %}
-      "taxID": {{ settings.company_tax_code | json }},
-    {% endif %}
-    {% if settings.company_pec != blank %}
-      "email": {{ settings.company_pec | json }},
-    {% endif %}
-    {% if settings.logo %}
-      "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
-    {% endif %}
-    "url": {{ request.origin | append: page.url | json }}
-  }
-</script>
+{% render 'organization-schema' %}
 
 <header-component
   id="header-component"
@@ -303,7 +281,7 @@
   data-scroll-direction="none"
 >
   {%- if request.page_type == 'index' -%}
-    <h1 class="visually-hidden">{{ shop.name }}</h1>
+    <h1 class="visually-hidden">{{ shop.name }} | Materassi Made in Italy dal produttore</h1>
   {%- endif -%}
   {% for row in rows %}
     {% liquid

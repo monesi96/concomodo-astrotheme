@@ -1,0 +1,43 @@
+{%- comment -%}
+  Dati strutturati Organization: nome, logo, URL del sito e profili social (sameAs).
+  I profili social si impostano in Impostazioni tema > Logo e favicon > "Profili social (sameAs)".
+{%- endcomment -%}
+{%- liquid
+  assign same_as = settings.organization_same_as | newline_to_br | strip_newlines | split: '<br />'
+  assign logo_image = settings.logo | default: settings.logo_inverse
+-%}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": {{ shop.url | append: '/#organization' | json }},
+    "name": {{ shop.name | json }},
+    "url": {{ shop.url | json }},
+    {% if settings.company_legal_name != blank %}
+      "legalName": {{ settings.company_legal_name | json }},
+    {% endif %}
+    {% if settings.company_vat_number != blank %}
+      "vatID": {{ settings.company_vat_number | json }},
+    {% endif %}
+    {% if settings.company_tax_code != blank %}
+      "taxID": {{ settings.company_tax_code | json }},
+    {% endif %}
+    {% if settings.company_pec != blank %}
+      "email": {{ settings.company_pec | json }},
+    {% endif %}
+    {% if logo_image %}
+      "logo": {{ logo_image | image_url: width: 600 | prepend: 'https:' | json }},
+    {% endif %}
+    "sameAs": [
+      {%- assign first_item = true -%}
+      {%- for url in same_as -%}
+        {%- assign url = url | strip -%}
+        {%- if url != blank -%}
+          {%- unless first_item %},{% endunless -%}
+          {{ url | json }}
+          {%- assign first_item = false -%}
+        {%- endif -%}
+      {%- endfor -%}
+    ]
+  }
+</script>
