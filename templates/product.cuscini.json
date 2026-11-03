@@ -2118,7 +2118,7 @@
                         "text_jrcKBC": {
                           "type": "text",
                           "settings": {
-                            "text": "<p><strong>Spedizione</strong></p><ul><li>Consegna <strong>gratuita in tutta Italia per </strong>ordini superiori a 500€</li><li>Per le isole minori e le località difficilmente raggiungibili la consegna può richiedere qualche giorno in più; eventuali supplementi vengono comunicati <strong>prima</strong> della conferma dell'ordine</li></ul><p><strong>Prova e reso</strong></p><ul><li>Hai <strong>100 notti di prova</strong>: al corpo servono alcune settimane per abituarsi a un cuscino nuovo, per questo ti chiediamo di provarlo per almeno <strong>30 notti</strong> prima di richiedere il reso</li><li>Se non ti trovi bene, organizziamo noi il ritiro: <strong>reso gratuito e rimborso completo</strong></li><li>Resta sempre valido il diritto di recesso entro 14 giorni dalla consegna previsto dalla legge</li></ul><p><strong>Garanzia</strong></p><ul><li><strong>10 anni di garanzia</strong> sulla struttura interna del cuscino (lastra e molleggio), contro difetti di produzione e cedimenti anomali</li><li>In più, tutti i prodotti sono coperti dalla <strong>garanzia legale di conformità di 24 mesi</strong></li><li>La garanzia non copre la normale usura, le variazioni di comfort percepito o i danni da uso improprio</li></ul><p>Per qualsiasi domanda su spedizioni, resi o garanzia scrivici a <strong>[email assistenza]</strong>: ti rispondiamo entro un giorno lavorativo.</p>",
+                            "text": "<p><strong>Spedizione</strong></p><ul><li>Consegna <strong>gratuita in tutta Italia</strong></li><li>Per le isole minori e le località difficilmente raggiungibili la consegna può richiedere qualche giorno in più; eventuali supplementi vengono comunicati <strong>prima</strong> della conferma dell'ordine</li></ul><p><strong>Prova e reso</strong></p><ul><li>Hai <strong>100 notti di prova</strong>: al corpo servono alcune settimane per abituarsi a un cuscino nuovo, per questo ti chiediamo di provarlo per almeno <strong>30 notti</strong> prima di richiedere il reso</li><li>Se non ti trovi bene, organizziamo noi il ritiro: <strong>reso gratuito e rimborso completo</strong></li><li>Resta sempre valido il diritto di recesso entro 14 giorni dalla consegna previsto dalla legge</li></ul><p><strong>Garanzia</strong></p><ul><li><strong>10 anni di garanzia</strong> sulla struttura interna del cuscino (lastra e molleggio), contro difetti di produzione e cedimenti anomali</li><li>In più, tutti i prodotti sono coperti dalla <strong>garanzia legale di conformità di 24 mesi</strong></li><li>La garanzia non copre la normale usura, le variazioni di comfort percepito o i danni da uso improprio</li></ul><p>Per qualsiasi domanda su spedizioni, resi o garanzia scrivici a <strong>assistenza@concomodo.it</strong>: ti rispondiamo entro un giorno lavorativo.</p>",
                             "width": "100%",
                             "max_width": "none",
                             "alignment": "left",
@@ -3630,7 +3630,7 @@
                         "text_rb8PnR": {
                           "type": "text",
                           "settings": {
-                            "text": "<p>Il nostro obiettivo è la totale soddisfazione di ogni cliente. In caso contrario, contattaci e faremo del nostro meglio per trovare una soluzione insieme a te.</p>",
+                            "text": "<p>Lo progettiamo noi e lo produciamo in Italia, senza grossisti né rivenditori, allo <strong>stesso prezzo tutto l’anno</strong>. Materiali e centimetri sono dichiarati, così sai cosa porti in camera.</p>",
                             "width": "100%",
                             "max_width": "normal",
                             "alignment": "left",
@@ -3670,7 +3670,7 @@
                         "text_wUpPUY": {
                           "type": "text",
                           "settings": {
-                            "text": "<p>I nostri prodotti sono realizzati sia a livello locale che globale. Selezioniamo attentamente i nostri partner di produzione per garantire prodotti di alta qualità a un prezzo equo.</p>",
+                            "text": "<p>Il cuscino arriva compresso in confezione. Una volta aperto, riprende la forma in poche ore: per il pieno comfort consigliamo di attendere circa 24 ore prima di usarlo.</p>",
                             "width": "100%",
                             "max_width": "normal",
                             "alignment": "left",
@@ -3710,7 +3710,7 @@
                         "text_KGkUtJ": {
                           "type": "text",
                           "settings": {
-                            "text": "<p>Lavoreremo rapidamente per spedire il tuo ordine il prima possibile. Una volta spedito l'ordine, riceverai un'email con ulteriori informazioni. I tempi di consegna variano a seconda della tua posizione.</p>",
+                            "text": "<p>La durata del cuscino dipende dalla frequenza d’uso e dalla cura quotidiana. Per conservarlo al meglio nel tempo, segui le indicazioni di manutenzione riportate per ciascun articolo.</p>",
                             "width": "100%",
                             "max_width": "normal",
                             "alignment": "left",
@@ -3737,53 +3737,12 @@
                       "block_order": [
                         "text_KGkUtJ"
                       ]
-                    },
-                    "accordion_row_Eew7wc": {
-                      "type": "_accordion-row",
-                      "settings": {
-                        "heading": "Avvertenze",
-                        "open_by_default": false,
-                        "icon": "none",
-                        "width": 30
-                      },
-                      "blocks": {
-                        "text_e3JkYt": {
-                          "type": "text",
-                          "settings": {
-                            "text": "<p>I nostri prodotti sono realizzati sia a livello locale che globale. Selezioniamo attentamente i nostri partner di produzione per garantire prodotti di alta qualità a un prezzo equo.</p>",
-                            "width": "100%",
-                            "max_width": "normal",
-                            "alignment": "left",
-                            "type_preset": "rte",
-                            "font": "var(--font-body--family)",
-                            "weight": "",
-                            "font_size": "1rem",
-                            "line_height": "normal",
-                            "letter_spacing": "normal",
-                            "case": "none",
-                            "wrap": "pretty",
-                            "color": "var(--color-foreground)",
-                            "background": false,
-                            "background_color": "#00000026",
-                            "corner_radius": 0,
-                            "padding-block-start": 0,
-                            "padding-block-end": 0,
-                            "padding-inline-start": 0,
-                            "padding-inline-end": 0
-                          },
-                          "blocks": {}
-                        }
-                      },
-                      "block_order": [
-                        "text_e3JkYt"
-                      ]
                     }
                   },
                   "block_order": [
                     "accordion_row_7AjxBK",
                     "accordion_row_q8WmUg",
-                    "accordion_row_kUgjtd",
-                    "accordion_row_Eew7wc"
+                    "accordion_row_kUgjtd"
                   ]
                 }
               },
