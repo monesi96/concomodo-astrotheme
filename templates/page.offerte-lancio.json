@@ -16,8 +16,8 @@
         "offerta_1": {
           "type": "offerta",
           "settings": {
-            "title": "Guanciali in regalo",
-            "text": "Scegli il materasso e il guanciale Concomodo te lo regaliamo noi.",
+            "title": "Cuscino in regalo con il topper",
+            "text": "Scegli il materasso, aggiungi un topper e il cuscino te lo regaliamo noi.",
             "highlight": true
           }
         },
@@ -49,14 +49,14 @@
           "type": "faq",
           "settings": {
             "question": "Il codice si somma ai regali?",
-            "answer": "<p>No: il 5% di benvenuto vale sul primo ordine e non si somma ai guanciali in regalo o al topper scontato. Al checkout scegli il vantaggio che preferisci.</p>"
+            "answer": "<p>No: il 5% di benvenuto vale sul primo ordine e non si somma al topper scontato o al cuscino in regalo. Al checkout scegli il vantaggio che preferisci.</p>"
           }
         },
         "faq_2": {
           "type": "faq",
           "settings": {
-            "question": "Perché non fate sconti del 50%?",
-            "answer": "<p>Perché il prezzo è già quello giusto, tutto l'anno: il materasso arriva dal produttore a casa tua, senza passaggi in mezzo che lo fanno salire.</p>"
+            "question": "Perché non vedo sconti del 50%?",
+            "answer": "<p>Perché la nostra offerta non “termina domenica”: il prezzo è già quello giusto, tutto l'anno: il materasso arriva dal produttore a casa tua, senza passaggi in mezzo che lo fanno salire.</p>"
           }
         },
         "faq_3": {
@@ -82,7 +82,8 @@
         "layer_3": "shopify://shop_images/concomodo-strato-3-schiuma.webp",
         "layer_4": "shopify://shop_images/concomodo-strato-4-molle.webp",
         "layer_5": "shopify://shop_images/concomodo-strato-5-base.webp",
-        "redirect_seconds": 6
+        "redirect_seconds": 6,
+        "end_text": "<p>Lasciaci la tua email: ricevi subito il 5% di benvenuto e accedi alle offerte di lancio, il topper scontato e il cuscino in regalo.</p>"
       }
     }
   },
