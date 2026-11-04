@@ -71,7 +71,8 @@
         "layer_2": "shopify://shop_images/concomodo-strato-2-memory.webp",
         "layer_3": "shopify://shop_images/concomodo-strato-3-schiuma.webp",
         "layer_4": "shopify://shop_images/concomodo-strato-4-molle.webp",
-        "layer_5": "shopify://shop_images/concomodo-strato-5-base.webp"
+        "layer_5": "shopify://shop_images/concomodo-strato-5-base.webp",
+        "redirect_seconds": 6
       }
     }
   },
