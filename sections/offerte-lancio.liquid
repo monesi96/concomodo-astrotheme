@@ -24,12 +24,12 @@
   #ol-{{ section.id }} .ol-hero h1 span{color:var(--cel);display:block}
   #ol-{{ section.id }} .ol-hero .ol-lead{max-width:620px;margin:22px auto 0;font-size:19px;line-height:1.55;color:#E4DED6}
   #ol-{{ section.id }} .ol-hero .ol-lead p{margin:0}
-  #ol-{{ section.id }} .ol-mat{position:relative;width:min(600px,96%);aspect-ratio:1200 / 889;margin:30px auto 0}
+  #ol-{{ section.id }} .ol-mat{position:relative;pointer-events:none;width:min(600px,96%);aspect-ratio:1200 / 889;margin:30px auto 0}
   #ol-{{ section.id }} .ol-ly{position:absolute;inset:0;animation:olOpen 7s cubic-bezier(.65,0,.35,1) var(--d) infinite both;will-change:transform}
   #ol-{{ section.id }} .ol-ly img{position:absolute;left:0;width:100%;height:auto;max-width:none;display:block}
   @keyframes olOpen{0%,10%{transform:translateY(0)}32%,70%{transform:translateY(var(--o))}90%,100%{transform:translateY(0)}}
   @media (prefers-reduced-motion:reduce){#ol-{{ section.id }} .ol-ly{animation:none;transform:translateY(var(--o))}}
-  #ol-{{ section.id }} form{max-width:560px;margin:24px auto 0}
+  #ol-{{ section.id }} form{max-width:560px;margin:24px auto 0;position:relative;z-index:20}
   #ol-{{ section.id }} .ol-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
   #ol-{{ section.id }} input[type=email]{flex:1 1 280px;border:0;border-radius:999px;padding:18px 24px;font-size:17px;font-family:inherit;color:var(--ink);background:var(--av);min-width:0}
   #ol-{{ section.id }} button,#ol-{{ section.id }} .ol-btn{border:0;border-radius:999px;padding:18px 30px;font-size:17px;font-weight:800;background:var(--cel);color:var(--ink);cursor:pointer;text-decoration:none;display:inline-block}
@@ -60,7 +60,20 @@
   #ol-{{ section.id }} .ol-end button{background:var(--ink);color:var(--av)}
   #ol-{{ section.id }} .ol-end .ol-small{color:var(--mid)}
   #ol-{{ section.id }} .ol-end .ol-err{color:#8C1D18}
+  #ol-{{ section.id }} .ol-checks{display:flex;flex-direction:column;gap:8px;margin:16px auto 0;max-width:520px;text-align:left}
+  #ol-{{ section.id }} .ol-check{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;color:#E4DED6;cursor:pointer}
+  #ol-{{ section.id }} .ol-check input{flex:0 0 auto;width:18px;height:18px;margin:1px 0 0;accent-color:var(--cel);cursor:pointer}
+  #ol-{{ section.id }} .ol-check a{color:inherit;text-decoration:underline}
+  #ol-{{ section.id }} .ol-end .ol-check{color:var(--ink)}
+  #ol-{{ section.id }} .ol-end .ol-check input{accent-color:var(--ink)}
 </style>
+
+{%- capture consent_fields -%}
+  <div class="ol-checks">
+    <label class="ol-check"><input type="checkbox" name="contact[accepts_marketing]" value="true"{% if section.settings.marketing_required %} required{% endif %}><span>{{ section.settings.marketing_label }}</span></label>
+    <label class="ol-check"><input type="checkbox" name="contact[privacy]" value="si" required><span>{{ section.settings.privacy_label }} <a href="{{ section.settings.privacy_url }}" target="_blank" rel="noopener">l'informativa privacy</a>.</span></label>
+  </div>
+{%- endcapture -%}
 
 {%- capture signup_success -%}
   <div class="ol-code" data-ol-success>
@@ -101,8 +114,9 @@
           <input type="email" name="contact[email]" placeholder="La tua email" required aria-label="La tua email" autocomplete="email">
           <button type="submit">{{ section.settings.button }}</button>
         </div>
+        {{ consent_fields }}
         {%- if form.errors -%}<div class="ol-err">Controlla l'indirizzo email e riprova.</div>{%- endif -%}
-        <div class="ol-small">{{ section.settings.privacy_top }} <a href="{{ section.settings.privacy_url }}">Informativa privacy</a></div>
+        <div class="ol-small">{{ section.settings.privacy_top }}</div>
       {%- endif -%}
     {%- endform -%}
   </section>
@@ -146,8 +160,9 @@
           <input type="email" name="contact[email]" placeholder="La tua email" required aria-label="La tua email" autocomplete="email">
           <button type="submit">{{ section.settings.button }}</button>
         </div>
+        {{ consent_fields }}
         {%- if form.errors -%}<div class="ol-err">Controlla l'indirizzo email e riprova.</div>{%- endif -%}
-        <div class="ol-small">{{ section.settings.privacy_end }} <a href="{{ section.settings.privacy_url }}">Informativa privacy</a></div>
+        <div class="ol-small">{{ section.settings.privacy_end }}</div>
       {%- endif -%}
     {%- endform -%}
   </section>
@@ -185,6 +200,9 @@
     { "type": "text", "id": "privacy_top", "label": "Nota privacy (hero)", "default": "Iscrivendoti ricevi il codice di benvenuto e le nostre email, puoi cancellarti quando vuoi." },
     { "type": "text", "id": "privacy_end", "label": "Nota privacy (chiusa)", "default": "Puoi cancellarti quando vuoi." },
     { "type": "text", "id": "privacy_url", "label": "Link informativa privacy", "default": "/policies/privacy-policy" },
+    { "type": "text", "id": "marketing_label", "label": "Checkbox marketing", "default": "Voglio ricevere via email il codice di benvenuto, le offerte e le novità di Concomodo." },
+    { "type": "checkbox", "id": "marketing_required", "label": "Checkbox marketing obbligatoria", "default": true },
+    { "type": "text", "id": "privacy_label", "label": "Checkbox privacy (prima del link)", "default": "Ho letto e accetto" },
     { "type": "text", "id": "code", "label": "Codice sconto", "default": "COMODO5" },
     { "type": "text", "id": "success_intro", "label": "Dopo l'iscrizione: prima del codice", "default": "Ecco il tuo codice di benvenuto" },
     { "type": "text", "id": "success_text", "label": "Dopo l'iscrizione: dopo il codice", "default": "Inseriscilo al checkout: 5% sul primo ordine. Tra pochi secondi ti portiamo sul sito." },
