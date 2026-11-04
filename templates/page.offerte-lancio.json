@@ -1,4 +1,5 @@
 {
+  "layout": "landing",
   "sections": {
     "offerte": {
       "type": "offerte-lancio",
