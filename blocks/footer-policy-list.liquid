@@ -43,8 +43,17 @@
     </div>
   </anchored-popover-component>
 {% endif %}
+{% render 'cookie-preferences-link', class: 'footer-utilities__text footer-utilities__cookie' %}
 
 {% stylesheet %}
+  .footer-utilities__cookie {
+    cursor: pointer;
+    font-size: var(--font-size, 0.75rem);
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
   .policy-list-trigger {
     anchor-name: --terms-policies-trigger;
     cursor: pointer;

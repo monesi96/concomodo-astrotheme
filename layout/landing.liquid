@@ -71,7 +71,7 @@
       .ll-head{display:flex;justify-content:center;align-items:center;padding:22px 20px 0}
       .ll-head img{height:{{ settings.logo_height | default: 36 }}px;width:auto;display:block}
       .ll-foot{max-width:1180px;margin:0 auto;padding:8px 20px 40px;text-align:center;font-size:13px;line-height:1.7;color:#706B65;font-family:var(--font-body--family)}
-      .ll-foot a{color:inherit}
+      .ll-foot a,.ll-foot .cookie-preferences-link{color:inherit;font:inherit;text-decoration:underline;cursor:pointer;background:none;border:0;padding:0}
       .ll-foot nav{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 16px;margin-top:6px}
       @media (max-width:749px){.ll-head img{height:{{ settings.logo_height_mobile | default: 28 }}px}}
     </style>
@@ -93,6 +93,7 @@
         {%- for policy in shop.policies -%}
           {%- if policy != blank -%}<a href="{{ policy.url }}">{{ policy.title }}</a>{%- endif -%}
         {%- endfor -%}
+        {% render 'cookie-preferences-link' %}
       </nav>
     </footer>
   </body>

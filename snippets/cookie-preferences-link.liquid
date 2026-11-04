@@ -1,0 +1,11 @@
+{%- comment -%}
+  Bottone per riaprire le preferenze cookie (Usercentrics) dopo che il
+  visitatore ha accettato o rifiutato. Accetta: class (classi CSS), label.
+{%- endcomment -%}
+<button
+  type="button"
+  class="cookie-preferences-link button-unstyled {{ class }}"
+  onclick="(function(){var c=window.__ucCmp,u=window.UC_UI;if(c&&c.showSecondLayer){c.showSecondLayer()}else if(u&&u.showSecondLayer){u.showSecondLayer()}else if(window.Cookiebot&&Cookiebot.renew){Cookiebot.renew()}})()"
+>
+  {{- label | default: 'Preferenze cookie' -}}
+</button>
