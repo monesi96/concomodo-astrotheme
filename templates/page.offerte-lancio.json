@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "offerte": {
+      "type": "offerte-lancio",
+      "blocks": {
+        "offerta_1": {
+          "type": "offerta",
+          "settings": {
+            "title": "Guanciali in regalo",
+            "text": "Scegli il materasso e il guanciale Concomodo te lo regaliamo noi.",
+            "highlight": true
+          }
+        },
+        "offerta_2": {
+          "type": "offerta",
+          "settings": {
+            "title": "Topper fino a 70 € in meno",
+            "text": "Aggiungi il topper al materasso e lo paghi fino a 70 € in meno, in base alla misura.",
+            "highlight": false
+          }
+        },
+        "offerta_3": {
+          "type": "offerta",
+          "settings": {
+            "title": "5% di benvenuto",
+            "text": "Iscriviti qui sopra e ricevi il codice per il primo ordine. Non si somma alle altre offerte.",
+            "highlight": false
+          }
+        },
+        "offerta_4": {
+          "type": "offerta",
+          "settings": {
+            "title": "Anche in 3 rate",
+            "text": "Dividi il pagamento in tre mesi direttamente al checkout.",
+            "highlight": false
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Il codice si somma ai regali?",
+            "answer": "<p>No: il 5% di benvenuto vale sul primo ordine e non si somma ai guanciali in regalo o al topper scontato. Al checkout scegli il vantaggio che preferisci.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Perché non fate sconti del 50%?",
+            "answer": "<p>Perché il prezzo è già quello giusto, tutto l'anno: il materasso arriva dal produttore a casa tua, senza passaggi in mezzo che lo fanno salire.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "E se il materasso non fa per me?",
+            "answer": "<p>Hai 100 notti per provarlo nel tuo letto. Se non ti trovi, lo cambi con un altro modello o lo veniamo a riprendere e ti rimborsiamo.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "offerta_1",
+        "offerta_2",
+        "offerta_3",
+        "offerta_4",
+        "faq_1",
+        "faq_2",
+        "faq_3"
+      ],
+      "settings": {
+        "layer_1": "shopify://shop_images/concomodo-strato-1-top.webp",
+        "layer_2": "shopify://shop_images/concomodo-strato-2-memory.webp",
+        "layer_3": "shopify://shop_images/concomodo-strato-3-schiuma.webp",
+        "layer_4": "shopify://shop_images/concomodo-strato-4-molle.webp",
+        "layer_5": "shopify://shop_images/concomodo-strato-5-base.webp"
+      }
+    }
+  },
+  "order": [
+    "offerte"
+  ]
+}
