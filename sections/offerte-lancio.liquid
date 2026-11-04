@@ -24,11 +24,11 @@
   #ol-{{ section.id }} .ol-hero h1 span{color:var(--cel);display:block}
   #ol-{{ section.id }} .ol-hero .ol-lead{max-width:620px;margin:22px auto 0;font-size:19px;line-height:1.55;color:#E4DED6}
   #ol-{{ section.id }} .ol-hero .ol-lead p{margin:0}
-  #ol-{{ section.id }} .ol-mat{position:relative;pointer-events:none;width:min(600px,96%);aspect-ratio:1200 / 889;margin:30px auto 0}
-  #ol-{{ section.id }} .ol-ly{position:absolute;inset:0;animation:olOpen 7s cubic-bezier(.65,0,.35,1) var(--d) infinite both;will-change:transform}
-  #ol-{{ section.id }} .ol-ly img{position:absolute;left:0;width:100%;height:auto;max-width:none;display:block}
-  @keyframes olOpen{0%,10%{transform:translateY(0)}32%,70%{transform:translateY(var(--o))}90%,100%{transform:translateY(0)}}
-  @media (prefers-reduced-motion:reduce){#ol-{{ section.id }} .ol-ly{animation:none;transform:translateY(var(--o))}}
+  #ol-{{ section.id }} .ol-mat{position:relative;pointer-events:none;width:min(600px,96%);aspect-ratio:1200 / 980;margin:30px auto 0}
+  #ol-{{ section.id }} .ol-ly{position:absolute;inset:0}
+  #ol-{{ section.id }} .ol-ly img{position:absolute;left:0;width:100%;height:auto;max-width:none;display:block;transform-origin:50% 50%;animation:olOpen 7s cubic-bezier(.65,0,.35,1) var(--d) infinite both;will-change:transform,opacity}
+  @keyframes olOpen{0%,12%{transform:translateY(var(--c)) scaleY(var(--s));opacity:var(--a)}32%,70%{transform:none;opacity:1}88%,100%{transform:translateY(var(--c)) scaleY(var(--s));opacity:var(--a)}}
+  @media (prefers-reduced-motion:reduce){#ol-{{ section.id }} .ol-ly img{animation:none}}
   #ol-{{ section.id }} form{max-width:560px;margin:24px auto 0;position:relative;z-index:20}
   #ol-{{ section.id }} .ol-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
   #ol-{{ section.id }} input[type=email]{flex:1 1 280px;border:0;border-radius:999px;padding:18px 24px;font-size:17px;font-family:inherit;color:var(--ink);background:var(--av);min-width:0}
@@ -89,15 +89,19 @@
 
     {%- if n_layers > 0 -%}
       <div class="ol-mat" role="img" aria-label="Il materasso Concomodo che si apre e mostra i suoi strati">
-        {%- assign offs = '-21.38,-10.69,0,10.69,21.38' | split: ',' -%}
-        {%- assign tops = '21.38,31.23,35.87,40.80,53.42' | split: ',' -%}
-        {%- assign dels = '0.24,0.18,0.12,0.18,0.24' | split: ',' -%}
+        {%- comment -%} Chiuso = solo rivestimento (sopra + base), gli strati interni dentro; aperto = strati separati come nella scheda prodotto {%- endcomment -%}
+        {%- assign closed = '221,184.4,62.6,-64.9,-153.9' | split: ',' -%}
+        {%- assign scales = '1,0.35,0.35,0.35,1' | split: ',' -%}
+        {%- assign alphas = '1,0,0,0,1' | split: ',' -%}
+        {%- assign tops = '0,20.41,36.53,50.92,77.14' | split: ',' -%}
+        {%- assign zs = '10,8,7,6,9' | split: ',' -%}
+        {%- assign dels = '0,0.12,0.08,0.04,0' | split: ',' -%}
         {%- for i in (1..5) -%}
           {%- assign key = 'layer_' | append: i -%}
           {%- assign idx = forloop.index0 -%}
           {%- if section.settings[key] != blank -%}
             {%- assign top_style = 'top:' | append: tops[idx] | append: '%' -%}
-            <div class="ol-ly" style="--o:{{ offs[idx] }}%;--d:{{ dels[idx] }}s;z-index:{{ 10 | minus: idx }}">
+            <div class="ol-ly" style="--c:{{ closed[idx] }}%;--s:{{ scales[idx] }};--a:{{ alphas[idx] }};--d:{{ dels[idx] }}s;z-index:{{ zs[idx] }}">
               {{ section.settings[key] | image_url: width: 1200 | image_tag: alt: '', loading: 'eager', style: top_style, widths: '600,900,1200', sizes: '(min-width: 700px) 600px, 92vw' }}
             </div>
           {%- endif -%}

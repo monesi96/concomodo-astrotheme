@@ -7,8 +7,8 @@
         "offerta_1": {
           "type": "offerta",
           "settings": {
-            "title": "Guanciali in regalo",
-            "text": "Scegli il materasso e il guanciale Concomodo te lo regaliamo noi.",
+            "title": "Guanciale in regalo",
+            "text": "Aggiungi il topper all'ordine e il guanciale Concomodo te lo regaliamo noi.",
             "highlight": true
           }
         },
@@ -40,7 +40,7 @@
           "type": "faq",
           "settings": {
             "question": "Il codice si somma ai regali?",
-            "answer": "<p>No: il 5% di benvenuto vale sul primo ordine e non si somma ai guanciali in regalo o al topper scontato. Al checkout scegli il vantaggio che preferisci.</p>"
+            "answer": "<p>No: il 5% di benvenuto vale sul primo ordine e non si somma al guanciale in regalo o al topper scontato. Al checkout scegli il vantaggio che preferisci.</p>"
           }
         },
         "faq_2": {
@@ -73,7 +73,8 @@
         "layer_3": "shopify://shop_images/concomodo-strato-3-schiuma.webp",
         "layer_4": "shopify://shop_images/concomodo-strato-4-molle.webp",
         "layer_5": "shopify://shop_images/concomodo-strato-5-base.webp",
-        "redirect_seconds": 6
+        "redirect_seconds": 6,
+        "end_text": "<p>Lasciaci la tua email: ricevi subito il 5% di benvenuto e accedi alle offerte di lancio, il guanciale in regalo con il topper e il topper scontato con il materasso.</p>"
       }
     }
   },
