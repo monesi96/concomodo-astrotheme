@@ -2054,7 +2054,7 @@
                         "faq_r2_t": {
                           "type": "text",
                           "settings": {
-                            "text": "<p>Se hai dubbi, fai il nostro quiz: in un minuto ti consigliamo il modello più adatto in base a corporatura, posizione nel sonno e preferenze di sostegno. In alternativa puoi confrontare i modelli nella pagina di ogni prodotto.</p>",
+                            "text": "<p>Potrai farti un'idea grazie al nostro <strong>quiz</strong>: in un minuto ti consigliamo il modello più adatto in base alle tue preferenze e necessità.&nbsp;<br/>In alternativa, puoi confrontare i modelli nella pagina di ogni prodotto, oppure <strong>chiedere in Chat</strong> al nostro assistente AI.&nbsp;<br/>Puoi anche contattarci <strong>via mail, telefono o Whatsapp</strong> e chiedere consiglio ai nostri Esperti.</p>",
                             "width": "100%",
                             "max_width": "none",
                             "alignment": "left",
@@ -2094,7 +2094,7 @@
                         "faq_r3_t": {
                           "type": "text",
                           "settings": {
-                            "text": "<p>I nostri materassi arrivano compressi e arrotolati in una comoda scatola. Una volta aperti, riprendono la forma in poche ore: per il pieno comfort consigliamo di attendere 24-48 ore prima del primo utilizzo.</p>",
+                            "text": "<p>I nostri materassi arrivano compressi e arrotolati in scatola. Una volta aperti, riprendono la forma in poche ore: per il pieno comfort consigliamo di attendere almeno 12 ore prima del primo utilizzo.</p>",
                             "width": "100%",
                             "max_width": "none",
                             "alignment": "left",
