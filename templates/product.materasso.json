@@ -1274,7 +1274,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Disponibile | Spedizione in 1-2 giorni lavorativi</p>",
+                    "text": "<p>Disponibile in magazzino &nbsp;| Spedizione in tempi brevi</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
