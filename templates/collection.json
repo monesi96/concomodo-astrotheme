@@ -1267,39 +1267,6 @@
         "padding-inline-end": 0
       }
     },
-    "mattress_quick_compare_ptWQmR": {
-      "type": "mattress-quick-compare",
-      "name": "Comparatore materassi",
-      "settings": {
-        "heading": "Confronta i nostri materassi",
-        "subheading": "<p>Quattro modelli, una sola cosa in comune: dormire meglio. Trova quello giusto per te.</p>",
-        "product_1": "sostegno",
-        "product_2": "carezza",
-        "product_3": "abbraccio",
-        "product_4": "abbraccio-plus",
-        "show_firmness": true,
-        "firmness_label": "Durezza",
-        "show_support": true,
-        "support_label": "Supporto",
-        "show_cooling": true,
-        "cooling_label": "Traspirabilità",
-        "show_height": true,
-        "height_label": "Altezza",
-        "show_layers": false,
-        "layers_label": "Strati",
-        "price_prefix": "da",
-        "cta_label": "Scopri",
-        "highlight": 3,
-        "highlight_badge": "Più venduto",
-        "corner_radius": 28,
-        "section_width": "full-width",
-        "color_scheme": "scheme-2",
-        "padding-block-start": 40,
-        "padding-block-end": 40,
-        "padding-inline-start": 0,
-        "padding-inline-end": 0
-      }
-    },
     "collection_list_pxN4wG": {
       "type": "collection-list",
       "blocks": {
@@ -1492,6 +1459,41 @@
         "color_scheme": "scheme-2",
         "padding-block-start": 45,
         "padding-block-end": 45
+      }
+    },
+    "mattress_quick_compare_ptWQmR": {
+      "type": "mattress-quick-compare",
+      "name": "Comparatore materassi",
+      "settings": {
+        "heading": "Confronta i nostri materassi",
+        "subheading": "<p>Quattro modelli, una sola cosa in comune: dormire meglio. Trova quello giusto per te.</p>",
+        "product_1": "sostegno",
+        "product_2": "carezza",
+        "product_3": "abbraccio",
+        "product_4": "abbraccio-plus",
+        "show_image": true,
+        "image_ratio": "4 / 3",
+        "show_firmness": true,
+        "firmness_label": "Durezza",
+        "show_support": true,
+        "support_label": "Supporto",
+        "show_cooling": true,
+        "cooling_label": "Traspirabilità",
+        "show_height": true,
+        "height_label": "Altezza",
+        "show_layers": false,
+        "layers_label": "Strati",
+        "price_prefix": "da",
+        "cta_label": "Scopri",
+        "highlight": 3,
+        "highlight_badge": "Più venduto",
+        "corner_radius": 28,
+        "section_width": "full-width",
+        "color_scheme": "scheme-2",
+        "padding-block-start": 40,
+        "padding-block-end": 40,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
       }
     },
     "section_promo": {
@@ -2132,7 +2134,7 @@
                         "faq_r4_t": {
                           "type": "text",
                           "settings": {
-                            "text": "<p>Trovi tutte le misure standard: singolo 80×190, piazza e mezza 120×190, matrimoniale 160×190 e matrimoniale XL 180×200. Su richiesta realizziamo anche misure personalizzate — scrivici e ti aiutiamo a trovare la soluzione giusta.</p>",
+                            "text": "<p>Trovi tutte le misure standard tra le nostre 27 varianti: singolo 80×190, piazza e mezza 120×190, matrimoniale 160×190 e matrimoniale XL 180×200. Su richiesta realizziamo anche misure personalizzate — scrivici e ti aiutiamo a trovare la soluzione giusta.</p>",
                             "width": "100%",
                             "max_width": "none",
                             "alignment": "left",
@@ -2346,7 +2348,7 @@
             "icon": "phone",
             "title": "Chiamaci",
             "text": "<p>Siamo qui per aiutarti a ritrovare il piacere di un sonno sereno e di qualità.</p>",
-            "link": "",
+            "link": "https://wa.me/+393937105726",
             "open_in_new_tab": false
           }
         },
@@ -2366,7 +2368,7 @@
             "icon": "email",
             "title": "Inviaci un'email",
             "text": "<p>Scrivici e ti risponderemo prima che tu possa dire \"fate Concomodo\".</p>",
-            "link": "",
+            "link": "mailto:info@concomodo.it",
             "open_in_new_tab": false
           }
         }
@@ -2609,6 +2611,8 @@
         "product_2": "carezza",
         "product_3": "abbraccio",
         "product_4": "abbraccio-plus",
+        "show_image": true,
+        "image_ratio": "4 / 3",
         "show_firmness": true,
         "firmness_label": "Durezza",
         "show_support": true,
