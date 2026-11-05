@@ -2014,7 +2014,7 @@
                         "faq_r1_t": {
                           "type": "text",
                           "settings": {
-                            "text": "<p>Acquisti il tuo materasso e lo provi a casa fino a 100 notti. Se non ti convince, ci pensiamo noi: lo ritiriamo gratuitamente e ti rimborsiamo. Le 100 notti si applicano ai materassi; per topper e cuscini valgono le normali condizioni di reso.</p>",
+                            "text": "<p>Acquisti il tuo materasso e lo provi a casa fino a 100 notti. Se non ti convince, ci pensiamo noi: lo ritiriamo gratuitamente e ti rimborsiamo, oppure lo sostituiamo senza costi aggiuntivi. Le 100 notti si applicano ai materassi; per topper e cuscini valgono le normali condizioni di reso.</p>",
                             "width": "100%",
                             "max_width": "none",
                             "alignment": "left",
