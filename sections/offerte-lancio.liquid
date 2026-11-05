@@ -1,6 +1,6 @@
 {%- comment -%}
   Landing "Offerte di lancio": hero con materasso che si apre a strati,
-  iscrizione newsletter (codice COMODO5), offerte, FAQ e chiusa con iscrizione.
+  iscrizione newsletter (codice di benvenuto), offerte, FAQ e chiusa con iscrizione.
   Dopo l'iscrizione mostra il codice e rimanda alla home.
 {%- endcomment -%}
 
@@ -44,6 +44,10 @@
   #ol-{{ section.id }} .ol-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
   #ol-{{ section.id }} .ol-card{background:#fff;border-radius:24px;padding:28px}
   #ol-{{ section.id }} .ol-card.ol-cel{background:var(--cel)}
+  #ol-{{ section.id }} .ol-price{display:flex;align-items:baseline;gap:10px;margin:0 0 10px;font-family:var(--font-heading--family)}
+  #ol-{{ section.id }} .ol-price s{font-size:20px;color:var(--mid);opacity:.75}
+  #ol-{{ section.id }} .ol-price b{font-size:28px;font-weight:900}
+  #ol-{{ section.id }} .ol-cap{margin:6px auto 0;font-size:14px;color:#CBC4BC}
   #ol-{{ section.id }} .ol-card .ol-d{font-size:26px;font-weight:900;line-height:1.1;margin-bottom:10px}
   #ol-{{ section.id }} .ol-card p{margin:0;font-size:16px;line-height:1.55;color:var(--mid)}
   #ol-{{ section.id }} .ol-trust{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
@@ -109,6 +113,8 @@
       </div>
     {%- endif -%}
 
+    {%- if section.settings.mat_caption != blank -%}<div class="ol-cap">{{ section.settings.mat_caption }}</div>{%- endif -%}
+
     {%- form 'customer', id: 'ol-form-top' -%}
       {%- if form.posted_successfully? -%}
         <div style="margin-top:24px">{{ signup_success }}</div>
@@ -132,6 +138,9 @@
         {%- if block.type == 'offerta' -%}
           <div class="ol-card{% if block.settings.highlight %} ol-cel{% endif %}" {{ block.shopify_attributes }}>
             <div class="ol-d">{{ block.settings.title }}</div>
+            {%- if block.settings.price_new != blank -%}
+              <div class="ol-price">{% if block.settings.price_old != blank %}<s>{{ block.settings.price_old }}</s> {% endif %}<b>{{ block.settings.price_new }}</b></div>
+            {%- endif -%}
             <p>{{ block.settings.text }}</p>
           </div>
         {%- endif -%}
@@ -198,6 +207,7 @@
     { "type": "image_picker", "id": "layer_3", "label": "Strato 3" },
     { "type": "image_picker", "id": "layer_4", "label": "Strato 4" },
     { "type": "image_picker", "id": "layer_5", "label": "Strato 5 (base)" },
+    { "type": "text", "id": "mat_caption", "label": "Didascalia sotto il materasso" },
     { "type": "header", "content": "Iscrizione" },
     { "type": "text", "id": "button", "label": "Testo bottone", "default": "Accedi alle offerte" },
     { "type": "text", "id": "tags", "label": "Tag cliente", "default": "newsletter,lancio-2026" },
@@ -207,9 +217,9 @@
     { "type": "text", "id": "marketing_label", "label": "Checkbox marketing", "default": "Voglio ricevere via email il codice di benvenuto, le offerte e le novità di Concomodo." },
     { "type": "checkbox", "id": "marketing_required", "label": "Checkbox marketing obbligatoria", "default": true },
     { "type": "text", "id": "privacy_label", "label": "Checkbox privacy (prima del link)", "default": "Ho letto e accetto" },
-    { "type": "text", "id": "code", "label": "Codice sconto", "default": "COMODO5" },
+    { "type": "text", "id": "code", "label": "Codice sconto", "default": "DI20COMODO" },
     { "type": "text", "id": "success_intro", "label": "Dopo l'iscrizione: prima del codice", "default": "Ecco il tuo codice di benvenuto" },
-    { "type": "text", "id": "success_text", "label": "Dopo l'iscrizione: dopo il codice", "default": "Inseriscilo al checkout: 5% sul primo ordine. Tra pochi secondi ti portiamo sul sito." },
+    { "type": "text", "id": "success_text", "label": "Dopo l'iscrizione: dopo il codice", "default": "Inseriscilo al checkout: 20 € in meno sul primo ordine. Tra pochi secondi ti portiamo sul sito." },
     { "type": "text", "id": "success_button", "label": "Dopo l'iscrizione: bottone", "default": "Vai al sito ora" },
     { "type": "url", "id": "redirect_url", "label": "Pagina dopo l'iscrizione (vuoto = home)" },
     { "type": "range", "id": "redirect_seconds", "label": "Secondi prima del rimando", "min": 3, "max": 15, "step": 1, "unit": "s", "default": 6 },
@@ -219,7 +229,7 @@
     { "type": "text", "id": "faq_heading", "label": "Titolo domande", "default": "Domande frequenti" },
     { "type": "header", "content": "Chiusa" },
     { "type": "text", "id": "end_heading", "label": "Titolo", "default": "Da stanotte, dormi Concomodo." },
-    { "type": "richtext", "id": "end_text", "label": "Testo", "default": "<p>Lasciaci la tua email: ricevi subito il 5% di benvenuto e accedi alle offerte di lancio, il topper scontato e il cuscino in regalo.</p>" }
+    { "type": "richtext", "id": "end_text", "label": "Testo", "default": "<p>Lasciaci la tua email: ricevi subito 20 € di benvenuto e accedi alle offerte di lancio.</p>" }
   ],
   "blocks": [
     {
@@ -228,7 +238,9 @@
       "settings": [
         { "type": "text", "id": "title", "label": "Titolo", "default": "Cuscino in regalo con il topper" },
         { "type": "textarea", "id": "text", "label": "Testo" },
-        { "type": "checkbox", "id": "highlight", "label": "Evidenzia (sfondo celeste)", "default": false }
+        { "type": "checkbox", "id": "highlight", "label": "Evidenzia (sfondo celeste)", "default": false },
+        { "type": "text", "id": "price_old", "label": "Prezzo barrato (facoltativo)" },
+        { "type": "text", "id": "price_new", "label": "Prezzo in offerta (facoltativo)" }
       ]
     },
     {

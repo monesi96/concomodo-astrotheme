@@ -16,24 +16,26 @@
         "offerta_1": {
           "type": "offerta",
           "settings": {
-            "title": "Cuscino in regalo con il topper",
-            "text": "Scegli il materasso, aggiungi un topper e il cuscino te lo regaliamo noi.",
-            "highlight": true
+            "title": "2 guanciali in regalo",
+            "text": "Scegli un materasso matrimoniale e ricevi gratis 2 guanciali in stampo di memory microforato.",
+            "highlight": true,
+            "price_old": "98 €",
+            "price_new": "Gratis"
           }
         },
         "offerta_2": {
           "type": "offerta",
           "settings": {
             "title": "Topper fino a 70 € in meno",
-            "text": "Aggiungi il topper al materasso e lo paghi fino a 70 € in meno, in base alla misura.",
+            "text": "Aggiungi il topper al materasso: lo paghi fino a 70 € in meno e avrai 1 o 2 guanciali in regalo, in base alla misura. Si somma all'offerta dei guanciali.",
             "highlight": false
           }
         },
         "offerta_3": {
           "type": "offerta",
           "settings": {
-            "title": "5% di benvenuto",
-            "text": "Iscriviti qui sopra e ricevi il codice per il primo ordine. Non si somma alle altre offerte.",
+            "title": "20 € di benvenuto",
+            "text": "Iscriviti qui sopra e ricevi il codice per il primo ordine.",
             "highlight": false
           }
         },
@@ -48,8 +50,8 @@
         "faq_1": {
           "type": "faq",
           "settings": {
-            "question": "Il codice si somma ai regali?",
-            "answer": "<p>No: il 5% di benvenuto vale sul primo ordine e non si somma al topper scontato o al cuscino in regalo. Al checkout scegli il vantaggio che preferisci.</p>"
+            "question": "Le offerte si sommano?",
+            "answer": "<p>Sì, i 2 guanciali in regalo con il matrimoniale e il topper scontato si sommano. Il codice di benvenuto da 20 € vale sul primo ordine.</p>"
           }
         },
         "faq_2": {
@@ -83,7 +85,10 @@
         "layer_4": "shopify://shop_images/concomodo-strato-4-molle.webp",
         "layer_5": "shopify://shop_images/concomodo-strato-5-base.webp",
         "redirect_seconds": 6,
-        "end_text": "<p>Lasciaci la tua email: ricevi subito il 5% di benvenuto e accedi alle offerte di lancio, il topper scontato e il cuscino in regalo.</p>"
+        "end_text": "<p>Lasciaci la tua email: ricevi subito 20 € di benvenuto e accedi alle offerte di lancio, 2 guanciali in regalo con il matrimoniale e il topper fino a 70 € in meno.</p>",
+        "code": "DI20COMODO",
+        "success_text": "Inseriscilo al checkout: 20 € in meno sul primo ordine. Tra pochi secondi ti portiamo sul sito.",
+        "mat_caption": "Abbraccio Plus, il nostro ibrido: molle a 7 zone e memory."
       }
     }
   },
