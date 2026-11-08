@@ -33,7 +33,7 @@
           "type": "offerta",
           "settings": {
             "title": "5% di benvenuto EXTRA",
-            "text": "Iscriviti qui sopra e ricevi il codice per il primo ordine. Puoi usarlo con articoli già scontati.",
+            "text": "Iscriviti qui sopra e ricevi il codice per il primo ordine, combinalo le altre promo!",
             "highlight": false
           }
         },
@@ -63,7 +63,7 @@
           "type": "faq",
           "settings": {
             "question": "E se il materasso non fa per me?",
-            "answer": "<p>Hai 100 notti per provarlo nel tuo letto. Se non ti trovi, lo cambi con un altro modello o lo veniamo a riprendere e ti rimborsiamo.</p>"
+            "answer": "<p>Hai <strong>100 notti</strong> per provarlo nel tuo letto. Se non ti trovi, lo cambiamo con un altro modello o lo veniamo a riprendere e ti rimborsiamo.</p>"
           }
         }
       },
