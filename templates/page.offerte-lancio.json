@@ -33,7 +33,7 @@
           "type": "offerta",
           "settings": {
             "title": "5% di benvenuto EXTRA",
-            "text": "Iscriviti qui sopra e ricevi il codice per il primo ordine. Puoi usarlo anche con articoli già scontati.",
+            "text": "Iscriviti qui sopra e ricevi il codice per il primo ordine. Puoi usarlo con articoli già scontati.",
             "highlight": false
           }
         },
@@ -56,7 +56,7 @@
           "type": "faq",
           "settings": {
             "question": "Perché non vedo sconti del 50%?",
-            "answer": "<p>Perché la nostra offerta non “termina domenica”: il prezzo è già quello giusto, tutto l'anno: il materasso arriva dal produttore a casa tua, senza passaggi in mezzo che lo fanno salire.</p>"
+            "answer": "<p>Perché la nostra offerta non <em>“termina domenica”</em>: <strong>il prezzo è quello giusto</strong>, tutto l'anno: il materasso arriva dal produttore a casa tua, senza passaggi in mezzo che lo fanno salire.</p>"
           }
         },
         "faq_3": {
