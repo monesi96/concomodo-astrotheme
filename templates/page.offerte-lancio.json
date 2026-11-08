@@ -32,8 +32,8 @@
         "offerta_3": {
           "type": "offerta",
           "settings": {
-            "title": "5% di benvenuto",
-            "text": "Iscriviti qui sopra e ricevi il codice per il primo ordine. Non si somma alle altre offerte.",
+            "title": "5% di benvenuto EXTRA",
+            "text": "Iscriviti qui sopra e ricevi il codice per il primo ordine. Puoi usarlo anche con articoli già scontati.",
             "highlight": false
           }
         },
@@ -49,7 +49,7 @@
           "type": "faq",
           "settings": {
             "question": "Il codice si somma ai regali?",
-            "answer": "<p>No: il 5% di benvenuto vale sul primo ordine e non si somma al topper scontato o al cuscino in regalo. Al checkout scegli il vantaggio che preferisci.</p>"
+            "answer": "<p>Si! Il 5% di benvenuto vale sul primo ordine e si somma al topper scontato o al cuscino in regalo, così come a tutti gli altri articoli. Assicurati di applicarlo sempre!</p>"
           }
         },
         "faq_2": {
@@ -77,12 +77,32 @@
         "faq_3"
       ],
       "settings": {
+        "heading": "Offerte di lancio",
+        "heading_accent": "già attive.",
+        "intro": "<p>Il sito è appena nato e per festeggiare abbiamo preparato qualche regalo. I prezzi restano quelli di sempre, tutto l'anno: in più, per tutto il periodo di lancio, trovi i vantaggi qui sotto.</p>",
         "layer_1": "shopify://shop_images/concomodo-strato-1-top.webp",
         "layer_2": "shopify://shop_images/concomodo-strato-2-memory.webp",
         "layer_3": "shopify://shop_images/concomodo-strato-3-schiuma.webp",
         "layer_4": "shopify://shop_images/concomodo-strato-4-molle.webp",
         "layer_5": "shopify://shop_images/concomodo-strato-5-base.webp",
+        "button": "Accedi alle offerte",
+        "tags": "newsletter,lancio-2026",
+        "privacy_top": "Iscrivendoti ricevi il codice di benvenuto e le nostre email, puoi cancellarti quando vuoi.",
+        "privacy_end": "Puoi cancellarti quando vuoi.",
+        "privacy_url": "/policies/privacy-policy",
+        "marketing_label": "Voglio ricevere via email il codice di benvenuto, le offerte e le novità di Concomodo.",
+        "marketing_required": true,
+        "privacy_label": "Ho letto e accetto",
+        "code": "COMODO5",
+        "success_intro": "Ecco il tuo codice di benvenuto",
+        "success_text": "Inseriscilo al checkout: 5% sul primo ordine. Tra pochi secondi ti portiamo sul sito.",
+        "success_button": "Vai al sito ora",
+        "redirect_url": "",
         "redirect_seconds": 6,
+        "offers_heading": "Cosa trovi per il lancio",
+        "trust": "100 notti di prova | 10 anni di garanzia | 100% Made in Italy | Dal produttore a casa tua",
+        "faq_heading": "Domande frequenti",
+        "end_heading": "Da stanotte, dormi Concomodo.",
         "end_text": "<p>Lasciaci la tua email: ricevi subito il 5% di benvenuto e accedi alle offerte di lancio, il topper scontato e il cuscino in regalo.</p>"
       }
     }
