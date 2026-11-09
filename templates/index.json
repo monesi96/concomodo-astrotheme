@@ -4152,7 +4152,7 @@
         "option_fbDpmL": {
           "type": "option",
           "settings": {
-            "label": "Meno dolori e tensioni",
+            "label": "Svegliarmi con meno fastidi",
             "link": "",
             "value": "dolori"
           }
@@ -4160,9 +4160,9 @@
         "option_tVfPca": {
           "type": "option",
           "settings": {
-            "label": "Addormentarmi prima",
+            "label": "Rinnovare o cambiare il mio letto",
             "link": "",
-            "value": "addormentarsi"
+            "value": "cambio-rinnovo"
           }
         }
       },
@@ -4173,8 +4173,8 @@
       ],
       "name": "Popup fullscreen",
       "settings": {
-        "eyebrow": "",
-        "heading": "Un extra 5% di sconto",
+        "eyebrow": "Per i nuovi utenti",
+        "heading": "5% di sconto EXTRA",
         "subheading": "<p>Scegli il tuo obiettivo di riposo</p>",
         "dismiss_label": "No, grazie",
         "close_label": "Chiudi",
@@ -4182,12 +4182,12 @@
         "image_position": "right",
         "show_image_mobile": true,
         "enable_email": true,
-        "email_heading": "Dove ti mandiamo lo sconto?",
-        "email_text": "<p>Lascia la tua email: ricevi subito il codice e i consigli per dormire meglio.</p>",
+        "email_heading": "Dove vuoi ricevere lo sconto?",
+        "email_text": "<p>Lascia la tua email: ricevi subito il codice e consigli personalizzati per dormire meglio.</p>",
         "email_placeholder": "La tua email",
         "email_button": "Ricevi lo sconto",
         "email_legal": "<p>Iscrivendoti accetti di ricevere comunicazioni da Concomodo. Puoi disiscriverti quando vuoi.</p>",
-        "success_heading": "Ecco il tuo sconto",
+        "success_heading": "Ecco il tuo codice sconto",
         "success_text": "<p>Usa il codice al checkout. Te lo abbiamo mandato anche via email.</p>",
         "discount_code": "COMODO5",
         "copy_label": "Copia",
@@ -4204,7 +4204,7 @@
         "storage_key": "sconto-5",
         "button_style": "primary",
         "corner_radius": 24,
-        "color_scheme": ""
+        "color_scheme": "scheme-2"
       }
     },
     "17854856083bbc919e": {
