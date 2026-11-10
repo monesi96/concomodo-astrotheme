@@ -138,8 +138,8 @@
             "label": "È troppo morbido",
             "p_m1": 4,
             "p_m2": 0,
-            "p_m3a": 0,
-            "p_m3b": 2,
+            "p_m3a": 2,
+            "p_m3b": 1,
             "icon": "none",
             "value": "troppo_morbido"
           }
@@ -150,8 +150,8 @@
             "label": "È troppo rigido",
             "p_m1": 0,
             "p_m2": 4,
-            "p_m3a": 3,
-            "p_m3b": 0,
+            "p_m3a": 1,
+            "p_m3b": 3,
             "icon": "none",
             "value": "troppo_rigido"
           }
@@ -161,8 +161,8 @@
           "settings": {
             "label": "Si è afflosciato o deformato",
             "p_m1": 2,
-            "p_m2": 0,
-            "p_m3a": 2,
+            "p_m2": 1,
+            "p_m3a": 3,
             "p_m3b": 3,
             "icon": "none",
             "value": "afflosciato"
@@ -172,10 +172,10 @@
           "type": "answer",
           "settings": {
             "label": "Sento tutti i movimenti del partner",
-            "p_m1": 0,
-            "p_m2": 2,
-            "p_m3a": 4,
-            "p_m3b": 2,
+            "p_m1": 2,
+            "p_m2": 1,
+            "p_m3a": 2,
+            "p_m3b": 3,
             "icon": "none",
             "value": "movimenti_partner"
           }
@@ -186,8 +186,8 @@
             "label": "Dormo caldo, mi sveglio sudato",
             "p_m1": 3,
             "p_m2": 0,
-            "p_m3a": 0,
-            "p_m3b": 4,
+            "p_m3a": 2,
+            "p_m3b": 3,
             "icon": "none",
             "value": "caldo"
           }
@@ -196,9 +196,9 @@
           "type": "answer",
           "settings": {
             "label": "Mi sveglio con dolori o indolenzito",
-            "p_m1": 0,
+            "p_m1": 2,
             "p_m2": 1,
-            "p_m3a": 4,
+            "p_m3a": 2,
             "p_m3b": 3,
             "icon": "none",
             "value": "dolori"
@@ -234,7 +234,7 @@
             "label": "Sul fianco",
             "p_m1": 0,
             "p_m2": 3,
-            "p_m3a": 3,
+            "p_m3a": 2,
             "p_m3b": 2,
             "icon": "fianco",
             "value": "fianco"
@@ -244,10 +244,10 @@
           "type": "answer",
           "settings": {
             "label": "Sulla schiena",
-            "p_m1": 2,
+            "p_m1": 3,
             "p_m2": 0,
             "p_m3a": 3,
-            "p_m3b": 3,
+            "p_m3b": 2,
             "icon": "schiena",
             "value": "schiena"
           }
@@ -258,7 +258,7 @@
             "label": "A pancia in giù",
             "p_m1": 4,
             "p_m2": 0,
-            "p_m3a": 0,
+            "p_m3a": 1,
             "p_m3b": 2,
             "icon": "pancia",
             "value": "pancia"
@@ -268,8 +268,8 @@
           "type": "answer",
           "settings": {
             "label": "Cambio di continuo",
-            "p_m1": 0,
-            "p_m2": 0,
+            "p_m1": 1,
+            "p_m2": 1,
             "p_m3a": 3,
             "p_m3b": 3,
             "icon": "cambio",
@@ -294,8 +294,8 @@
             "label": "Morbido e avvolgente: voglio “affondare” nel comfort",
             "p_m1": 0,
             "p_m2": 5,
-            "p_m3a": 1,
-            "p_m3b": 0,
+            "p_m3a": 0,
+            "p_m3b": 1,
             "icon": "none",
             "value": "morbido"
           }
@@ -304,10 +304,10 @@
           "type": "answer",
           "settings": {
             "label": "Equilibrato: accogliente ma con sostegno",
-            "p_m1": 0,
-            "p_m2": 0,
-            "p_m3a": 4,
-            "p_m3b": 3,
+            "p_m1": 1,
+            "p_m2": 1,
+            "p_m3a": 3,
+            "p_m3b": 2,
             "icon": "none",
             "value": "equilibrato"
           }
@@ -318,8 +318,8 @@
             "label": "Sostenuto e deciso: preferisco dormire “sopra” il materasso",
             "p_m1": 4,
             "p_m2": 0,
-            "p_m3a": 0,
-            "p_m3b": 2,
+            "p_m3a": 2,
+            "p_m3b": 1,
             "icon": "none",
             "value": "deciso"
           }
@@ -340,10 +340,10 @@
           "type": "answer",
           "settings": {
             "label": "Isolamento dei movimenti",
-            "p_m1": 0,
-            "p_m2": 3,
-            "p_m3a": 4,
-            "p_m3b": 2,
+            "p_m1": 2,
+            "p_m2": 1,
+            "p_m3a": 3,
+            "p_m3b": 4,
             "icon": "none",
             "value": "isolamento"
           }
@@ -353,9 +353,9 @@
           "settings": {
             "label": "Freschezza e traspirabilità",
             "p_m1": 3,
-            "p_m2": 0,
-            "p_m3a": 0,
-            "p_m3b": 4,
+            "p_m2": 1,
+            "p_m3a": 2,
+            "p_m3b": 3,
             "icon": "none",
             "value": "freschezza"
           }
@@ -364,9 +364,9 @@
           "type": "answer",
           "settings": {
             "label": "Supporto ergonomico a zone",
-            "p_m1": 1,
-            "p_m2": 0,
-            "p_m3a": 4,
+            "p_m1": 2,
+            "p_m2": 1,
+            "p_m3a": 2,
             "p_m3b": 3,
             "icon": "none",
             "value": "ergonomia"
@@ -376,7 +376,7 @@
           "type": "answer",
           "settings": {
             "label": "Rivestimento sfoderabile e lavabile",
-            "p_m1": 0,
+            "p_m1": 2,
             "p_m2": 2,
             "p_m3a": 2,
             "p_m3b": 2,
@@ -389,9 +389,9 @@
           "settings": {
             "label": "Durata nel tempo",
             "p_m1": 2,
-            "p_m2": 0,
+            "p_m2": 1,
             "p_m3a": 2,
-            "p_m3b": 4,
+            "p_m3b": 3,
             "icon": "none",
             "value": "durata"
           }
@@ -412,9 +412,9 @@
           "type": "answer",
           "settings": {
             "label": "Dormire bene non ha prezzo: voglio il massimo",
-            "p_m1": 0,
-            "p_m2": 0,
-            "p_m3a": 4,
+            "p_m1": 2,
+            "p_m2": 2,
+            "p_m3a": 3,
             "p_m3b": 4,
             "icon": "none",
             "value": "top"
@@ -424,8 +424,8 @@
           "type": "answer",
           "settings": {
             "label": "Cerco il giusto equilibrio qualità-prezzo",
-            "p_m1": 1,
-            "p_m2": 4,
+            "p_m1": 3,
+            "p_m2": 3,
             "p_m3a": 2,
             "p_m3b": 1,
             "icon": "none",
@@ -453,10 +453,10 @@
             "subtitle": "Materasso a molle insacchettate · 7 zone",
             "description": "Stabile, reattivo e con un sostegno deciso. Il rivestimento imbottito aggiunge comfort al primo contatto, ma la sensazione resta ferma e solida: ideale per chi ama dormire “sopra” il materasso.",
             "tag_1": "Sostegno deciso",
-            "tag_2": "Traspirabilità ottima",
+            "tag_2": "Traspirabile e lavabile",
             "feat_1": "Molle insacchettate a 7 zone di portanza differenziata",
-            "feat_2": "Fascia perimetrale 3D Air che disperde calore e umidità",
-            "feat_3": "Ribaltabile e modulare: abbinalo a un topper per più comfort",
+            "feat_2": "Fascia perimetrale 3D Air con zip, che disperde calore e umidità",
+            "feat_3": "Ribaltabile e modulare: abbinalo a un topper per comfort e longevità",
             "product": "sostegno",
             "link": "",
             "cta_label": "Scopri il materasso"
@@ -491,8 +491,8 @@
             "tag_1": "Comfort strutturato",
             "tag_2": "Tessuto premium",
             "feat_1": "Memory bugnato che lavora sulle diverse zone di appoggio",
-            "feat_2": "Strato strutturale in poliuretano per sostegno e consistenza",
-            "feat_3": "Filamenti d’argento e 3D Air per la dispersione termica",
+            "feat_2": "Strato strutturale a resistenza aumentata per sostegno e consistenza",
+            "feat_3": "Filamenti d’argento, fascia 3D Air e imbottitura traspirante per la dispersione termica",
             "product": "abbraccio",
             "link": "",
             "cta_label": "Scopri il materasso"
@@ -509,8 +509,8 @@
             "tag_1": "Ibrido premium",
             "tag_2": "Traspirabilità eccellente",
             "feat_1": "Molle insacchettate a 7 zone: sostegno indipendente e progressivo",
-            "feat_2": "Memory bugnato che accompagna le zone di appoggio del corpo",
-            "feat_3": "Rivestimento sfoderabile con filamenti d’argento e 3D Air",
+            "feat_2": "Memory bugnato che accompagna le zone di appoggio del corpo, materiali selezionati",
+            "feat_3": "Rivestimento con imbottitura traspirante, filamenti d’argento e fascia 3D Air regolano perfettamente la temperatura",
             "product": "abbraccio-plus",
             "link": "",
             "cta_label": "Scopri il materasso"
@@ -519,9 +519,9 @@
         "xsell_topper": {
           "type": "cross_sell",
           "settings": {
-            "show_for": "m1",
+            "show_for": "m1,m2,m3a,m3b",
             "title": "Topper Carezza",
-            "subtitle": "Aggiunge morbidezza al sostegno deciso delle molle",
+            "subtitle": "Aggiunge morbidezza al sostegno del sistema di riposo, abbinalo al materasso per uno sconto a partire da 40€",
             "image": "shopify://shop_images/topperambientatomemory-1.png",
             "product": "topper-carezza",
             "link": ""
@@ -532,7 +532,7 @@
           "settings": {
             "show_for": "m1,m2,m3a,m3b",
             "title": "Cuscino Concomodo",
-            "subtitle": "Completa il riposo con il supporto giusto per il collo",
+            "subtitle": "Completa il riposo con il supporto giusto per il collo, -25€ se abbinato a un materasso",
             "image": "shopify://shop_images/cuscini2.png",
             "product": "cuscino-concomodo",
             "link": ""
