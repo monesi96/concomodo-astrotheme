@@ -775,7 +775,7 @@
                           "type": "text",
                           "name": "t:names.text",
                           "settings": {
-                            "text": "<p><strong>Consegna gratis</strong></p>",
+                            "text": "<p><strong>Consegna gratuita</strong></p>",
                             "width": "fit-content",
                             "max_width": "normal",
                             "alignment": "left",
