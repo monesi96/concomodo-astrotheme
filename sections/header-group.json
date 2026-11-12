@@ -87,6 +87,8 @@
         "separator_text": "—",
         "gap": 48,
         "show_borders": false,
+        "edge_fade": true,
+        "edge_fade_width": 10,
         "color_scheme": "scheme-4",
         "padding-block-start": 10,
         "padding-block-end": 10,
