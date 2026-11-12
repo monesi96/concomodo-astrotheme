@@ -48,22 +48,43 @@
 }
 
 /* ---------- barra progresso ---------- */
+/* barra "a pillola" staccata dai bordi: prima era a filo del bordo
+   superiore e veniva tagliata dagli angoli arrotondati del box */
 .cq__progress {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 6px;
-  background: var(--cq-accent-soft);
+  top: clamp(18px, 3vh, 28px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(520px, calc(100% - 48px));
+  height: 8px;
+  border-radius: 99px;
+  background: rgba(178, 200, 209, 0.55);
+  box-shadow: inset 0 1px 2px rgba(70, 70, 70, 0.08);
+  overflow: hidden;
   z-index: 5;
+  transition: opacity 0.3s ease;
 }
 
 .cq__progress-bar {
   height: 100%;
   width: 0%;
   background: var(--cq-ink);
-  border-radius: 0 99px 99px 0;
+  border-radius: 99px;
   transition: width 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* nell'intro (0%) e nel risultato la barra non serve */
+.cq:has(.cq-step--intro.is-active) .cq__progress,
+.cq:has(.cq-step--result.is-active) .cq__progress {
+  opacity: 0;
+}
+
+@media (max-width: 749px) {
+  .cq__progress {
+    top: 14px;
+    width: calc(100% - 36px);
+    height: 6px;
+  }
 }
 
 /* ---------- viewport step ---------- */
