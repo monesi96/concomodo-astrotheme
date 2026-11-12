@@ -140,6 +140,17 @@
                   },
                   "blocks": {}
                 },
+                "ai_gen_block_d44ce42_eYYMQq": {
+                  "type": "ai_gen_block_d44ce42",
+                  "settings": {
+                    "heading": "Hai bisogno di noi?",
+                    "email": "info@concomodo.it",
+                    "phone": "+39 3937105726",
+                    "contact_font_size": 18,
+                    "desktop_width_percent": 100
+                  },
+                  "blocks": {}
+                },
                 "company_legal_info_njKzVX": {
                   "type": "company-legal-info",
                   "name": "Dati azienda",
@@ -163,6 +174,7 @@
               },
               "block_order": [
                 "logo_4qrxkB",
+                "ai_gen_block_d44ce42_eYYMQq",
                 "company_legal_info_njKzVX"
               ]
             },
@@ -248,7 +260,7 @@
                       "type": "text",
                       "name": "t:names.text",
                       "settings": {
-                        "text": "<p>Concomodo: comfort e cura per il tuo riposo, ogni giorno. Spediamo e ritiriamo gratuitamente in tutta Italia.</p>",
+                        "text": "<p>Concomodo: matersassi, topper, cuscini 100% Made In Italy e garantiti fino a 10 anni.<br/>100 notti di prova, consegna e reso gratuiti.</p>",
                         "width": "fit-content",
                         "max_width": "normal",
                         "alignment": "left",
@@ -274,7 +286,7 @@
                     "text_LR7EYA": {
                       "type": "text",
                       "settings": {
-                        "text": "<p><a href=\"/collections/materassi\" title=\"Materassi\">materassi</a><br/><a href=\"/collections/topper\" title=\"Topper\">topper</a><a href=\"/collections/cuscini\" title=\"Cuscini\"><br/>cuscini</a><br/><a href=\"/pages/contact\" title=\"FAQ\">faq</a><br/><a href=\"/#shopify-section-section_wiLr9X\" title=\"Recensioni\">recensioni</a></p>",
+                        "text": "<p><a href=\"/collections/materassi\" title=\"Materassi\">materassi</a><br/><a href=\"/collections/topper\" title=\"Topper\">topper</a><a href=\"/collections/cuscini\" title=\"Cuscini\"><br/>cuscini</a></p>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
