@@ -257,6 +257,11 @@
         });
       });
 
+      // arrotonda per evitare falsi spareggi da virgola mobile (es. 1/3+1/3+1/3)
+      Object.keys(scores).forEach((k) => {
+        scores[k] = Math.round(scores[k] * 1000) / 1000;
+      });
+
       // parità: vince il prodotto più completo (specchia le soglie "premium" di Casper)
       const priority = ['m3b', 'm3a', 'm2', 'm1'];
       let winner = priority[0];
