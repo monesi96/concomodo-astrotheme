@@ -18,6 +18,7 @@
           "type": "item",
           "settings": {
             "text": "Prova 100 notti",
+            "icon": "moon",
             "link": "",
             "color_mode": "auto",
             "custom_color": "#464646"
@@ -27,6 +28,7 @@
           "type": "item",
           "settings": {
             "text": "Garanzia 10 anni",
+            "icon": "shield",
             "link": "",
             "color_mode": "auto",
             "custom_color": "#464646"
@@ -36,6 +38,7 @@
           "type": "item",
           "settings": {
             "text": "Spedizione e reso gratuiti",
+            "icon": "truck",
             "link": "",
             "color_mode": "auto",
             "custom_color": "#464646"
@@ -45,6 +48,7 @@
           "type": "item",
           "settings": {
             "text": "Pagamento in 3 rate",
+            "icon": "card",
             "link": "",
             "color_mode": "auto",
             "custom_color": "#464646"
@@ -54,6 +58,7 @@
           "type": "item",
           "settings": {
             "text": "Made in Italy",
+            "icon": "flag",
             "link": "",
             "color_mode": "auto",
             "custom_color": "#464646"
