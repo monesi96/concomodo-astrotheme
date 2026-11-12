@@ -703,7 +703,7 @@
                       "settings": {
                         "show_sale_price_first": true,
                         "show_installments": false,
-                        "show_tax_info": true,
+                        "show_tax_info": false,
                         "type_preset": "h3",
                         "width": "fit-content",
                         "alignment": "left",
@@ -764,7 +764,7 @@
                           "type": "icon",
                           "name": "t:names.icon",
                           "settings": {
-                            "icon": "price_tag",
+                            "icon": "truck",
                             "width": 16,
                             "link": "",
                             "open_in_new_tab": false
@@ -772,6 +772,90 @@
                           "blocks": {}
                         },
                         "text_EGW4kJ": {
+                          "type": "text",
+                          "name": "t:names.text",
+                          "settings": {
+                            "text": "<p><strong>IVA e spedizione incluse</strong></p>",
+                            "width": "fit-content",
+                            "max_width": "normal",
+                            "alignment": "left",
+                            "type_preset": "rte",
+                            "font": "var(--font-body--family)",
+                            "weight": "",
+                            "font_size": "1rem",
+                            "line_height": "normal",
+                            "letter_spacing": "normal",
+                            "case": "none",
+                            "wrap": "pretty",
+                            "color": "var(--color-foreground)",
+                            "background": false,
+                            "background_color": "#00000026",
+                            "corner_radius": 0,
+                            "padding-block-start": 0,
+                            "padding-block-end": 0,
+                            "padding-inline-start": 0,
+                            "padding-inline-end": 0
+                          },
+                          "blocks": {}
+                        }
+                      },
+                      "block_order": [
+                        "icon_Qy9PXx",
+                        "text_EGW4kJ"
+                      ]
+                    },
+                    "group_mW48FJ": {
+                      "type": "group",
+                      "name": "t:names.group",
+                      "settings": {
+                        "content_direction": "row",
+                        "vertical_on_mobile": false,
+                        "horizontal_alignment": "flex-end",
+                        "vertical_alignment": "center",
+                        "align_baseline": false,
+                        "horizontal_alignment_flex_direction_column": "flex-start",
+                        "vertical_alignment_flex_direction_column": "center",
+                        "gap": 12,
+                        "width": "fill",
+                        "custom_width": 100,
+                        "width_mobile": "fit-content",
+                        "custom_width_mobile": 100,
+                        "height": "fit",
+                        "custom_height": 100,
+                        "inherit_color_scheme": true,
+                        "color_scheme": "",
+                        "background_media": "none",
+                        "video_position": "cover",
+                        "background_image_position": "cover",
+                        "border": "none",
+                        "border_width": 1,
+                        "border_opacity": 100,
+                        "border_radius": 0,
+                        "toggle_overlay": false,
+                        "overlay_color": "#00000026",
+                        "overlay_style": "solid",
+                        "gradient_direction": "to top",
+                        "link": "",
+                        "open_in_new_tab": false,
+                        "placeholder": "",
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {
+                        "icon_yUVct6": {
+                          "type": "icon",
+                          "name": "t:names.icon",
+                          "settings": {
+                            "icon": "price_tag",
+                            "width": 16,
+                            "link": "",
+                            "open_in_new_tab": false
+                          },
+                          "blocks": {}
+                        },
+                        "text_gqEPwz": {
                           "type": "text",
                           "name": "t:names.text",
                           "settings": {
@@ -800,14 +884,15 @@
                         }
                       },
                       "block_order": [
-                        "icon_Qy9PXx",
-                        "text_EGW4kJ"
+                        "icon_yUVct6",
+                        "text_gqEPwz"
                       ]
                     }
                   },
                   "block_order": [
                     "price_8qL6AA",
-                    "group_hw4AkW"
+                    "group_hw4AkW",
+                    "group_mW48FJ"
                   ]
                 },
                 "buy_buttons_VLi7An": {
