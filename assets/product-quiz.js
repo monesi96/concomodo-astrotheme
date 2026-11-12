@@ -238,15 +238,22 @@
     /* ------------------------------------------------ punteggio */
     computeWinner() {
       const scores = {};
-      this.root.querySelectorAll('.cq-opt[aria-checked="true"]').forEach((opt) => {
-        let points = {};
-        try {
-          points = JSON.parse(opt.dataset.points || '{}');
-        } catch (e) {
-          points = {};
-        }
-        Object.keys(points).forEach((k) => {
-          scores[k] = (scores[k] || 0) + points[k];
+      // Domande a scelta multipla: i punti di ogni opzione scelta si dividono per
+      // il numero di opzioni scelte nella stessa domanda, così spuntarne 3 vale
+      // quanto sceglierne una sola.
+      this.root.querySelectorAll('[data-step-type="question"]').forEach((step) => {
+        const selected = step.querySelectorAll('.cq-opt[aria-checked="true"]');
+        if (!selected.length) return;
+        selected.forEach((opt) => {
+          let points = {};
+          try {
+            points = JSON.parse(opt.dataset.points || '{}');
+          } catch (e) {
+            points = {};
+          }
+          Object.keys(points).forEach((k) => {
+            scores[k] = (scores[k] || 0) + points[k] / selected.length;
+          });
         });
       });
 
