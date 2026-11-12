@@ -81,15 +81,15 @@
         "text_size": 14,
         "font_weight": "500",
         "uppercase": false,
-        "alternate_colors": true,
+        "alternate_colors": false,
         "accent_color": "#4a6f7d",
         "separator": "none",
         "separator_text": "—",
         "gap": 48,
         "show_borders": false,
         "color_scheme": "scheme-4",
-        "padding-block-start": 8,
-        "padding-block-end": 8,
+        "padding-block-start": 10,
+        "padding-block-end": 10,
         "padding-inline-start": 0,
         "padding-inline-end": 0
       }
