@@ -2,6 +2,7 @@
   Slider testuale — strip a scorrimento continuo con le promesse del brand.
   Ogni voce è un blocco: può usare il colore di base, il colore accento o un
   colore personalizzato. Con "colori alternati" le voci si alternano da sole.
+  Ogni voce può avere un'icona (set integrato o immagine caricata).
 {%- endcomment -%}
 
 <script src="{{ 'text-slider.js' | asset_url }}" defer></script>
@@ -46,6 +47,26 @@
                   endif
               endcase
             -%}
+            {%- capture ts_icon -%}
+              {%- case block.settings.icon -%}
+                {%- when 'moon' -%}
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19.5 14.6A7.8 7.8 0 0 1 9.4 4.5a7.8 7.8 0 1 0 10.1 10.1Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M16 4.5h2.5L16 7.5h2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                {%- when 'shield' -%}
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3 5 5.5v6c0 4.2 2.9 7.6 7 9 4.1-1.4 7-4.8 7-9v-6L12 3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m8.8 11.8 2.3 2.3 4.2-4.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                {%- when 'truck' -%}
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 6h11v10h-11z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M13.5 9h4l3 3.5V16h-7" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="6.5" cy="17.5" r="1.9" fill="var(--color-background, #fff)" stroke="currentColor" stroke-width="1.6"/><circle cx="16.5" cy="17.5" r="1.9" fill="var(--color-background, #fff)" stroke="currentColor" stroke-width="1.6"/></svg>
+                {%- when 'card' -%}
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5.5" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 10h18M7 14.5h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                {%- when 'flag' -%}
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 21V3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M5.5 4.5h12l-2.5 4 2.5 4h-12" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+                {%- when 'return' -%}
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 5 4.5 9.5 9 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.5 9.5H15a4.5 4.5 0 0 1 0 9H8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                {%- when 'check' -%}
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.6"/><path d="m8.5 12.2 2.4 2.4 4.6-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                {%- when 'star' -%}
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m12 3.5 2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.8l-5.2 2.8 1-5.8-4.3-4.1 5.9-.8L12 3.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              {%- endcase -%}
+            {%- endcapture -%}
             <span
               class="text-slider__item{% if section.settings.uppercase %} text-slider__item--upper{% endif %}"
               {% if color_value != blank %}
@@ -53,6 +74,13 @@
               {% endif %}
               {{ block.shopify_attributes }}
             >
+              {%- if block.settings.icon_image != blank -%}
+                <span class="text-slider__icon" aria-hidden="true">
+                  {{- block.settings.icon_image | image_url: width: 96 | image_tag: alt: '', loading: 'lazy' -}}
+                </span>
+              {%- elsif ts_icon != blank -%}
+                <span class="text-slider__icon" aria-hidden="true">{{- ts_icon -}}</span>
+              {%- endif -%}
               {%- if block.settings.link != blank -%}
                 <a class="text-slider__link" href="{{ block.settings.link }}">{{ block.settings.text }}</a>
               {%- else -%}
@@ -134,12 +162,30 @@
   }
 
   .text-slider__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
     color: var(--ts-item-color, var(--color-foreground));
     font-family: var(--font-body--family);
     font-size: var(--ts-size);
     font-weight: var(--ts-weight);
     line-height: 1.2;
     white-space: nowrap;
+  }
+
+  .text-slider__icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    width: 1.25em;
+    height: 1.25em;
+  }
+
+  .text-slider__icon svg,
+  .text-slider__icon img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 
   .text-slider__item--upper {
@@ -215,6 +261,28 @@
           "id": "text",
           "label": "Testo",
           "default": "Prova 100 notti"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icona",
+          "options": [
+            { "value": "none", "label": "Nessuna" },
+            { "value": "moon", "label": "Luna (notti di prova)" },
+            { "value": "shield", "label": "Scudo (garanzia)" },
+            { "value": "truck", "label": "Furgone (spedizione)" },
+            { "value": "card", "label": "Carta (pagamento)" },
+            { "value": "flag", "label": "Bandiera (Made in Italy)" },
+            { "value": "return", "label": "Reso" },
+            { "value": "check", "label": "Spunta" },
+            { "value": "star", "label": "Stella" }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Icona personalizzata (sostituisce quella sopra)"
         },
         {
           "type": "url",
@@ -415,11 +483,11 @@
     {
       "name": "Slider testuale",
       "blocks": {
-        "item-1": { "type": "item", "settings": { "text": "Prova 100 notti", "color_mode": "auto" } },
-        "item-2": { "type": "item", "settings": { "text": "Garanzia 10 anni", "color_mode": "auto" } },
-        "item-3": { "type": "item", "settings": { "text": "Spedizione e reso gratuiti", "color_mode": "auto" } },
-        "item-4": { "type": "item", "settings": { "text": "Pagamento in 3 rate", "color_mode": "auto" } },
-        "item-5": { "type": "item", "settings": { "text": "Made in Italy", "color_mode": "auto" } }
+        "item-1": { "type": "item", "settings": { "text": "Prova 100 notti", "icon": "moon", "color_mode": "auto" } },
+        "item-2": { "type": "item", "settings": { "text": "Garanzia 10 anni", "icon": "shield", "color_mode": "auto" } },
+        "item-3": { "type": "item", "settings": { "text": "Spedizione e reso gratuiti", "icon": "truck", "color_mode": "auto" } },
+        "item-4": { "type": "item", "settings": { "text": "Pagamento in 3 rate", "icon": "card", "color_mode": "auto" } },
+        "item-5": { "type": "item", "settings": { "text": "Made in Italy", "icon": "flag", "color_mode": "auto" } }
       },
       "block_order": ["item-1", "item-2", "item-3", "item-4", "item-5"]
     }
