@@ -131,58 +131,6 @@
         "padding-inline-end": 0
       }
     },
-    "channels": {
-      "type": "vuoi-parlare-con-noi",
-      "blocks": {
-        "card_chat": {
-          "type": "card",
-          "settings": {
-            "icon": "chat",
-            "title": "Chatta con noi",
-            "text": "<p>Apri la chat e ottieni subito l’assistenza di cui hai bisogno, senza perdite di tempo.</p>",
-            "link": "",
-            "open_in_new_tab": false
-          }
-        },
-        "card_phone": {
-          "type": "card",
-          "settings": {
-            "icon": "phone",
-            "title": "Chiamaci",
-            "text": "<p>Dal lunedì al venerdì, 9:00–18:00. Siamo qui per aiutarti a dormire meglio.</p>",
-            "link": "https://wa.me/+393937105726",
-            "open_in_new_tab": false
-          }
-        },
-        "card_email": {
-          "type": "card",
-          "settings": {
-            "icon": "email",
-            "title": "Scrivici",
-            "text": "<p>Compila il modulo qui sotto: ti rispondiamo prima che tu possa dire «fate Concomodo».</p>",
-            "link": "mailto:info@concomodo.it",
-            "open_in_new_tab": false
-          }
-        }
-      },
-      "block_order": [
-        "card_chat",
-        "card_phone",
-        "card_email"
-      ],
-      "name": "Vorresti parlare con noi?",
-      "settings": {
-        "heading": "Vorresti parlare con noi?",
-        "subheading": "<p>Scegli il canale che preferisci: la qualità della risposta non cambia.</p>",
-        "corner_radius": 24,
-        "section_width": "page-width",
-        "color_scheme": "scheme-1",
-        "padding-block-start": 48,
-        "padding-block-end": 48,
-        "padding-inline-start": 0,
-        "padding-inline-end": 0
-      }
-    },
     "faq": {
       "type": "section",
       "blocks": {
@@ -692,7 +640,6 @@
   "order": [
     "main",
     "self_service",
-    "channels",
     "faq",
     "form"
   ]
