@@ -1168,7 +1168,7 @@
                   "name": "Upsell prodotto",
                   "settings": {
                     "heading": "Completa il tuo letto <strong>con</strong>",
-                    "hint": "Personalizza il tuo riposo con un topper scontato: in base alla misura riceverai in omaggio uno o due Cuscini Concomodo.",
+                    "hint": "Personalizza il tuo riposo con un topper scontato: in base alla misura riceverai in omaggio anche uno o due Cuscini Concomodo.",
                     "gift_product": "cuscino-concomodo",
                     "gift_free_product": "cuscino-concomodo-omaggio",
                     "gift_enabled": true,
@@ -1177,7 +1177,7 @@
                     "gift_text": "Aggiungi anche un topper, il cuscino è in regalo",
                     "gift_cart_property": "In regalo con il topper",
                     "solo_discount_percent": 50,
-                    "solo_badge": "-50% solo online",
+                    "solo_badge": "-50% con materasso",
                     "bundle_main": true,
                     "topper_keyword": "topper",
                     "mattress_keyword": "materasso",
