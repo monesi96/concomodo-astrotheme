@@ -2318,6 +2318,7 @@
         "item_jYq6eR",
         "item_yyBEVd"
       ],
+      "disabled": true,
       "name": "Slider testuale",
       "settings": {
         "speed": 60,
