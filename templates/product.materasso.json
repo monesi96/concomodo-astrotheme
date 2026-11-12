@@ -3726,58 +3726,6 @@
         "padding-block-end": 40
       }
     },
-    "vuoi_parlare_con_noi_YckWRF": {
-      "type": "vuoi-parlare-con-noi",
-      "blocks": {
-        "card_dREkEQ": {
-          "type": "card",
-          "settings": {
-            "icon": "chat",
-            "title": "Chatta con noi",
-            "text": "<p>Apri la chat e ottieni subito l'assistenza di cui hai bisogno, senza perdite di tempo.</p>",
-            "link": "",
-            "open_in_new_tab": false
-          }
-        },
-        "card_YUjgCc": {
-          "type": "card",
-          "settings": {
-            "icon": "phone",
-            "title": "Chiamaci",
-            "text": "<p>Siamo qui per aiutarti a ritrovare il piacere di un sonno sereno e di qualità.</p>",
-            "link": "https://wa.me/+393937105726",
-            "open_in_new_tab": false
-          }
-        },
-        "card_GPdAfe": {
-          "type": "card",
-          "settings": {
-            "icon": "email",
-            "title": "Inviaci un'email",
-            "text": "<p>Scrivici e ti risponderemo prima che tu possa dire \"fate Concomodo\".</p>",
-            "link": "mailto:info@concomodo.it",
-            "open_in_new_tab": false
-          }
-        }
-      },
-      "block_order": [
-        "card_dREkEQ",
-        "card_YUjgCc",
-        "card_GPdAfe"
-      ],
-      "name": "Vuoi parlare con noi?",
-      "settings": {
-        "heading": "Vuoi parlare con noi?",
-        "subheading": "<p>Parla con un esperto del sonno e trova la soluzione di riposo più adatta a te.</p>",
-        "corner_radius": 24,
-        "section_width": "page-width",
-        "color_scheme": "scheme-2",
-        "padding-block-start": 48,
-        "padding-block-end": 82,
-        "padding-inline-start": 0,
-        "padding-inline-end": 0
-      }
-    },
     "1790954386f337fffd": {
       "type": "_blocks",
       "settings": {
@@ -3822,7 +3770,6 @@
     "installment_payments_tC9BhM",
     "fatti_in_italia",
     "section_chbtyY",
-    "vuoi_parlare_con_noi_YckWRF",
     "1790954386f337fffd"
   ]
 }
