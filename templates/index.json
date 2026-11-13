@@ -2731,8 +2731,8 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/hf_20260707_142325_9f478322-ab1e-4808-9b98-6f5e364e5b42_min.png",
-            "tag": "Prova 100 notti",
-            "text": "100 notti per sentirlo tuo.\nReso o sostituzione gratuita.",
+            "tag": "Prova 100 notti e Garanzia 10 anni",
+            "text": "100 notti per sentirlo tuo, con reso o sostituzione gratuita.",
             "link": "https://www.concomodo.it/policies/refund-policy"
           }
         },
@@ -2770,7 +2770,6 @@
         "card_djQJJ8",
         "card_TUaGPG"
       ],
-      "disabled": true,
       "name": "Perché Concomodo",
       "settings": {
         "label": "Perché Concomodo",
