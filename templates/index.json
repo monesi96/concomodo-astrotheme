@@ -2704,7 +2704,7 @@
                         "weight": "",
                         "font_size_desktop": "",
                         "font_size_mobile": "",
-                        "width": "fit-content",
+                        "width": "custom",
                         "custom_width": 100,
                         "width_mobile": "custom",
                         "custom_width_mobile": 100
