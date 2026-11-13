@@ -245,60 +245,12 @@
     }
   }
 
-  /* Scorrimento card: niente scroll verticale + dissolvenza a sinistra quando si scorre */
-  @property --whycc-fade {
-    syntax: '<length>';
-    inherits: false;
-    initial-value: 0px;
-  }
-
-  .whycc {
-    --whycc-fade-size: 56px;
-  }
-
+  /* Scorrimento card: niente scroll verticale, taglio con angoli arrotondati come le card */
   .whycc__track {
-    --whycc-fade: 0px;
     overflow-y: hidden;
-    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 var(--whycc-fade));
-    mask-image: linear-gradient(to right, transparent 0, #000 var(--whycc-fade));
-    transition: --whycc-fade 0.25s ease;
-  }
-
-  .whycc__track.is-scrolled {
-    --whycc-fade: var(--whycc-fade-size);
-  }
-
-  @media screen and (max-width: 749px) {
-    .whycc {
-      --whycc-fade-size: 36px;
-    }
+    border-radius: calc(var(--whycc-radius) * 0.7);
   }
 {% endstylesheet %}
-
-{% javascript %}
-  (() => {
-    if (window.__whyccFade) return;
-    window.__whyccFade = true;
-    document.addEventListener(
-      'scroll',
-      (event) => {
-        const track = event.target;
-        if (!(track instanceof Element) || !track.classList.contains('whycc__track')) return;
-        if (track.__whyccRaf) return;
-        track.__whyccRaf = requestAnimationFrame(() => {
-          track.__whyccRaf = 0;
-          const edge = track.getBoundingClientRect().left;
-          const cut = [...track.children].some((card) => {
-            const box = card.getBoundingClientRect();
-            return box.left < edge - 1 && box.right > edge + 1;
-          });
-          track.classList.toggle('is-scrolled', cut);
-        });
-      },
-      { capture: true, passive: true }
-    );
-  })();
-{% endjavascript %}
 
 {% schema %}
 {
