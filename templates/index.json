@@ -1115,33 +1115,6 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "text_fnrLMP": {
-              "type": "text",
-              "name": "t:names.text",
-              "settings": {
-                "text": "",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "paragraph",
-                "font": "var(--font-body--family)",
-                "weight": "500",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
             "text_bjkEqE": {
               "type": "text",
               "name": "t:names.text",
@@ -1171,7 +1144,6 @@
             }
           },
           "block_order": [
-            "text_fnrLMP",
             "text_bjkEqE"
           ]
         },
@@ -1821,6 +1793,144 @@
         "color_scheme": "scheme-2",
         "padding-block-start": 45,
         "padding-block-end": 45
+      }
+    },
+    "recensioni_ovunque_DbfNPx": {
+      "type": "recensioni-ovunque",
+      "blocks": {
+        "review_i66djw": {
+          "type": "review",
+          "settings": {
+            "name": "Francesco",
+            "text": "Dopo aver girato decine di negozi, ho scelto di acquistare online da loro […]. Acquisto semplice, qualità in ogni dettaglio […]. Assistenza top.",
+            "platform": "trustpilot"
+          }
+        },
+        "review_YYNxzb": {
+          "type": "review",
+          "settings": {
+            "name": "Ilaria",
+            "text": "",
+            "platform": "google"
+          }
+        },
+        "review_GmjLT9": {
+          "type": "review",
+          "settings": {
+            "name": "Raffaella",
+            "text": "Io e mio marito abbiamo preso Abbraccio Plus e già alla prima notte ci siamo innamorati. […] Veramente comodo",
+            "platform": "trustpilot"
+          }
+        },
+        "review_dzhAdU": {
+          "type": "review",
+          "settings": {
+            "name": "Simone",
+            "text": "",
+            "platform": "judgeme"
+          }
+        },
+        "review_JQcRrY": {
+          "type": "review",
+          "settings": {
+            "name": "Andrea",
+            "text": "[…] mi sto trovando veramente bene... Francesca dell'assistenza vendite mi ha chiamato […] assistenza top!",
+            "platform": "trustpilot"
+          }
+        },
+        "review_wwdXz3": {
+          "type": "review",
+          "settings": {
+            "name": "Sandro",
+            "text": "Prezzo e qualità al servizio della gente, azienda serissima",
+            "platform": "trustpilot"
+          }
+        },
+        "review_3UQ67y": {
+          "type": "review",
+          "settings": {
+            "name": "Fabio",
+            "text": "[…] ho chiamato, l’operatrice […] ha compreso e soddisfatto tutte le mie necessità. […] sto pensando di prenderlo anche ai miei!",
+            "platform": "google"
+          }
+        }
+      },
+      "block_order": [
+        "review_i66djw",
+        "review_YYNxzb",
+        "review_GmjLT9",
+        "review_dzhAdU",
+        "review_JQcRrY",
+        "review_wwdXz3",
+        "review_3UQ67y"
+      ],
+      "name": "Recensioni ovunque",
+      "settings": {
+        "heading": "Recensioni a 5 stelle, <strong>ovunque.</strong>",
+        "subheading": "Chi ci sceglie ci lascia la valutazione massima per i nostri prodotti e il nostro servizio, su qualsiasi piattaforma.",
+        "footnote": "Qui mostriamo le recensioni a 5 stelle. Le trovi tutte sulle principali piattaforme di recensioni e nelle pagine dei prodotti.",
+        "icon_google": "shopify://shop_images/GoogleG_FullColor_RGB.png",
+        "icon_trustpilot": "shopify://shop_images/icona-trustpilot.png",
+        "icon_judgeme": "shopify://shop_images/icona-judgeme-symbol.png",
+        "google_zoom": 270,
+        "speed": 50,
+        "star_color": "#d49a2a",
+        "panel_color": "#b2c8d1",
+        "corner_radius": 32,
+        "section_width": "page-width",
+        "color_scheme": "scheme-2",
+        "padding-block-start": 40,
+        "padding-block-end": 40,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
+      }
+    },
+    "fatti_in_italia": {
+      "type": "fatti-in-italia",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/concomodo-produzione-reparto.png",
+            "caption": ""
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/concomodo-produzione-magazzino.png",
+            "caption": ""
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/concomodo-produzione-linea.png",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "slide_2",
+        "slide_3"
+      ],
+      "settings": {
+        "show_flag": true,
+        "heading": "I nostri materassi li facciamo noi, in Italia.",
+        "text": "<p>Tagliamo le schiume su misura, cuciamo i rivestimenti nel nostro reparto e controlliamo ogni materasso prima di imballarlo. Da qui parte direttamente verso casa tua, dal produttore a te senza intermediari.</p><p>Seguire tutto da vicino ci permette di curare ogni dettaglio e di tenere un prezzo onesto.</p>",
+        "button_label": "Scopri i materassi",
+        "button_link": "shopify://collections/materassi",
+        "image_position": "right",
+        "autoplay": true,
+        "autoplay_speed": 5,
+        "corner_radius": 24,
+        "section_width": "page-width",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 56,
+        "padding-block-end": 56,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
       }
     },
     "section_NGmFUm": {
@@ -2503,144 +2613,6 @@
         "padding-block-end": 24
       }
     },
-    "recensioni_ovunque_DbfNPx": {
-      "type": "recensioni-ovunque",
-      "blocks": {
-        "review_i66djw": {
-          "type": "review",
-          "settings": {
-            "name": "Francesco",
-            "text": "Dopo aver girato decine di negozi, ho scelto di acquistare online da loro […]. Acquisto semplice, qualità in ogni dettaglio […]. Assistenza top.",
-            "platform": "trustpilot"
-          }
-        },
-        "review_YYNxzb": {
-          "type": "review",
-          "settings": {
-            "name": "Ilaria",
-            "text": "",
-            "platform": "google"
-          }
-        },
-        "review_GmjLT9": {
-          "type": "review",
-          "settings": {
-            "name": "Raffaella",
-            "text": "Io e mio marito abbiamo preso Abbraccio Plus e già alla prima notte ci siamo innamorati. […] Veramente comodo",
-            "platform": "trustpilot"
-          }
-        },
-        "review_dzhAdU": {
-          "type": "review",
-          "settings": {
-            "name": "Simone",
-            "text": "",
-            "platform": "judgeme"
-          }
-        },
-        "review_JQcRrY": {
-          "type": "review",
-          "settings": {
-            "name": "Andrea",
-            "text": "[…] mi sto trovando veramente bene... Francesca dell'assistenza vendite mi ha chiamato […] assistenza top!",
-            "platform": "trustpilot"
-          }
-        },
-        "review_wwdXz3": {
-          "type": "review",
-          "settings": {
-            "name": "Sandro",
-            "text": "Prezzo e qualità al servizio della gente, azienda serissima",
-            "platform": "trustpilot"
-          }
-        },
-        "review_3UQ67y": {
-          "type": "review",
-          "settings": {
-            "name": "Fabio",
-            "text": "[…] ho chiamato, l’operatrice […] ha compreso e soddisfatto tutte le mie necessità. […] sto pensando di prenderlo anche ai miei!",
-            "platform": "google"
-          }
-        }
-      },
-      "block_order": [
-        "review_i66djw",
-        "review_YYNxzb",
-        "review_GmjLT9",
-        "review_dzhAdU",
-        "review_JQcRrY",
-        "review_wwdXz3",
-        "review_3UQ67y"
-      ],
-      "name": "Recensioni ovunque",
-      "settings": {
-        "heading": "Recensioni a 5 stelle, <strong>ovunque.</strong>",
-        "subheading": "Chi ci sceglie ci lascia la valutazione massima per i nostri prodotti e il nostro servizio, su qualsiasi piattaforma.",
-        "footnote": "Qui mostriamo le recensioni a 5 stelle. Le trovi tutte sulle principali piattaforme di recensioni e nelle pagine dei prodotti.",
-        "icon_google": "shopify://shop_images/GoogleG_FullColor_RGB.png",
-        "icon_trustpilot": "shopify://shop_images/icona-trustpilot.png",
-        "icon_judgeme": "shopify://shop_images/icona-judgeme-symbol.png",
-        "google_zoom": 270,
-        "speed": 50,
-        "star_color": "#d49a2a",
-        "panel_color": "#b2c8d1",
-        "corner_radius": 32,
-        "section_width": "page-width",
-        "color_scheme": "scheme-2",
-        "padding-block-start": 40,
-        "padding-block-end": 40,
-        "padding-inline-start": 0,
-        "padding-inline-end": 0
-      }
-    },
-    "fatti_in_italia": {
-      "type": "fatti-in-italia",
-      "blocks": {
-        "slide_1": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/concomodo-produzione-reparto.png",
-            "caption": ""
-          }
-        },
-        "slide_2": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/concomodo-produzione-magazzino.png",
-            "caption": ""
-          }
-        },
-        "slide_3": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/concomodo-produzione-linea.png",
-            "caption": ""
-          }
-        }
-      },
-      "block_order": [
-        "slide_1",
-        "slide_2",
-        "slide_3"
-      ],
-      "settings": {
-        "show_flag": true,
-        "heading": "I nostri materassi li facciamo noi, in Italia.",
-        "text": "<p>Tagliamo le schiume su misura, cuciamo i rivestimenti nel nostro reparto e controlliamo ogni materasso prima di imballarlo. Da qui parte direttamente verso casa tua, dal produttore a te senza intermediari.</p><p>Seguire tutto da vicino ci permette di curare ogni dettaglio e di tenere un prezzo onesto.</p>",
-        "button_label": "Scopri i materassi",
-        "button_link": "shopify://collections/materassi",
-        "image_position": "right",
-        "autoplay": true,
-        "autoplay_speed": 5,
-        "corner_radius": 24,
-        "section_width": "page-width",
-        "color_scheme": "scheme-1",
-        "padding-block-start": 56,
-        "padding-block-end": 56,
-        "padding-inline-start": 0,
-        "padding-inline-end": 0
-      }
-    },
     "popup_fullscreen_B4y8gG": {
       "type": "popup-fullscreen",
       "blocks": {
@@ -2780,9 +2752,9 @@
     "collection_list_hwFndy",
     "section_Yt33in",
     "product_list_4P4Ang",
-    "section_NGmFUm",
     "recensioni_ovunque_DbfNPx",
     "fatti_in_italia",
+    "section_NGmFUm",
     "popup_fullscreen_B4y8gG",
     "17854856083bbc919e"
   ]
