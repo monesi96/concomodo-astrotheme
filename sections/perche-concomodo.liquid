@@ -1,0 +1,441 @@
+{%- comment -%}
+  Perché Concomodo — riquadro con etichetta verticale e card fotografiche a scorrimento orizzontale.
+  Ogni card è un blocco: foto, etichetta (pill), testo sovrapposto, link facoltativo.
+{%- endcomment -%}
+
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--{{ section.settings.section_width }} whycc color-{{ section.settings.color_scheme }} spacing-style"
+  style="{% render 'spacing-style', settings: section.settings %} --whycc-radius: {{ section.settings.corner_radius }}px; --whycc-bg: {{ section.settings.panel_color }}; --whycc-label: {{ section.settings.label_color }}; --whycc-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"
+>
+  <div class="whycc__panel">
+    {%- if section.settings.label != blank -%}
+      <h2 class="whycc__label"><span>{{ section.settings.label | escape }}</span></h2>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="whycc__track" role="list" tabindex="0" aria-label="{{ section.settings.label | escape }}">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign img = block.settings.image
+            assign tag_open = 'div'
+            assign focal = 'object-position: ' | append: img.presentation.focal_point | append: ';'
+            if block.settings.link != blank
+              assign tag_open = 'a'
+            endif
+          -%}
+          <{{ tag_open }}
+            class="whycc__card whycc__card--{{ section.settings.text_position }}"
+            role="listitem"
+            {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% endif %}
+            {{ block.shopify_attributes }}
+          >
+            {%- if img != blank -%}
+              {{
+                img
+                | image_url: width: 1200
+                | image_tag:
+                  widths: '360, 540, 720, 900, 1200',
+                  sizes: '(min-width: 750px) 300px, 78vw',
+                  loading: 'lazy',
+                  alt: img.alt,
+                  class: 'whycc__img',
+                  style: focal
+              }}
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'whycc__img whycc__img--placeholder' }}
+            {%- endif -%}
+
+            <span class="whycc__shade" aria-hidden="true"></span>
+
+            {%- if block.settings.tag != blank -%}
+              <span class="whycc__tag">{{ block.settings.tag | escape }}</span>
+            {%- endif -%}
+
+            {%- if block.settings.text != blank -%}
+              <p class="whycc__text">{{ block.settings.text | escape | newline_to_br }}</p>
+            {%- endif -%}
+          </{{ tag_open }}>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .whycc {
+    --whycc-radius: 24px;
+    --whycc-bg: #B2C8D1;
+    --whycc-label: #464646;
+    --whycc-overlay: 0.25;
+  }
+
+  .whycc__panel {
+    display: flex;
+    align-items: stretch;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: var(--whycc-radius);
+    background: var(--whycc-bg);
+    overflow: hidden;
+  }
+
+  .whycc__label {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    padding-block: 8px;
+    color: var(--whycc-label);
+    font-family: var(--font-heading--family);
+    font-weight: 500;
+    font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .whycc__label span {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  .whycc__track {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(250px, 1fr);
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 0;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+
+  .whycc__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .whycc__track:focus-visible {
+    outline: 2px solid var(--whycc-label);
+    outline-offset: 4px;
+  }
+
+  .whycc__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    aspect-ratio: 3 / 4;
+    padding: 18px;
+    box-sizing: border-box;
+    border-radius: calc(var(--whycc-radius) * 0.7);
+    overflow: hidden;
+    isolation: isolate;
+    scroll-snap-align: start;
+    color: #ffffff;
+    text-decoration: none;
+    background: #8a8a8a;
+  }
+
+  .whycc__img {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .whycc__img--placeholder {
+    background: #9fb3bb;
+    fill: rgb(255 255 255 / 0.35);
+  }
+
+  a.whycc__card:hover .whycc__img {
+    transform: scale(1.04);
+  }
+
+  .whycc__shade {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgb(0 0 0 / var(--whycc-overlay));
+    pointer-events: none;
+  }
+
+  .whycc__card--bottom .whycc__shade {
+    background: linear-gradient(to top, rgb(0 0 0 / calc(var(--whycc-overlay) * 2)) 0%, rgb(0 0 0 / 0) 60%);
+  }
+
+  .whycc__tag {
+    align-self: flex-start;
+    padding: 5px 12px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .whycc__text {
+    margin: 0;
+    font-family: var(--font-body--family);
+    font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+    font-weight: 600;
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+
+  .whycc__card--top .whycc__text {
+    margin-top: 16px;
+  }
+
+  .whycc__card--center .whycc__text {
+    margin-block: auto;
+  }
+
+  .whycc__card--bottom .whycc__text {
+    margin-top: auto;
+  }
+
+  @media screen and (max-width: 749px) {
+    .whycc__panel {
+      flex-direction: column;
+      gap: 14px;
+      padding: 18px 0 18px 18px;
+      border-radius: calc(var(--whycc-radius) * 0.8);
+    }
+
+    .whycc__label {
+      padding-block: 0;
+      font-size: 1.5rem;
+    }
+
+    .whycc__label span {
+      writing-mode: horizontal-tb;
+      transform: none;
+    }
+
+    .whycc__track {
+      grid-auto-columns: 74vw;
+      gap: 12px;
+      padding-inline-end: 18px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .whycc__img {
+      transition: none;
+    }
+
+    a.whycc__card:hover .whycc__img {
+      transform: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Perché Concomodo",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Etichetta laterale",
+      "info": "In verticale su desktop, sopra le card su mobile",
+      "default": "Perché Concomodo"
+    },
+    {
+      "type": "header",
+      "content": "Card"
+    },
+    {
+      "type": "select",
+      "id": "text_position",
+      "label": "Posizione testo",
+      "options": [
+        { "value": "top", "label": "In alto" },
+        { "value": "center", "label": "Al centro" },
+        { "value": "bottom", "label": "In basso" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Scurimento foto",
+      "info": "Aumentalo se il testo bianco si legge poco",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "%",
+      "default": 25
+    },
+    {
+      "type": "header",
+      "content": "Riquadro"
+    },
+    {
+      "type": "color",
+      "id": "panel_color",
+      "label": "Colore riquadro",
+      "default": "#B2C8D1"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Colore etichetta",
+      "default": "#464646"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "Raggio angoli",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Sezione"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Larghezza sezione",
+      "options": [
+        { "value": "page-width", "label": "Pagina" },
+        { "value": "full-width", "label": "Piena" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Schema colore",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Spaziatura"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Sopra",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Sotto",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "Sinistra",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "Destra",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Foto",
+          "info": "Verticale 3:4, almeno 900 × 1200 px. Imposta il punto focale sul soggetto."
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Etichetta"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Testo",
+          "info": "Vai a capo per spezzare la frase su due righe"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (facoltativo)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Perché Concomodo",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "tag": "Prova 100 notti",
+            "text": "100 notti per sentirlo tuo.\nReso o sostituzione gratuita."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "tag": "Spedizione gratuita",
+            "text": "Spedizione gratuita in tutta Italia.\nDal produttore a casa tua."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "tag": "Recensioni",
+            "text": "Recensioni a 5 stelle\nsu Google, Trustpilot e Judge.me."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "tag": "Assistenza",
+            "text": "Un esperto del sonno ti risponde\nsu WhatsApp, al telefono o via email."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
