@@ -3462,8 +3462,8 @@
           "type": "review",
           "settings": {
             "name": "Fabio",
-            "text": "Ottimo servizio e rapporto qualità prezzo",
-            "platform": "trustpilot"
+            "text": "[…] ho chiamato, l’operatrice […] ha compreso e soddisfatto tutte le mie necessità. […] sto pensando di prenderlo anche ai miei!",
+            "platform": "google"
           }
         }
       },
@@ -3479,15 +3479,12 @@
       "name": "Recensioni ovunque",
       "settings": {
         "heading": "Recensioni a 5 stelle, <strong>ovunque.</strong>",
-        "subheading": "Chi ci sceglie ci lascia quasi sempre 5 stelle, su qualsiasi piattaforma.",
-        "footnote": "Qui mostriamo le recensioni a 5 stelle. Le trovi tutte, senza filtri, sulle principali piattaforme di recensioni e nelle pagine dei prodotti.",
+        "subheading": "Chi ci sceglie ci lascia la valutazione massima per i nostri prodotti e il nostro servizio, su qualsiasi piattaforma.",
+        "footnote": "Qui mostriamo le recensioni a 5 stelle. Le trovi tutte sulle principali piattaforme di recensioni e nelle pagine dei prodotti.",
         "icon_google": "shopify://shop_images/GoogleG_FullColor_RGB.png",
         "icon_trustpilot": "shopify://shop_images/icona-trustpilot.png",
         "icon_judgeme": "shopify://shop_images/icona-judgeme-symbol.png",
         "google_zoom": 270,
-        "link_google": "https://www.google.com/maps/place/Concomodo/@41.29085,12.71216,6z/data=!3m1!4b1!4m6!3m5!1s0x1347e9fd3d6c538d:0xf17b9c04162597e6!8m2!3d41.29085!4d12.71216!16s%2Fg%2F11z_xxq3qp",
-        "link_trustpilot": "https://it.trustpilot.com/review/concomodo.it",
-        "link_judgeme": "",
         "speed": 50,
         "star_color": "#d49a2a",
         "panel_color": "#B2C8D1",
