@@ -1515,7 +1515,7 @@
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
-            "border_radius": 24
+            "border_radius": 30
           },
           "blocks": {
             "collection_title_9jU6kF": {
@@ -1642,17 +1642,17 @@
           "topper",
           "cuscini"
         ],
-        "layout_type": "bento",
-        "carousel_card_layout": "horizontal",
-        "carousel_on_mobile": false,
+        "layout_type": "carousel",
+        "carousel_card_layout": "vertical",
+        "carousel_on_mobile": true,
         "columns": 3,
         "mobile_columns": "2",
         "mobile_card_size": "60cqw",
-        "columns_gap": 24,
-        "bento_gap": 12,
+        "columns_gap": 26,
+        "bento_gap": 8,
         "rows_gap": 20,
         "max_collections": 4,
-        "icons_style": "none",
+        "icons_style": "chevron_large",
         "icons_shape": "circle",
         "content_direction": "column",
         "section_width": "page-width",
@@ -1660,6 +1660,159 @@
         "color_scheme": "scheme-1",
         "padding-block-start": 48,
         "padding-block-end": 48
+      }
+    },
+    "section_6mPHiF": {
+      "type": "section",
+      "blocks": {
+        "group_rzBiTx": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-end",
+            "gap": 12,
+            "width": "custom",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "image",
+            "video_position": "cover",
+            "background_image": "shopify://shop_images/quiz3.jpg",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 24,
+            "toggle_overlay": true,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 24,
+            "padding-block-end": 24,
+            "padding-inline-start": 24,
+            "padding-inline-end": 24
+          },
+          "blocks": {
+            "text_7yjNEp": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<h2>Non sai cosa fa al tuo caso? Scegli Concomodo.</h2>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h3",
+                "font": "var(--font-body--family)",
+                "weight": "",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_xDkV9M": {
+              "type": "text",
+              "settings": {
+                "text": "<p><br/>I nostri materassi sono progettati, per rispondere alle tue reali esigenze di riposo.</p><p>Scopri il materasso ideale per te con il nostro quiz di 2 minuti e migliora il tuo sonno per sempre.</p>",
+                "width": "fit-content",
+                "max_width": "narrow",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "weight": "",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "button_WqnHdJ": {
+              "type": "button",
+              "settings": {
+                "label": "Fai il quiz",
+                "link": "shopify://pages/quiz",
+                "open_in_new_tab": false,
+                "style_class": "button-secondary",
+                "weight": "",
+                "font_size_desktop": "",
+                "font_size_mobile": "",
+                "width": "custom",
+                "custom_width": 100,
+                "width_mobile": "custom",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_7yjNEp",
+            "text_xDkV9M",
+            "button_WqnHdJ"
+          ]
+        }
+      },
+      "block_order": [
+        "group_rzBiTx"
+      ],
+      "name": "t:names.image_with_text",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 32,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-5",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 40,
+        "padding-block-end": 40
       }
     },
     "product_list_4P4Ang": {
@@ -2903,6 +3056,7 @@
     "section_CUf3wJ",
     "mattress_quick_compare_8GUQz9",
     "collection_list_hwFndy",
+    "section_6mPHiF",
     "product_list_4P4Ang",
     "recensioni_ovunque_DbfNPx",
     "fatti_in_italia",
