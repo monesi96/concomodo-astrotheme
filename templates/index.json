@@ -380,11 +380,14 @@
         "card_djQJJ8",
         "card_TUaGPG"
       ],
-      "disabled": true,
       "name": "Perché Concomodo",
       "settings": {
-        "label": "Perché Concomodo",
+        "label": "Perché Concomodo?",
         "label_uppercase": false,
+        "label_layout": "vertical",
+        "label_align_v": "center",
+        "label_align_h": "center",
+        "label_gap": 20,
         "text_position": "center",
         "overlay_opacity": 25,
         "panel_color": "#b2c8d1",
