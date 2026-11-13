@@ -2723,6 +2723,68 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "perche_concomodo_qL46PN": {
+      "type": "perche-concomodo",
+      "blocks": {
+        "card_UwkY3M": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/hf_20260707_142325_9f478322-ab1e-4808-9b98-6f5e364e5b42_min.png",
+            "tag": "Prova 100 notti",
+            "text": "100 notti per sentirlo tuo.\nReso o sostituzione gratuita.",
+            "link": "https://www.concomodo.it/policies/refund-policy"
+          }
+        },
+        "card_y7npAH": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/concomodo-produzione-reparto.png",
+            "tag": "Spedizione gratuita",
+            "text": "Spedizione gratuita in tutta Italia.\nDal produttore a casa tua.",
+            "link": ""
+          }
+        },
+        "card_djQJJ8": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/cuscini_d0745e16-7ea7-489a-a9fb-7c1f4049c855.jpg",
+            "tag": "Recensioni",
+            "text": "Recensioni a 5 stelle\nsu Google, Trustpilot e Judge.me.",
+            "link": ""
+          }
+        },
+        "card_TUaGPG": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/materassi_18a11c3d-6686-4cb7-8815-b54f2d4d7781.jpg",
+            "tag": "Assistenza",
+            "text": "Un esperto del sonno ti risponde\nsu WhatsApp, al telefono o via email.",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_UwkY3M",
+        "card_y7npAH",
+        "card_djQJJ8",
+        "card_TUaGPG"
+      ],
+      "name": "Perché Concomodo",
+      "settings": {
+        "label": "Perché Concomodo",
+        "text_position": "center",
+        "overlay_opacity": 25,
+        "panel_color": "#B2C8D1",
+        "label_color": "#464646",
+        "corner_radius": 24,
+        "section_width": "page-width",
+        "color_scheme": "",
+        "padding-block-start": 40,
+        "padding-block-end": 40,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
+      }
     }
   },
   "order": [
@@ -2737,6 +2799,7 @@
     "fatti_in_italia",
     "section_NGmFUm",
     "popup_fullscreen_B4y8gG",
-    "17854856083bbc919e"
+    "17854856083bbc919e",
+    "perche_concomodo_qL46PN"
   ]
 }
