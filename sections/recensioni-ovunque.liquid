@@ -1,0 +1,636 @@
+{%- comment -%}
+  Recensioni ovunque — carosello a scorrimento continuo di recensioni a 5 stelle.
+  Ogni recensione è un blocco: nome, testo (facoltativo), piattaforma.
+{%- endcomment -%}
+
+{%- capture icon_seal -%}<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M23 4.5 37.5 10v11.5c0 9.6-6.2 17.4-14.5 20.5C14.7 38.9 8.5 31.1 8.5 21.5V10L23 4.5Z" fill="#ffffff" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m16 23.5 4.8 4.8 9.4-9.6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><circle class="rev5__seal-badge" cx="38" cy="10.4" r="7.2" fill="currentColor"/><polygon points="38.00,6.10 39.09,8.90 42.09,9.07 39.76,10.97 40.53,13.88 38.00,12.25 35.47,13.88 36.24,10.97 33.91,9.07 36.91,8.90" fill="#ffffff"/></svg>{%- endcapture -%}
+{%- capture star -%}<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2.8l2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3L2.9 9.5l6.3-.9z" fill="currentColor"/></svg>{%- endcapture -%}
+
+{%- capture cards -%}
+  {%- for block in section.blocks -%}
+    {%- liquid
+      case block.settings.platform
+        when 'google'
+          assign p_name = 'Google'
+          assign p_icon = section.settings.icon_google
+          assign p_letter = 'G'
+          assign p_link = section.settings.link_google
+        when 'trustpilot'
+          assign p_name = 'Trustpilot'
+          assign p_icon = section.settings.icon_trustpilot
+          assign p_letter = 'T'
+          assign p_link = section.settings.link_trustpilot
+        when 'judgeme'
+          assign p_name = 'Judge.me'
+          assign p_icon = section.settings.icon_judgeme
+          assign p_letter = 'J'
+          assign p_link = section.settings.link_judgeme
+        else
+          assign p_name = 'Sito Concomodo'
+          assign p_icon = section.settings.icon_sito
+          assign p_letter = 'C'
+          assign p_link = ''
+      endcase
+    -%}
+    <article class="rev5__card" {{ block.shopify_attributes }}>
+      <span class="rev5__stars" role="img" aria-label="5 stelle su 5">
+        {{- star }}{{ star }}{{ star }}{{ star }}{{ star -}}
+      </span>
+      {%- if block.settings.text != blank -%}
+        <p class="rev5__text">“{{ block.settings.text | escape }}”</p>
+      {%- else -%}
+        <p class="rev5__text rev5__text--empty">5 stelle, senza bisogno di parole.</p>
+      {%- endif -%}
+      <div class="rev5__card-foot">
+        <strong class="rev5__name">{{ block.settings.name | escape }}</strong>
+        {%- capture p_badge -%}
+          {%- if p_icon != blank -%}
+            {%- liquid
+              assign p_w = 192
+              if block.settings.platform == 'google'
+                assign p_w = 800
+              endif
+              if p_icon.width < p_w
+                assign p_w = p_icon.width
+              endif
+            -%}
+            {{ p_icon | image_url: width: p_w | image_tag: alt: '', width: 24, height: 24, loading: 'lazy', class: 'rev5__platform-img' }}
+          {%- else -%}
+            <span class="rev5__platform-fallback" aria-hidden="true">{{ p_letter }}</span>
+          {%- endif -%}
+          <span class="visually-hidden">Recensione su {{ p_name }}</span>
+        {%- endcapture -%}
+        {%- if p_link != blank -%}
+          <a class="rev5__platform rev5__platform--{{ block.settings.platform }}" href="{{ p_link }}" target="_blank" rel="noopener" title="Leggi su {{ p_name }}">{{ p_badge }}</a>
+        {%- else -%}
+          <span class="rev5__platform rev5__platform--{{ block.settings.platform }}" title="Recensione su {{ p_name }}">{{ p_badge }}</span>
+        {%- endif -%}
+      </div>
+    </article>
+  {%- endfor -%}
+{%- endcapture -%}
+
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--{{ section.settings.section_width }} rev5 color-{{ section.settings.color_scheme }} spacing-style"
+  style="{% render 'spacing-style', settings: section.settings %} --rev5-radius: {{ section.settings.corner_radius }}px; --rev5-bg: {{ section.settings.panel_color }}; --rev5-star: {{ section.settings.star_color }}; --rev5-duration: {{ section.settings.speed }}s; --rev5-google-zoom: {{ section.settings.google_zoom | divided_by: 100.0 }};"
+>
+  <div class="rev5__panel">
+    <div class="rev5__head">
+      <div class="rev5__head-text">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="rev5__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <p class="rev5__sub">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+      </div>
+      <span class="rev5__seal">{{ icon_seal }}</span>
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="rev5__viewport" aria-label="Recensioni dei clienti" role="region">
+        <div class="rev5__track">
+          <div class="rev5__group">{{ cards }}</div>
+          <div class="rev5__group" aria-hidden="true" inert>{{ cards }}</div>
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.footnote != blank -%}
+      <p class="rev5__note">{{ section.settings.footnote }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .rev5 {
+    --rev5-radius: 32px;
+    --rev5-bg: #dce5ea;
+    --rev5-star: #d49a2a;
+    --rev5-duration: 50s;
+  }
+
+  .rev5__panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-block: 2.5rem 2rem;
+    border-radius: var(--rev5-radius);
+    background: var(--rev5-bg);
+    overflow: hidden;
+  }
+
+  .rev5__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    padding-inline: clamp(1.25rem, 4vw, 3rem);
+  }
+
+  .rev5__head-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 0;
+    flex: 1 1 26rem;
+  }
+
+  .rev5__heading {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-weight: 500;
+    font-size: clamp(1.75rem, 3.2vw, 2.4rem);
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+
+  .rev5__heading strong {
+    font-weight: 800;
+  }
+
+  .rev5__sub,
+  .rev5__note {
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .rev5__sub {
+    font-size: 1rem;
+  }
+
+  .rev5__note {
+    padding-inline: clamp(1.25rem, 4vw, 3rem);
+    font-size: 0.875rem;
+    opacity: 0.85;
+  }
+
+  .rev5__seal {
+    display: inline-flex;
+    flex: 0 0 auto;
+    width: 56px;
+    height: 56px;
+    color: #464646;
+  }
+
+  .rev5__seal svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .rev5__seal .rev5__seal-badge {
+    color: var(--rev5-star);
+  }
+
+  .rev5__viewport {
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    padding-block: 0.5rem 0.75rem;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+  }
+
+  .rev5__track {
+    display: flex;
+    width: max-content;
+    animation: rev5-scroll var(--rev5-duration) linear infinite;
+  }
+
+  .rev5__track:hover,
+  .rev5__track:focus-within {
+    animation-play-state: paused;
+  }
+
+  .rev5__group {
+    display: flex;
+  }
+
+  @keyframes rev5-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .rev5__card {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 300px;
+    height: 210px;
+    margin-inline-end: 16px;
+    padding: 22px;
+    box-sizing: border-box;
+    border-radius: 22px;
+    background: #ffffff;
+    color: #464646;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  .rev5__card:hover {
+    transform: translateY(-6px) rotate(-0.6deg);
+    box-shadow: 0 18px 40px rgb(70 70 70 / 0.12);
+  }
+
+  .rev5__card-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .rev5__stars {
+    display: inline-flex;
+    gap: 2px;
+    color: var(--rev5-star);
+  }
+
+  .rev5__stars svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .rev5__platform {
+    display: inline-flex;
+    align-items: center;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .rev5__platform {
+    width: 24px;
+    height: 24px;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 6px;
+  }
+
+  .rev5__platform-img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+
+  .rev5__platform--google .rev5__platform-img {
+    transform: scale(var(--rev5-google-zoom, 1));
+  }
+
+  .rev5__platform-fallback {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #eef3f5;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  .rev5__text {
+    flex: 1;
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.45;
+    overflow: hidden;
+  }
+
+  .rev5__text--empty {
+    display: flex;
+    align-items: center;
+    font-family: var(--font-heading--family);
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1.15;
+  }
+
+  .rev5__name {
+    font-size: 1rem;
+  }
+
+  @media screen and (max-width: 749px) {
+    .rev5__card {
+      width: 260px;
+      height: 220px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rev5__track {
+      animation: none;
+    }
+
+    .rev5__viewport {
+      overflow-x: auto;
+    }
+
+    .rev5__group[aria-hidden='true'] {
+      display: none;
+    }
+
+    .rev5__card {
+      transition: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Recensioni ovunque",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Titolo",
+      "default": "Recensioni a 5 stelle, <strong>ovunque.</strong>"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Sottotitolo",
+      "default": "Chi ci sceglie ci lascia quasi sempre 5 stelle, su qualsiasi piattaforma."
+    },
+    {
+      "type": "text",
+      "id": "footnote",
+      "label": "Nota sotto il carosello",
+      "default": "Qui mostriamo le recensioni a 5 stelle. Le trovi tutte, senza filtri, sulle principali piattaforme di recensioni e nelle pagine dei prodotti."
+    },
+    {
+      "type": "header",
+      "content": "Icone piattaforme"
+    },
+    {
+      "type": "paragraph",
+      "content": "Usa solo le icone ufficiali dei kit grafici. Google e Trustpilot chiedono che l'icona rimandi al profilo. Senza icona viene mostrata l'iniziale."
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_google",
+      "label": "Icona Google"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_trustpilot",
+      "label": "Icona Trustpilot"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_judgeme",
+      "label": "Icona Judge.me"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_sito",
+      "label": "Icona sito Concomodo"
+    },
+    {
+      "type": "range",
+      "id": "google_zoom",
+      "label": "Ingrandimento icona Google",
+      "info": "Serve se il file ha molto margine bianco intorno alla G",
+      "min": 100,
+      "max": 400,
+      "step": 10,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "url",
+      "id": "link_google",
+      "label": "Link profilo Google"
+    },
+    {
+      "type": "url",
+      "id": "link_trustpilot",
+      "label": "Link profilo Trustpilot"
+    },
+    {
+      "type": "url",
+      "id": "link_judgeme",
+      "label": "Link recensioni Judge.me"
+    },
+    {
+      "type": "header",
+      "content": "Carosello"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Durata di un giro completo",
+      "min": 20,
+      "max": 120,
+      "step": 5,
+      "unit": "s",
+      "default": 50
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Colore stelle",
+      "default": "#D49A2A"
+    },
+    {
+      "type": "color",
+      "id": "panel_color",
+      "label": "Colore riquadro",
+      "default": "#DCE5EA"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "Raggio angoli",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Sezione"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Larghezza sezione",
+      "options": [
+        { "value": "page-width", "label": "Pagina" },
+        { "value": "full-width", "label": "Piena" }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Schema colore",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "Spaziatura"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Sopra",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Sotto",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "Sinistra",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "Destra",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Recensione",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Nome (solo il nome)"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Estratto (lascia vuoto se la recensione non ha testo)",
+          "info": "Non cambiare le parole del cliente: per accorciare usa […]"
+        },
+        {
+          "type": "select",
+          "id": "platform",
+          "label": "Piattaforma",
+          "options": [
+            { "value": "google", "label": "Google" },
+            { "value": "trustpilot", "label": "Trustpilot" },
+            { "value": "judgeme", "label": "Judge.me" },
+            { "value": "sito", "label": "Sito Concomodo" }
+          ],
+          "default": "google"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Recensioni ovunque",
+      "settings": {
+        "heading": "Recensioni a 5 stelle, <strong>ovunque.</strong>",
+        "subheading": "Chi ci sceglie ci lascia quasi sempre 5 stelle, su qualsiasi piattaforma.",
+        "footnote": "Qui mostriamo le recensioni a 5 stelle. Le trovi tutte, senza filtri, sulle principali piattaforme di recensioni e nelle pagine dei prodotti.",
+        "speed": 50,
+        "star_color": "#D49A2A",
+        "panel_color": "#DCE5EA",
+        "corner_radius": 32,
+        "section_width": "page-width",
+        "color_scheme": "scheme-2",
+        "padding-block-start": 40,
+        "padding-block-end": 40,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0,
+        "icon_judgeme": "shopify://shop_images/icona-judgeme-symbol.png",
+        "link_google": "https://www.google.com/maps/place/Concomodo/@41.29085,12.71216,6z/data=!3m1!4b1!4m6!3m5!1s0x1347e9fd3d6c538d:0xf17b9c04162597e6!8m2!3d41.29085!4d12.71216!16s%2Fg%2F11z_xxq3qp",
+        "link_trustpilot": "https://it.trustpilot.com/review/concomodo.it",
+        "icon_google": "shopify://shop_images/GoogleG_FullColor_RGB.png",
+        "icon_trustpilot": "shopify://shop_images/icona-trustpilot.png",
+        "google_zoom": 270
+      },
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "name": "Francesco",
+            "text": "Dopo aver girato decine di negozi, ho scelto di acquistare online da loro […]. Acquisto semplice, qualità in ogni dettaglio […]. Assistenza top.",
+            "platform": "trustpilot"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "name": "Ilaria",
+            "platform": "google"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "name": "Raffaella",
+            "text": "Io e mio marito abbiamo preso Abbraccio Plus e già alla prima notte ci siamo innamorati. […] Veramente comodo",
+            "platform": "trustpilot"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "name": "Simone",
+            "platform": "judgeme"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "name": "Andrea",
+            "text": "[…] mi sto trovando veramente bene... Francesca dell'assistenza vendite mi ha chiamato […] assistenza top!",
+            "platform": "trustpilot"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "name": "Sandro",
+            "text": "Prezzo e qualità al servizio della gente, azienda serissima",
+            "platform": "trustpilot"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "name": "Fabio",
+            "text": "Ottimo servizio e rapporto qualità prezzo",
+            "platform": "trustpilot"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
