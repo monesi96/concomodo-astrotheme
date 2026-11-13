@@ -2231,10 +2231,10 @@
         "corner_radius": 24,
         "section_width": "page-width",
         "color_scheme": "scheme-1",
-        "padding-block-start": 48,
-        "padding-block-end": 48,
-        "padding-inline-start": 0,
-        "padding-inline-end": 0
+        "padding-block-start": 60,
+        "padding-block-end": 60,
+        "padding-inline-start": 48,
+        "padding-inline-end": 48
       }
     },
     "section_NGmFUm": {
