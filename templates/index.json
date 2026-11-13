@@ -334,6 +334,69 @@
         "padding-block-end": 30
       }
     },
+    "perche_concomodo_qL46PN": {
+      "type": "perche-concomodo",
+      "blocks": {
+        "card_UwkY3M": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/pexels-cottonbro-10061441.jpg",
+            "tag": "Prova 100 notti e Garanzia 10 anni",
+            "text": "100 notti per sentirlo tuo, con reso o sostituzione gratuita.\nFino a 10 anni di garanzia.\nQuando scegli Concomodo, puoi dormire sonni tranquilli.",
+            "link": "https://www.concomodo.it/policies/refund-policy"
+          }
+        },
+        "card_y7npAH": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/concomodo-produzione-reparto.png",
+            "tag": "100% Made in Italy, senza intermediari",
+            "text": "La nostra produzione ha oltre 25 anni di storia.\nMateriali selezionati, lavorazione artigianale e macchinari moderni: ogni materasso Concomodo nasce così.\nPoi parte direttamente verso casa tua, senza intermediari.\nE la spedizione è sempre inclusa.",
+            "link": ""
+          }
+        },
+        "card_djQJJ8": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/cuscini_d0745e16-7ea7-489a-a9fb-7c1f4049c855.jpg",
+            "tag": "Recensioni",
+            "text": "Recensioni a 5 stelle\nsu Google, Trustpilot e Judge.me.",
+            "link": ""
+          }
+        },
+        "card_TUaGPG": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/materassi_18a11c3d-6686-4cb7-8815-b54f2d4d7781.jpg",
+            "tag": "Assistenza",
+            "text": "Un esperto del sonno ti risponde\nsu WhatsApp, al telefono o via email.",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_UwkY3M",
+        "card_y7npAH",
+        "card_djQJJ8",
+        "card_TUaGPG"
+      ],
+      "name": "Perché Concomodo",
+      "settings": {
+        "label": "Perché Concomodo",
+        "label_uppercase": false,
+        "text_position": "center",
+        "overlay_opacity": 25,
+        "panel_color": "#b2c8d1",
+        "label_color": "#464646",
+        "corner_radius": 24,
+        "section_width": "page-width",
+        "color_scheme": "scheme-2",
+        "padding-block-start": 40,
+        "padding-block-end": 40,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
+      }
+    },
     "section_CUf3wJ": {
       "type": "section",
       "blocks": {
@@ -1021,6 +1084,7 @@
       "block_order": [
         "group_4ATCHM"
       ],
+      "disabled": true,
       "custom_css": [
         "@media screen and (max-width: 749px) {> div > div {margin: 0; } .section-content-wrapper > .group-block > .group-block-content > .group-block {flex: 0 0 47%; height: auto; }}"
       ],
@@ -2723,75 +2787,13 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
-    },
-    "perche_concomodo_qL46PN": {
-      "type": "perche-concomodo",
-      "blocks": {
-        "card_UwkY3M": {
-          "type": "card",
-          "settings": {
-            "image": "shopify://shop_images/hf_20260707_142325_9f478322-ab1e-4808-9b98-6f5e364e5b42_min.png",
-            "tag": "Prova 100 notti e Garanzia 10 anni",
-            "text": "100 notti per sentirlo tuo, con reso o sostituzione gratuita.",
-            "link": "https://www.concomodo.it/policies/refund-policy"
-          }
-        },
-        "card_y7npAH": {
-          "type": "card",
-          "settings": {
-            "image": "shopify://shop_images/concomodo-produzione-reparto.png",
-            "tag": "Spedizione gratuita",
-            "text": "Spedizione gratuita in tutta Italia.\nDal produttore a casa tua.",
-            "link": ""
-          }
-        },
-        "card_djQJJ8": {
-          "type": "card",
-          "settings": {
-            "image": "shopify://shop_images/cuscini_d0745e16-7ea7-489a-a9fb-7c1f4049c855.jpg",
-            "tag": "Recensioni",
-            "text": "Recensioni a 5 stelle\nsu Google, Trustpilot e Judge.me.",
-            "link": ""
-          }
-        },
-        "card_TUaGPG": {
-          "type": "card",
-          "settings": {
-            "image": "shopify://shop_images/materassi_18a11c3d-6686-4cb7-8815-b54f2d4d7781.jpg",
-            "tag": "Assistenza",
-            "text": "Un esperto del sonno ti risponde\nsu WhatsApp, al telefono o via email.",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "card_UwkY3M",
-        "card_y7npAH",
-        "card_djQJJ8",
-        "card_TUaGPG"
-      ],
-      "disabled": true,
-      "name": "Perché Concomodo",
-      "settings": {
-        "label": "Perché Concomodo",
-        "text_position": "center",
-        "overlay_opacity": 25,
-        "panel_color": "#b2c8d1",
-        "label_color": "#464646",
-        "corner_radius": 24,
-        "section_width": "page-width",
-        "color_scheme": "",
-        "padding-block-start": 40,
-        "padding-block-end": 40,
-        "padding-inline-start": 0,
-        "padding-inline-end": 0
-      }
     }
   },
   "order": [
     "hero_jVaWmY",
     "hero_atmosfera_ALAf3q",
     "section_kiCFcD",
+    "perche_concomodo_qL46PN",
     "section_CUf3wJ",
     "collection_list_hwFndy",
     "section_Yt33in",
@@ -2800,7 +2802,6 @@
     "fatti_in_italia",
     "section_NGmFUm",
     "popup_fullscreen_B4y8gG",
-    "17854856083bbc919e",
-    "perche_concomodo_qL46PN"
+    "17854856083bbc919e"
   ]
 }
