@@ -334,74 +334,7 @@
         "padding-block-end": 30
       }
     },
-    "perche_concomodo_qL46PN": {
-      "type": "perche-concomodo",
-      "blocks": {
-        "card_UwkY3M": {
-          "type": "card",
-          "settings": {
-            "image": "shopify://shop_images/pexels-cottonbro-10061441.jpg",
-            "tag": "Prova 100 notti e Garanzia 10 anni",
-            "text": "100 notti per sentirlo tuo, con reso o sostituzione gratuita.\nFino a 10 anni di garanzia.\nQuando scegli Concomodo, puoi dormire sonni tranquilli.",
-            "link": "https://www.concomodo.it/policies/refund-policy"
-          }
-        },
-        "card_y7npAH": {
-          "type": "card",
-          "settings": {
-            "image": "shopify://shop_images/concomodo-produzione-reparto.png",
-            "tag": "100% Made in Italy, senza intermediari",
-            "text": "Da oltre 25 anni usiamo materiali selezionati, lavorazione artigianale e macchinari moderni: ogni materasso Concomodo nasce così.\nPoi parte direttamente verso casa tua, senza intermediari.\nE la spedizione è sempre inclusa.",
-            "link": ""
-          }
-        },
-        "card_djQJJ8": {
-          "type": "card",
-          "settings": {
-            "image": "shopify://shop_images/Anziano_col_berretto_azzurro_e_cinque_stelle.png",
-            "tag": "Recensioni autentiche",
-            "text": "Recensioni a 5 stelle\nsu Google, Trustpilot e Judge.me.",
-            "link": ""
-          }
-        },
-        "card_TUaGPG": {
-          "type": "card",
-          "settings": {
-            "image": "shopify://shop_images/Cuffie_e_grande_foglio_A4_a_quadretti.png",
-            "tag": "Assistenza",
-            "text": "Un esperto del sonno ti risponde\nsu WhatsApp, al telefono o via email.",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "card_UwkY3M",
-        "card_y7npAH",
-        "card_djQJJ8",
-        "card_TUaGPG"
-      ],
-      "disabled": true,
-      "name": "Perché Concomodo",
-      "settings": {
-        "label": "Perché Concomodo?",
-        "label_uppercase": false,
-        "label_layout": "vertical",
-        "label_align_v": "center",
-        "label_align_h": "center",
-        "label_gap": 20,
-        "text_position": "center",
-        "overlay_opacity": 25,
-        "panel_color": "#b2c8d1",
-        "label_color": "#464646",
-        "corner_radius": 24,
-        "section_width": "page-width",
-        "color_scheme": "scheme-2",
-        "padding-block-start": 40,
-        "padding-block-end": 40,
-        "padding-inline-start": 0,
-        "padding-inline-end": 0
-      }
-    },
+    "perche_concomodo_qL46PN": {"type": "perche-concomodo", "blocks": {"whycc-label": {"type": "text", "name": "Etichetta", "static": true, "settings": {"type_preset": "custom", "font": "var(--font-heading--family)", "weight": "500", "line_height": "tight", "max_width": "none", "color": "var(--color-foreground)", "text": "<p>Perché Concomodo?</p>", "font_size": "2rem"}, "blocks": {}}, "card_UwkY3M": {"type": "_whycc-card", "name": "Card", "settings": {"image": "shopify://shop_images/pexels-cottonbro-10061441.jpg", "text_color": "#ffffff", "tag_border": true, "link": "https://www.concomodo.it/policies/refund-policy", "open_in_new_tab": false}, "blocks": {"tag": {"type": "text", "name": "Pillola", "static": true, "settings": {"type_preset": "custom", "font": "var(--font-body--family)", "weight": "500", "line_height": "tight", "max_width": "none", "color": "var(--color-foreground)", "text": "<p>Prova 100 notti e Garanzia 10 anni</p>", "font_size": "0.75rem"}, "blocks": {}}, "body": {"type": "text", "name": "Testo", "static": true, "settings": {"type_preset": "custom", "font": "var(--font-body--family)", "weight": "500", "line_height": "tight", "max_width": "none", "color": "var(--color-foreground)", "text": "<p>100 notti per sentirlo tuo, con reso o sostituzione gratuita.<br/>Fino a 10 anni di garanzia.<br/>Quando scegli Concomodo, puoi dormire sonni tranquilli.</p>", "font_size": "1.125rem"}, "blocks": {}}}, "block_order": []}, "card_y7npAH": {"type": "_whycc-card", "name": "Card", "settings": {"image": "shopify://shop_images/concomodo-produzione-reparto.png", "text_color": "#ffffff", "tag_border": true, "link": "", "open_in_new_tab": false}, "blocks": {"tag": {"type": "text", "name": "Pillola", "static": true, "settings": {"type_preset": "custom", "font": "var(--font-body--family)", "weight": "500", "line_height": "tight", "max_width": "none", "color": "var(--color-foreground)", "text": "<p>100% Made in Italy, senza intermediari</p>", "font_size": "0.75rem"}, "blocks": {}}, "body": {"type": "text", "name": "Testo", "static": true, "settings": {"type_preset": "custom", "font": "var(--font-body--family)", "weight": "500", "line_height": "tight", "max_width": "none", "color": "var(--color-foreground)", "text": "<p>Da oltre 25 anni usiamo materiali selezionati, lavorazione artigianale e macchinari moderni: ogni materasso Concomodo nasce così.<br/>Poi parte direttamente verso casa tua, senza intermediari.<br/>E la spedizione è sempre inclusa.</p>", "font_size": "1.125rem"}, "blocks": {}}}, "block_order": []}, "card_djQJJ8": {"type": "_whycc-card", "name": "Card", "settings": {"image": "shopify://shop_images/Anziano_col_berretto_azzurro_e_cinque_stelle.png", "text_color": "#ffffff", "tag_border": true, "link": "", "open_in_new_tab": false}, "blocks": {"tag": {"type": "text", "name": "Pillola", "static": true, "settings": {"type_preset": "custom", "font": "var(--font-body--family)", "weight": "500", "line_height": "tight", "max_width": "none", "color": "var(--color-foreground)", "text": "<p>Recensioni autentiche</p>", "font_size": "0.75rem"}, "blocks": {}}, "body": {"type": "text", "name": "Testo", "static": true, "settings": {"type_preset": "custom", "font": "var(--font-body--family)", "weight": "500", "line_height": "tight", "max_width": "none", "color": "var(--color-foreground)", "text": "<p>Recensioni a 5 stelle<br/>su Google, Trustpilot e Judge.me.</p>", "font_size": "1.125rem"}, "blocks": {}}}, "block_order": []}, "card_TUaGPG": {"type": "_whycc-card", "name": "Card", "settings": {"image": "shopify://shop_images/Cuffie_e_grande_foglio_A4_a_quadretti.png", "text_color": "#ffffff", "tag_border": true, "link": "", "open_in_new_tab": false}, "blocks": {"tag": {"type": "text", "name": "Pillola", "static": true, "settings": {"type_preset": "custom", "font": "var(--font-body--family)", "weight": "500", "line_height": "tight", "max_width": "none", "color": "var(--color-foreground)", "text": "<p>Assistenza</p>", "font_size": "0.75rem"}, "blocks": {}}, "body": {"type": "text", "name": "Testo", "static": true, "settings": {"type_preset": "custom", "font": "var(--font-body--family)", "weight": "500", "line_height": "tight", "max_width": "none", "color": "var(--color-foreground)", "text": "<p>Un esperto del sonno ti risponde<br/>su WhatsApp, al telefono o via email.</p>", "font_size": "1.125rem"}, "blocks": {}}}, "block_order": []}}, "block_order": ["card_UwkY3M", "card_y7npAH", "card_djQJJ8", "card_TUaGPG"], "disabled": true, "name": "Perché Concomodo", "settings": {"label_layout": "vertical", "label_align_v": "center", "label_align_h": "center", "label_gap": 20, "label_color": "#464646", "text_position": "center", "overlay_opacity": 25, "panel_color": "#b2c8d1", "corner_radius": 24, "section_width": "page-width", "color_scheme": "scheme-2", "padding-block-start": 40, "padding-block-end": 40, "padding-inline-start": 0, "padding-inline-end": 0}},
     "section_CUf3wJ": {
       "type": "section",
       "blocks": {
