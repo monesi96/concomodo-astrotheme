@@ -1167,7 +1167,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Hai ancora dei dubbi?</p>",
+                    "text": "<p>Hai bisogno di informazioni o di una consulenza personalizzata?</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -1221,7 +1221,7 @@
                     "overlay_color": "#424448",
                     "overlay_style": "solid",
                     "gradient_direction": "to top",
-                    "link": "tel:0800000000",
+                    "link": "tel:+393937105726",
                     "open_in_new_tab": false,
                     "placeholder": "",
                     "padding-block-start": 10,
