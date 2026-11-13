@@ -1396,7 +1396,7 @@
       "name": "Comparatore materassi",
       "settings": {
         "heading": "Scopri i materassi",
-        "subheading": "<p>Quattro modelli, una sola cosa in comune: dormire meglio. Trova quello giusto per te.</p>",
+        "subheading": "<p>Quattro modelli, quattro modi diversi di dormire, una cosa in comune: <strong>farti dormire meglio</strong>. Trova quello giusto per te.</p>",
         "product_1": "carezza",
         "product_2": "sostegno",
         "product_3": "abbraccio",
@@ -1473,13 +1473,13 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Troviamo  la soluzione perfetta, con te</p>",
+                "text": "<p>Troviamo  la soluzione perfetta, <strong>con te</strong></p>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "left",
                 "type_preset": "h3",
                 "font": "var(--font-body--family)",
-                "weight": "700",
+                "weight": "500",
                 "font_size": "1rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
