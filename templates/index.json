@@ -657,18 +657,18 @@
         "label_layout": "vertical",
         "label_align_v": "center",
         "label_align_h": "center",
-        "label_gap": 8,
+        "label_gap": 10,
         "label_color": "#464646",
         "text_position": "bottom",
         "overlay_opacity": 40,
         "panel_color": "#b2c8d1",
         "corner_radius": 24,
-        "section_width": "page-width",
+        "section_width": "full-width",
         "color_scheme": "scheme-2",
         "padding-block-start": 40,
         "padding-block-end": 40,
-        "padding-inline-start": 0,
-        "padding-inline-end": 0
+        "padding-inline-start": 10,
+        "padding-inline-end": 10
       }
     },
     "section_CUf3wJ": {
