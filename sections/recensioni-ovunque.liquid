@@ -14,22 +14,18 @@
           assign p_name = 'Google'
           assign p_icon = section.settings.icon_google
           assign p_letter = 'G'
-          assign p_link = section.settings.link_google
         when 'trustpilot'
           assign p_name = 'Trustpilot'
           assign p_icon = section.settings.icon_trustpilot
           assign p_letter = 'T'
-          assign p_link = section.settings.link_trustpilot
         when 'judgeme'
           assign p_name = 'Judge.me'
           assign p_icon = section.settings.icon_judgeme
           assign p_letter = 'J'
-          assign p_link = section.settings.link_judgeme
         else
           assign p_name = 'Sito Concomodo'
           assign p_icon = section.settings.icon_sito
           assign p_letter = 'C'
-          assign p_link = ''
       endcase
     -%}
     <article class="rev5__card" {{ block.shopify_attributes }}>
@@ -60,11 +56,7 @@
           {%- endif -%}
           <span class="visually-hidden">Recensione su {{ p_name }}</span>
         {%- endcapture -%}
-        {%- if p_link != blank -%}
-          <a class="rev5__platform rev5__platform--{{ block.settings.platform }}" href="{{ p_link }}" target="_blank" rel="noopener" title="Leggi su {{ p_name }}">{{ p_badge }}</a>
-        {%- else -%}
-          <span class="rev5__platform rev5__platform--{{ block.settings.platform }}" title="Recensione su {{ p_name }}">{{ p_badge }}</span>
-        {%- endif -%}
+        <span class="rev5__platform rev5__platform--{{ block.settings.platform }}" title="Recensione su {{ p_name }}">{{ p_badge }}</span>
       </div>
     </article>
   {%- endfor -%}
@@ -356,13 +348,13 @@
       "type": "text",
       "id": "subheading",
       "label": "Sottotitolo",
-      "default": "Chi ci sceglie ci lascia quasi sempre 5 stelle, su qualsiasi piattaforma."
+      "default": "Chi ci sceglie ci lascia la valutazione massima per i nostri prodotti e il nostro servizio, su qualsiasi piattaforma."
     },
     {
       "type": "text",
       "id": "footnote",
       "label": "Nota sotto il carosello",
-      "default": "Qui mostriamo le recensioni a 5 stelle. Le trovi tutte, senza filtri, sulle principali piattaforme di recensioni e nelle pagine dei prodotti."
+      "default": "Qui mostriamo le recensioni a 5 stelle. Le trovi tutte sulle principali piattaforme di recensioni e nelle pagine dei prodotti."
     },
     {
       "type": "header",
@@ -370,7 +362,7 @@
     },
     {
       "type": "paragraph",
-      "content": "Usa solo le icone ufficiali dei kit grafici. Google e Trustpilot chiedono che l'icona rimandi al profilo. Senza icona viene mostrata l'iniziale."
+      "content": "Usa solo le icone ufficiali dei kit grafici. Senza icona viene mostrata l'iniziale."
     },
     {
       "type": "image_picker",
@@ -402,21 +394,6 @@
       "step": 10,
       "unit": "%",
       "default": 100
-    },
-    {
-      "type": "url",
-      "id": "link_google",
-      "label": "Link profilo Google"
-    },
-    {
-      "type": "url",
-      "id": "link_trustpilot",
-      "label": "Link profilo Trustpilot"
-    },
-    {
-      "type": "url",
-      "id": "link_judgeme",
-      "label": "Link recensioni Judge.me"
     },
     {
       "type": "header",
@@ -555,8 +532,8 @@
       "name": "Recensioni ovunque",
       "settings": {
         "heading": "Recensioni a 5 stelle, <strong>ovunque.</strong>",
-        "subheading": "Chi ci sceglie ci lascia quasi sempre 5 stelle, su qualsiasi piattaforma.",
-        "footnote": "Qui mostriamo le recensioni a 5 stelle. Le trovi tutte, senza filtri, sulle principali piattaforme di recensioni e nelle pagine dei prodotti.",
+        "subheading": "Chi ci sceglie ci lascia la valutazione massima per i nostri prodotti e il nostro servizio, su qualsiasi piattaforma.",
+        "footnote": "Qui mostriamo le recensioni a 5 stelle. Le trovi tutte sulle principali piattaforme di recensioni e nelle pagine dei prodotti.",
         "speed": 50,
         "star_color": "#D49A2A",
         "panel_color": "#B2C8D1",
@@ -568,8 +545,6 @@
         "padding-inline-start": 0,
         "padding-inline-end": 0,
         "icon_judgeme": "shopify://shop_images/icona-judgeme-symbol.png",
-        "link_google": "https://www.google.com/maps/place/Concomodo/@41.29085,12.71216,6z/data=!3m1!4b1!4m6!3m5!1s0x1347e9fd3d6c538d:0xf17b9c04162597e6!8m2!3d41.29085!4d12.71216!16s%2Fg%2F11z_xxq3qp",
-        "link_trustpilot": "https://it.trustpilot.com/review/concomodo.it",
         "icon_google": "shopify://shop_images/GoogleG_FullColor_RGB.png",
         "icon_trustpilot": "shopify://shop_images/icona-trustpilot.png",
         "google_zoom": 270
@@ -625,8 +600,8 @@
           "type": "review",
           "settings": {
             "name": "Fabio",
-            "text": "Ottimo servizio e rapporto qualità prezzo",
-            "platform": "trustpilot"
+            "text": "[…] ho chiamato, l’operatrice […] ha compreso e soddisfatto tutte le mie necessità. […] sto pensando di prenderlo anche ai miei!",
+            "platform": "google"
           }
         }
       ]
