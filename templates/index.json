@@ -344,7 +344,7 @@
             "image": "shopify://shop_images/pexels-cottonbro-10061441.jpg",
             "text_color": "#ffffff",
             "tag_border": true,
-            "link": "https://www.concomodo.it/policies/refund-policy",
+            "link": "",
             "open_in_new_tab": false
           },
           "blocks": {
@@ -353,7 +353,7 @@
               "name": "Pillola",
               "static": true,
               "settings": {
-                "text": "<p>Prova <strong>100 notti</strong> e Garanzia <strong>10 anni</strong></p>",
+                "text": "<p>Prova <strong>100 notti</strong></p>",
                 "width": "fit-content",
                 "max_width": "none",
                 "alignment": "left",
@@ -381,7 +381,7 @@
               "name": "Testo",
               "static": true,
               "settings": {
-                "text": "<p>100 notti per sentirlo tuo, con reso o sostituzione <strong>gratuita</strong>.<br/>Fino a 10 anni di garanzia.<br/>Quando scegli Concomodo, <strong>puoi dormire sonni tranquilli.</strong></p>",
+                "text": "<p>Non ti convince? Reso o sostituzione <strong>gratuiti</strong>. E fino a 10 anni di garanzia.</p>",
                 "width": "fit-content",
                 "max_width": "none",
                 "alignment": "left",
@@ -423,7 +423,7 @@
               "name": "Pillola",
               "static": true,
               "settings": {
-                "text": "<p>100% Made in <strong>Italy</strong>, <strong>senza intermediari</strong></p>",
+                "text": "<p>Made in <strong>Italy</strong></p>",
                 "width": "fit-content",
                 "max_width": "none",
                 "alignment": "left",
@@ -451,7 +451,7 @@
               "name": "Testo",
               "static": true,
               "settings": {
-                "text": "<p>Da oltre <strong>25 anni</strong> usiamo materiali selezionati, lavorazione artigianale e macchinari moderni: ogni materasso Concomodo nasce così.<br/>Poi parte direttamente verso casa tua, <strong>senza intermediari</strong>.<br/>La spedizione è <strong>sempre inclusa</strong>.</p>",
+                "text": "<p>Lo produciamo noi da oltre 25 anni e arriva a casa tua <strong>senza intermediari</strong>, spedizione inclusa.</p>",
                 "width": "fit-content",
                 "max_width": "none",
                 "alignment": "left",
@@ -521,7 +521,7 @@
               "name": "Testo",
               "static": true,
               "settings": {
-                "text": "<p>Recensioni a <strong>5 stelle</strong><br/>su tutte le principali piattaforme.<br/>Puoi trovarle online<br/>o nelle pagine dei prodotti.</p>",
+                "text": "<p>Valutazioni a <strong>5 stelle</strong> su tutte le principali piattaforme e nelle pagine dei prodotti.</p>",
                 "width": "fit-content",
                 "max_width": "none",
                 "alignment": "left",
@@ -563,7 +563,7 @@
               "name": "Pillola",
               "static": true,
               "settings": {
-                "text": "<p>Assistenza e consulenza <strong>che ti coccola</strong></p>",
+                "text": "<p>Assistenza <strong>dedicata</strong></p>",
                 "width": "fit-content",
                 "max_width": "none",
                 "alignment": "left",
@@ -591,7 +591,7 @@
               "name": "Testo",
               "static": true,
               "settings": {
-                "text": "<p>Un esperto del sonno pronto a rispondere&nbsp;<br/>su WhatsApp, al telefono, via email o in chat.<br/>Gli stessi contatti <strong>prima e dopo</strong> l’acquisto:<br/><strong>ti seguiamo dall'inizio alla fine.</strong></p>",
+                "text": "<p>Un esperto del sonno su WhatsApp, telefono, email o chat, <strong>prima e dopo l’acquisto</strong>.</p>",
                 "width": "fit-content",
                 "max_width": "none",
                 "alignment": "left",
@@ -659,8 +659,8 @@
         "label_align_h": "center",
         "label_gap": 8,
         "label_color": "#464646",
-        "text_position": "center",
-        "overlay_opacity": 30,
+        "text_position": "bottom",
+        "overlay_opacity": 40,
         "panel_color": "#b2c8d1",
         "corner_radius": 24,
         "section_width": "page-width",
