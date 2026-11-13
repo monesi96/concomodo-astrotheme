@@ -655,7 +655,7 @@
       "name": "Perché Concomodo",
       "settings": {
         "label_layout": "vertical",
-        "label_align_v": "start",
+        "label_align_v": "center",
         "label_align_h": "center",
         "label_gap": 0,
         "label_color": "#464646",
