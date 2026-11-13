@@ -665,8 +665,8 @@
         "corner_radius": 24,
         "section_width": "page-width",
         "color_scheme": "scheme-6",
-        "padding-block-start": 40,
-        "padding-block-end": 40,
+        "padding-block-start": 48,
+        "padding-block-end": 48,
         "padding-inline-start": 0,
         "padding-inline-end": 0
       }
@@ -1420,8 +1420,8 @@
         "corner_radius": 24,
         "section_width": "page-width",
         "color_scheme": "scheme-2",
-        "padding-block-start": 40,
-        "padding-block-end": 40,
+        "padding-block-start": 48,
+        "padding-block-end": 48,
         "padding-inline-start": 0,
         "padding-inline-end": 0
       }
@@ -1811,8 +1811,8 @@
         "overlay_color": "#00000026",
         "overlay_style": "solid",
         "gradient_direction": "to top",
-        "padding-block-start": 40,
-        "padding-block-end": 40
+        "padding-block-start": 48,
+        "padding-block-end": 48
       }
     },
     "product_list_4P4Ang": {
@@ -2183,8 +2183,8 @@
         "corner_radius": 24,
         "section_width": "page-width",
         "color_scheme": "scheme-2",
-        "padding-block-start": 40,
-        "padding-block-end": 40,
+        "padding-block-start": 48,
+        "padding-block-end": 48,
         "padding-inline-start": 0,
         "padding-inline-end": 0
       }
@@ -2231,8 +2231,8 @@
         "corner_radius": 24,
         "section_width": "page-width",
         "color_scheme": "scheme-1",
-        "padding-block-start": 56,
-        "padding-block-end": 56,
+        "padding-block-start": 48,
+        "padding-block-end": 48,
         "padding-inline-start": 0,
         "padding-inline-end": 0
       }
@@ -2914,7 +2914,7 @@
         "overlay_style": "solid",
         "gradient_direction": "to top",
         "padding-block-start": 0,
-        "padding-block-end": 30
+        "padding-block-end": 48
       }
     },
     "popup_fullscreen_B4y8gG": {
