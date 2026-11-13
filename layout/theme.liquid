@@ -149,5 +149,97 @@
     {% if settings.quick_add or settings.mobile_quick_add %}
       {% render 'quick-add-modal' %}
     {% endif %}
-  </body>
+  {%- comment -%}
+  Curve tra sezioni.
+  Quando una sezione ha uno sfondo di colore diverso da quella precedente, arrotonda
+  i suoi angoli superiori e mostra negli spigoli il colore della sezione precedente
+  (stesso effetto di newsletter e footer).
+  Salta le sezioni già arrotondate e quelle con sfondo a immagine o sfumatura.
+{%- endcomment -%}
+<style>
+  .cc-curve-top {
+    position: relative;
+    z-index: 0;
+    isolation: isolate;
+    background-color: var(--cc-curve-prev);
+  }
+
+  .cc-curve-top > .section-background,
+  .cc-curve-top > .section {
+    border-top-left-radius: var(--cc-curve-radius, 30px);
+    border-top-right-radius: var(--cc-curve-radius, 30px);
+  }
+</style>
+<script>
+  (function () {
+    function isTransparent(c) {
+      return !c || c === 'transparent' || /^rgba\(.*,\s*0\)$/.test(c);
+    }
+
+    function pageColor() {
+      var c = getComputedStyle(document.body).backgroundColor;
+      return isTransparent(c) ? 'rgb(255, 255, 255)' : c;
+    }
+
+    function read(sec, fallback) {
+      if (sec.offsetHeight === 0 || getComputedStyle(sec).position === 'fixed') return null;
+      var el =
+        sec.querySelector(':scope > .section-background') ||
+        sec.querySelector(':scope > .section') ||
+        sec.firstElementChild;
+      if (!el) return { color: fallback, image: false, top: false, bottom: false };
+      var cs = getComputedStyle(el);
+      return {
+        color: isTransparent(cs.backgroundColor) ? fallback : cs.backgroundColor,
+        image: cs.backgroundImage !== 'none',
+        top: parseFloat(cs.borderTopLeftRadius) > 0,
+        bottom: parseFloat(cs.borderBottomLeftRadius) > 0
+      };
+    }
+
+    function run() {
+      var sections = Array.prototype.slice.call(
+        document.querySelectorAll('#MainContent > .shopify-section, body > .shopify-section')
+      );
+
+      // 1. pulizia
+      sections.forEach(function (sec) {
+        sec.classList.remove('cc-curve-top');
+        sec.style.removeProperty('--cc-curve-prev');
+      });
+
+      // 2. solo letture (evita ricalcoli di layout ripetuti)
+      var fallback = pageColor();
+      var data = sections.map(function (sec) {
+        return read(sec, fallback);
+      });
+
+      // 3. solo scritture
+      var prev = null;
+      data.forEach(function (cur, i) {
+        if (!cur) return;
+        if (prev && !prev.image && !cur.image && !prev.bottom && !cur.top && cur.color !== prev.color) {
+          sections[i].classList.add('cc-curve-top');
+          sections[i].style.setProperty('--cc-curve-prev', prev.color);
+        }
+        prev = cur;
+      });
+    }
+
+    var timer;
+    function schedule() {
+      clearTimeout(timer);
+      timer = setTimeout(run, 50);
+    }
+
+    run();
+    window.addEventListener('load', run);
+    window.addEventListener('resize', schedule);
+    ['shopify:section:load', 'shopify:section:unload', 'shopify:section:reorder'].forEach(function (evt) {
+      document.addEventListener(evt, schedule);
+    });
+  })();
+</script>
+
+</body>
 </html>
