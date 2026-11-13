@@ -1,71 +1,33 @@
 {%- comment -%}
-  Perché Concomodo — riquadro con etichetta verticale e card fotografiche a scorrimento orizzontale.
-  Ogni card è un blocco: foto, etichetta (pill), testo sovrapposto, link facoltativo.
+  Perché Concomodo — riquadro con etichetta (verticale a sinistra o orizzontale in cima)
+  e card fotografiche a scorrimento orizzontale.
+  Etichetta, pillole e testi delle card sono blocchi Testo: si formattano come qualsiasi testo del tema.
 {%- endcomment -%}
 
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <div
   class="section section--{{ section.settings.section_width }} whycc whycc--label-{{ section.settings.label_layout }} color-{{ section.settings.color_scheme }} spacing-style"
-  style="{% render 'spacing-style', settings: section.settings %} --whycc-radius: {{ section.settings.corner_radius }}px; --whycc-bg: {{ section.settings.panel_color }}; --whycc-label: {{ section.settings.label_color }}; --whycc-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }}; --whycc-gap: {{ section.settings.label_gap }}px; --whycc-label-size: {{ section.settings.label_size }}px;"
+  style="{% render 'spacing-style', settings: section.settings %} --whycc-radius: {{ section.settings.corner_radius }}px; --whycc-bg: {{ section.settings.panel_color }}; --whycc-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }}; --whycc-gap: {{ section.settings.label_gap }}px;"
 >
   <div class="whycc__panel">
-    {%- if section.settings.label != blank -%}
-      {%- liquid
-        if section.settings.label_layout == 'horizontal'
-          assign label_align = section.settings.label_align_h
-        else
-          assign label_align = section.settings.label_align_v
-        endif
-      -%}
-      <h2 class="whycc__label whycc__label--{{ label_align }}{% if section.settings.label_uppercase %} whycc__label--upper{% endif %}"><span>{{ section.settings.label | escape }}</span></h2>
-    {%- endif -%}
+    {%- liquid
+      if section.settings.label_layout == 'horizontal'
+        assign label_align = section.settings.label_align_h
+      else
+        assign label_align = section.settings.label_align_v
+      endif
+      assign label_rgb = section.settings.label_color.red | append: ' ' | append: section.settings.label_color.green | append: ' ' | append: section.settings.label_color.blue
+    -%}
+    <div
+      class="whycc__label whycc__label--{{ label_align }}"
+      style="--color-foreground: {{ section.settings.label_color }}; --color-foreground-heading: {{ section.settings.label_color }}; --color-foreground-rgb: {{ label_rgb }}; color: {{ section.settings.label_color }};"
+    >
+      {%- content_for 'block', type: 'text', id: 'whycc-label' -%}
+    </div>
 
-    {%- if section.blocks.size > 0 -%}
-      <div class="whycc__track" role="list" tabindex="0" aria-label="{{ section.settings.label | escape }}">
-        {%- for block in section.blocks -%}
-          {%- liquid
-            assign img = block.settings.image
-            assign tag_open = 'div'
-            assign focal = 'object-position: ' | append: img.presentation.focal_point | append: ';'
-            if block.settings.link != blank
-              assign tag_open = 'a'
-            endif
-          -%}
-          <{{ tag_open }}
-            class="whycc__card whycc__card--{{ section.settings.text_position }}"
-            role="listitem"
-            {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% endif %}
-            {{ block.shopify_attributes }}
-          >
-            {%- if img != blank -%}
-              {{
-                img
-                | image_url: width: 1200
-                | image_tag:
-                  widths: '360, 540, 720, 900, 1200',
-                  sizes: '(min-width: 750px) 300px, 78vw',
-                  loading: 'lazy',
-                  alt: img.alt,
-                  class: 'whycc__img',
-                  style: focal
-              }}
-            {%- else -%}
-              {{ 'lifestyle-1' | placeholder_svg_tag: 'whycc__img whycc__img--placeholder' }}
-            {%- endif -%}
-
-            <span class="whycc__shade" aria-hidden="true"></span>
-
-            {%- if block.settings.tag != blank -%}
-              <span class="whycc__tag">{{ block.settings.tag | escape }}</span>
-            {%- endif -%}
-
-            {%- if block.settings.text != blank -%}
-              <p class="whycc__text">{{ block.settings.text | escape | newline_to_br }}</p>
-            {%- endif -%}
-          </{{ tag_open }}>
-        {%- endfor -%}
-      </div>
-    {%- endif -%}
+    <div class="whycc__track" role="list" tabindex="0" aria-label="Perché Concomodo">
+      {%- content_for 'blocks' -%}
+    </div>
   </div>
 </div>
 
@@ -73,10 +35,8 @@
   .whycc {
     --whycc-radius: 24px;
     --whycc-bg: #B2C8D1;
-    --whycc-label: #464646;
     --whycc-overlay: 0.25;
     --whycc-gap: 20px;
-    --whycc-label-size: 28px;
   }
 
   .whycc__panel {
@@ -94,42 +54,39 @@
   }
 
   .whycc__label {
-    position: relative;
+    display: flex;
     flex: 0 0 auto;
-    width: 1em;
-    margin: 0;
-    color: var(--whycc-label);
-    font-family: var(--font-heading--family);
-    font-weight: 500;
-    font-size: var(--whycc-label-size);
-    line-height: 1;
+    min-width: 0;
+  }
+
+  .whycc__label:empty {
+    display: none;
+  }
+
+  /* Etichetta verticale a sinistra (si legge dal basso verso l'alto, come nella reference) */
+  .whycc--label-vertical .whycc__label {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    contain: inline-size;
     white-space: nowrap;
   }
 
-  .whycc__label--upper {
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
+  .whycc--label-vertical .whycc__label--start {
+    justify-content: flex-end;
   }
 
-  /* Etichetta verticale a sinistra */
-  .whycc--label-vertical .whycc__label span {
-    position: absolute;
-    left: 0;
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
+  .whycc--label-vertical .whycc__label--center {
+    justify-content: center;
   }
 
-  .whycc--label-vertical .whycc__label--start span {
-    top: 4px;
+  .whycc--label-vertical .whycc__label--end {
+    justify-content: flex-start;
   }
 
-  .whycc--label-vertical .whycc__label--center span {
-    top: 50%;
-    transform: translateY(-50%) rotate(180deg);
-  }
-
-  .whycc--label-vertical .whycc__label--end span {
-    bottom: 4px;
+  .whycc--label-vertical .whycc__label .text-block,
+  .whycc--label-vertical .whycc__label .text-block > * {
+    width: auto;
+    max-inline-size: none;
   }
 
   /* Etichetta orizzontale in cima */
@@ -137,21 +94,17 @@
     flex-direction: column;
   }
 
-  .whycc--label-horizontal .whycc__label {
-    width: auto;
-    white-space: normal;
-    text-wrap: balance;
+  .whycc--label-horizontal .whycc__label--left {
+    justify-content: flex-start;
   }
 
-  .whycc__label--left {
-    text-align: left;
-  }
-
-  .whycc__label--center {
+  .whycc--label-horizontal .whycc__label--center {
+    justify-content: center;
     text-align: center;
   }
 
-  .whycc__label--right {
+  .whycc--label-horizontal .whycc__label--right {
+    justify-content: flex-end;
     text-align: right;
   }
 
@@ -164,7 +117,6 @@
     gap: 16px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    scroll-padding-inline: 0;
     overscroll-behavior-x: contain;
     scrollbar-width: none;
   }
@@ -174,7 +126,7 @@
   }
 
   .whycc__track:focus-visible {
-    outline: 2px solid var(--whycc-label);
+    outline: 2px solid currentColor;
     outline-offset: 4px;
   }
 
@@ -189,7 +141,6 @@
     overflow: hidden;
     isolation: isolate;
     scroll-snap-align: start;
-    color: #ffffff;
     text-decoration: none;
     background: #8a8a8a;
   }
@@ -227,22 +178,25 @@
 
   .whycc__tag {
     align-self: flex-start;
+    max-width: 100%;
     padding: 5px 12px;
     border: 1px solid currentColor;
     border-radius: 999px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    line-height: 1.2;
-    white-space: nowrap;
+  }
+
+  .whycc__tag--plain {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .whycc__tag:empty,
+  .whycc__text:empty {
+    display: none;
   }
 
   .whycc__text {
-    margin: 0;
-    font-family: var(--font-body--family);
-    font-size: clamp(1rem, 1.25vw, 1.15rem);
-    font-weight: 500;
-    line-height: 1.2;
-    text-wrap: balance;
+    width: 100%;
   }
 
   .whycc__card--top .whycc__text {
@@ -262,10 +216,6 @@
       gap: min(var(--whycc-gap), 16px);
       padding: 18px 0 18px 18px;
       border-radius: calc(var(--whycc-radius) * 0.8);
-    }
-
-    .whycc__label {
-      font-size: calc(var(--whycc-label-size) * 0.8);
     }
 
     .whycc--label-horizontal .whycc__label {
@@ -294,23 +244,22 @@
 {
   "name": "Perché Concomodo",
   "tag": "section",
+  "blocks": [
+    { "type": "_whycc-card" }
+  ],
   "settings": [
     {
-      "type": "text",
-      "id": "label",
-      "label": "Etichetta",
-      "default": "Perché Concomodo"
+      "type": "paragraph",
+      "content": "Testo e formattazione dell'etichetta si modificano dal blocco Etichetta. Testi e pillole delle card dai blocchi dentro ogni card."
     },
     {
-      "type": "checkbox",
-      "id": "label_uppercase",
-      "label": "Etichetta in maiuscolo",
-      "default": false
+      "type": "header",
+      "content": "Etichetta"
     },
     {
       "type": "select",
       "id": "label_layout",
-      "label": "Posizione etichetta",
+      "label": "Posizione",
       "options": [
         { "value": "vertical", "label": "In verticale a sinistra" },
         { "value": "horizontal", "label": "In orizzontale in cima" }
@@ -320,7 +269,7 @@
     {
       "type": "select",
       "id": "label_align_v",
-      "label": "Allineamento etichetta",
+      "label": "Allineamento",
       "options": [
         { "value": "start", "label": "In alto" },
         { "value": "center", "label": "Al centro" },
@@ -332,7 +281,7 @@
     {
       "type": "select",
       "id": "label_align_h",
-      "label": "Allineamento etichetta",
+      "label": "Allineamento",
       "options": [
         { "value": "left", "label": "A sinistra" },
         { "value": "center", "label": "Al centro" },
@@ -343,17 +292,6 @@
     },
     {
       "type": "range",
-      "id": "label_size",
-      "label": "Dimensione etichetta",
-      "info": "In verticale il testo deve stare nell'altezza delle card: se viene tagliato, riducila o accorcia l'etichetta. Su mobile è ridotta del 20%.",
-      "min": 16,
-      "max": 48,
-      "step": 2,
-      "unit": "px",
-      "default": 28
-    },
-    {
-      "type": "range",
       "id": "label_gap",
       "label": "Spazio tra etichetta e card",
       "min": 0,
@@ -361,6 +299,13 @@
       "step": 2,
       "unit": "px",
       "default": 20
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Colore etichetta",
+      "info": "Vale quando il colore del blocco Etichetta è Testo o Intestazione",
+      "default": "#464646"
     },
     {
       "type": "header",
@@ -397,12 +342,6 @@
       "id": "panel_color",
       "label": "Colore riquadro",
       "default": "#B2C8D1"
-    },
-    {
-      "type": "color",
-      "id": "label_color",
-      "label": "Colore etichetta",
-      "default": "#464646"
     },
     {
       "type": "range",
@@ -479,69 +418,40 @@
       "default": 0
     }
   ],
-  "blocks": [
-    {
-      "type": "card",
-      "name": "Card",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Foto",
-          "info": "Verticale 3:4, almeno 900 × 1200 px. Imposta il punto focale sul soggetto."
-        },
-        {
-          "type": "text",
-          "id": "tag",
-          "label": "Etichetta"
-        },
-        {
-          "type": "textarea",
-          "id": "text",
-          "label": "Testo",
-          "info": "Vai a capo per spezzare la frase su due righe"
-        },
-        {
-          "type": "url",
-          "id": "link",
-          "label": "Link (facoltativo)"
-        }
-      ]
-    }
-  ],
   "presets": [
     {
       "name": "Perché Concomodo",
-      "blocks": [
-        {
-          "type": "card",
+      "blocks": {
+        "whycc-label": {
+          "type": "text",
+          "name": "Etichetta",
+          "static": true,
           "settings": {
-            "tag": "Prova 100 notti",
-            "text": "100 notti per sentirlo tuo.\nReso o sostituzione gratuita."
+            "text": "<p>Perché Concomodo</p>",
+            "type_preset": "custom",
+            "font": "var(--font-heading--family)",
+            "weight": "500",
+            "font_size": "2rem",
+            "line_height": "tight",
+            "max_width": "none"
           }
         },
-        {
-          "type": "card",
-          "settings": {
-            "tag": "Spedizione gratuita",
-            "text": "Spedizione gratuita in tutta Italia.\nDal produttore a casa tua."
+        "card_1": {
+          "type": "_whycc-card",
+          "blocks": {
+            "tag": { "type": "text", "static": true, "settings": { "text": "<p>Prova 100 notti</p>", "type_preset": "custom", "weight": "500", "font_size": "0.75rem", "line_height": "tight", "max_width": "none" } },
+            "body": { "type": "text", "static": true, "settings": { "text": "<p>100 notti per sentirlo tuo.<br/>Reso o sostituzione gratuita.</p>", "type_preset": "custom", "weight": "500", "font_size": "1.125rem", "line_height": "tight", "max_width": "none" } }
           }
         },
-        {
-          "type": "card",
-          "settings": {
-            "tag": "Recensioni",
-            "text": "Recensioni a 5 stelle\nsu Google, Trustpilot e Judge.me."
-          }
-        },
-        {
-          "type": "card",
-          "settings": {
-            "tag": "Assistenza",
-            "text": "Un esperto del sonno ti risponde\nsu WhatsApp, al telefono o via email."
+        "card_2": {
+          "type": "_whycc-card",
+          "blocks": {
+            "tag": { "type": "text", "static": true, "settings": { "text": "<p>Spedizione gratuita</p>", "type_preset": "custom", "weight": "500", "font_size": "0.75rem", "line_height": "tight", "max_width": "none" } },
+            "body": { "type": "text", "static": true, "settings": { "text": "<p>Spedizione gratuita in tutta Italia.<br/>Dal produttore a casa tua.</p>", "type_preset": "custom", "weight": "500", "font_size": "1.125rem", "line_height": "tight", "max_width": "none" } }
           }
         }
-      ]
+      },
+      "block_order": ["card_1", "card_2"]
     }
   ]
 }
