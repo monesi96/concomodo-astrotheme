@@ -1167,7 +1167,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Hai bisogno di informazioni o di una consulenza personalizzata?</p>",
+                    "text": "<p>Hai bisogno di una consulenza personalizzata?</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
