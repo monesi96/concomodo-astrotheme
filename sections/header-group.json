@@ -14,11 +14,31 @@
     "text_slider_CH8Tn9": {
       "type": "text-slider",
       "blocks": {
+        "item_3Eeyj3": {
+          "type": "item",
+          "settings": {
+            "text": "Consulenza personalizzata",
+            "icon": "star",
+            "link": "",
+            "color_mode": "auto",
+            "custom_color": "#464646"
+          }
+        },
         "item_DJnHhG": {
           "type": "item",
           "settings": {
             "text": "Prova 100 notti",
             "icon": "moon",
+            "link": "",
+            "color_mode": "auto",
+            "custom_color": "#464646"
+          }
+        },
+        "item_mJQK4r": {
+          "type": "item",
+          "settings": {
+            "text": "Pagamento in 3 rate",
+            "icon": "card",
             "link": "",
             "color_mode": "auto",
             "custom_color": "#464646"
@@ -44,16 +64,6 @@
             "custom_color": "#464646"
           }
         },
-        "item_mJQK4r": {
-          "type": "item",
-          "settings": {
-            "text": "Pagamento in 3 rate",
-            "icon": "card",
-            "link": "",
-            "color_mode": "auto",
-            "custom_color": "#464646"
-          }
-        },
         "item_V7tJiy": {
           "type": "item",
           "settings": {
@@ -66,10 +76,11 @@
         }
       },
       "block_order": [
+        "item_3Eeyj3",
         "item_DJnHhG",
+        "item_mJQK4r",
         "item_ntFPiL",
         "item_WqwBpA",
-        "item_mJQK4r",
         "item_V7tJiy"
       ],
       "custom_css": [],
