@@ -6,7 +6,7 @@
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <div
   class="section section--{{ section.settings.section_width }} whycc whycc--label-{{ section.settings.label_layout }} color-{{ section.settings.color_scheme }} spacing-style"
-  style="{% render 'spacing-style', settings: section.settings %} --whycc-radius: {{ section.settings.corner_radius }}px; --whycc-bg: {{ section.settings.panel_color }}; --whycc-label: {{ section.settings.label_color }}; --whycc-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }}; --whycc-gap: {{ section.settings.label_gap }}px;"
+  style="{% render 'spacing-style', settings: section.settings %} --whycc-radius: {{ section.settings.corner_radius }}px; --whycc-bg: {{ section.settings.panel_color }}; --whycc-label: {{ section.settings.label_color }}; --whycc-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }}; --whycc-gap: {{ section.settings.label_gap }}px; --whycc-label-size: {{ section.settings.label_size }}px;"
 >
   <div class="whycc__panel">
     {%- if section.settings.label != blank -%}
@@ -76,6 +76,7 @@
     --whycc-label: #464646;
     --whycc-overlay: 0.25;
     --whycc-gap: 20px;
+    --whycc-label-size: 28px;
   }
 
   .whycc__panel {
@@ -100,7 +101,7 @@
     color: var(--whycc-label);
     font-family: var(--font-heading--family);
     font-weight: 500;
-    font-size: clamp(1.25rem, 1.9vw, 1.75rem);
+    font-size: var(--whycc-label-size);
     line-height: 1;
     white-space: nowrap;
   }
@@ -258,27 +259,17 @@
 
   @media screen and (max-width: 749px) {
     .whycc__panel {
-      flex-direction: column;
       gap: min(var(--whycc-gap), 16px);
       padding: 18px 0 18px 18px;
       border-radius: calc(var(--whycc-radius) * 0.8);
     }
 
     .whycc__label {
-      width: auto;
+      font-size: calc(var(--whycc-label-size) * 0.8);
+    }
+
+    .whycc--label-horizontal .whycc__label {
       padding-inline-end: 18px;
-      font-size: 1.375rem;
-      white-space: normal;
-    }
-
-    .whycc--label-vertical .whycc__label span {
-      position: static;
-      writing-mode: horizontal-tb;
-      transform: none;
-    }
-
-    .whycc--label-vertical .whycc__label {
-      text-align: left;
     }
 
     .whycc__track {
@@ -320,7 +311,6 @@
       "type": "select",
       "id": "label_layout",
       "label": "Posizione etichetta",
-      "info": "Su mobile l'etichetta va sempre in orizzontale sopra le card",
       "options": [
         { "value": "vertical", "label": "In verticale a sinistra" },
         { "value": "horizontal", "label": "In orizzontale in cima" }
@@ -350,6 +340,17 @@
       ],
       "default": "left",
       "visible_if": "{{ section.settings.label_layout == 'horizontal' }}"
+    },
+    {
+      "type": "range",
+      "id": "label_size",
+      "label": "Dimensione etichetta",
+      "info": "In verticale il testo deve stare nell'altezza delle card: se viene tagliato, riducila o accorcia l'etichetta. Su mobile è ridotta del 20%.",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 28
     },
     {
       "type": "range",
