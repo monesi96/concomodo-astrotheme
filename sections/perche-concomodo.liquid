@@ -10,7 +10,7 @@
 >
   <div class="whycc__panel">
     {%- if section.settings.label != blank -%}
-      <h2 class="whycc__label"><span>{{ section.settings.label | escape }}</span></h2>
+      <h2 class="whycc__label{% if section.settings.label_uppercase %} whycc__label--upper{% endif %}"><span>{{ section.settings.label | escape }}</span></h2>
     {%- endif -%}
 
     {%- if section.blocks.size > 0 -%}
@@ -94,9 +94,12 @@
     font-weight: 500;
     font-size: clamp(1.25rem, 1.9vw, 1.75rem);
     line-height: 1;
+    white-space: nowrap;
+  }
+
+  .whycc__label--upper {
     letter-spacing: 0.02em;
     text-transform: uppercase;
-    white-space: nowrap;
   }
 
   .whycc__label span {
@@ -257,6 +260,12 @@
       "label": "Etichetta laterale",
       "info": "In verticale su desktop, sopra le card su mobile",
       "default": "Perché Concomodo"
+    },
+    {
+      "type": "checkbox",
+      "id": "label_uppercase",
+      "label": "Etichetta in maiuscolo",
+      "default": false
     },
     {
       "type": "header",
