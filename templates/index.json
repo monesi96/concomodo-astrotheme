@@ -1768,7 +1768,7 @@
                 "weight": "900",
                 "font_size_desktop": "",
                 "font_size_mobile": "",
-                "width": "custom",
+                "width": "fit-content",
                 "custom_width": 100,
                 "width_mobile": "custom",
                 "custom_width_mobile": 100
