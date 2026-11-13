@@ -259,7 +259,6 @@
   .whycc__track {
     --whycc-fade: 0px;
     overflow-y: hidden;
-    scroll-padding-inline-start: var(--whycc-fade-size);
     -webkit-mask-image: linear-gradient(to right, transparent 0, #000 var(--whycc-fade));
     mask-image: linear-gradient(to right, transparent 0, #000 var(--whycc-fade));
     transition: --whycc-fade 0.25s ease;
@@ -285,7 +284,16 @@
       (event) => {
         const track = event.target;
         if (!(track instanceof Element) || !track.classList.contains('whycc__track')) return;
-        track.classList.toggle('is-scrolled', track.scrollLeft > 4);
+        if (track.__whyccRaf) return;
+        track.__whyccRaf = requestAnimationFrame(() => {
+          track.__whyccRaf = 0;
+          const edge = track.getBoundingClientRect().left;
+          const cut = [...track.children].some((card) => {
+            const box = card.getBoundingClientRect();
+            return box.left < edge - 1 && box.right > edge + 1;
+          });
+          track.classList.toggle('is-scrolled', cut);
+        });
       },
       { capture: true, passive: true }
     );
