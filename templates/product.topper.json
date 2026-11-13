@@ -2187,6 +2187,96 @@
         "padding-block-end": 40
       }
     },
+    "recensioni_ovunque_dLVRhc": {
+      "type": "recensioni-ovunque",
+      "blocks": {
+        "review_dL4Wzg": {
+          "type": "review",
+          "settings": {
+            "name": "Francesco",
+            "text": "Dopo aver girato decine di negozi, ho scelto di acquistare online da loro […]. Acquisto semplice, qualità in ogni dettaglio […]. Assistenza top.",
+            "platform": "trustpilot"
+          }
+        },
+        "review_BjrKrC": {
+          "type": "review",
+          "settings": {
+            "name": "Ilaria",
+            "text": "",
+            "platform": "google"
+          }
+        },
+        "review_TTGdKm": {
+          "type": "review",
+          "settings": {
+            "name": "Raffaella",
+            "text": "Io e mio marito abbiamo preso Abbraccio Plus e già alla prima notte ci siamo innamorati. […] Veramente comodo",
+            "platform": "trustpilot"
+          }
+        },
+        "review_i7Pfhn": {
+          "type": "review",
+          "settings": {
+            "name": "Simone",
+            "text": "",
+            "platform": "judgeme"
+          }
+        },
+        "review_J3MQ3k": {
+          "type": "review",
+          "settings": {
+            "name": "Andrea",
+            "text": "[…] mi sto trovando veramente bene... Francesca dell'assistenza vendite mi ha chiamato […] assistenza top!",
+            "platform": "trustpilot"
+          }
+        },
+        "review_YwPTtm": {
+          "type": "review",
+          "settings": {
+            "name": "Sandro",
+            "text": "Prezzo e qualità al servizio della gente, azienda serissima",
+            "platform": "trustpilot"
+          }
+        },
+        "review_Kc7tBk": {
+          "type": "review",
+          "settings": {
+            "name": "Fabio",
+            "text": "[…] ho chiamato, l’operatrice […] ha compreso e soddisfatto tutte le mie necessità. […] sto pensando di prenderlo anche ai miei!",
+            "platform": "google"
+          }
+        }
+      },
+      "block_order": [
+        "review_dL4Wzg",
+        "review_BjrKrC",
+        "review_TTGdKm",
+        "review_i7Pfhn",
+        "review_J3MQ3k",
+        "review_YwPTtm",
+        "review_Kc7tBk"
+      ],
+      "name": "Recensioni ovunque",
+      "settings": {
+        "heading": "Recensioni a 5 stelle, <strong>ovunque.</strong>",
+        "subheading": "Chi ci sceglie ci lascia la valutazione massima per i nostri prodotti e il nostro servizio, su qualsiasi piattaforma.",
+        "footnote": "Qui mostriamo le recensioni a 5 stelle. Le trovi tutte sulle principali piattaforme di recensioni e nelle pagine dei prodotti.",
+        "icon_google": "shopify://shop_images/GoogleG_FullColor_RGB.png",
+        "icon_trustpilot": "shopify://shop_images/icona-trustpilot.png",
+        "icon_judgeme": "shopify://shop_images/icona-judgeme-symbol.png",
+        "google_zoom": 270,
+        "speed": 50,
+        "star_color": "#d49a2a",
+        "panel_color": "#b2c8d1",
+        "corner_radius": 32,
+        "section_width": "page-width",
+        "color_scheme": "scheme-2",
+        "padding-block-start": 40,
+        "padding-block-end": 40,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
+      }
+    },
     "fatti_in_italia": {
       "type": "fatti-in-italia",
       "blocks": {
@@ -2546,8 +2636,9 @@
   "order": [
     "main",
     "mattress_layers_R9pXPi",
-    "mattress_comparison_tYh7VN",
     "section_7KrxGG",
+    "mattress_comparison_tYh7VN",
+    "recensioni_ovunque_dLVRhc",
     "fatti_in_italia",
     "section_chbtyY"
   ]
