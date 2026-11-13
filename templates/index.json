@@ -3407,6 +3407,99 @@
         "padding-block-end": 100
       }
     },
+    "recensioni_ovunque_DbfNPx": {
+      "type": "recensioni-ovunque",
+      "blocks": {
+        "review_i66djw": {
+          "type": "review",
+          "settings": {
+            "name": "Francesco",
+            "text": "Dopo aver girato decine di negozi, ho scelto di acquistare online da loro […]. Acquisto semplice, qualità in ogni dettaglio […]. Assistenza top.",
+            "platform": "trustpilot"
+          }
+        },
+        "review_YYNxzb": {
+          "type": "review",
+          "settings": {
+            "name": "Ilaria",
+            "text": "",
+            "platform": "google"
+          }
+        },
+        "review_GmjLT9": {
+          "type": "review",
+          "settings": {
+            "name": "Raffaella",
+            "text": "Io e mio marito abbiamo preso Abbraccio Plus e già alla prima notte ci siamo innamorati. […] Veramente comodo",
+            "platform": "trustpilot"
+          }
+        },
+        "review_dzhAdU": {
+          "type": "review",
+          "settings": {
+            "name": "Simone",
+            "text": "",
+            "platform": "judgeme"
+          }
+        },
+        "review_JQcRrY": {
+          "type": "review",
+          "settings": {
+            "name": "Andrea",
+            "text": "[…] mi sto trovando veramente bene... Francesca dell'assistenza vendite mi ha chiamato […] assistenza top!",
+            "platform": "trustpilot"
+          }
+        },
+        "review_wwdXz3": {
+          "type": "review",
+          "settings": {
+            "name": "Sandro",
+            "text": "Prezzo e qualità al servizio della gente, azienda serissima",
+            "platform": "trustpilot"
+          }
+        },
+        "review_3UQ67y": {
+          "type": "review",
+          "settings": {
+            "name": "Fabio",
+            "text": "Ottimo servizio e rapporto qualità prezzo",
+            "platform": "trustpilot"
+          }
+        }
+      },
+      "block_order": [
+        "review_i66djw",
+        "review_YYNxzb",
+        "review_GmjLT9",
+        "review_dzhAdU",
+        "review_JQcRrY",
+        "review_wwdXz3",
+        "review_3UQ67y"
+      ],
+      "name": "Recensioni ovunque",
+      "settings": {
+        "heading": "Recensioni a 5 stelle, <strong>ovunque.</strong>",
+        "subheading": "Chi ci sceglie ci lascia quasi sempre 5 stelle, su qualsiasi piattaforma.",
+        "footnote": "Qui mostriamo le recensioni a 5 stelle. Le trovi tutte, senza filtri, sulle principali piattaforme di recensioni e nelle pagine dei prodotti.",
+        "icon_google": "shopify://shop_images/GoogleG_FullColor_RGB.png",
+        "icon_trustpilot": "shopify://shop_images/icona-trustpilot.png",
+        "icon_judgeme": "shopify://shop_images/icona-judgeme-symbol.png",
+        "google_zoom": 270,
+        "link_google": "https://www.google.com/maps/place/Concomodo/@41.29085,12.71216,6z/data=!3m1!4b1!4m6!3m5!1s0x1347e9fd3d6c538d:0xf17b9c04162597e6!8m2!3d41.29085!4d12.71216!16s%2Fg%2F11z_xxq3qp",
+        "link_trustpilot": "https://it.trustpilot.com/review/concomodo.it",
+        "link_judgeme": "",
+        "speed": 50,
+        "star_color": "#d49a2a",
+        "panel_color": "#B2C8D1",
+        "corner_radius": 32,
+        "section_width": "page-width",
+        "color_scheme": "scheme-2",
+        "padding-block-start": 40,
+        "padding-block-end": 40,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
+      }
+    },
     "fatti_in_italia": {
       "type": "fatti-in-italia",
       "blocks": {
@@ -4020,6 +4113,7 @@
     "collection_list_hwFndy",
     "section_NGmFUm",
     "section_9w3rDi",
+    "recensioni_ovunque_DbfNPx",
     "fatti_in_italia",
     "installment_payments_aUaDcf",
     "section_EpVhwi",
