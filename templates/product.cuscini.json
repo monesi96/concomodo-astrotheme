@@ -1123,7 +1123,7 @@
                 "buy_buttons_VLi7An"
               ]
             },
-            "group_Mj77cX": {
+            "group_MEUqKk": {
               "type": "group",
               "name": "parla con noi",
               "settings": {
@@ -1163,11 +1163,11 @@
                 "padding-inline-end": 10
               },
               "blocks": {
-                "text_EUpnXk": {
+                "text_caQfwb": {
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Hai bisogno di una consulenza personalizzata?</p>",
+                    "text": "<p>Per consigli personalizzati o ordinare</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -1190,7 +1190,7 @@
                   },
                   "blocks": {}
                 },
-                "group_U4QUkM": {
+                "group_mFffGh": {
                   "type": "group",
                   "name": "t:names.group",
                   "settings": {
@@ -1230,7 +1230,7 @@
                     "padding-inline-end": 30
                   },
                   "blocks": {
-                    "icon_ATapNr": {
+                    "icon_cmiDjn": {
                       "type": "icon",
                       "name": "t:names.icon",
                       "settings": {
@@ -1242,7 +1242,7 @@
                       },
                       "blocks": {}
                     },
-                    "text_MQwQhV": {
+                    "text_XxCEXX": {
                       "type": "text",
                       "name": "t:names.text",
                       "settings": {
@@ -1271,14 +1271,14 @@
                     }
                   },
                   "block_order": [
-                    "icon_ATapNr",
-                    "text_MQwQhV"
+                    "icon_cmiDjn",
+                    "text_XxCEXX"
                   ]
                 }
               },
               "block_order": [
-                "text_EUpnXk",
-                "group_U4QUkM"
+                "text_caQfwb",
+                "group_mFffGh"
               ]
             },
             "group_cbQ78H": {
@@ -1743,7 +1743,7 @@
             "divider_8WdpaB",
             "group_8RdTqG",
             "group_hnXFGW",
-            "group_Mj77cX",
+            "group_MEUqKk",
             "group_cbQ78H",
             "group_P6QbQe",
             "group_KVEVyF"
