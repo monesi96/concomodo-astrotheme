@@ -1,0 +1,123 @@
+{%- comment -%}
+  Card della sezione "Perché Concomodo": foto di sfondo, pillola e testo come blocchi Testo statici.
+{%- endcomment -%}
+
+{%- liquid
+  assign img = block.settings.image
+  assign tag_open = 'div'
+  if block.settings.link != blank
+    assign tag_open = 'a'
+  endif
+  assign focal = 'object-position: ' | append: img.presentation.focal_point | append: ';'
+  assign text_rgb = block.settings.text_color.red | append: ' ' | append: block.settings.text_color.green | append: ' ' | append: block.settings.text_color.blue
+-%}
+
+<{{ tag_open }}
+  class="whycc__card whycc__card--{{ section.settings.text_position }}"
+  role="listitem"
+  {% if block.settings.link != blank %}
+    href="{{ block.settings.link }}"
+    {% if block.settings.open_in_new_tab %}target="_blank" rel="noopener"{% endif %}
+  {% endif %}
+  style="--color-foreground: {{ block.settings.text_color }}; --color-foreground-heading: {{ block.settings.text_color }}; --color-primary: {{ block.settings.text_color }}; --color-foreground-rgb: {{ text_rgb }}; color: {{ block.settings.text_color }};"
+  {{ block.shopify_attributes }}
+>
+  {%- if img != blank -%}
+    {{
+      img
+      | image_url: width: 1200
+      | image_tag:
+        widths: '360, 540, 720, 900, 1200',
+        sizes: '(min-width: 750px) 300px, 78vw',
+        loading: 'lazy',
+        alt: img.alt,
+        class: 'whycc__img',
+        style: focal
+    }}
+  {%- else -%}
+    {{ 'lifestyle-1' | placeholder_svg_tag: 'whycc__img whycc__img--placeholder' }}
+  {%- endif -%}
+
+  <span class="whycc__shade" aria-hidden="true"></span>
+
+  <div class="whycc__tag{% if block.settings.tag_border == false %} whycc__tag--plain{% endif %}">
+    {%- content_for 'block', type: 'text', id: 'tag' -%}
+  </div>
+
+  <div class="whycc__text">
+    {%- content_for 'block', type: 'text', id: 'body' -%}
+  </div>
+</{{ tag_open }}>
+
+{% schema %}
+{
+  "name": "Card",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Foto",
+      "info": "Verticale 3:4, almeno 900 × 1200 px. Imposta il punto focale sul soggetto."
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Colore testi",
+      "info": "Vale per pillola e testo quando il loro colore è Testo, Intestazione o Link",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "checkbox",
+      "id": "tag_border",
+      "label": "Bordo intorno alla pillola",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link (facoltativo)",
+      "info": "Rende cliccabile tutta la card. In quel caso non mettere link dentro i testi."
+    },
+    {
+      "type": "checkbox",
+      "id": "open_in_new_tab",
+      "label": "Apri link in una nuova scheda",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Card",
+      "blocks": {
+        "tag": {
+          "type": "text",
+          "static": true,
+          "settings": {
+            "text": "<p>Etichetta</p>",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "weight": "500",
+            "font_size": "0.75rem",
+            "line_height": "tight",
+            "max_width": "none"
+          }
+        },
+        "body": {
+          "type": "text",
+          "static": true,
+          "settings": {
+            "text": "<p>Scrivi qui il testo della card.</p>",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "weight": "500",
+            "font_size": "1.125rem",
+            "line_height": "tight",
+            "max_width": "none"
+          }
+        }
+      }
+    }
+  ]
+}
+{% endschema %}
