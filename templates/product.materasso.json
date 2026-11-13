@@ -938,7 +938,7 @@
                 "buy_buttons_VLi7An"
               ]
             },
-            "group_jmwKgV": {
+            "group_r7Ge4Y": {
               "type": "group",
               "name": "parla con noi",
               "settings": {
@@ -978,11 +978,11 @@
                 "padding-inline-end": 10
               },
               "blocks": {
-                "text_FcwxFD": {
+                "text_HBjakq": {
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Hai bisogno di una consulenza personalizzata?</p>",
+                    "text": "<p>Per consigli personalizzati o ordinare</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -1005,7 +1005,7 @@
                   },
                   "blocks": {}
                 },
-                "group_MmpjHU": {
+                "group_QPBpwB": {
                   "type": "group",
                   "name": "t:names.group",
                   "settings": {
@@ -1045,7 +1045,7 @@
                     "padding-inline-end": 30
                   },
                   "blocks": {
-                    "icon_j6bMDf": {
+                    "icon_ddnBbN": {
                       "type": "icon",
                       "name": "t:names.icon",
                       "settings": {
@@ -1057,7 +1057,7 @@
                       },
                       "blocks": {}
                     },
-                    "text_ePUaLM": {
+                    "text_FbAEKf": {
                       "type": "text",
                       "name": "t:names.text",
                       "settings": {
@@ -1086,14 +1086,14 @@
                     }
                   },
                   "block_order": [
-                    "icon_j6bMDf",
-                    "text_ePUaLM"
+                    "icon_ddnBbN",
+                    "text_FbAEKf"
                   ]
                 }
               },
               "block_order": [
-                "text_FcwxFD",
-                "group_MmpjHU"
+                "text_HBjakq",
+                "group_QPBpwB"
               ]
             },
             "group_8RdTqG": {
@@ -1950,7 +1950,7 @@
             "variant_picker_R3rGDr",
             "divider_8WdpaB",
             "group_hnXFGW",
-            "group_jmwKgV",
+            "group_r7Ge4Y",
             "group_8RdTqG",
             "group_cbQ78H",
             "group_Mj77cX",
