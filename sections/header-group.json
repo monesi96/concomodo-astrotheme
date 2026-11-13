@@ -38,7 +38,7 @@
         "item_mJQK4r": {
           "type": "item",
           "settings": {
-            "text": "Pagamento in 3 rate",
+            "text": "Pagamento a rate",
             "icon": "card",
             "link": "",
             "color_mode": "auto",
