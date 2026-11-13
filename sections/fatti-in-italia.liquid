@@ -1,6 +1,3 @@
-{%- capture icon_prev -%}<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="m15 6-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>{%- endcapture -%}
-{%- capture icon_next -%}<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="m9 6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>{%- endcapture -%}
-
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <div
   class="section section--{{ section.settings.section_width }} made-italy color-{{ section.settings.color_scheme }} spacing-style{% if section.settings.image_position == 'left' %} made-italy--media-left{% endif %}"
@@ -25,102 +22,94 @@
 
     <div class="made-italy__media">
       {%- if section.blocks.size > 0 -%}
-        <made-italy-carousel
-          class="made-italy__carousel"
+        <made-italy-autoplay
+          class="made-italy__carousel{% if section.blocks.size == 1 %} is-single{% endif %}"
           data-autoplay="{{ section.settings.autoplay }}"
           data-speed="{{ section.settings.autoplay_speed | times: 1000 }}"
         >
-          <div class="made-italy__track" tabindex="0" aria-label="{{ section.settings.heading | strip_html | escape }}">
-            {%- for block in section.blocks -%}
-              <figure class="made-italy__slide" {{ block.shopify_attributes }}>
-                {%- if block.settings.image != blank -%}
-                  {%- liquid
-                    assign img_loading = 'lazy'
-                    if forloop.first and section.index < 3
-                      assign img_loading = 'eager'
-                    endif
-                  -%}
-                  {{
-                    block.settings.image
-                    | image_url: width: 1600
-                    | image_tag:
-                      loading: img_loading,
-                      widths: '600, 900, 1200, 1600',
-                      sizes: '(min-width: 990px) 55vw, 100vw',
-                      class: 'made-italy__img'
-                  }}
-                {%- else -%}
-                  {{ 'lifestyle-1' | placeholder_svg_tag: 'made-italy__img made-italy__img--placeholder' }}
-                {%- endif -%}
-                {%- if block.settings.caption != blank -%}
-                  <figcaption class="made-italy__caption">{{ block.settings.caption }}</figcaption>
-                {%- endif -%}
-              </figure>
-            {%- endfor -%}
-          </div>
-
-          {%- if section.blocks.size > 1 -%}
-            <div class="made-italy__controls">
-              <button type="button" class="made-italy__arrow" data-dir="-1" aria-label="Foto precedente">{{ icon_prev }}</button>
-              <div class="made-italy__dots">
-                {%- for block in section.blocks -%}
-                  <button type="button" class="made-italy__dot{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Vai alla foto {{ forloop.index }}"></button>
-                {%- endfor -%}
-              </div>
-              <button type="button" class="made-italy__arrow" data-dir="1" aria-label="Foto successiva">{{ icon_next }}</button>
+          <div class="made-italy__viewport" role="region" aria-label="{{ section.settings.heading | strip_html | escape }}">
+            <div class="made-italy__track">
+              {%- for block in section.blocks -%}
+                <figure class="made-italy__slide" {{ block.shopify_attributes }}>
+                  {%- if block.settings.image != blank -%}
+                    {%- liquid
+                      assign img_loading = 'lazy'
+                      if forloop.first and section.index < 3
+                        assign img_loading = 'eager'
+                      endif
+                    -%}
+                    {{
+                      block.settings.image
+                      | image_url: width: 1600
+                      | image_tag:
+                        loading: img_loading,
+                        widths: '600, 900, 1200, 1600',
+                        sizes: '(min-width: 990px) 50vw, 90vw',
+                        class: 'made-italy__img',
+                        draggable: 'false'
+                    }}
+                  {%- else -%}
+                    {{ 'lifestyle-1' | placeholder_svg_tag: 'made-italy__img made-italy__img--placeholder' }}
+                  {%- endif -%}
+                  {%- if block.settings.caption != blank -%}
+                    <figcaption class="made-italy__caption">{{ block.settings.caption }}</figcaption>
+                  {%- endif -%}
+                </figure>
+              {%- endfor -%}
             </div>
-          {%- endif -%}
-        </made-italy-carousel>
+          </div>
+        </made-italy-autoplay>
       {%- endif -%}
     </div>
   </div>
 </div>
 
 <script>
-  if (!customElements.get('made-italy-carousel')) {
+  if (!customElements.get('made-italy-autoplay')) {
     customElements.define(
-      'made-italy-carousel',
+      'made-italy-autoplay',
       class extends HTMLElement {
         connectedCallback() {
           this.track = this.querySelector('.made-italy__track');
-          this.slides = Array.from(this.querySelectorAll('.made-italy__slide'));
-          this.dots = Array.from(this.querySelectorAll('.made-italy__dot'));
-          if (!this.track || this.slides.length < 2) return;
-          this.index = 0;
+          if (!this.track) return;
+          this.slides = Array.from(this.track.children);
+          this.count = this.slides.length;
+          if (this.count < 2) return;
 
-          this.querySelectorAll('.made-italy__arrow').forEach((btn) =>
-            btn.addEventListener('click', () => {
-              this.go(this.index + Number(btn.dataset.dir));
-              this.stop();
-            })
-          );
-          this.dots.forEach((dot) =>
-            dot.addEventListener('click', () => {
-              this.go(Number(dot.dataset.index));
-              this.stop();
-            })
-          );
-
-          let raf;
-          this.track.addEventListener('scroll', () => {
-            cancelAnimationFrame(raf);
-            raf = requestAnimationFrame(() => {
-              const i = Math.round(this.track.scrollLeft / this.track.clientWidth);
-              this.setActive(i);
-            });
-          }, { passive: true });
-
-          this.track.addEventListener('pointerdown', () => this.stop(), { passive: true });
-          this.track.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight') { this.go(this.index + 1); this.stop(); }
-            if (e.key === 'ArrowLeft') { this.go(this.index - 1); this.stop(); }
+          // Copie delle card in coda: servono per il giro continuo senza salti all'indietro.
+          this.slides.forEach((slide) => {
+            const clone = slide.cloneNode(true);
+            clone.setAttribute('aria-hidden', 'true');
+            clone.removeAttribute('data-shopify-editor-block');
+            clone.classList.add('is-clone');
+            clone.querySelectorAll('img').forEach((img) => (img.loading = 'eager'));
+            this.track.appendChild(clone);
           });
 
+          this.index = 0;
+
+          this.onTransitionEnd = (event) => {
+            if (event.target === this.track && this.index >= this.count) this.jump(0);
+          };
+          this.track.addEventListener('transitionend', this.onTransitionEnd);
+
+          this.onResize = () => this.jump(this.index % this.count);
+          window.addEventListener('resize', this.onResize);
+
+          this.onVisibility = () => (document.hidden ? this.pause() : this.inView && this.play());
+          document.addEventListener('visibilitychange', this.onVisibility);
+
           const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-          if (this.dataset.autoplay === 'true' && !reduce && !(window.Shopify && window.Shopify.designMode)) {
-            this.observer = new IntersectionObserver((entries) => {
-              entries.forEach((entry) => (entry.isIntersecting ? this.play() : this.pause()));
-            }, { threshold: 0.4 });
+          if (this.dataset.autoplay === 'true' && !reduce) {
+            this.observer = new IntersectionObserver(
+              (entries) => {
+                entries.forEach((entry) => {
+                  this.inView = entry.isIntersecting;
+                  this.inView ? this.play() : this.pause();
+                });
+              },
+              { threshold: 0.3 }
+            );
             this.observer.observe(this);
           }
         }
@@ -128,33 +117,41 @@
         disconnectedCallback() {
           this.pause();
           if (this.observer) this.observer.disconnect();
+          if (this.onResize) window.removeEventListener('resize', this.onResize);
+          if (this.onVisibility) document.removeEventListener('visibilitychange', this.onVisibility);
         }
 
-        go(i) {
-          const total = this.slides.length;
-          const next = (i + total) % total;
-          this.track.scrollTo({ left: next * this.track.clientWidth, behavior: 'smooth' });
-          this.setActive(next);
+        step() {
+          const gap = parseFloat(getComputedStyle(this.track).columnGap) || 0;
+          return this.slides[0].getBoundingClientRect().width + gap;
         }
 
-        setActive(i) {
+        apply() {
+          this.track.style.transform = 'translate3d(' + -this.index * this.step() + 'px, 0, 0)';
+        }
+
+        jump(i) {
+          this.track.classList.add('is-jumping');
           this.index = i;
-          this.dots.forEach((d, n) => d.classList.toggle('is-active', n === i));
+          this.apply();
+          void this.track.offsetWidth;
+          this.track.classList.remove('is-jumping');
+        }
+
+        next() {
+          if (this.index >= this.count) this.jump(0);
+          this.index += 1;
+          this.apply();
         }
 
         play() {
-          if (this.stopped || this.timer) return;
-          this.timer = setInterval(() => this.go(this.index + 1), Number(this.dataset.speed) || 5000);
+          if (this.timer) return;
+          this.timer = setInterval(() => this.next(), Number(this.dataset.speed) || 5000);
         }
 
         pause() {
           clearInterval(this.timer);
           this.timer = null;
-        }
-
-        stop() {
-          this.stopped = true;
-          this.pause();
         }
       }
     );
@@ -193,14 +190,17 @@
   }
 
   .made-italy__flag {
-    display: inline-flex;
-    display: flex; gap: 6px; width: 100%; max-width: 1200px; margin: 0 auto clamp(1.5rem, 3vw, 2.5rem);
+    display: flex;
+    gap: 6px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto clamp(1.5rem, 3vw, 2.5rem);
   }
 
   .made-italy__flag i {
     display: block;
-    width: 40px;
-    flex: 1; height: 6px;
+    flex: 1;
+    height: 6px;
     border-radius: 3px;
   }
 
@@ -231,30 +231,44 @@
   }
 
   .made-italy__carousel {
+    --mi-gap: 16px;
+    --mi-card: 86%;
     display: block;
     position: relative;
   }
 
-  .made-italy__track {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    border-radius: var(--mi-radius);
-    outline-offset: 4px;
+  .made-italy__carousel.is-single {
+    --mi-card: 100%;
   }
 
-  .made-italy__track::-webkit-scrollbar {
-    display: none;
+  /* Nessuno scorrimento manuale: niente scroll, swipe, trascinamento o tastiera */
+  .made-italy__viewport {
+    overflow: hidden;
+    overflow: clip;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .made-italy__track {
+    display: flex;
+    gap: var(--mi-gap);
+    will-change: transform;
+    transition: transform 0.9s cubic-bezier(0.45, 0, 0.2, 1);
+  }
+
+  .made-italy__track.is-jumping {
+    transition: none;
   }
 
   .made-italy__slide {
     position: relative;
-    flex: 0 0 100%;
+    flex: 0 0 var(--mi-card);
     margin: 0;
-    scroll-snap-align: start;
     aspect-ratio: 16 / 10;
     overflow: hidden;
+    border-radius: var(--mi-radius);
+    background: rgb(var(--color-foreground-rgb) / 0.06);
   }
 
   .made-italy__img {
@@ -262,6 +276,8 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    pointer-events: none;
+    -webkit-user-drag: none;
   }
 
   .made-italy__img--placeholder {
@@ -280,62 +296,15 @@
     line-height: 1.3;
   }
 
-  .made-italy__controls {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-block-start: 1rem;
-  }
-
-  .made-italy__arrow {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    border: 1px solid rgb(var(--color-foreground-rgb) / 0.2);
-    border-radius: 50%;
-    background: transparent;
-    color: inherit;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-
-  .made-italy__arrow:hover {
-    background: rgb(var(--color-foreground-rgb) / 0.06);
-  }
-
-  .made-italy__arrow svg {
-    width: 18px;
-    height: 18px;
-  }
-
-  .made-italy__dots {
-    display: flex;
-    gap: 8px;
-  }
-
-  .made-italy__dot {
-    width: 8px;
-    height: 8px;
-    padding: 0;
-    border: 0;
-    border-radius: 999px;
-    background: rgb(var(--color-foreground-rgb) / 0.25);
-    cursor: pointer;
-    transition: width 0.25s ease, background-color 0.25s ease;
-  }
-
-  .made-italy__dot.is-active {
-    width: 24px;
-    background: rgb(var(--color-foreground-rgb) / 0.8);
+  @media screen and (max-width: 749px) {
+    .made-italy__carousel {
+      --mi-gap: 12px;
+      --mi-card: 88%;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .made-italy__dot,
-    .made-italy__arrow {
+    .made-italy__track {
       transition: none;
     }
   }
