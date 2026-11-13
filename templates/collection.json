@@ -1946,7 +1946,7 @@
       "settings": {
         "heading": "Recensioni a 5 stelle, <strong>ovunque.</strong>",
         "subheading": "Chi ci sceglie ci lascia la valutazione massima per i nostri prodotti e il nostro servizio, su qualsiasi piattaforma.",
-        "footnote": "Qui mostriamo le recensioni a 5 stelle. Le trovi tutte sulle principali piattaforme di recensioni e nelle pagine dei prodotti.",
+        "footnote": "",
         "icon_google": "shopify://shop_images/GoogleG_FullColor_RGB.png",
         "icon_trustpilot": "shopify://shop_images/icona-trustpilot.png",
         "icon_judgeme": "shopify://shop_images/icona-judgeme-symbol.png",
@@ -1954,11 +1954,11 @@
         "speed": 50,
         "star_color": "#d49a2a",
         "panel_color": "#b2c8d1",
-        "corner_radius": 32,
+        "corner_radius": 24,
         "section_width": "page-width",
         "color_scheme": "scheme-2",
-        "padding-block-start": 40,
-        "padding-block-end": 40,
+        "padding-block-start": 48,
+        "padding-block-end": 48,
         "padding-inline-start": 0,
         "padding-inline-end": 0
       }
