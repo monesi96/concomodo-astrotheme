@@ -1715,7 +1715,7 @@
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
-                    "text": "<p>Sai già cosa fa al tuo caso?<br/><strong>Scegli Concomodo.</strong></p>",
+                    "text": "<p>Non sai cosa fa al tuo caso?<br/><strong>Scegli Concomodo.</strong></p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
