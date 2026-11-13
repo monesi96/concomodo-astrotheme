@@ -381,7 +381,7 @@
               "name": "Testo",
               "static": true,
               "settings": {
-                "text": "<p>Non ti convince? Reso o sostituzione <strong>gratuiti</strong>. E fino a 10 anni di garanzia.</p>",
+                "text": "<p>Se non fa per te, reso o sostituzione <strong>gratuiti</strong>. E fino a 10 anni di garanzia.</p>",
                 "width": "fit-content",
                 "max_width": "none",
                 "alignment": "left",
