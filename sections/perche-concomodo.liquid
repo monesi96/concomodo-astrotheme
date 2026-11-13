@@ -244,7 +244,53 @@
       transform: none;
     }
   }
+
+  /* Scorrimento card: niente scroll verticale + dissolvenza a sinistra quando si scorre */
+  @property --whycc-fade {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 0px;
+  }
+
+  .whycc {
+    --whycc-fade-size: 56px;
+  }
+
+  .whycc__track {
+    --whycc-fade: 0px;
+    overflow-y: hidden;
+    scroll-padding-inline-start: var(--whycc-fade-size);
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 var(--whycc-fade));
+    mask-image: linear-gradient(to right, transparent 0, #000 var(--whycc-fade));
+    transition: --whycc-fade 0.25s ease;
+  }
+
+  .whycc__track.is-scrolled {
+    --whycc-fade: var(--whycc-fade-size);
+  }
+
+  @media screen and (max-width: 749px) {
+    .whycc {
+      --whycc-fade-size: 36px;
+    }
+  }
 {% endstylesheet %}
+
+{% javascript %}
+  (() => {
+    if (window.__whyccFade) return;
+    window.__whyccFade = true;
+    document.addEventListener(
+      'scroll',
+      (event) => {
+        const track = event.target;
+        if (!(track instanceof Element) || !track.classList.contains('whycc__track')) return;
+        track.classList.toggle('is-scrolled', track.scrollLeft > 4);
+      },
+      { capture: true, passive: true }
+    );
+  })();
+{% endjavascript %}
 
 {% schema %}
 {
