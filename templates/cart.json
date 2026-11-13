@@ -16,7 +16,7 @@
           "type": "_cart-title",
           "static": true,
           "settings": {
-            "title": "Cart",
+            "title": "Carrello",
             "show_count": true,
             "type_preset": "h4",
             "alignment": "left",
@@ -59,7 +59,7 @@
       },
       "settings": {
         "section_width": "page-width",
-        "color_scheme": "",
+        "color_scheme": "scheme-2",
         "padding-block-start": 24,
         "padding-block-end": 0
       }
