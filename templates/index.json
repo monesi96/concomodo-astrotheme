@@ -358,8 +358,8 @@
         "card_djQJJ8": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/cuscini_d0745e16-7ea7-489a-a9fb-7c1f4049c855.jpg",
-            "tag": "Recensioni",
+            "image": "shopify://shop_images/Anziano_col_berretto_azzurro_e_cinque_stelle.png",
+            "tag": "Recensioni autentiche",
             "text": "Recensioni a 5 stelle\nsu Google, Trustpilot e Judge.me.",
             "link": ""
           }
@@ -367,7 +367,7 @@
         "card_TUaGPG": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/Cuffie_nere_su_sfondo_azzurro_tenue.png",
+            "image": "shopify://shop_images/Cuffie_e_grande_foglio_A4_a_quadretti.png",
             "tag": "Assistenza",
             "text": "Un esperto del sonno ti risponde\nsu WhatsApp, al telefono o via email.",
             "link": ""
@@ -380,6 +380,7 @@
         "card_djQJJ8",
         "card_TUaGPG"
       ],
+      "disabled": true,
       "name": "Perché Concomodo",
       "settings": {
         "label": "Perché Concomodo?",
