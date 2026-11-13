@@ -93,22 +93,22 @@
         "speed": 60,
         "direction": "left",
         "pause_on_hover": true,
-        "text_size": 14,
+        "text_size": 16,
         "font_weight": "500",
         "uppercase": false,
         "alternate_colors": false,
         "accent_color": "#4a6f7d",
         "separator": "none",
         "separator_text": "—",
-        "gap": 48,
+        "gap": 60,
         "show_borders": false,
         "edge_fade": true,
         "edge_fade_width": 10,
         "color_scheme": "scheme-4",
-        "padding-block-start": 10,
-        "padding-block-end": 10,
-        "padding-inline-start": 0,
-        "padding-inline-end": 0
+        "padding-block-start": 12,
+        "padding-block-end": 12,
+        "padding-inline-start": 24,
+        "padding-inline-end": 24
       }
     },
     "header_section": {
