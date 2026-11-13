@@ -353,7 +353,7 @@
               "name": "Pillola",
               "static": true,
               "settings": {
-                "text": "<p>Prova 100 notti e Garanzia 10 anni</p>",
+                "text": "<p>Prova <strong>100 notti</strong> e Garanzia <strong>10 anni</strong></p>",
                 "width": "fit-content",
                 "max_width": "none",
                 "alignment": "left",
@@ -381,7 +381,7 @@
               "name": "Testo",
               "static": true,
               "settings": {
-                "text": "<p>100 notti per sentirlo tuo, con reso o sostituzione gratuita.<br/>Fino a 10 anni di garanzia.<br/>Quando scegli Concomodo, puoi dormire sonni tranquilli.</p>",
+                "text": "<p>100 notti per sentirlo tuo, con reso o sostituzione <strong>gratuita</strong>.<br/>Fino a 10 anni di garanzia.<br/>Quando scegli Concomodo, <strong>puoi dormire sonni tranquilli.</strong></p>",
                 "width": "fit-content",
                 "max_width": "none",
                 "alignment": "left",
@@ -423,7 +423,7 @@
               "name": "Pillola",
               "static": true,
               "settings": {
-                "text": "<p>100% Made in Italy, senza intermediari</p>",
+                "text": "<p>100% Made in <strong>Italy</strong>, <strong>senza intermediari</strong></p>",
                 "width": "fit-content",
                 "max_width": "none",
                 "alignment": "left",
@@ -451,7 +451,7 @@
               "name": "Testo",
               "static": true,
               "settings": {
-                "text": "<p>Da oltre 25 anni usiamo materiali selezionati, lavorazione artigianale e macchinari moderni: ogni materasso Concomodo nasce così.<br/>Poi parte direttamente verso casa tua, senza intermediari.<br/>E la spedizione è sempre inclusa.</p>",
+                "text": "<p>Da oltre <strong>25 anni</strong> usiamo materiali selezionati, lavorazione artigianale e macchinari moderni: ogni materasso Concomodo nasce così.<br/>Poi parte direttamente verso casa tua, <strong>senza intermediari</strong>.<br/>La spedizione è <strong>sempre inclusa</strong>.</p>",
                 "width": "fit-content",
                 "max_width": "none",
                 "alignment": "left",
@@ -493,7 +493,7 @@
               "name": "Pillola",
               "static": true,
               "settings": {
-                "text": "<p>Recensioni autentiche</p>",
+                "text": "<p>Recensioni <strong>autentiche</strong></p>",
                 "width": "fit-content",
                 "max_width": "none",
                 "alignment": "left",
@@ -521,7 +521,7 @@
               "name": "Testo",
               "static": true,
               "settings": {
-                "text": "<p>Recensioni a 5 stelle<br/>su Google, Trustpilot e Judge.me.</p>",
+                "text": "<p>Recensioni a <strong>5 stelle</strong><br/>su tutte le principali piattaforme.<br/>Puoi trovarle online<br/>o nelle pagine dei prodotti.</p>",
                 "width": "fit-content",
                 "max_width": "none",
                 "alignment": "left",
@@ -563,7 +563,7 @@
               "name": "Pillola",
               "static": true,
               "settings": {
-                "text": "<p>Assistenza</p>",
+                "text": "<p>Assistenza e consulenza <strong>che ti coccola</strong></p>",
                 "width": "fit-content",
                 "max_width": "none",
                 "alignment": "left",
@@ -591,7 +591,7 @@
               "name": "Testo",
               "static": true,
               "settings": {
-                "text": "<p>Un esperto del sonno ti risponde<br/>su WhatsApp, al telefono o via email.</p>",
+                "text": "<p>Un esperto del sonno pronto a rispondere&nbsp;<br/>su WhatsApp, al telefono, via email o in chat.<br/>Gli stessi contatti <strong>prima e dopo</strong> l’acquisto:<br/><strong>ti seguiamo dall'inizio alla fine.</strong></p>",
                 "width": "fit-content",
                 "max_width": "none",
                 "alignment": "left",
@@ -622,7 +622,7 @@
           "name": "Etichetta",
           "static": true,
           "settings": {
-            "text": "<p>Perché Concomodo?</p>",
+            "text": "<p><strong>Perché</strong> Concomodo?</p>",
             "width": "fit-content",
             "max_width": "none",
             "alignment": "left",
@@ -652,7 +652,6 @@
         "card_djQJJ8",
         "card_TUaGPG"
       ],
-      "disabled": true,
       "name": "Perché Concomodo",
       "settings": {
         "label_layout": "vertical",
@@ -1359,6 +1358,7 @@
       "block_order": [
         "group_4ATCHM"
       ],
+      "disabled": true,
       "custom_css": [
         "@media screen and (max-width: 749px) {> div > div {margin: 0; } .section-content-wrapper > .group-block > .group-block-content > .group-block {flex: 0 0 47%; height: auto; }}"
       ],
