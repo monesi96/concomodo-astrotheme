@@ -657,7 +657,7 @@
         "label_layout": "vertical",
         "label_align_v": "center",
         "label_align_h": "center",
-        "label_gap": 20,
+        "label_gap": 10,
         "label_color": "#464646",
         "text_position": "center",
         "overlay_opacity": 25,
