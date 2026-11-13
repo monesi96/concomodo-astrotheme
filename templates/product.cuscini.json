@@ -850,7 +850,7 @@
                     "content_direction": "row",
                     "vertical_on_mobile": true,
                     "horizontal_alignment": "space-between",
-                    "vertical_alignment": "flex-end",
+                    "vertical_alignment": "center",
                     "align_baseline": false,
                     "horizontal_alignment_flex_direction_column": "flex-start",
                     "vertical_alignment_flex_direction_column": "center",
@@ -879,7 +879,7 @@
                     "placeholder": "",
                     "padding-block-start": 0,
                     "padding-block-end": 0,
-                    "padding-inline-start": 0,
+                    "padding-inline-start": 10,
                     "padding-inline-end": 0
                   },
                   "blocks": {
@@ -918,7 +918,7 @@
                         "horizontal_alignment_flex_direction_column": "flex-start",
                         "vertical_alignment_flex_direction_column": "center",
                         "gap": 12,
-                        "width": "fill",
+                        "width": "fit-content",
                         "custom_width": 100,
                         "width_mobile": "fit-content",
                         "custom_width_mobile": 100,
@@ -1002,7 +1002,7 @@
                         "horizontal_alignment_flex_direction_column": "flex-start",
                         "vertical_alignment_flex_direction_column": "center",
                         "gap": 12,
-                        "width": "fill",
+                        "width": "fit-content",
                         "custom_width": 100,
                         "width_mobile": "fit-content",
                         "custom_width_mobile": 100,
@@ -1127,12 +1127,12 @@
               "type": "group",
               "name": "parla con noi",
               "settings": {
-                "content_direction": "row",
+                "content_direction": "column",
                 "vertical_on_mobile": false,
                 "horizontal_alignment": "space-between",
                 "vertical_alignment": "center",
                 "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "flex-start",
+                "horizontal_alignment_flex_direction_column": "center",
                 "vertical_alignment_flex_direction_column": "center",
                 "gap": 12,
                 "width": "fill",
@@ -1159,7 +1159,7 @@
                 "placeholder": "",
                 "padding-block-start": 10,
                 "padding-block-end": 10,
-                "padding-inline-start": 30,
+                "padding-inline-start": 10,
                 "padding-inline-end": 10
               },
               "blocks": {
@@ -1196,13 +1196,13 @@
                   "settings": {
                     "content_direction": "row",
                     "vertical_on_mobile": false,
-                    "horizontal_alignment": "flex-start",
+                    "horizontal_alignment": "center",
                     "vertical_alignment": "center",
                     "align_baseline": false,
                     "horizontal_alignment_flex_direction_column": "flex-start",
                     "vertical_alignment_flex_direction_column": "center",
                     "gap": 12,
-                    "width": "fit-content",
+                    "width": "fill",
                     "custom_width": 100,
                     "width_mobile": "fill",
                     "custom_width_mobile": 100,
@@ -1226,8 +1226,8 @@
                     "placeholder": "",
                     "padding-block-start": 10,
                     "padding-block-end": 10,
-                    "padding-inline-start": 15,
-                    "padding-inline-end": 15
+                    "padding-inline-start": 30,
+                    "padding-inline-end": 30
                   },
                   "blocks": {
                     "icon_ATapNr": {
