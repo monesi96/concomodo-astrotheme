@@ -89,6 +89,10 @@
     max-inline-size: none;
   }
 
+  .whycc--label-vertical .whycc__label .text-block {
+    block-size: 1lh;
+  }
+
   /* Etichetta orizzontale in cima */
   .whycc--label-horizontal .whycc__panel {
     flex-direction: column;
@@ -138,7 +142,9 @@
     padding: 18px;
     box-sizing: border-box;
     border-radius: calc(var(--whycc-radius) * 0.7);
-    overflow: hidden;
+    clip-path: inset(0 round calc(var(--whycc-radius) * 0.7));
+    width: 100%;
+    align-self: stretch;
     isolation: isolate;
     scroll-snap-align: start;
     text-decoration: none;
