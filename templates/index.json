@@ -109,7 +109,7 @@
       ],
       "custom_css": [
         ".color-scheme-5 {background: linear-gradient( 0deg, rgba(178, 200, 209, 1) 50%, rgba(244, 239, 232, 1) 50% );}",
-        "img {border-radius: 0 0 30px 30px;}"
+        "img {border-radius: 0 0 0px 0px;}"
       ],
       "name": "t:names.hero",
       "settings": {
