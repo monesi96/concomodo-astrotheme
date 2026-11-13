@@ -5,12 +5,19 @@
 
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <div
-  class="section section--{{ section.settings.section_width }} whycc color-{{ section.settings.color_scheme }} spacing-style"
-  style="{% render 'spacing-style', settings: section.settings %} --whycc-radius: {{ section.settings.corner_radius }}px; --whycc-bg: {{ section.settings.panel_color }}; --whycc-label: {{ section.settings.label_color }}; --whycc-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"
+  class="section section--{{ section.settings.section_width }} whycc whycc--label-{{ section.settings.label_layout }} color-{{ section.settings.color_scheme }} spacing-style"
+  style="{% render 'spacing-style', settings: section.settings %} --whycc-radius: {{ section.settings.corner_radius }}px; --whycc-bg: {{ section.settings.panel_color }}; --whycc-label: {{ section.settings.label_color }}; --whycc-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }}; --whycc-gap: {{ section.settings.label_gap }}px;"
 >
   <div class="whycc__panel">
     {%- if section.settings.label != blank -%}
-      <h2 class="whycc__label{% if section.settings.label_uppercase %} whycc__label--upper{% endif %}"><span>{{ section.settings.label | escape }}</span></h2>
+      {%- liquid
+        if section.settings.label_layout == 'horizontal'
+          assign label_align = section.settings.label_align_h
+        else
+          assign label_align = section.settings.label_align_v
+        endif
+      -%}
+      <h2 class="whycc__label whycc__label--{{ label_align }}{% if section.settings.label_uppercase %} whycc__label--upper{% endif %}"><span>{{ section.settings.label | escape }}</span></h2>
     {%- endif -%}
 
     {%- if section.blocks.size > 0 -%}
@@ -68,12 +75,13 @@
     --whycc-bg: #B2C8D1;
     --whycc-label: #464646;
     --whycc-overlay: 0.25;
+    --whycc-gap: 20px;
   }
 
   .whycc__panel {
     display: flex;
     align-items: stretch;
-    gap: 20px;
+    gap: var(--whycc-gap);
     width: 100%;
     max-width: 1200px;
     margin-inline: auto;
@@ -102,12 +110,48 @@
     text-transform: uppercase;
   }
 
-  .whycc__label span {
+  /* Etichetta verticale a sinistra */
+  .whycc--label-vertical .whycc__label span {
     position: absolute;
-    top: 4px;
     left: 0;
     writing-mode: vertical-rl;
     transform: rotate(180deg);
+  }
+
+  .whycc--label-vertical .whycc__label--start span {
+    top: 4px;
+  }
+
+  .whycc--label-vertical .whycc__label--center span {
+    top: 50%;
+    transform: translateY(-50%) rotate(180deg);
+  }
+
+  .whycc--label-vertical .whycc__label--end span {
+    bottom: 4px;
+  }
+
+  /* Etichetta orizzontale in cima */
+  .whycc--label-horizontal .whycc__panel {
+    flex-direction: column;
+  }
+
+  .whycc--label-horizontal .whycc__label {
+    width: auto;
+    white-space: normal;
+    text-wrap: balance;
+  }
+
+  .whycc__label--left {
+    text-align: left;
+  }
+
+  .whycc__label--center {
+    text-align: center;
+  }
+
+  .whycc__label--right {
+    text-align: right;
   }
 
   .whycc__track {
@@ -215,20 +259,26 @@
   @media screen and (max-width: 749px) {
     .whycc__panel {
       flex-direction: column;
-      gap: 14px;
+      gap: min(var(--whycc-gap), 16px);
       padding: 18px 0 18px 18px;
       border-radius: calc(var(--whycc-radius) * 0.8);
     }
 
     .whycc__label {
       width: auto;
+      padding-inline-end: 18px;
       font-size: 1.375rem;
+      white-space: normal;
     }
 
-    .whycc__label span {
+    .whycc--label-vertical .whycc__label span {
       position: static;
       writing-mode: horizontal-tb;
       transform: none;
+    }
+
+    .whycc--label-vertical .whycc__label {
+      text-align: left;
     }
 
     .whycc__track {
@@ -257,8 +307,7 @@
     {
       "type": "text",
       "id": "label",
-      "label": "Etichetta laterale",
-      "info": "In verticale su desktop, sopra le card su mobile",
+      "label": "Etichetta",
       "default": "Perché Concomodo"
     },
     {
@@ -266,6 +315,51 @@
       "id": "label_uppercase",
       "label": "Etichetta in maiuscolo",
       "default": false
+    },
+    {
+      "type": "select",
+      "id": "label_layout",
+      "label": "Posizione etichetta",
+      "info": "Su mobile l'etichetta va sempre in orizzontale sopra le card",
+      "options": [
+        { "value": "vertical", "label": "In verticale a sinistra" },
+        { "value": "horizontal", "label": "In orizzontale in cima" }
+      ],
+      "default": "vertical"
+    },
+    {
+      "type": "select",
+      "id": "label_align_v",
+      "label": "Allineamento etichetta",
+      "options": [
+        { "value": "start", "label": "In alto" },
+        { "value": "center", "label": "Al centro" },
+        { "value": "end", "label": "In basso" }
+      ],
+      "default": "start",
+      "visible_if": "{{ section.settings.label_layout == 'vertical' }}"
+    },
+    {
+      "type": "select",
+      "id": "label_align_h",
+      "label": "Allineamento etichetta",
+      "options": [
+        { "value": "left", "label": "A sinistra" },
+        { "value": "center", "label": "Al centro" },
+        { "value": "right", "label": "A destra" }
+      ],
+      "default": "left",
+      "visible_if": "{{ section.settings.label_layout == 'horizontal' }}"
+    },
+    {
+      "type": "range",
+      "id": "label_gap",
+      "label": "Spazio tra etichetta e card",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 20
     },
     {
       "type": "header",
