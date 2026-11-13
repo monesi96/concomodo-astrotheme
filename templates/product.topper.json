@@ -3985,7 +3985,7 @@
         "group_BTcAXz"
       ],
       "custom_css": [
-        "> div {max-width: 1000px; margin: auto;}",
+        ".custom-section-content {max-width: 1000px; margin: auto; width: 100%;}",
         "summary .svg-wrapper {width: 24px;}",
         ".accordion .details__header {padding: 30px 0;}",
         ".accordion--dividers accordion-custom .details {border-block-end: 2px solid #cbc4bc;}",
