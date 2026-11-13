@@ -1873,6 +1873,96 @@
         "padding-block-end": 40
       }
     },
+    "recensioni_ovunque_9UMG7t": {
+      "type": "recensioni-ovunque",
+      "blocks": {
+        "review_atjQpQ": {
+          "type": "review",
+          "settings": {
+            "name": "Francesco",
+            "text": "Dopo aver girato decine di negozi, ho scelto di acquistare online da loro […]. Acquisto semplice, qualità in ogni dettaglio […]. Assistenza top.",
+            "platform": "trustpilot"
+          }
+        },
+        "review_hdwC8J": {
+          "type": "review",
+          "settings": {
+            "name": "Ilaria",
+            "text": "",
+            "platform": "google"
+          }
+        },
+        "review_tbRaXD": {
+          "type": "review",
+          "settings": {
+            "name": "Raffaella",
+            "text": "Io e mio marito abbiamo preso Abbraccio Plus e già alla prima notte ci siamo innamorati. […] Veramente comodo",
+            "platform": "trustpilot"
+          }
+        },
+        "review_etQPpG": {
+          "type": "review",
+          "settings": {
+            "name": "Simone",
+            "text": "",
+            "platform": "judgeme"
+          }
+        },
+        "review_hGtiVz": {
+          "type": "review",
+          "settings": {
+            "name": "Andrea",
+            "text": "[…] mi sto trovando veramente bene... Francesca dell'assistenza vendite mi ha chiamato […] assistenza top!",
+            "platform": "trustpilot"
+          }
+        },
+        "review_Fqq8c8": {
+          "type": "review",
+          "settings": {
+            "name": "Sandro",
+            "text": "Prezzo e qualità al servizio della gente, azienda serissima",
+            "platform": "trustpilot"
+          }
+        },
+        "review_tdTahj": {
+          "type": "review",
+          "settings": {
+            "name": "Fabio",
+            "text": "[…] ho chiamato, l’operatrice […] ha compreso e soddisfatto tutte le mie necessità. […] sto pensando di prenderlo anche ai miei!",
+            "platform": "google"
+          }
+        }
+      },
+      "block_order": [
+        "review_atjQpQ",
+        "review_hdwC8J",
+        "review_tbRaXD",
+        "review_etQPpG",
+        "review_hGtiVz",
+        "review_Fqq8c8",
+        "review_tdTahj"
+      ],
+      "name": "Recensioni ovunque",
+      "settings": {
+        "heading": "Recensioni a 5 stelle, <strong>ovunque.</strong>",
+        "subheading": "Chi ci sceglie ci lascia la valutazione massima per i nostri prodotti e il nostro servizio, su qualsiasi piattaforma.",
+        "footnote": "Qui mostriamo le recensioni a 5 stelle. Le trovi tutte sulle principali piattaforme di recensioni e nelle pagine dei prodotti.",
+        "icon_google": "shopify://shop_images/GoogleG_FullColor_RGB.png",
+        "icon_trustpilot": "shopify://shop_images/icona-trustpilot.png",
+        "icon_judgeme": "shopify://shop_images/icona-judgeme-symbol.png",
+        "google_zoom": 270,
+        "speed": 50,
+        "star_color": "#d49a2a",
+        "panel_color": "#b2c8d1",
+        "corner_radius": 32,
+        "section_width": "page-width",
+        "color_scheme": "scheme-2",
+        "padding-block-start": 40,
+        "padding-block-end": 40,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
+      }
+    },
     "section_faq": {
       "type": "section",
       "blocks": {
@@ -2269,6 +2359,7 @@
           "type": "item",
           "settings": {
             "text": "Prova 100 notti",
+            "icon": "none",
             "link": "",
             "color_mode": "auto",
             "custom_color": "#464646"
@@ -2278,6 +2369,7 @@
           "type": "item",
           "settings": {
             "text": "Garanzia 10 anni",
+            "icon": "none",
             "link": "",
             "color_mode": "auto",
             "custom_color": "#464646"
@@ -2287,6 +2379,7 @@
           "type": "item",
           "settings": {
             "text": "Spedizione e reso gratuiti",
+            "icon": "none",
             "link": "",
             "color_mode": "auto",
             "custom_color": "#464646"
@@ -2296,6 +2389,7 @@
           "type": "item",
           "settings": {
             "text": "Pagamento in 3 rate",
+            "icon": "none",
             "link": "",
             "color_mode": "auto",
             "custom_color": "#464646"
@@ -2305,6 +2399,7 @@
           "type": "item",
           "settings": {
             "text": "Made in Italy",
+            "icon": "none",
             "link": "",
             "color_mode": "auto",
             "custom_color": "#464646"
@@ -2333,6 +2428,8 @@
         "separator_text": "—",
         "gap": 48,
         "show_borders": false,
+        "edge_fade": false,
+        "edge_fade_width": 10,
         "color_scheme": "",
         "padding-block-start": 20,
         "padding-block-end": 20,
@@ -2385,6 +2482,7 @@
     "collection_list_pxN4wG",
     "mattress_quick_compare_ptWQmR",
     "section_promo",
+    "recensioni_ovunque_9UMG7t",
     "section_faq",
     "text_slider_64NyLh",
     "mattress_quick_compare_7RTFVm"
