@@ -7,11 +7,11 @@
   style="{% render 'spacing-style', settings: section.settings %} --mi-radius: {{ section.settings.corner_radius }}px;"
   {% if request.visual_preview_mode %}data-shopify-visual-preview{% endif %}
 >
+  {%- if section.settings.show_flag -%}
+    <span class="made-italy__flag" aria-hidden="true"><i></i><i></i><i></i></span>
+  {%- endif -%}
   <div class="made-italy__inner">
     <div class="made-italy__content">
-      {%- if section.settings.show_flag -%}
-        <span class="made-italy__flag" aria-hidden="true"><i></i><i></i><i></i></span>
-      {%- endif -%}
       {%- if section.settings.heading != blank -%}
         <h2 class="made-italy__heading">{{ section.settings.heading }}</h2>
       {%- endif -%}
@@ -194,14 +194,14 @@
 
   .made-italy__flag {
     display: inline-flex;
-    gap: 4px;
+    display: flex; gap: 6px; width: 100%; max-width: 1200px; margin: 0 auto clamp(1.5rem, 3vw, 2.5rem);
   }
 
   .made-italy__flag i {
     display: block;
     width: 40px;
-    height: 4px;
-    border-radius: 2px;
+    flex: 1; height: 12px;
+    border-radius: 6px;
   }
 
   .made-italy__flag i:nth-child(1) { background: #009246; }
