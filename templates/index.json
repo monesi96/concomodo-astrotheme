@@ -380,6 +380,7 @@
         "card_djQJJ8",
         "card_TUaGPG"
       ],
+      "disabled": true,
       "name": "Perché Concomodo",
       "settings": {
         "label": "Perché Concomodo",
@@ -1084,7 +1085,6 @@
       "block_order": [
         "group_4ATCHM"
       ],
-      "disabled": true,
       "custom_css": [
         "@media screen and (max-width: 749px) {> div > div {margin: 0; } .section-content-wrapper > .group-block > .group-block-content > .group-block {flex: 0 0 47%; height: auto; }}"
       ],
