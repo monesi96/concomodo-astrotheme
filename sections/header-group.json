@@ -19,6 +19,7 @@
           "settings": {
             "text": "Consulenza personalizzata",
             "icon": "star",
+            "icon_image": "shopify://shop_images/icon-cell.svg",
             "link": "",
             "color_mode": "auto",
             "custom_color": "#464646"
@@ -49,6 +50,7 @@
           "settings": {
             "text": "Garanzia 10 anni",
             "icon": "shield",
+            "icon_image": "shopify://shop_images/icon-10notti.svg",
             "link": "",
             "color_mode": "auto",
             "custom_color": "#464646"
@@ -59,6 +61,7 @@
           "settings": {
             "text": "Spedizione e reso gratuiti",
             "icon": "truck",
+            "icon_image": "shopify://shop_images/icon-spedizione.svg",
             "link": "",
             "color_mode": "auto",
             "custom_color": "#464646"
@@ -69,6 +72,7 @@
           "settings": {
             "text": "Made in Italy",
             "icon": "flag",
+            "icon_image": "shopify://shop_images/icon-qualita.svg",
             "link": "",
             "color_mode": "auto",
             "custom_color": "#464646"
