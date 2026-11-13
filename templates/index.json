@@ -2770,12 +2770,13 @@
         "card_djQJJ8",
         "card_TUaGPG"
       ],
+      "disabled": true,
       "name": "Perché Concomodo",
       "settings": {
         "label": "Perché Concomodo",
         "text_position": "center",
         "overlay_opacity": 25,
-        "panel_color": "#B2C8D1",
+        "panel_color": "#b2c8d1",
         "label_color": "#464646",
         "corner_radius": 24,
         "section_width": "page-width",
