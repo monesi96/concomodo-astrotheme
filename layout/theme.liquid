@@ -233,10 +233,32 @@
       }
 
       .whycc__track {
-        display: block !important;
-        padding-inline-end: var(--page-margin) !important;
-        scroll-padding-inline-end: var(--page-margin);
+        display: flex !important;
+        padding-inline-end: 0 !important;
+        scroll-padding-inline-end: calc(var(--page-margin) + 20px);
+        overscroll-behavior-x: none;
         border-radius: 0 !important;
+      }
+
+      /* Spazio finale reale: Safari ignora il padding destro dei contenitori a scorrimento */
+      .whycc__track::after {
+        content: '';
+        flex: 0 0 var(--page-margin);
+      }
+
+      .whycc__rail > :last-child {
+        scroll-snap-align: end;
+      }
+
+      /* Azzurro dietro le card: copre lo spazio che si apre trascinando oltre la prima card */
+      .whycc--label-vertical .whycc__track {
+        background: linear-gradient(to right, var(--whycc-bg) 50%, transparent 50%);
+      }
+
+      @media screen and (max-width: 749px) {
+        .whycc__track {
+          scroll-padding-inline-end: calc(var(--page-margin) + 18px);
+        }
       }
 
       .whycc__rail {
