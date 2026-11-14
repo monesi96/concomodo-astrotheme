@@ -1314,7 +1314,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Mettili alla prova <strong>con</strong> le tue notti</p>",
+                "text": "<p>Mettili alla prova <strong>con le tue notti</strong></p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1465,7 +1465,7 @@
       "type": "mattress-quick-compare",
       "name": "Comparatore materassi",
       "settings": {
-        "heading": "Confronta i nostri materassi",
+        "heading": "Confronta i nostri <strong>materassi</strong>",
         "subheading": "<p>Quattro modelli, una sola cosa in comune: dormire meglio. Trova quello giusto per te.</p>",
         "product_1": "sostegno",
         "product_2": "carezza",
@@ -2010,7 +2010,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>Domande frequenti</h2>",
+                "text": "<h2>Domande <strong>frequenti</strong></h2>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
@@ -2442,7 +2442,7 @@
       "disabled": true,
       "name": "Comparatore materassi",
       "settings": {
-        "heading": "Confronta i nostri materassi",
+        "heading": "Confronta i nostri <strong>materassi</strong>",
         "subheading": "<p>Quattro modelli, una sola cosa in comune: dormire meglio. Trova quello giusto per te.</p>",
         "product_1": "sostegno",
         "product_2": "carezza",
