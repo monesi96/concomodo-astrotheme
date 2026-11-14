@@ -340,6 +340,30 @@
           --cc-pb: 18px;
         }
       }
+
+      /* 5. Comparatore su mobile: carosello a filo schermo. Parte dal margine, le card escono a destra
+         e scorrono fino al bordo sinistro; a fine corsa l'ultima si ferma sul margine destro */
+      @media screen and (max-width: 599px) {
+        .qcompare__grid {
+          display: flex !important;
+          margin-inline: calc(-1 * var(--page-margin)) !important;
+          padding-inline: var(--page-margin) 0 !important;
+          scroll-padding-inline: var(--page-margin) !important;
+        }
+
+        .qcompare__grid > .qcompare__card {
+          flex: 0 0 min(calc((100vw - 2 * var(--page-margin)) * 0.8), 330px);
+        }
+
+        .qcompare__grid > .qcompare__card:last-of-type {
+          scroll-snap-align: end;
+        }
+
+        .qcompare__grid::after {
+          content: '';
+          flex: 0 0 calc(var(--page-margin) - var(--cc-gap));
+        }
+      }
     </style>
   </head>
 
