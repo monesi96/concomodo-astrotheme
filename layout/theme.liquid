@@ -222,8 +222,8 @@
           margin-right: 0 !important;
         }
       }
-      /* 4. Caroselli a filo destro (come Better Nights): riquadro e card escono dal bordo destro dello schermo,
-         l'ultima card si ferma sul margine pagina solo a fine corsa */
+      /* 4. Caroselli a filo destro (come Better Nights): riquadro e card escono dal bordo destro dello schermo
+         e si chiudono sul margine pagina solo a fine corsa */
       .whycc__panel {
         width: calc(100% + var(--page-margin)) !important;
         margin-inline-end: calc(-1 * var(--page-margin)) !important;
@@ -233,20 +233,58 @@
       }
 
       .whycc__track {
-        grid-auto-columns: 74vw !important;
+        display: block !important;
         padding-inline-end: var(--page-margin) !important;
         scroll-padding-inline-end: var(--page-margin);
-        border-start-end-radius: 0 !important;
-        border-end-end-radius: 0 !important;
+        border-radius: 0 !important;
+      }
+
+      .whycc__rail {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: 74vw;
+        gap: var(--cc-gap);
+        width: max-content;
+      }
+
+      @media screen and (min-width: 750px) {
+        .whycc__rail {
+          grid-auto-columns: clamp(260px, 26vw, 380px);
+        }
       }
 
       .whycc--label-horizontal .whycc__label {
         padding-inline-end: var(--cc-pad) !important;
       }
 
-      @media screen and (min-width: 750px) {
-        .whycc__track {
-          grid-auto-columns: clamp(260px, 26vw, 380px) !important;
+      /* Etichetta verticale: l'azzurro scorre con le card e si chiude dopo l'ultima.
+         L'etichetta e' ruotata di 180 gradi, per questo padding e angoli sono invertiti. */
+      .whycc--label-vertical .whycc__panel {
+        padding: 0 !important;
+        gap: 0 !important;
+        background: none !important;
+        border-radius: 0 !important;
+      }
+
+      .whycc--label-vertical .whycc__label {
+        padding: 20px var(--cc-pad) 20px var(--whycc-gap);
+        background: var(--whycc-bg);
+        border-radius: 0 var(--whycc-radius) var(--whycc-radius) 0;
+      }
+
+      .whycc--label-vertical .whycc__rail {
+        padding: 20px 20px 20px 0;
+        background: var(--whycc-bg);
+        border-radius: 0 var(--whycc-radius) var(--whycc-radius) 0;
+      }
+
+      @media screen and (max-width: 749px) {
+        .whycc--label-vertical .whycc__label {
+          padding-block: 18px;
+        }
+
+        .whycc--label-vertical .whycc__rail {
+          padding: 18px 18px 18px 0;
         }
       }
 
