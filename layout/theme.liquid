@@ -314,6 +314,32 @@
       .made-italy:not(.made-italy--media-left) .made-italy__viewport {
         margin-inline-end: calc(-1 * var(--page-margin));
       }
+
+      /* Taglio arrotondato delle card quando scorrono sotto l'etichetta (stesso raggio delle card) */
+      .whycc--label-vertical .whycc__panel {
+        background: linear-gradient(to right, var(--whycc-bg) 50%, transparent 50%) !important;
+        border-radius: var(--whycc-radius) 0 0 var(--whycc-radius) !important;
+      }
+
+      .whycc--label-vertical .whycc__track {
+        --cc-r: round(calc(var(--whycc-radius) * 0.7), 1px);
+        --cc-pb: 20px;
+        --cc-mask:
+          linear-gradient(#000 0 0) right / calc(100% - var(--cc-r)) 100% no-repeat,
+          linear-gradient(#000 0 0) left top / var(--cc-r) var(--cc-pb) no-repeat,
+          linear-gradient(#000 0 0) left bottom / var(--cc-r) var(--cc-pb) no-repeat,
+          linear-gradient(#000 0 0) left center / var(--cc-r) calc(100% - 2 * var(--cc-pb) - 2 * var(--cc-r)) no-repeat,
+          radial-gradient(circle at 100% 100%, #000 calc(var(--cc-r) - 0.5px), #0000 var(--cc-r)) left 0 top var(--cc-pb) / var(--cc-r) var(--cc-r) no-repeat,
+          radial-gradient(circle at 100% 0, #000 calc(var(--cc-r) - 0.5px), #0000 var(--cc-r)) left 0 bottom var(--cc-pb) / var(--cc-r) var(--cc-r) no-repeat;
+        -webkit-mask: var(--cc-mask);
+        mask: var(--cc-mask);
+      }
+
+      @media screen and (max-width: 749px) {
+        .whycc--label-vertical .whycc__track {
+          --cc-pb: 18px;
+        }
+      }
     </style>
   </head>
 
