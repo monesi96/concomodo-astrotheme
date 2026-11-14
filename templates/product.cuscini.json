@@ -831,7 +831,7 @@
                 "border_opacity": 100,
                 "border_radius": 30,
                 "toggle_overlay": false,
-                "overlay_color": "#FFFFFF",
+                "overlay_color": "#ffffff",
                 "overlay_style": "solid",
                 "gradient_direction": "to top",
                 "link": "",
@@ -1603,6 +1603,7 @@
             "group_P6QbQe": {
               "type": "group",
               "name": "quiz",
+              "disabled": true,
               "settings": {
                 "content_direction": "row",
                 "vertical_on_mobile": false,
@@ -1985,7 +1986,7 @@
         }
       },
       "custom_css": [
-        "@media screen and (max-width: 749px) {.layout-panel-flex--row:has(> product-price) {flex-wrap: nowrap; align-items: center; } .layout-panel-flex--row:has(> product-price) > product-price {flex: 0 0 auto; } }"
+        "@media screen and (max-width: 749px) {.layout-panel-flex--row:has(> product-price) {flex-wrap: nowrap; align-items: center; } .layout-panel-flex--row:has(> product-price) > product-price {flex: 0 0 auto; }}"
       ],
       "settings": {
         "content_width": "content-center-aligned",
