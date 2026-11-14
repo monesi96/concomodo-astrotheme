@@ -906,7 +906,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Mettili alla prova <strong>con</strong> le tue notti</p>",
+                "text": "<p>Mettili alla prova <strong>con le tue notti</strong></p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
