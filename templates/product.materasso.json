@@ -1979,7 +1979,7 @@
       ],
       "name": "Mattress layers",
       "settings": {
-        "heading": "Con quali comfort dormirai",
+        "heading": "Con quali <strong>comfort</strong> dormirai",
         "subheading": "",
         "content_position": "right",
         "animate_on_scroll": true,
@@ -2041,7 +2041,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<p>Con tutte le specifiche che ti servono</p>",
+                "text": "<p>Con tutte le <strong>specifiche</strong> che ti servono</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
@@ -2308,7 +2308,7 @@
       "type": "mattress-comparison",
       "name": "Mattress comparison",
       "settings": {
-        "heading": "Confronta questo materasso",
+        "heading": "Confronta questo <strong>materasso</strong>",
         "compare_collection": "",
         "max_products": 12,
         "picker_label": "Confronta con",
@@ -2900,8 +2900,8 @@
       ],
       "settings": {
         "show_flag": true,
-        "heading": "Materassi, topper e cuscini di linea premium, fatti in Italia da oltre 25 anni.",
-        "text": "<p>Il segreto dietro Concomodo è il nostro laboratorio dove da oltre 25 anni produciamo materassi di linea premium. È un mestiere che si impara con il tempo: scegliere le materie prime giuste, tagliare le schiume su misura, assemblare gli strati nell'ordine che fa la differenza, cucire i rivestimenti con cura. È ciò che facciamo da decenni.</p><p>Ogni prodotto Concomodo nasce grazie a mani esperte che fanno questo lavoro da una vita e supera un controllo finale prima di essere imballato. Seguire tutto da vicino, dalla selezione dei materiali fino all'ultima cucitura, ci permette di garantire un’elevata qualità su ogni prodotto e di portarlo direttamente a casa tua: dal produttore a te, senza intermediari e a un prezzo onesto.</p>",
+        "heading": "Linea premium, <strong>fatta in Italia da oltre 25 anni.</strong>",
+        "text": "<p>Il segreto dietro Concomodo è il nostro laboratorio dove da oltre 25 anni produciamo materassi di linea premium. È un mestiere che si impara con il tempo: scegliere le materie prime giuste, tagliare le schiume su misura, assemblare gli strati nell'ordine che fa la differenza, cucire i rivestimenti con cura. È ciò che facciamo da decenni.</p><p>Ogni materasso, topper e cuscino Concomodo nasce grazie a mani esperte che fanno questo lavoro da una vita e supera un controllo finale prima di essere imballato. Seguire tutto da vicino, dalla selezione dei materiali fino all'ultima cucitura, ci permette di garantire un’elevata qualità su ogni prodotto e di portarlo direttamente a casa tua: dal produttore a te, senza intermediari e a un prezzo onesto.</p>",
         "button_label": "",
         "button_link": "",
         "image_position": "right",
@@ -2963,7 +2963,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<p>Domande frequenti</p>",
+                "text": "<p>Domande <strong>frequenti</strong></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
