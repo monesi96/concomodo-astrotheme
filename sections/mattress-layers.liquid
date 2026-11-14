@@ -28,7 +28,9 @@
   assign closed_trim_cover = 0
   assign closed_trim_base = 0
   if has_layers
-    assign cover_layer = layers.first
+    for item in layers limit: 1
+      assign cover_layer = item
+    endfor
     assign raw = cover_layer.closed_overlap.value | default: cover_layer.closed_overlap
     if raw != blank
       assign closed_overlap = raw
