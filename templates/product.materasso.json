@@ -209,7 +209,7 @@
               "type": "review",
               "name": "t:names.product_review_stars",
               "settings": {
-                "stars_style": "shaded",
+                "stars_style": "outline",
                 "show_number": true,
                 "rating_color": "primary",
                 "type_preset": "paragraph",
@@ -314,7 +314,7 @@
                       "type": "text",
                       "name": "t:names.text",
                       "settings": {
-                        "text": "<p>100 notti di prova gratuita</p>",
+                        "text": "<p>10 anni di garanzia</p>",
                         "width": "fit-content",
                         "max_width": "normal",
                         "alignment": "left",
@@ -399,7 +399,7 @@
                       "type": "text",
                       "name": "t:names.text",
                       "settings": {
-                        "text": "<p>Riposo migliore</p>",
+                        "text": "<p>100 notti di prova</p>",
                         "width": "fit-content",
                         "max_width": "normal",
                         "alignment": "left",
