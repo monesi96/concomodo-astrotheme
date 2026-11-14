@@ -6,17 +6,21 @@ import { prefersReducedMotion } from '@theme/utilities';
  * @property {HTMLElement} stage - The wrapper holding the stacked layer images.
  * @property {HTMLElement[]} [layers] - The individual layer image elements.
  * @property {HTMLElement[]} [captions] - The caption buttons (title + description).
+ * @property {HTMLButtonElement} [toggle] - The open / close button.
  */
 
 /**
  * Interactive "exploded view" of a mattress.
  *
- * On enter, the layers start collapsed (closed mattress) and, after a short beat,
- * animate outwards into a stacked "exploded" view where they stay.
+ * With "data-start-closed" the mattress stays closed (cover + base, titles only)
+ * until the visitor clicks the mattress, a caption or the toggle button.
+ * Clicking the mattress only explodes it; clicking a caption explodes it and
+ * highlights that layer. The toggle button closes it again.
  *
- * Clicking a caption (or a layer) highlights the matching layer + caption and
- * dims every other layer and caption. Clicking the active item again, clicking
- * outside, or pressing Escape resets the state.
+ * With "data-open" in the markup (toppers) it starts exploded.
+ *
+ * Without either attribute it keeps the original behaviour: closed, then it
+ * explodes once the section scrolls into view.
  *
  * @extends {Component<MattressLayersRefs>}
  */
@@ -41,6 +45,11 @@ export class MattressLayersComponent extends Component {
     // Reset when clicking anywhere outside the component or pressing Escape.
     document.addEventListener('click', this.#handleOutsideClick, { signal });
     document.addEventListener('keydown', this.#handleKeydown, { signal });
+
+    this.#syncToggle();
+
+    // Already open from the markup (toppers) or waiting for a click.
+    if (this.hasAttribute('data-open') || this.hasAttribute('data-start-closed')) return;
 
     if (prefersReducedMotion() || this.hasAttribute('data-no-animation')) {
       this.#open();
@@ -72,13 +81,36 @@ export class MattressLayersComponent extends Component {
     window.clearTimeout(this.#openTimer);
   }
 
+  get #isOpen() {
+    return this.hasAttribute('data-open');
+  }
+
   #open() {
     this.setAttribute('data-open', '');
+    this.#syncToggle();
+  }
+
+  #close() {
+    this.#setActive(null);
+    this.removeAttribute('data-open');
+    this.#syncToggle();
+  }
+
+  #syncToggle() {
+    this.refs.toggle?.setAttribute('aria-expanded', String(this.#isOpen));
   }
 
   /**
-   * Toggle the active layer/caption. Bound declaratively via `on:click="/select"`.
-   * The clicked element (caption or layer) must carry a `data-index` attribute.
+   * Open / close the exploded view. Bound declaratively via "on:click="/toggle"".
+   */
+  toggle() {
+    if (this.#isOpen) this.#close();
+    else this.#open();
+  }
+
+  /**
+   * Toggle the active layer/caption. Bound declaratively via "on:click="/select"".
+   * The clicked element (caption or layer) must carry a "data-index" attribute.
    *
    * @param {MouseEvent} event
    */
@@ -86,6 +118,13 @@ export class MattressLayersComponent extends Component {
     const target = /** @type {HTMLElement} */ (event.target);
     const item = target.closest('[data-index]');
     if (!(item instanceof HTMLElement)) return;
+
+    if (!this.#isOpen) {
+      this.#open();
+      // A click on the closed mattress only explodes it; a click on a caption
+      // also highlights that layer.
+      if (!item.classList.contains('mattress-layers__caption')) return;
+    }
 
     const index = Number(item.dataset.index);
     if (Number.isNaN(index)) return;
