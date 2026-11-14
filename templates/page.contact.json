@@ -120,7 +120,7 @@
       ],
       "name": "Risposte rapide",
       "settings": {
-        "heading": "Risposte rapide",
+        "heading": "Risposte <strong>rapide</strong>",
         "subheading": "<p>Forse la tua domanda ha già una risposta: parti da qui.</p>",
         "corner_radius": 24,
         "section_width": "page-width",
@@ -178,7 +178,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>Domande frequenti</h2>",
+                "text": "<h2>Domande <strong>frequenti</strong></h2>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
@@ -527,7 +527,7 @@
           "type": "text",
           "name": "Titolo modulo",
           "settings": {
-            "text": "<h2>Non hai trovato la risposta? Scrivici</h2>",
+            "text": "<h2>Non hai trovato la risposta? <strong>Scrivici</strong></h2>",
             "width": "100%",
             "max_width": "narrow",
             "alignment": "center",
