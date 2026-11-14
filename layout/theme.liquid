@@ -365,6 +365,33 @@
         }
       }
     </style>
+  <style id="cc-tipografia">
+      /* 6. Titoli e sottotitoli di sezione: una sola scala su tutto il sito.
+         Titolo 32px su mobile fino a 48px su desktop, base peso 500, parte chiave in <strong> peso 700.
+         Testo introduttivo 16px, interlinea 1.6. Hero, card e titoli prodotto restano come sono. */
+      :root {
+        --cc-title: clamp(2rem, 1.35rem + 2.2vw, 3rem);
+      }
+
+      :is(.made-italy__heading, .rev5__heading, .qcompare__heading, .contact-cards__heading, .mattress-layers__heading, .mattress-comparison__heading, .comodi20__heading, .bundle-builder__heading, .installment-payments__heading),
+      #MainContent :is([class*='__text_bjkEqE'], [class*='__text_7yjNEp'], [class*='__text_7qQVdD'], [class*='__text_R84Ug6'], [class*='__faq_h '], [class*='__cf_heading '], [class*='__form_heading '], [class*='__blog_banner_title '], [class*='__coll_header_text '], [class*='__text_mtnBCE'], [class*='__text_9KQaTd']) > * {
+        font-size: var(--cc-title) !important;
+        font-weight: 500 !important;
+        line-height: 1.08 !important;
+        letter-spacing: -0.03em !important;
+      }
+
+      :is(.made-italy__heading, .rev5__heading, .qcompare__heading, .contact-cards__heading, .mattress-layers__heading, .mattress-comparison__heading, .comodi20__heading, .bundle-builder__heading, .installment-payments__heading) strong,
+      #MainContent :is([class*='__text_bjkEqE'], [class*='__text_7yjNEp'], [class*='__text_7qQVdD'], [class*='__text_R84Ug6'], [class*='__faq_h '], [class*='__cf_heading '], [class*='__form_heading '], [class*='__blog_banner_title '], [class*='__coll_header_text '], [class*='__text_mtnBCE'], [class*='__text_9KQaTd']) strong {
+        font-weight: 700 !important;
+      }
+
+      :is(.made-italy__text, .rev5__sub, .qcompare__subheading, .contact-cards__subheading, .mattress-layers__subheading, .comodi20__subheading, .bundle-builder__subheading, .installment-payments__subheading),
+      #MainContent [class*='__text_xDkV9M'] > * {
+        font-size: 1rem !important;
+        line-height: 1.6 !important;
+      }
+    </style>
   </head>
 
   <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
