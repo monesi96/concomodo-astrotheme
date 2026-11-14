@@ -1395,7 +1395,7 @@
       "type": "mattress-quick-compare",
       "name": "Comparatore materassi",
       "settings": {
-        "heading": "Scopri i materassi",
+        "heading": "Scopri i <strong>materassi</strong>",
         "subheading": "<p>Quattro modelli, quattro modi diversi di dormire, una cosa in comune: <strong>farti dormire meglio</strong>. Trova quello giusto per te.</p>",
         "product_1": "carezza",
         "product_2": "sostegno",
