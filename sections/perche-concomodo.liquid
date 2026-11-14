@@ -25,8 +25,10 @@
       {%- content_for 'block', type: 'text', id: 'whycc-label' -%}
     </div>
 
-    <div class="whycc__track" role="list" tabindex="0" aria-label="Perché Concomodo">
-      {%- content_for 'blocks' -%}
+    <div class="whycc__track" role="region" tabindex="0" aria-label="Perché Concomodo">
+      <div class="whycc__rail" role="list">
+        {%- content_for 'blocks' -%}
+      </div>
     </div>
   </div>
 </div>
