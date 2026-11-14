@@ -72,6 +72,96 @@
   gtag('config', 'AW-18544052229');
 </script>
 
+  {%- comment -%}
+      Allineamento uniforme delle sezioni (Concomodo).
+      1. Bordo esterno: riquadri, foto, card e testi partono dal margine pagina del tema.
+      2. Rientro unico dentro i riquadri colorati: --cc-pad (20px mobile, 48px desktop).
+      3. Spazio unico tra le card: --cc-gap (12px mobile, 16px desktop).
+      Per ora attivo solo in homepage: per estenderlo a tutto il sito togli la condizione template.name == 'index'.
+    {%- endcomment -%}
+    {%- if template.name == 'index' -%}
+      <style id="cc-allineamento">
+        :root {
+          --cc-pad: clamp(20px, 4vw, 48px);
+          --cc-gap: 16px;
+        }
+
+        @media screen and (max-width: 749px) {
+          :root {
+            --cc-gap: 12px;
+          }
+        }
+
+        /* 1. Bordo esterno */
+        #MainContent > .shopify-section > .section {
+          --padding-inline-start: 0px !important;
+          --padding-inline-end: 0px !important;
+        }
+
+        .made-italy__inner,
+        .made-italy__flag,
+        .rev5__panel,
+        .qcompare__grid,
+        .contact-cards__grid {
+          max-width: none !important;
+        }
+
+        @media screen and (max-width: 599px) {
+          .qcompare__grid {
+            padding-inline: 0 !important;
+            scroll-padding-inline: 0 !important;
+          }
+        }
+
+        /* 2. Rientro dentro i riquadri */
+        .whycc__panel {
+          padding-inline: var(--cc-pad) !important;
+        }
+
+        .whycc__track,
+        .whycc--label-horizontal .whycc__label {
+          padding-inline-end: 0 !important;
+        }
+
+        .rev5__head,
+        .rev5__note {
+          padding-inline: var(--cc-pad) !important;
+        }
+
+        .rev5__viewport {
+          margin-inline: var(--cc-pad) !important;
+        }
+
+        [id$='__section_6mPHiF'] .custom-section-content > .layout-panel-flex > .group-block {
+          --padding-inline-start: var(--cc-pad) !important;
+          --padding-inline-end: var(--cc-pad) !important;
+          padding-inline: var(--cc-pad) !important;
+        }
+
+        /* 3. Spazio tra le card */
+        .whycc__track,
+        .qcompare__grid,
+        .contact-cards__grid,
+        [id$='__collection_list_hwFndy'] slideshow-slides {
+          gap: var(--cc-gap) !important;
+        }
+
+        .made-italy__carousel {
+          --mi-gap: var(--cc-gap) !important;
+        }
+
+        .rev5__card {
+          margin-inline-end: var(--cc-gap) !important;
+        }
+
+        @media screen and (min-width: 750px) {
+          [id$='__collection_list_hwFndy'] .resource-list__carousel .resource-list__slide {
+            width: calc((100% - 2 * var(--cc-gap)) / 3) !important;
+            margin-right: 0 !important;
+          }
+        }
+      </style>
+    {%- endif -%}
   </head>
 
   <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
