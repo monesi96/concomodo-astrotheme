@@ -73,95 +73,156 @@
 </script>
 
   {%- comment -%}
-      Allineamento uniforme delle sezioni (Concomodo).
-      1. Bordo esterno: riquadri, foto, card e testi partono dal margine pagina del tema.
+      Allineamento uniforme delle sezioni (Concomodo), su tutto il sito.
+      1. Bordo esterno: riquadri, foto, card e testi partono dal margine pagina del tema (--page-margin).
       2. Rientro unico dentro i riquadri colorati: --cc-pad (20px mobile, 48px desktop).
       3. Spazio unico tra le card: --cc-gap (12px mobile, 16px desktop).
-      Per ora attivo solo in homepage: per estenderlo a tutto il sito togli la condizione template.name == 'index'.
     {%- endcomment -%}
-    {%- if template.name == 'index' -%}
-      <style id="cc-allineamento">
+    <style id="cc-allineamento">
+      :root {
+        --cc-pad: clamp(20px, 4vw, 48px);
+        --cc-gap: 16px;
+      }
+
+      @media screen and (max-width: 749px) {
         :root {
-          --cc-pad: clamp(20px, 4vw, 48px);
-          --cc-gap: 16px;
+          --cc-gap: 12px;
         }
+      }
 
-        @media screen and (max-width: 749px) {
-          :root {
-            --cc-gap: 12px;
-          }
-        }
+      /* 1. Bordo esterno */
+      /* Sezioni ristrette con CSS personalizzato (max-width + margin auto): tornano sul margine pagina */
+      #MainContent > .shopify-section > div {
+        max-width: none !important;
+      }
 
-        /* 1. Bordo esterno */
-        #MainContent > .shopify-section > .section {
-          --padding-inline-start: 0px !important;
-          --padding-inline-end: 0px !important;
-        }
+      #MainContent > .shopify-section > .section {
+        margin-inline: 0 !important;
+      }
 
-        .made-italy__inner,
-        .made-italy__flag,
-        .rev5__panel,
-        .qcompare__grid,
-        .contact-cards__grid {
-          max-width: none !important;
-        }
+      /* FAQ, accordion e sezioni personalizzate impostate a tutta larghezza: stesso margine pagina delle altre */
+      #MainContent > .shopify-section > .section--full-width:has(.accordion),
+      #MainContent > .shopify-section > .section--full-width:is(.qcompare, .rev5, .made-italy, .whycc, .contact-cards) {
+        padding-inline: var(--page-margin) !important;
+      }
 
-        @media screen and (max-width: 599px) {
-          .qcompare__grid {
-            padding-inline: 0 !important;
-            scroll-padding-inline: 0 !important;
-          }
-        }
+      .custom-section-content,
+      .made-italy__inner,
+      .made-italy__flag,
+      .rev5__panel,
+      .qcompare__grid,
+      .contact-cards__grid {
+        max-width: none !important;
+      }
 
-        /* 2. Rientro dentro i riquadri */
-        .whycc__panel {
-          padding-inline: var(--cc-pad) !important;
-        }
+      .made-italy__inner,
+      .rev5__panel,
+      .qcompare__grid,
+      .contact-cards__grid,
+      .mattress-comparison__card,
+      .section-resource-list__layout {
+        margin-inline: 0 !important;
+      }
 
-        .whycc__track,
-        .whycc--label-horizontal .whycc__label {
-          padding-inline-end: 0 !important;
-        }
+      .mattress-comparison__card {
+        max-width: none !important;
+      }
 
-        .rev5__head,
-        .rev5__note {
-          padding-inline: var(--cc-pad) !important;
-        }
+      /* Gruppi senza sfondo che contengono FAQ o accordion: nessun rientro */
+      .group-block:not([class*='color-']):has(> .group-block-content > .accordion) {
+        --padding-inline-start: 0px !important;
+        --padding-inline-end: 0px !important;
+        padding-inline: 0 !important;
+      }
 
-        .rev5__viewport {
-          margin-inline: var(--cc-pad) !important;
-        }
+      /* Landing Offerte di lancio */
+      .ol {
+        padding-inline: var(--page-margin) !important;
+      }
 
-        [id$='__section_6mPHiF'] .custom-section-content > .layout-panel-flex > .group-block {
-          --padding-inline-start: var(--cc-pad) !important;
-          --padding-inline-end: var(--cc-pad) !important;
-          padding-inline: var(--cc-pad) !important;
-        }
+      /* Rientri laterali impostati a mano nelle sezioni personalizzate */
+      .section.made-italy,
+      .section.rev5,
+      .section.whycc,
+      .section.qcompare,
+      .section.contact-cards {
+        --padding-inline-start: 0px !important;
+        --padding-inline-end: 0px !important;
+      }
 
-        /* 3. Spazio tra le card */
-        .whycc__track,
-        .qcompare__grid,
-        .contact-cards__grid,
-        [id$='__collection_list_hwFndy'] slideshow-slides {
-          gap: var(--cc-gap) !important;
+      @media screen and (max-width: 599px) {
+        .qcompare__grid {
+          padding-inline: 0 !important;
+          scroll-padding-inline: 0 !important;
         }
+      }
 
-        .made-italy__carousel {
-          --mi-gap: var(--cc-gap) !important;
-        }
+      /* 2. Rientro dentro i riquadri */
+      .whycc__panel {
+        padding-inline: var(--cc-pad) !important;
+      }
 
-        .rev5__card {
-          margin-inline-end: var(--cc-gap) !important;
-        }
+      .whycc__track,
+      .whycc--label-horizontal .whycc__label {
+        padding-inline-end: 0 !important;
+      }
 
-        @media screen and (min-width: 750px) {
-          [id$='__collection_list_hwFndy'] .resource-list__carousel .resource-list__slide {
-            width: calc((100% - 2 * var(--cc-gap)) / 3) !important;
-            margin-right: 0 !important;
-          }
+      .rev5__head,
+      .rev5__note {
+        padding-inline: var(--cc-pad) !important;
+      }
+
+      .rev5__viewport {
+        margin-inline: var(--cc-pad) !important;
+      }
+
+      .mattress-comparison__card,
+      .ol-hero {
+        padding-inline: var(--cc-pad) !important;
+      }
+
+      /* Box colorati di Prova 100 notti + Quiz */
+      :is([id$='__section_promo'], [id$='__section_XndPc9']) .group-block .group-block[class*='color-'] {
+        --padding-inline-start: var(--cc-pad) !important;
+        --padding-inline-end: var(--cc-pad) !important;
+        padding-inline: var(--cc-pad) !important;
+      }
+
+      [id$='__section_6mPHiF'] .custom-section-content > .layout-panel-flex > .group-block {
+        --padding-inline-start: var(--cc-pad) !important;
+        --padding-inline-end: var(--cc-pad) !important;
+        padding-inline: var(--cc-pad) !important;
+      }
+
+      /* 3. Spazio tra le card */
+      .whycc__track,
+      .qcompare__grid,
+      .contact-cards__grid,
+      .ol-grid,
+      :is([id$='__section_promo'], [id$='__section_XndPc9']) .custom-section-content > .layout-panel-flex > .group-block > .group-block-content,
+      .resource-list__carousel:has(.collection-card) slideshow-slides {
+        gap: var(--cc-gap) !important;
+      }
+
+      .product-grid {
+        column-gap: var(--cc-gap) !important;
+      }
+
+      .made-italy__carousel {
+        --mi-gap: var(--cc-gap) !important;
+      }
+
+      .rev5__card {
+        margin-inline-end: var(--cc-gap) !important;
+      }
+
+      @media screen and (min-width: 750px) {
+        .resource-list__carousel:has(.collection-card) .resource-list__slide {
+          width: calc((100% - 2 * var(--cc-gap)) / 3) !important;
+          margin-right: 0 !important;
         }
-      </style>
-    {%- endif -%}
+      }
+    </style>
   </head>
 
   <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
