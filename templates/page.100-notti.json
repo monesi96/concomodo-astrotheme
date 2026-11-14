@@ -657,7 +657,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h3>Come funziona</h3>",
+            "text": "<h3>Come <strong>funziona</strong></h3>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
