@@ -10,6 +10,38 @@
   if section.settings.content_position == 'left'
     assign content_side_class = 'mattress-layers--content-left'
   endif
+
+  comment
+    I topper (tipo prodotto "Topper") partono sempre esplosi: da chiuso si vedrebbe solo il rivestimento.
+  endcomment
+  assign is_topper = false
+  assign product_type = product.type | downcase
+  if product_type contains 'topper'
+    assign is_topper = true
+  endif
+
+  comment
+    Calibrazione della vista chiusa: i valori stanno sul layer del rivestimento superiore (primo layer).
+  endcomment
+  assign closed_overlap = 0
+  assign closed_scale = 1
+  assign closed_trim_cover = 0
+  assign closed_trim_base = 0
+  if has_layers
+    assign cover_layer = layers.first
+    if cover_layer.closed_overlap.value != blank
+      assign closed_overlap = cover_layer.closed_overlap.value
+    endif
+    if cover_layer.closed_scale.value != blank
+      assign closed_scale = cover_layer.closed_scale.value
+    endif
+    if cover_layer.closed_trim_cover.value != blank
+      assign closed_trim_cover = cover_layer.closed_trim_cover.value
+    endif
+    if cover_layer.closed_trim_base.value != blank
+      assign closed_trim_base = cover_layer.closed_trim_base.value
+    endif
+  endif
 -%}
 
 {%- if has_layers -%}
@@ -21,14 +53,23 @@
 
   <div class="section-background color-{{ section.settings.color_scheme }}"></div>
   <mattress-layers-component
-    class="section section--{{ section.settings.section_width }} mattress-layers color-{{ section.settings.color_scheme }} spacing-style {{ content_side_class }}"
+    class="section section--{{ section.settings.section_width }} mattress-layers color-{{ section.settings.color_scheme }} spacing-style {{ content_side_class }}{% if is_topper %} mattress-layers--topper{% endif %}"
     {% unless section.settings.animate_on_scroll %}data-no-animation{% endunless %}
+    {% if is_topper %}
+      data-open
+    {% elsif section.settings.start_closed %}
+      data-start-closed
+    {% endif %}
     style="
       {%- render 'spacing-style', settings: section.settings %}
       --ml-gap-open: {{ section.settings.explode_gap }}px;
       --ml-gap-open-mobile: {{ section.settings.explode_gap | times: 0.6 | round }}px;
       --ml-dim: {{ section.settings.dim_opacity | divided_by: 100.0 }};
       --ml-stagger: {{ section.settings.stagger }}ms;
+      --ml-closed-overlap: {{ closed_overlap }}%;
+      --ml-closed-scale: {{ closed_scale }};
+      --ml-closed-trim-cover: {{ closed_trim_cover }}%;
+      --ml-closed-trim-base: {{ closed_trim_base }}%;
     "
     {% if request.visual_preview_mode %}data-shopify-visual-preview{% endif %}
   >
@@ -70,6 +111,25 @@
           </button>
         {%- endfor -%}
       </div>
+
+      {%- if section.settings.show_toggle -%}
+        <div class="mattress-layers__toggle-wrap">
+          <button
+            type="button"
+            class="mattress-layers__toggle"
+            ref="toggle"
+            aria-expanded="{% if is_topper %}true{% else %}false{% endif %}"
+            on:click="/toggle"
+          >
+            <span class="mattress-layers__toggle-label mattress-layers__toggle-label--open">
+              {{- section.settings.label_open -}}
+            </span>
+            <span class="mattress-layers__toggle-label mattress-layers__toggle-label--close">
+              {{- section.settings.label_close -}}
+            </span>
+          </button>
+        </div>
+      {%- endif -%}
     </div>
 
     {%- comment -%} ── Content: captions linked to layers by index ── {%- endcomment -%}
@@ -121,6 +181,7 @@
     --ml-gap-closed: 0px;
     --ml-dim: 0.5;
     --ml-stagger: 90ms;
+    --ml-ease: cubic-bezier(0.22, 1, 0.36, 1);
 
     display: grid;
     gap: var(--gap, 2rem);
@@ -162,6 +223,10 @@
     justify-content: center;
   }
 
+  .mattress-layers:not([data-open]) .mattress-layers__stage {
+    cursor: pointer;
+  }
+
   .mattress-layers__layer {
     position: relative;
     /* Higher layers stack above lower ones (index 0 = top = highest) */
@@ -177,9 +242,9 @@
     appearance: none;
     margin-block-start: 0;
     transition:
-      grid-template-rows 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      grid-template-rows 0.7s var(--ml-ease),
       opacity 0.6s ease,
-      margin 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      margin 0.7s var(--ml-ease);
     transition-delay: calc(var(--index) * var(--ml-stagger));
   }
 
@@ -192,6 +257,46 @@
   .mattress-layers__layer:not(:first-child):not(:last-child) {
     grid-template-rows: 0fr;
     opacity: 0;
+  }
+
+  /* Topper chiuso: si vede solo il rivestimento superiore */
+  .mattress-layers--topper:not([data-open]) .mattress-layers__layer:not(:first-child) {
+    grid-template-rows: 0fr;
+    opacity: 0;
+  }
+
+  /* Materasso chiuso: il rivestimento superiore appoggia sulla base.
+     I valori arrivano dai campi "Chiuso · …" del layer del rivestimento superiore. */
+  .mattress-layers:not(.mattress-layers--topper) .mattress-layers__layer:first-child {
+    transform-origin: 50% 100%;
+    clip-path: inset(0 0 0 0);
+    transition:
+      grid-template-rows 0.7s var(--ml-ease),
+      opacity 0.6s ease,
+      margin 0.7s var(--ml-ease),
+      transform 0.7s var(--ml-ease),
+      clip-path 0.7s ease;
+  }
+
+  .mattress-layers:not(.mattress-layers--topper):not([data-open]) .mattress-layers__layer:first-child {
+    transform: scale(var(--ml-closed-scale, 1));
+    clip-path: inset(0 0 var(--ml-closed-trim-cover, 0%) 0);
+  }
+
+  .mattress-layers:not(.mattress-layers--topper) .mattress-layers__layer:last-child {
+    clip-path: inset(0 0 0 0);
+    transition:
+      grid-template-rows 0.7s var(--ml-ease),
+      opacity 0.6s ease,
+      margin 0.7s var(--ml-ease),
+      clip-path 0.7s ease;
+    transition-delay: calc(var(--index) * var(--ml-stagger));
+  }
+
+  .mattress-layers:not(.mattress-layers--topper):not([data-open]) .mattress-layers__layer:last-child {
+    /* percentuale sulla larghezza: resta proporzionata su ogni schermo */
+    margin-block-start: var(--ml-closed-overlap, 0%);
+    clip-path: inset(var(--ml-closed-trim-base, 0%) 0 0 0);
   }
 
   /* ── Exploded state ── */
@@ -250,6 +355,45 @@
     border-radius: 4px;
   }
 
+  /* ── Pulsante apri / richiudi ── */
+  .mattress-layers__toggle-wrap {
+    display: flex;
+    justify-content: center;
+    margin-block-start: 1.25rem;
+  }
+
+  .mattress-layers__toggle {
+    padding: 0.55rem 1.1rem;
+    border: 1px solid rgb(from currentcolor r g b / 25%);
+    border-radius: 999px;
+    background: none;
+    color: inherit;
+    font: inherit;
+    font-size: 0.95em;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    transition: border-color 0.25s ease;
+  }
+
+  .mattress-layers__toggle:hover {
+    border-color: rgb(from currentcolor r g b / 55%);
+  }
+
+  .mattress-layers__toggle:focus-visible {
+    outline: 2px solid currentcolor;
+    outline-offset: 2px;
+  }
+
+  .mattress-layers__toggle-label--close,
+  .mattress-layers[data-open] .mattress-layers__toggle-label--open {
+    display: none;
+  }
+
+  .mattress-layers[data-open] .mattress-layers__toggle-label--close {
+    display: inline;
+  }
+
   /* ── Header (spans both columns, centered) ── */
   .mattress-layers__header {
     grid-area: header;
@@ -298,7 +442,14 @@
     /* Inherit the site font instead of the browser's default button font */
     font-family: inherit;
     font-size: 1.25em;
-    transition: opacity 0.35s ease;
+    transition:
+      opacity 0.35s ease,
+      padding 0.6s var(--ml-ease);
+  }
+
+  /* Da chiuso: solo i titoli, più compatti */
+  .mattress-layers:not([data-open]) .mattress-layers__caption {
+    padding-block: 0.7rem;
   }
 
   @media screen and (min-width: 750px) {
@@ -323,9 +474,23 @@
   }
 
   .mattress-layers__caption-text {
+    display: block;
+    overflow: hidden;
+    max-height: 20em;
     opacity: 0.8;
     font-size: 0.95em;
     line-height: 1.5;
+    transition:
+      max-height 0.6s var(--ml-ease),
+      opacity 0.45s ease,
+      margin 0.6s var(--ml-ease);
+  }
+
+  /* Da chiuso le descrizioni sono nascoste */
+  .mattress-layers:not([data-open]) .mattress-layers__caption-text {
+    max-height: 0;
+    opacity: 0;
+    margin-block-start: -0.35rem;
   }
 
   .mattress-layers__caption-text > :first-child {
@@ -345,7 +510,9 @@
 
   @media (prefers-reduced-motion: reduce) {
     .mattress-layers__stage,
-    .mattress-layers__layer {
+    .mattress-layers__layer,
+    .mattress-layers__caption,
+    .mattress-layers__caption-text {
       transition: none;
     }
   }
@@ -386,12 +553,42 @@
     },
     {
       "type": "header",
+      "content": "Apertura"
+    },
+    {
+      "type": "checkbox",
+      "id": "start_closed",
+      "label": "Parti chiuso, esplodi al click",
+      "info": "Il materasso resta chiuso finché il cliente non clicca sul materasso, su uno strato o sul pulsante. I topper (tipo prodotto Topper) partono sempre esplosi. La calibrazione della vista chiusa si imposta nei campi \"Chiuso · …\" del layer del rivestimento superiore.",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_toggle",
+      "label": "Mostra pulsante apri / richiudi",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "label_open",
+      "label": "Testo pulsante per aprire",
+      "default": "Scopri gli strati ↓"
+    },
+    {
+      "type": "text",
+      "id": "label_close",
+      "label": "Testo pulsante per richiudere",
+      "default": "Richiudi gli strati ↑"
+    },
+    {
+      "type": "header",
       "content": "Animation & layout"
     },
     {
       "type": "checkbox",
       "id": "animate_on_scroll",
       "label": "Explode on scroll into view",
+      "info": "Usato solo se \"Parti chiuso\" è disattivato.",
       "default": true
     },
     {
