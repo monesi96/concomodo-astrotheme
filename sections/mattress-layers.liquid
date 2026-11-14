@@ -29,17 +29,21 @@
   assign closed_trim_base = 0
   if has_layers
     assign cover_layer = layers.first
-    if cover_layer.closed_overlap.value != blank
-      assign closed_overlap = cover_layer.closed_overlap.value
+    assign raw = cover_layer.closed_overlap.value | default: cover_layer.closed_overlap
+    if raw != blank
+      assign closed_overlap = raw
     endif
-    if cover_layer.closed_scale.value != blank
-      assign closed_scale = cover_layer.closed_scale.value
+    assign raw = cover_layer.closed_scale.value | default: cover_layer.closed_scale
+    if raw != blank
+      assign closed_scale = raw
     endif
-    if cover_layer.closed_trim_cover.value != blank
-      assign closed_trim_cover = cover_layer.closed_trim_cover.value
+    assign raw = cover_layer.closed_trim_cover.value | default: cover_layer.closed_trim_cover
+    if raw != blank
+      assign closed_trim_cover = raw
     endif
-    if cover_layer.closed_trim_base.value != blank
-      assign closed_trim_base = cover_layer.closed_trim_base.value
+    assign raw = cover_layer.closed_trim_base.value | default: cover_layer.closed_trim_base
+    if raw != blank
+      assign closed_trim_base = raw
     endif
   endif
 -%}
