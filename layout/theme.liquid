@@ -222,6 +222,32 @@
           margin-right: 0 !important;
         }
       }
+      /* 4. Caroselli a filo destro: le card escono dal bordo destro e si fermano col margine solo a fine corsa */
+      .whycc__panel {
+        padding-inline-end: 0 !important;
+      }
+
+      .whycc__track {
+        grid-auto-columns: 74vw !important;
+        padding-inline-end: var(--cc-pad) !important;
+        scroll-padding-inline-end: var(--cc-pad);
+        border-start-end-radius: 0 !important;
+        border-end-end-radius: 0 !important;
+      }
+
+      .whycc--label-horizontal .whycc__label {
+        padding-inline-end: var(--cc-pad) !important;
+      }
+
+      @media screen and (min-width: 750px) {
+        .whycc__track {
+          grid-auto-columns: clamp(260px, 26vw, 380px) !important;
+        }
+      }
+
+      .made-italy:not(.made-italy--media-left) .made-italy__viewport {
+        margin-inline-end: calc(-1 * var(--page-margin));
+      }
     </style>
   </head>
 
