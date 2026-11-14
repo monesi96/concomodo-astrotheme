@@ -2177,7 +2177,7 @@
         }
       },
       "custom_css": [
-        "@media screen and (max-width: 749px) {.layout-panel-flex--row:has(> product-price) {flex-wrap: nowrap; align-items: center; } .layout-panel-flex--row:has(> product-price) > product-price {flex: 0 0 auto; } }"
+        "@media screen and (max-width: 749px) {.layout-panel-flex--row:has(> product-price) {flex-wrap: nowrap; align-items: center; } .layout-panel-flex--row:has(> product-price) > product-price {flex: 0 0 auto; }}"
       ],
       "settings": {
         "content_width": "content-center-aligned",
