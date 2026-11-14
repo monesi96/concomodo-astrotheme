@@ -601,7 +601,7 @@
               },
               "blocks": {}
             },
-            "group_hnXFGW": {
+            "group_7ywnab": {
               "type": "group",
               "name": "checkout",
               "settings": {
@@ -628,8 +628,8 @@
                 "border_width": 1,
                 "border_opacity": 100,
                 "border_radius": 30,
-                "toggle_overlay": true,
-                "overlay_color": "#ffffff",
+                "toggle_overlay": false,
+                "overlay_color": "#FFFFFF",
                 "overlay_style": "solid",
                 "gradient_direction": "to top",
                 "link": "",
@@ -641,9 +641,10 @@
                 "padding-inline-end": 30
               },
               "blocks": {
-                "heylight_rate_HVFKmr": {
+                "heylight_rate_yED6Ni": {
                   "type": "heylight-rate",
                   "name": "Rata HeyLight",
+                  "disabled": true,
                   "settings": {
                     "brand_label": "HeyLight",
                     "text_before": "Pagalo da",
@@ -656,14 +657,14 @@
                   },
                   "blocks": {}
                 },
-                "group_rm3y8g": {
+                "group_HqYKRm": {
                   "type": "group",
                   "name": "t:names.group",
                   "settings": {
                     "content_direction": "row",
-                    "vertical_on_mobile": true,
+                    "vertical_on_mobile": false,
                     "horizontal_alignment": "space-between",
-                    "vertical_alignment": "flex-end",
+                    "vertical_alignment": "center",
                     "align_baseline": false,
                     "horizontal_alignment_flex_direction_column": "flex-start",
                     "vertical_alignment_flex_direction_column": "center",
@@ -696,13 +697,13 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {
-                    "price_8qL6AA": {
+                    "price_gLyTKG": {
                       "type": "price",
                       "name": "t:names.product_price",
                       "settings": {
                         "show_sale_price_first": true,
                         "show_installments": false,
-                        "show_tax_info": true,
+                        "show_tax_info": false,
                         "type_preset": "h3",
                         "width": "fit-content",
                         "alignment": "left",
@@ -719,9 +720,224 @@
                       },
                       "blocks": {}
                     },
-                    "group_hw4AkW": {
+                    "group_RxwpRP": {
                       "type": "group",
                       "name": "t:names.group",
+                      "settings": {
+                        "content_direction": "column",
+                        "vertical_on_mobile": true,
+                        "horizontal_alignment": "flex-start",
+                        "vertical_alignment": "center",
+                        "align_baseline": false,
+                        "horizontal_alignment_flex_direction_column": "center",
+                        "vertical_alignment_flex_direction_column": "space-between",
+                        "gap": 12,
+                        "width": "fit-content",
+                        "custom_width": 100,
+                        "width_mobile": "fit-content",
+                        "custom_width_mobile": 100,
+                        "height": "fit",
+                        "custom_height": 100,
+                        "inherit_color_scheme": true,
+                        "color_scheme": "",
+                        "background_media": "none",
+                        "video_position": "cover",
+                        "background_image_position": "cover",
+                        "border": "none",
+                        "border_width": 1,
+                        "border_opacity": 100,
+                        "border_radius": 0,
+                        "toggle_overlay": false,
+                        "overlay_color": "#00000026",
+                        "overlay_style": "solid",
+                        "gradient_direction": "to top",
+                        "link": "",
+                        "open_in_new_tab": false,
+                        "placeholder": "",
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {
+                        "group_ydgVqn": {
+                          "type": "group",
+                          "name": "t:names.group",
+                          "settings": {
+                            "content_direction": "row",
+                            "vertical_on_mobile": false,
+                            "horizontal_alignment": "flex-end",
+                            "vertical_alignment": "center",
+                            "align_baseline": false,
+                            "horizontal_alignment_flex_direction_column": "flex-start",
+                            "vertical_alignment_flex_direction_column": "center",
+                            "gap": 12,
+                            "width": "fill",
+                            "custom_width": 100,
+                            "width_mobile": "fit-content",
+                            "custom_width_mobile": 100,
+                            "height": "fit",
+                            "custom_height": 100,
+                            "inherit_color_scheme": true,
+                            "color_scheme": "",
+                            "background_media": "none",
+                            "video_position": "cover",
+                            "background_image_position": "cover",
+                            "border": "none",
+                            "border_width": 1,
+                            "border_opacity": 100,
+                            "border_radius": 0,
+                            "toggle_overlay": false,
+                            "overlay_color": "#00000026",
+                            "overlay_style": "solid",
+                            "gradient_direction": "to top",
+                            "link": "",
+                            "open_in_new_tab": false,
+                            "placeholder": "",
+                            "padding-block-start": 0,
+                            "padding-block-end": 0,
+                            "padding-inline-start": 0,
+                            "padding-inline-end": 0
+                          },
+                          "blocks": {
+                            "icon_k97W6B": {
+                              "type": "icon",
+                              "name": "t:names.icon",
+                              "settings": {
+                                "icon": "price_tag",
+                                "width": 16,
+                                "link": "",
+                                "open_in_new_tab": false
+                              },
+                              "blocks": {}
+                            },
+                            "text_HVt4hG": {
+                              "type": "text",
+                              "name": "t:names.text",
+                              "settings": {
+                                "text": "<p><strong>Prezzo solo online</strong></p>",
+                                "width": "fit-content",
+                                "max_width": "normal",
+                                "alignment": "left",
+                                "type_preset": "rte",
+                                "font": "var(--font-body--family)",
+                                "weight": "",
+                                "font_size": "1rem",
+                                "line_height": "normal",
+                                "letter_spacing": "normal",
+                                "case": "none",
+                                "wrap": "pretty",
+                                "color": "var(--color-foreground)",
+                                "background": false,
+                                "background_color": "#00000026",
+                                "corner_radius": 0,
+                                "padding-block-start": 0,
+                                "padding-block-end": 0,
+                                "padding-inline-start": 0,
+                                "padding-inline-end": 0
+                              },
+                              "blocks": {}
+                            }
+                          },
+                          "block_order": [
+                            "icon_k97W6B",
+                            "text_HVt4hG"
+                          ]
+                        },
+                        "group_JFYWBk": {
+                          "type": "group",
+                          "name": "t:names.group",
+                          "settings": {
+                            "content_direction": "row",
+                            "vertical_on_mobile": false,
+                            "horizontal_alignment": "flex-end",
+                            "vertical_alignment": "center",
+                            "align_baseline": false,
+                            "horizontal_alignment_flex_direction_column": "flex-start",
+                            "vertical_alignment_flex_direction_column": "center",
+                            "gap": 12,
+                            "width": "fill",
+                            "custom_width": 100,
+                            "width_mobile": "fit-content",
+                            "custom_width_mobile": 100,
+                            "height": "fit",
+                            "custom_height": 100,
+                            "inherit_color_scheme": true,
+                            "color_scheme": "",
+                            "background_media": "none",
+                            "video_position": "cover",
+                            "background_image_position": "cover",
+                            "border": "none",
+                            "border_width": 1,
+                            "border_opacity": 100,
+                            "border_radius": 0,
+                            "toggle_overlay": false,
+                            "overlay_color": "#00000026",
+                            "overlay_style": "solid",
+                            "gradient_direction": "to top",
+                            "link": "",
+                            "open_in_new_tab": false,
+                            "placeholder": "",
+                            "padding-block-start": 0,
+                            "padding-block-end": 0,
+                            "padding-inline-start": 0,
+                            "padding-inline-end": 0
+                          },
+                          "blocks": {
+                            "icon_ezqaXz": {
+                              "type": "icon",
+                              "name": "t:names.icon",
+                              "settings": {
+                                "icon": "truck",
+                                "width": 16,
+                                "link": "",
+                                "open_in_new_tab": false
+                              },
+                              "blocks": {}
+                            },
+                            "text_qRWKrf": {
+                              "type": "text",
+                              "name": "t:names.text",
+                              "settings": {
+                                "text": "<p><strong>Consegna gratuita</strong></p>",
+                                "width": "fit-content",
+                                "max_width": "normal",
+                                "alignment": "left",
+                                "type_preset": "rte",
+                                "font": "var(--font-body--family)",
+                                "weight": "",
+                                "font_size": "1rem",
+                                "line_height": "normal",
+                                "letter_spacing": "normal",
+                                "case": "none",
+                                "wrap": "pretty",
+                                "color": "var(--color-foreground)",
+                                "background": false,
+                                "background_color": "#00000026",
+                                "corner_radius": 0,
+                                "padding-block-start": 0,
+                                "padding-block-end": 0,
+                                "padding-inline-start": 0,
+                                "padding-inline-end": 0
+                              },
+                              "blocks": {}
+                            }
+                          },
+                          "block_order": [
+                            "icon_ezqaXz",
+                            "text_qRWKrf"
+                          ]
+                        }
+                      },
+                      "block_order": [
+                        "group_ydgVqn",
+                        "group_JFYWBk"
+                      ]
+                    },
+                    "group_D3DVtA": {
+                      "type": "group",
+                      "name": "t:names.group",
+                      "disabled": true,
                       "settings": {
                         "content_direction": "row",
                         "vertical_on_mobile": false,
@@ -759,7 +975,92 @@
                         "padding-inline-end": 0
                       },
                       "blocks": {
-                        "icon_Qy9PXx": {
+                        "icon_B76MxQ": {
+                          "type": "icon",
+                          "name": "t:names.icon",
+                          "settings": {
+                            "icon": "truck",
+                            "width": 16,
+                            "link": "",
+                            "open_in_new_tab": false
+                          },
+                          "blocks": {}
+                        },
+                        "text_6LYhDz": {
+                          "type": "text",
+                          "name": "t:names.text",
+                          "settings": {
+                            "text": "<p><strong>Consegna gratuita</strong></p>",
+                            "width": "fit-content",
+                            "max_width": "normal",
+                            "alignment": "left",
+                            "type_preset": "rte",
+                            "font": "var(--font-body--family)",
+                            "weight": "",
+                            "font_size": "1rem",
+                            "line_height": "normal",
+                            "letter_spacing": "normal",
+                            "case": "none",
+                            "wrap": "pretty",
+                            "color": "var(--color-foreground)",
+                            "background": false,
+                            "background_color": "#00000026",
+                            "corner_radius": 0,
+                            "padding-block-start": 0,
+                            "padding-block-end": 0,
+                            "padding-inline-start": 0,
+                            "padding-inline-end": 0
+                          },
+                          "blocks": {}
+                        }
+                      },
+                      "block_order": [
+                        "icon_B76MxQ",
+                        "text_6LYhDz"
+                      ]
+                    },
+                    "group_mHRygy": {
+                      "type": "group",
+                      "name": "t:names.group",
+                      "disabled": true,
+                      "settings": {
+                        "content_direction": "row",
+                        "vertical_on_mobile": false,
+                        "horizontal_alignment": "flex-end",
+                        "vertical_alignment": "center",
+                        "align_baseline": false,
+                        "horizontal_alignment_flex_direction_column": "flex-start",
+                        "vertical_alignment_flex_direction_column": "center",
+                        "gap": 12,
+                        "width": "fill",
+                        "custom_width": 100,
+                        "width_mobile": "fit-content",
+                        "custom_width_mobile": 100,
+                        "height": "fit",
+                        "custom_height": 100,
+                        "inherit_color_scheme": true,
+                        "color_scheme": "",
+                        "background_media": "none",
+                        "video_position": "cover",
+                        "background_image_position": "cover",
+                        "border": "none",
+                        "border_width": 1,
+                        "border_opacity": 100,
+                        "border_radius": 0,
+                        "toggle_overlay": false,
+                        "overlay_color": "#00000026",
+                        "overlay_style": "solid",
+                        "gradient_direction": "to top",
+                        "link": "",
+                        "open_in_new_tab": false,
+                        "placeholder": "",
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {
+                        "icon_wf4UWm": {
                           "type": "icon",
                           "name": "t:names.icon",
                           "settings": {
@@ -770,7 +1071,7 @@
                           },
                           "blocks": {}
                         },
-                        "text_EGW4kJ": {
+                        "text_XiXeUY": {
                           "type": "text",
                           "name": "t:names.text",
                           "settings": {
@@ -799,17 +1100,19 @@
                         }
                       },
                       "block_order": [
-                        "icon_Qy9PXx",
-                        "text_EGW4kJ"
+                        "icon_wf4UWm",
+                        "text_XiXeUY"
                       ]
                     }
                   },
                   "block_order": [
-                    "price_8qL6AA",
-                    "group_hw4AkW"
+                    "price_gLyTKG",
+                    "group_RxwpRP",
+                    "group_D3DVtA",
+                    "group_mHRygy"
                   ]
                 },
-                "buy_buttons_VLi7An": {
+                "buy_buttons_VY7LMP": {
                   "type": "buy-buttons",
                   "settings": {
                     "stacking": true,
@@ -847,9 +1150,9 @@
                 }
               },
               "block_order": [
-                "heylight_rate_HVFKmr",
-                "group_rm3y8g",
-                "buy_buttons_VLi7An"
+                "heylight_rate_yED6Ni",
+                "group_HqYKRm",
+                "buy_buttons_VY7LMP"
               ]
             },
             "group_8RdTqG": {
@@ -1114,9 +1417,9 @@
                         "product": "topper-carezza",
                         "badge": "Più morbidezza",
                         "benefit": "Se il materasso è troppo rigido e lo vuoi più morbido, senza effetto sprofondo.",
-                        "add_label": "Aggiungi al carrello",
                         "discounts": "80x190=40\n85x190=40\n90x190=40\n120x190=50\n140x190=50\n160x190=50\n165x190=50\n170x190=50\n180x190=50\n80x195=40\n85x195=40\n90x195=40\n120x195=50\n140x195=50\n160x195=50\n165x195=50\n170x195=50\n180x195=50\n80x200=40\n85x200=40\n90x200=40\n120x200=50\n140x200=50\n160x200=50\n165x200=50\n170x200=50\n180x200=50",
-                        "saving_label": "-{amount}€ di sconto + {pillows} in omaggio"
+                        "saving_label": "-{amount}€ di sconto + {pillows} in omaggio",
+                        "add_label": "Aggiungi al carrello"
                       },
                       "blocks": {}
                     },
@@ -1126,9 +1429,9 @@
                         "product": "topper-abbraccio",
                         "badge": "Più sostegno",
                         "benefit": "Allunga la vita del materasso e dà più rigidità a quello che sprofonda.",
-                        "add_label": "Aggiungi al carrello",
                         "discounts": "80x190=60\n85x190=60\n90x190=50\n120x190=70\n140x190=70\n160x190=70\n165x190=70\n170x190=70\n180x190=70\n80x195=50\n85x195=60\n90x195=60\n120x195=70\n140x195=70\n160x195=70\n165x195=70\n170x195=70\n180x195=70\n80x200=50\n85x200=50\n90x200=50\n120x200=70\n140x200=70\n160x200=70\n165x200=70\n170x200=70\n180x200=70",
-                        "saving_label": "-{amount}€ di sconto + {pillows} in omaggio"
+                        "saving_label": "-{amount}€ di sconto + {pillows} in omaggio",
+                        "add_label": "Aggiungi al carrello"
                       },
                       "blocks": {}
                     }
@@ -1835,7 +2138,7 @@
             "divider_VJhene",
             "variant_picker_R3rGDr",
             "divider_8WdpaB",
-            "group_hnXFGW",
+            "group_7ywnab",
             "group_8RdTqG",
             "group_cFCqYB",
             "group_cbQ78H",
@@ -1845,6 +2148,9 @@
           ]
         }
       },
+      "custom_css": [
+        "@media screen and (max-width: 749px) {.layout-panel-flex--row:has(> product-price) {flex-wrap: nowrap; align-items: center; } .layout-panel-flex--row:has(> product-price) > product-price {flex: 0 0 auto; } }"
+      ],
       "settings": {
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",
@@ -1898,6 +2204,10 @@
         "heading": "Con quali comfort dormirai",
         "subheading": "",
         "content_position": "right",
+        "start_closed": true,
+        "show_toggle": true,
+        "label_open": "Scopri gli strati ↓",
+        "label_close": "Richiudi gli strati ↑",
         "animate_on_scroll": true,
         "explode_gap": -16,
         "stagger": 90,
@@ -2345,6 +2655,9 @@
       "name": "Mattress comparison",
       "settings": {
         "heading": "Confronta questo materasso",
+        "compare_collection": "",
+        "max_products": 12,
+        "picker_label": "Confronta con",
         "show_feel": true,
         "feel_label": "Sensazione del materasso",
         "feel_tooltip": "Quanto il materasso risulta morbido o rigido al primo contatto. Non è un voto ma una caratteristica: la sensazione giusta dipende dalle tue abitudini e dalla posizione in cui dormi.",
@@ -3426,6 +3739,54 @@
         "padding-inline-end": 0
       }
     },
+    "fatti_in_italia": {
+      "type": "fatti-in-italia",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/concomodo-produzione-reparto.png",
+            "caption": ""
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/concomodo-produzione-magazzino.png",
+            "caption": ""
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/concomodo-produzione-linea.png",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "slide_2",
+        "slide_3"
+      ],
+      "settings": {
+        "show_flag": true,
+        "heading": "I nostri materassi li facciamo noi, in Italia.",
+        "text": "<p>Tagliamo le schiume su misura, cuciamo i rivestimenti nel nostro reparto e controlliamo ogni materasso prima di imballarlo. Da qui parte direttamente verso casa tua, dal produttore a te senza intermediari.</p><p>Seguire tutto da vicino ci permette di curare ogni dettaglio e di tenere un prezzo onesto.</p>",
+        "button_label": "",
+        "button_link": "",
+        "image_position": "right",
+        "autoplay": true,
+        "autoplay_speed": 5,
+        "corner_radius": 24,
+        "section_width": "page-width",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 56,
+        "padding-block-end": 56,
+        "padding-inline-start": 0,
+        "padding-inline-end": 0
+      }
+    },
     "section_chbtyY": {
       "type": "section",
       "blocks": {
@@ -4459,54 +4820,6 @@
         "gradient_direction": "to top",
         "padding-block-start": 0,
         "padding-block-end": 0
-      }
-    },
-    "fatti_in_italia": {
-      "type": "fatti-in-italia",
-      "blocks": {
-        "slide_1": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/concomodo-produzione-reparto.png",
-            "caption": ""
-          }
-        },
-        "slide_2": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/concomodo-produzione-magazzino.png",
-            "caption": ""
-          }
-        },
-        "slide_3": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/concomodo-produzione-linea.png",
-            "caption": ""
-          }
-        }
-      },
-      "block_order": [
-        "slide_1",
-        "slide_2",
-        "slide_3"
-      ],
-      "settings": {
-        "show_flag": true,
-        "heading": "I nostri materassi li facciamo noi, in Italia.",
-        "text": "<p>Tagliamo le schiume su misura, cuciamo i rivestimenti nel nostro reparto e controlliamo ogni materasso prima di imballarlo. Da qui parte direttamente verso casa tua, dal produttore a te senza intermediari.</p><p>Seguire tutto da vicino ci permette di curare ogni dettaglio e di tenere un prezzo onesto.</p>",
-        "button_label": "",
-        "button_link": "",
-        "image_position": "right",
-        "autoplay": true,
-        "autoplay_speed": 5,
-        "corner_radius": 24,
-        "section_width": "page-width",
-        "color_scheme": "scheme-1",
-        "padding-block-start": 56,
-        "padding-block-end": 56,
-        "padding-inline-start": 0,
-        "padding-inline-end": 0
       }
     }
   },
