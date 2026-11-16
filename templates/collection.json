@@ -107,7 +107,7 @@
           "type": "filters",
           "static": true,
           "settings": {
-            "enable_filtering": true,
+            "enable_filtering": false,
             "filter_style": "horizontal",
             "filter_width": "centered",
             "text_label_case": "default",
@@ -1242,6 +1242,54 @@
         "padding-block-end": 60
       }
     },
+    "fatti_in_italia_HqzcMY": {
+      "type": "fatti-in-italia",
+      "blocks": {
+        "slide_trb8cB": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/concomodo-produzione-reparto.png",
+            "caption": ""
+          }
+        },
+        "slide_QrQ7pe": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/concomodo-produzione-magazzino.png",
+            "caption": ""
+          }
+        },
+        "slide_BtXVLj": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/concomodo-produzione-linea.png",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_trb8cB",
+        "slide_QrQ7pe",
+        "slide_BtXVLj"
+      ],
+      "settings": {
+        "show_flag": true,
+        "heading": "Linea artigianale, <strong>fatta in Italia da oltre 25 anni.</strong>",
+        "text": "<p>Il segreto dietro Concomodo è il nostro laboratorio dove da oltre 25 anni produciamo materassi di linea premium. È un mestiere che si impara con il tempo: scegliere le materie prime giuste, tagliare le schiume su misura, assemblare gli strati nell'ordine che fa la differenza, cucire i rivestimenti con cura. È ciò che facciamo da decenni.</p><p>Ogni materasso, topper e cuscino Concomodo nasce grazie a mani esperte che fanno questo lavoro da una vita e supera un controllo finale prima di essere imballato. Seguire tutto da vicino, dalla selezione dei materiali fino all'ultima cucitura, ci permette di garantire un’elevata qualità su ogni prodotto e di portarlo direttamente a casa tua: dal produttore a te, senza intermediari e a un prezzo onesto.</p>",
+        "button_label": "Scopri i materassi",
+        "button_link": "shopify://collections/materassi",
+        "image_position": "right",
+        "autoplay": true,
+        "autoplay_speed": 5,
+        "corner_radius": 24,
+        "section_width": "page-width",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 60,
+        "padding-block-end": 60,
+        "padding-inline-start": 48,
+        "padding-inline-end": 48
+      }
+    },
     "section_bundlebuilder": {
       "type": "bundle-builder",
       "disabled": true,
@@ -2349,7 +2397,7 @@
         "overlay_style": "solid",
         "gradient_direction": "to top",
         "padding-block-start": 80,
-        "padding-block-end": 80
+        "padding-block-end": 48
       }
     },
     "text_slider_64NyLh": {
@@ -2436,55 +2484,19 @@
         "padding-inline-start": 0,
         "padding-inline-end": 0
       }
-    },
-    "mattress_quick_compare_7RTFVm": {
-      "type": "mattress-quick-compare",
-      "disabled": true,
-      "name": "Comparatore materassi",
-      "settings": {
-        "heading": "Confronta i nostri <strong>materassi</strong>",
-        "subheading": "<p>Quattro modelli, una sola cosa in comune: dormire meglio. Trova quello giusto per te.</p>",
-        "product_1": "sostegno",
-        "product_2": "carezza",
-        "product_3": "abbraccio",
-        "product_4": "abbraccio-plus",
-        "show_image": true,
-        "image_ratio": "4 / 3",
-        "show_firmness": true,
-        "firmness_label": "Durezza",
-        "show_support": true,
-        "support_label": "Supporto",
-        "show_cooling": true,
-        "cooling_label": "Traspirabilità",
-        "show_height": true,
-        "height_label": "Altezza",
-        "show_layers": false,
-        "layers_label": "Strati",
-        "price_prefix": "da",
-        "cta_label": "Scopri",
-        "highlight": 0,
-        "highlight_badge": "",
-        "corner_radius": 26,
-        "section_width": "full-width",
-        "color_scheme": "",
-        "padding-block-start": 40,
-        "padding-block-end": 40,
-        "padding-inline-start": 0,
-        "padding-inline-end": 0
-      }
     }
   },
   "order": [
     "section",
     "main",
     "section_bundle",
+    "fatti_in_italia_HqzcMY",
     "section_bundlebuilder",
     "collection_list_pxN4wG",
     "mattress_quick_compare_ptWQmR",
     "section_promo",
     "recensioni_ovunque_9UMG7t",
     "section_faq",
-    "text_slider_64NyLh",
-    "mattress_quick_compare_7RTFVm"
+    "text_slider_64NyLh"
   ]
 }
