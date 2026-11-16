@@ -168,6 +168,41 @@
   </sticky-add-to-cart>
 {% endif %}
 
+{% comment %} Concomodo: galleria ferma su desktop, dettagli e checkout scorrono {% endcomment %}
+<style>
+  @media screen and (min-width: 750px) {
+    .product-information__media media-gallery {
+      top: var(--cc-gallery-top, var(--sticky-header-offset, 0));
+    }
+  }
+</style>
+<script>
+  (function () {
+    if (window.__ccStickyGallery) return;
+    window.__ccStickyGallery = true;
+    var queued = false;
+    function update() {
+      queued = false;
+      if (window.innerWidth < 750) return;
+      var header = document.querySelector('header.header-section');
+      var headerHeight = header ? header.getBoundingClientRect().height : 0;
+      document.querySelectorAll('.product-information__media media-gallery').forEach(function (gallery) {
+        var top = Math.min(headerHeight + 20, window.innerHeight - gallery.getBoundingClientRect().height - 20);
+        gallery.style.setProperty('--cc-gallery-top', Math.round(top) + 'px');
+      });
+    }
+    function queue() {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(update);
+    }
+    window.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', queue);
+    window.addEventListener('load', queue);
+    queue();
+  })();
+</script>
+
 {% render 'product-information-content',
   product_media_size: closest.product.media.size,
   section_id: section.id,
