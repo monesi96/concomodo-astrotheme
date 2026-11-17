@@ -94,6 +94,14 @@
               },
               "blocks": {}
             },
+            "trust_rating_cc01": {
+              "type": "trust-rating",
+              "settings": {
+                "show_label": true,
+                "alignment": "left"
+              },
+              "blocks": {}
+            },
             "group_icgrde": {
               "type": "group",
               "name": "Header",
@@ -1780,6 +1788,7 @@
             "product_inventory_BWWbeX",
             "review_gVeziG",
             "group_icgrde",
+            "trust_rating_cc01",
             "text_aEtTtq",
             "group_dr6R8y",
             "product_indicators_block",

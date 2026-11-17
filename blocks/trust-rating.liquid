@@ -1,0 +1,152 @@
+{%- comment -%}
+  Concomodo: badge valutazione recensioni (dati del profilo Trustpilot, senza logo).
+  I dati arrivano dal metafield shop concomodo.trustpilot (json: score, count, label, url, updated_at),
+  aggiornato ogni giorno da un'attività programmata. Il badge porta al profilo delle recensioni.
+{%- endcomment -%}
+{%- liquid
+  assign tp = shop.metafields.concomodo.trustpilot.value
+  assign score = tp.score | default: 0 | times: 1.0
+  assign count = tp.count | default: 0
+  assign url = tp.url | default: 'https://it.trustpilot.com/review/concomodo.it'
+  assign label = tp.label
+
+  # Stelle arrotondate alla mezza stella, come sul profilo
+  assign star_rating = score | times: 2 | round | divided_by: 2.0
+  assign fill_pct = star_rating | divided_by: 5.0 | times: 100
+
+  assign score_display = score | times: 10 | round | divided_by: 10.0 | append: '' | replace: '.0', '' | replace: '.', ','
+-%}
+
+{%- if score > 0 and count > 0 -%}
+  {%- capture star_path -%}M12 2.8l2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3L2.9 9.5l6.3-.9z{%- endcapture -%}
+  <a
+    class="cc-trust justify-{{ block.settings.alignment }}"
+    href="{{ url }}"
+    target="_blank"
+    rel="noopener"
+    style="{% if block.settings.star_color != blank %}--cc-trust-star: {{ block.settings.star_color }};{% endif %}"
+    aria-label="{{ label | escape }}: {{ score_display }} su 5, {{ count }} recension{% if count == 1 %}e{% else %}i{% endif %}. Leggi le recensioni"
+    {{ block.shopify_attributes }}
+  >
+    {%- if block.settings.show_label and label != blank -%}
+      <span class="cc-trust__label">{{ label | escape }}</span>
+    {%- endif -%}
+    <span class="cc-trust__stars" aria-hidden="true">
+      <span class="cc-trust__stars-base">
+        {%- for i in (1..5) -%}<svg viewBox="0 0 24 24" width="18" height="18"><path d="{{ star_path }}"/></svg>{%- endfor -%}
+      </span>
+      <span class="cc-trust__stars-fill" style="width: {{ fill_pct }}%;">
+        {%- for i in (1..5) -%}<svg viewBox="0 0 24 24" width="18" height="18"><path d="{{ star_path }}"/></svg>{%- endfor -%}
+      </span>
+    </span>
+    <span class="cc-trust__meta">
+      <strong>{{ score_display }}</strong> su 5 · {{ count }} recension{% if count == 1 %}e{% else %}i{% endif %}
+    </span>
+  </a>
+
+<style>
+  .cc-trust {
+    --cc-trust-star: var(--color-primary);
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 10px;
+    width: 100%;
+    color: inherit;
+    text-decoration: none;
+    font-size: var(--font-paragraph--size);
+    line-height: 1.3;
+  }
+
+  .cc-trust.justify-center { justify-content: center; }
+  .cc-trust.justify-right { justify-content: flex-end; }
+
+  .cc-trust__label {
+    font-weight: var(--font-weight-semibold, 600);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .cc-trust__stars {
+    position: relative;
+    display: inline-block;
+    line-height: 0;
+  }
+
+  .cc-trust__stars-base,
+  .cc-trust__stars-fill {
+    display: inline-flex;
+    gap: 2px;
+    white-space: nowrap;
+  }
+
+  .cc-trust__stars svg {
+    width: 1.05em;
+    height: 1.05em;
+    flex: 0 0 auto;
+  }
+
+  .cc-trust__stars-base svg {
+    fill: var(--cc-trust-star);
+    opacity: 0.2;
+  }
+
+  .cc-trust__stars-fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    overflow: hidden;
+  }
+
+  .cc-trust__stars-fill svg {
+    fill: var(--cc-trust-star);
+  }
+
+  .cc-trust__meta {
+    opacity: 0.75;
+    font-size: 0.9em;
+  }
+
+  .cc-trust:hover .cc-trust__meta {
+    opacity: 1;
+  }
+</style>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Valutazione recensioni",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Voto, giudizio e numero di recensioni arrivano dal profilo recensioni di Concomodo e si aggiornano ogni giorno. Il badge si nasconde se i dati mancano."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_label",
+      "label": "Mostra il giudizio (es. Molto buono)",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Colore stelle (vuoto = colore primario del tema)"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Allineamento",
+      "options": [
+        { "value": "left", "label": "Sinistra" },
+        { "value": "center", "label": "Centro" },
+        { "value": "right", "label": "Destra" }
+      ],
+      "default": "left"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Valutazione recensioni"
+    }
+  ]
+}
+{% endschema %}
