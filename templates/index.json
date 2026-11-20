@@ -9,6 +9,10 @@
  */
 {
   "sections": {
+    "hero_promo_tasso0": {
+      "type": "hero-promo",
+      "settings": {}
+    },
     "hero_jVaWmY": {
       "type": "hero",
       "blocks": {
@@ -3049,6 +3053,7 @@
     }
   },
   "order": [
+    "hero_promo_tasso0",
     "hero_jVaWmY",
     "hero_atmosfera_ALAf3q",
     "section_kiCFcD",

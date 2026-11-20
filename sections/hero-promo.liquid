@@ -1,0 +1,249 @@
+{%- comment -%}
+  Hero promo (Black Friday · Tasso 0). Ricostruzione in HTML/CSS della
+  grafica della promo di lancio: sfondo notte con stelle, badge, titolo
+  gigante, pillola con la rata, sottotitolo, bottone e riga legale, più i
+  materassi che fluttuano sopra un alone di luce. Tutti i testi, i colori
+  e i link si cambiano dal theme editor. Nessuna libreria.
+{%- endcomment -%}
+
+{%- liquid
+  assign mat_alt = section.settings.image.alt | default: section.settings.image_alt
+  assign btn_url = section.settings.button_link | default: routes.collections_url
+-%}
+
+<style>
+  #hp-{{ section.id }} {
+    --hp-bg-1: {{ section.settings.bg_light }};
+    --hp-bg-2: {{ section.settings.bg_dark }};
+    --hp-ink: {{ section.settings.text_color }};
+    --hp-accent: {{ section.settings.accent_color }};
+    --hp-accent-ink: #23272c;
+    --hp-pill: {{ section.settings.pill_color }};
+    --hp-pill-ink: #23272c;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    color: var(--hp-ink);
+    font-family: var(--font-body--family);
+    background:
+      radial-gradient(70% 90% at 72% 40%, var(--hp-bg-1) 0%, transparent 70%),
+      var(--hp-bg-2);
+  }
+  #hp-{{ section.id }} *,
+  #hp-{{ section.id }} *::before,
+  #hp-{{ section.id }} *::after { box-sizing: border-box; }
+
+  /* stelle */
+  #hp-{{ section.id }} .hp__stars { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+  #hp-{{ section.id }} .hp__star {
+    position: absolute;
+    left: var(--x); top: var(--y);
+    width: var(--s); height: var(--s);
+    border-radius: 50%;
+    background: #fff;
+    opacity: .5;
+    animation: hpTwinkle var(--t) ease-in-out var(--d) infinite;
+  }
+  @keyframes hpTwinkle { 0%,100% { opacity: .15; } 50% { opacity: .75; } }
+
+  #hp-{{ section.id }} .hp__inner {
+    position: relative;
+    max-width: 1440px;
+    margin: 0 auto;
+    min-height: {{ section.settings.min_height }}px;
+    padding: clamp(48px, 7vw, 96px) clamp(20px, 5vw, 72px);
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(16px, 3vw, 48px);
+  }
+
+  #hp-{{ section.id }} .hp__copy { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; }
+
+  #hp-{{ section.id }} .hp__badge {
+    display: inline-block;
+    margin: 0 0 clamp(14px, 2vw, 24px);
+    padding: .38em .8em;
+    border-radius: 18px;
+    background: var(--hp-accent);
+    color: var(--hp-accent-ink);
+    font-family: var(--font-heading--family);
+    font-weight: 700;
+    font-size: clamp(22px, 2.9vw, 42px);
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    transform: rotate(-3deg);
+    transform-origin: left center;
+  }
+
+  #hp-{{ section.id }} .hp__title {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-weight: 800;
+    font-size: clamp(72px, 10.4vw, 168px);
+    white-space: nowrap;
+    line-height: .9;
+    letter-spacing: -.045em;
+    color: var(--hp-ink);
+  }
+
+  #hp-{{ section.id }} .hp__pill {
+    display: inline-block;
+    margin: clamp(10px, 1.6vw, 22px) 0 0;
+    padding: .42em .8em;
+    border-radius: 22px;
+    background: var(--hp-pill);
+    color: var(--hp-pill-ink);
+    font-family: var(--font-heading--family);
+    font-weight: 700;
+    font-size: clamp(24px, 3.3vw, 48px);
+    line-height: 1.1;
+    letter-spacing: -.03em;
+    transform: rotate(-2deg);
+    transform-origin: left center;
+  }
+
+  #hp-{{ section.id }} .hp__sub {
+    margin: clamp(20px, 2.6vw, 36px) 0 0;
+    max-width: 34em;
+    font-size: clamp(16px, 1.4vw, 20px);
+    line-height: 1.45;
+    opacity: .92;
+  }
+  #hp-{{ section.id }} .hp__sub p { margin: 0; }
+
+  #hp-{{ section.id }} .hp__cta { display: flex; align-items: center; gap: clamp(14px, 1.8vw, 24px); margin-top: clamp(20px, 2.4vw, 32px); flex-wrap: wrap; }
+  #hp-{{ section.id }} .hp__btn {
+    display: inline-block;
+    padding: 1em 1.8em;
+    border-radius: 999px;
+    background: var(--hp-accent);
+    color: var(--hp-accent-ink);
+    font-family: var(--font-heading--family);
+    font-weight: 700;
+    font-size: clamp(17px, 1.5vw, 22px);
+    letter-spacing: -.02em;
+    text-decoration: none;
+    transition: transform .2s ease, filter .2s ease;
+  }
+  #hp-{{ section.id }} .hp__btn:hover { transform: translateY(-2px); filter: brightness(1.06); }
+  #hp-{{ section.id }} .hp__btn:focus-visible { outline: 3px solid var(--hp-ink); outline-offset: 3px; }
+  #hp-{{ section.id }} .hp__legal { max-width: 20em; font-size: 12px; line-height: 1.4; opacity: .7; }
+
+  /* materassi */
+  #hp-{{ section.id }} .hp__media { position: relative; z-index: 1; align-self: stretch; display: flex; align-items: center; justify-content: center; min-width: 0; }
+  #hp-{{ section.id }} .hp__mat {
+    position: relative;
+    width: min(122%, 980px);
+    margin-right: -22%;
+    margin-left: -4%;
+    pointer-events: none;
+    animation: hpFloat 7s ease-in-out infinite;
+  }
+  #hp-{{ section.id }} .hp__mat img { display: block; width: 100%; height: auto; filter: drop-shadow(0 30px 40px rgba(0,0,0,.35)); }
+  #hp-{{ section.id }} .hp__glow {
+    position: absolute;
+    left: 50%; bottom: 4%;
+    width: 80%; height: 18%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(228,222,214,.32), rgba(228,222,214,0) 100%);
+    filter: blur(6px);
+    z-index: 0;
+    animation: hpGlow 7s ease-in-out infinite;
+  }
+  @keyframes hpFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+  @keyframes hpGlow { 0%,100% { opacity: 1; transform: translateX(-50%) scale(1); } 50% { opacity: .7; transform: translateX(-50%) scale(.92); } }
+
+  @media (max-width: 899px) {
+    #hp-{{ section.id }} .hp__inner { grid-template-columns: 1fr; min-height: 0; gap: 8px; padding-bottom: 40px; }
+    #hp-{{ section.id }} .hp__title { font-size: clamp(80px, 25vw, 170px); }
+    #hp-{{ section.id }} .hp__media { order: 2; }
+    #hp-{{ section.id }} .hp__mat { width: 118%; margin: 8px -9% 0; }
+    #hp-{{ section.id }} .hp__legal { max-width: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #hp-{{ section.id }} .hp__mat,
+    #hp-{{ section.id }} .hp__glow,
+    #hp-{{ section.id }} .hp__star { animation: none; }
+  }
+</style>
+
+<section id="hp-{{ section.id }}" class="hp" aria-label="{{ section.settings.badge | escape }} – {{ section.settings.title | escape }}">
+  {%- if section.settings.show_stars -%}
+    <div class="hp__stars" aria-hidden="true">
+      {%- for i in (1..40) -%}
+        {%- liquid
+          assign x = i | times: 37 | modulo: 97 | plus: 1
+          assign y = i | times: 61 | modulo: 91 | plus: 2
+          assign s = i | modulo: 3 | plus: 2
+          assign d = i | times: 137 | modulo: 5000
+          assign t = i | modulo: 4 | plus: 3
+        -%}
+        <span class="hp__star" style="--x:{{ x }}%;--y:{{ y }}%;--s:{{ s }}px;--d:-{{ d }}ms;--t:{{ t }}s"></span>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  <div class="hp__inner">
+    <div class="hp__copy">
+      {%- if section.settings.badge != blank -%}<p class="hp__badge">{{ section.settings.badge }}</p>{%- endif -%}
+      <h1 class="hp__title">{{ section.settings.title }}</h1>
+      {%- if section.settings.pill != blank -%}<p class="hp__pill">{{ section.settings.pill }}</p>{%- endif -%}
+      {%- if section.settings.subtitle != blank -%}<div class="hp__sub">{{ section.settings.subtitle }}</div>{%- endif -%}
+      <div class="hp__cta">
+        {%- if section.settings.button_label != blank -%}
+          <a class="hp__btn" href="{{ btn_url }}">{{ section.settings.button_label }}</a>
+        {%- endif -%}
+        {%- if section.settings.legal != blank -%}<p class="hp__legal">{{ section.settings.legal }}</p>{%- endif -%}
+      </div>
+    </div>
+
+    <div class="hp__media">
+      <div class="hp__glow" aria-hidden="true"></div>
+      <div class="hp__mat">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 1600
+            | image_tag: loading: 'eager', fetchpriority: 'high', widths: '600, 900, 1200, 1600', sizes: '(min-width: 900px) 55vw, 118vw', alt: mat_alt
+          }}
+        {%- else -%}
+          <img src="{{ 'hero-promo-materassi.png' | asset_url }}" width="847" height="427" loading="eager" fetchpriority="high" alt="{{ mat_alt | escape }}">
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero promo",
+  "settings": [
+    { "type": "header", "content": "Testi" },
+    { "type": "text", "id": "badge", "label": "Badge", "default": "Black Friday" },
+    { "type": "text", "id": "title", "label": "Titolo", "default": "Tasso 0" },
+    { "type": "text", "id": "pill", "label": "Pillola (rata)", "default": "12 rate da 21,58 € al mese" },
+    { "type": "richtext", "id": "subtitle", "label": "Sottotitolo", "default": "<p>Sostegno o Carezza singolo. Totale 259 €, senza interessi.</p>" },
+    { "type": "text", "id": "button_label", "label": "Testo bottone", "default": "Scopri le rate" },
+    { "type": "url", "id": "button_link", "label": "Link bottone" },
+    { "type": "textarea", "id": "legal", "label": "Riga legale HeyLight", "info": "Inserisci qui TAN, TAEG e importo totale dovuto prima di pubblicare.", "default": "Riga legale HeyLight: TAN, TAEG, importo totale dovuto" },
+
+    { "type": "header", "content": "Immagine" },
+    { "type": "image_picker", "id": "image", "label": "Materassi (PNG scontornato)", "info": "Se vuoto usa l'immagine di default del tema." },
+    { "type": "text", "id": "image_alt", "label": "Testo alternativo", "default": "I materassi Sostegno e Carezza Concomodo" },
+
+    { "type": "header", "content": "Stile" },
+    { "type": "color", "id": "bg_dark", "label": "Sfondo", "default": "#1c2025" },
+    { "type": "color", "id": "bg_light", "label": "Alone di luce dello sfondo", "default": "#2e343b" },
+    { "type": "color", "id": "text_color", "label": "Colore testo", "default": "#f4efe8" },
+    { "type": "color", "id": "accent_color", "label": "Colore badge e bottone", "default": "#b2c8d1" },
+    { "type": "color", "id": "pill_color", "label": "Colore pillola", "default": "#f4efe8" },
+    { "type": "checkbox", "id": "show_stars", "label": "Mostra le stelle", "default": true },
+    { "type": "range", "id": "min_height", "label": "Altezza minima (desktop)", "min": 420, "max": 900, "step": 20, "unit": "px", "default": 640 }
+  ],
+  "presets": [
+    { "name": "Hero promo" }
+  ]
+}
+{% endschema %}
