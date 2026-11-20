@@ -16,9 +16,9 @@
         "title": "Tasso 0",
         "pill": "12 rate da 21,58 € al mese",
         "subtitle": "<p>Sostegno o Carezza singolo. Totale 259 €, senza interessi.</p>",
-        "button_label": "Scopri le rate",
-        "button_link": "",
-        "legal": "Riga legale HeyLight: TAN, TAEG, importo totale dovuto",
+        "button_label": "Scopri i nostri materassi",
+        "button_link": "shopify://collections/materassi",
+        "legal": "",
         "image_alt": "I materassi Sostegno e Carezza Concomodo",
         "bg_dark": "#1c2025",
         "bg_light": "#2e343b",
@@ -31,7 +31,6 @@
     },
     "hero_jVaWmY": {
       "type": "hero",
-      "disabled": true,
       "blocks": {
         "group_fCMeMm": {
           "type": "group",
