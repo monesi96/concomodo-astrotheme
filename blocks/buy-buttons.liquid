@@ -670,6 +670,49 @@
     font-size: var(--font-size--sm);
     font-weight: normal;
   }
+
+  /* Concomodo: card acquisto PDP — quantità + carrello armonizzati */
+  .product-information .buy-buttons-block,
+  .product-information .buy-buttons-block product-form-component {
+    display: block;
+  }
+
+  .product-information .buy-buttons-block .shopify-product-form {
+    container-type: inline-size;
+  }
+
+  .product-information .product-form-buttons:not(:has(.quantity-rules)) {
+    gap: var(--gap-sm);
+  }
+
+  @container (min-width: 360px) {
+    .product-information .product-form-buttons {
+      flex-wrap: nowrap;
+    }
+
+    .product-information
+      .product-form-buttons
+      > *:not(.quantity-selector-wrapper, .quantity-rules, .quantity-label, .volume-pricing) {
+      flex: 1 1 0;
+      min-width: 0;
+    }
+  }
+
+  @container (max-width: 359.98px) {
+    .product-information .product-form-buttons > * {
+      flex: 1 1 100%;
+    }
+
+    .product-information .product-form-buttons .quantity-selector {
+      flex: 1 1 100%;
+    }
+
+    .product-information .product-form-buttons .quantity-selector input[type='number'] {
+      flex: 1 1 auto;
+      max-width: none;
+      text-align: center;
+    }
+  }
 {% endstylesheet %}
 
 {% schema %}
