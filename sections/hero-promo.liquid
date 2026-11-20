@@ -129,17 +129,15 @@
   #hp-{{ section.id }} .hp__btn:focus-visible { outline: 3px solid var(--hp-ink); outline-offset: 3px; }
   #hp-{{ section.id }} .hp__legal { max-width: 20em; font-size: 12px; line-height: 1.4; opacity: .7; }
 
-  /* materassi: foto unica su fondo nero, fusa con lo sfondo (screen): il nero sparisce.
-     mix-blend-mode sta sul contenitore, che è un contesto di stacking e si fonde con la hero. */
+  /* materassi: composizione dalle foto originali, WebP con trasparenza */
   #hp-{{ section.id }} .hp__media {
     position: absolute;
     z-index: 1;
     top: 0; bottom: 0; right: 0;
-    width: 56%;
+    width: 52%;
     display: flex; align-items: center; justify-content: center;
     pointer-events: none;
-    mix-blend-mode: screen;
-    padding: 0 2% 0 0;
+    padding: 0 3% 0 0;
   }
   #hp-{{ section.id }} .hp__mat {
     position: relative;
@@ -148,7 +146,7 @@
     margin-top: 8%;
     animation: hpFloat 7s ease-in-out infinite;
   }
-  #hp-{{ section.id }} .hp__mat img { display: block; width: 100%; height: auto; }
+  #hp-{{ section.id }} .hp__mat img { display: block; width: 100%; height: auto; filter: drop-shadow(0 28px 34px rgba(0,0,0,.45)); }
   #hp-{{ section.id }} .hp__glow {
     position: absolute;
     left: 50%; bottom: 4%;
@@ -223,7 +221,7 @@
             | image_tag: loading: 'eager', fetchpriority: 'high', widths: '600, 900, 1200, 1600', sizes: '(min-width: 900px) 56vw, 112vw', alt: mat_alt
           }}
         {%- else -%}
-          <img src="{{ 'hero-promo-materassi.webp' | asset_url }}" width="2000" height="1160" loading="eager" fetchpriority="high" alt="{{ mat_alt | escape }}">
+          <img src="{{ 'hero-promo-materassi.webp' | asset_url }}" width="2000" height="937" loading="eager" fetchpriority="high" alt="{{ mat_alt | escape }}">
         {%- endif -%}
       </div>
     </div>
@@ -244,7 +242,7 @@
     { "type": "textarea", "id": "legal", "label": "Riga legale HeyLight", "info": "Inserisci qui TAN, TAEG e importo totale dovuto prima di pubblicare.", "default": "Riga legale HeyLight: TAN, TAEG, importo totale dovuto" },
 
     { "type": "header", "content": "Immagine" },
-    { "type": "image_picker", "id": "image", "label": "Foto materassi (su fondo nero)", "info": "Foto su sfondo nero puro: si fonde con lo sfondo della hero. Se vuoto usa quella di default del tema." },
+    { "type": "image_picker", "id": "image", "label": "Foto materassi (sfondo trasparente)", "info": "PNG/WebP con sfondo trasparente. Se vuoto usa quella di default del tema." },
     { "type": "text", "id": "image_alt", "label": "Testo alternativo", "default": "I materassi Sostegno e Carezza Concomodo" },
 
     { "type": "header", "content": "Stile" },
