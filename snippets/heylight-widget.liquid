@@ -1,0 +1,105 @@
+{%- doc -%}
+  Messaggio promozionale ufficiale HeyLight Dilazione (docs.heylight.com).
+  Adattato per Concomodo: usa il prezzo della variante selezionata e si aggiorna
+  al cambio misura. Limiti da contratto Emme Z: min 60 €, max 3.000 €, rata minima 20 €.
+
+  @param {object} product_resource - Il prodotto
+{%- enddoc -%}
+
+{%- comment -%} CONDIZIONI PERSONALIZZATE (importi in centesimi) {%- endcomment -%}
+{%- assign minimum_amount = 6000 -%}
+{%- assign maximum_amount = 300000 -%}
+{%- comment -%} Rate da mostrare (separate da virgola): il widget mostra la più alta compatibile con la rata minima. Da contratto: 2-12 {%- endcomment -%}
+{%- assign available_terms_string = '2,3,4,5,6,7,8,9,10,11,12' -%}
+{%- assign min_instalment_amount = 2000 -%}
+
+{%- assign hl_variant = product_resource.selected_or_first_available_variant -%}
+{%- assign hl_price = hl_variant.price | default: product_resource.price -%}
+
+{%- liquid
+  assign available_terms = available_terms_string | split: ','
+  assign term_ceiling = hl_price | divided_by: min_instalment_amount
+  assign hl_term = ''
+  for term in available_terms
+    assign test_term = term | times: 1
+    if test_term <= term_ceiling
+      assign hl_term = term
+    endif
+  endfor
+  assign hl_in_range = false
+  if hl_price >= minimum_amount and hl_price <= maximum_amount and hl_term != ''
+    assign hl_in_range = true
+  endif
+-%}
+
+{%- if product_resource.price_max >= minimum_amount and product_resource.price_min <= maximum_amount -%}
+  <heylight-widget
+    class="heidi_messaging"
+    data-min="{{ minimum_amount }}"
+    data-max="{{ maximum_amount }}"
+    data-terms="{{ available_terms_string }}"
+    data-min-instalment="{{ min_instalment_amount }}"
+    {% unless hl_in_range %}hidden{% endunless %}
+  >
+    <script type="application/json" data-heylight-prices>
+      { {%- for v in product_resource.variants -%}"{{ v.id }}": {{ v.price }}{% unless forloop.last %},{% endunless %}{%- endfor -%} }
+    </script>
+    <div
+      id="heidipay-container"
+      data-heylight="true"
+      data-heylight-minorAmount="{{ hl_price }}"
+      data-heylight-term="{{ hl_term | default: available_terms.first }}"
+      data-heylight-currencySymbol="EUR"
+      data-heylight-lang="{{ localization.language.iso_code | slice: 0, 2 }}"
+      data-heylight-type="PRODUCT_DESCRIPTION_HEYLIGHT_BNPL_IT"
+      data-heylight-apiKey="ecommerce"
+      data-heylight-cadence="MONTHLY"
+      data-heylight-thousandsSeparator="."
+      data-heylight-decimalSeparator=","
+      data-heylight-symbolOnLeft="false"
+      data-heylight-spaceBetweenAmountAndSymbol="true"
+      data-heylight-logo-variant="red"
+      data-heylight-decimalDigits="2"
+    ></div>
+  </heylight-widget>
+
+  <script src="https://upstream.heidipay.com/sdk/heidi-upstream-lib.js" defer></script>
+  <script>
+    if (!customElements.get('heylight-widget')) {
+      customElements.define('heylight-widget', class extends HTMLElement {
+        connectedCallback() {
+          try {
+            this.prices = JSON.parse(this.querySelector('[data-heylight-prices]').textContent);
+          } catch (e) {
+            this.prices = {};
+          }
+          this.onVariant = (event) => {
+            const id = event.detail && event.detail.resource && event.detail.resource.id;
+            if (id && this.prices[id] !== undefined) this.update(this.prices[id]);
+          };
+          document.addEventListener('variant:update', this.onVariant);
+        }
+        disconnectedCallback() {
+          document.removeEventListener('variant:update', this.onVariant);
+        }
+        update(price) {
+          const min = Number(this.dataset.min);
+          const max = Number(this.dataset.max);
+          const ceiling = Math.floor(price / Number(this.dataset.minInstalment));
+          const terms = this.dataset.terms.split(',').map(Number).filter((t) => t <= ceiling);
+          const container = this.querySelector('#heidipay-container');
+          if (price < min || price > max || !terms.length || !container) {
+            this.hidden = true;
+            return;
+          }
+          this.hidden = false;
+          if (container.getAttribute('data-heylight-minorAmount') === String(price)) return;
+          container.setAttribute('data-heylight-minorAmount', price);
+          container.setAttribute('data-heylight-term', terms[terms.length - 1]);
+          container.innerHTML = '';
+          if (typeof window.initCoreHeidiCode === 'function') window.initCoreHeidiCode();
+        }
+      });
+    }
+  </script>
+{%- endif -%}
