@@ -15,6 +15,7 @@
     },
     "hero_jVaWmY": {
       "type": "hero",
+      "disabled": true,
       "blocks": {
         "group_fCMeMm": {
           "type": "group",
