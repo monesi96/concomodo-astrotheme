@@ -1117,7 +1117,7 @@
                   "name": "Messaggio HeyLight",
                   "settings": {
                     "padding-block-start": 0,
-                    "padding-block-end": 0
+                    "padding-block-end": 6
                   },
                   "blocks": {}
                 },
