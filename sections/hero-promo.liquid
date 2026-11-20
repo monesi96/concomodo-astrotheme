@@ -129,26 +129,26 @@
   #hp-{{ section.id }} .hp__btn:focus-visible { outline: 3px solid var(--hp-ink); outline-offset: 3px; }
   #hp-{{ section.id }} .hp__legal { max-width: 20em; font-size: 12px; line-height: 1.4; opacity: .7; }
 
-  /* materassi: a filo con il bordo destro della sezione. Il ritaglio ha il
-     lato destro tagliato (come nella grafica originale): così il taglio sta
-     fuori schermo a qualsiasi larghezza. */
+  /* materassi: foto unica su fondo nero, fusa con lo sfondo (screen): il nero sparisce.
+     mix-blend-mode sta sul contenitore, che è un contesto di stacking e si fonde con la hero. */
   #hp-{{ section.id }} .hp__media {
     position: absolute;
     z-index: 1;
     top: 0; bottom: 0; right: 0;
-    width: 58%;
-    display: flex; align-items: center; justify-content: flex-end;
+    width: 56%;
+    display: flex; align-items: center; justify-content: center;
     pointer-events: none;
+    mix-blend-mode: screen;
+    padding: 0 2% 0 0;
   }
   #hp-{{ section.id }} .hp__mat {
     position: relative;
     width: 100%;
-    max-width: 1100px;
-    margin-top: 6%;
+    max-width: 1000px;
+    margin-top: 8%;
     animation: hpFloat 7s ease-in-out infinite;
   }
-  #hp-{{ section.id }} .hp__mat img { display: block; width: 100%; height: auto; filter: drop-shadow(0 30px 40px rgba(0,0,0,.35)); }
-  #hp-{{ section.id }} .hp__logos { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  #hp-{{ section.id }} .hp__mat img { display: block; width: 100%; height: auto; }
   #hp-{{ section.id }} .hp__glow {
     position: absolute;
     left: 50%; bottom: 4%;
@@ -164,12 +164,17 @@
   @keyframes hpGlow { 0%,100% { opacity: 1; transform: translateX(-50%) scale(1); } 50% { opacity: .7; transform: translateX(-50%) scale(.92); } }
 
   @media (max-width: 899px) {
-    #hp-{{ section.id }} .hp__inner { display: block; min-height: 0; padding-top: 130px; padding-bottom: 0; }
+    #hp-{{ section.id }} .hp__inner { display: block; min-height: 0; padding-top: 112px; padding-bottom: 0; }
     #hp-{{ section.id }} .hp__copy { width: 100%; }
-    #hp-{{ section.id }} .hp__title { font-size: clamp(80px, 25vw, 170px); }
-    #hp-{{ section.id }} .hp__media { position: relative; width: auto; margin: 16px calc(-1 * clamp(20px, 5vw, 72px)) 0; padding-bottom: 28px; justify-content: flex-end; }
-    #hp-{{ section.id }} .hp__mat { width: 118%; max-width: none; margin-top: 0; margin-right: -2%; }
-    #hp-{{ section.id }} .hp__legal { max-width: none; }
+    #hp-{{ section.id }} .hp__badge { font-size: 22px; margin-bottom: 10px; }
+    #hp-{{ section.id }} .hp__title { font-size: clamp(76px, 24vw, 150px); }
+    #hp-{{ section.id }} .hp__pill { font-size: clamp(21px, 6.2vw, 34px); margin-top: 6px; }
+    #hp-{{ section.id }} .hp__sub { margin-top: 18px; font-size: 16px; }
+    #hp-{{ section.id }} .hp__cta { margin-top: 18px; gap: 12px; }
+    #hp-{{ section.id }} .hp__btn { font-size: 17px; padding: .85em 1.5em; }
+    #hp-{{ section.id }} .hp__legal { flex: 1 1 100%; max-width: none; font-size: 11px; }
+    #hp-{{ section.id }} .hp__media { position: relative; width: auto; margin: 0 calc(-1 * clamp(20px, 5vw, 72px)); padding: 0 0 12px; }
+    #hp-{{ section.id }} .hp__mat { width: 112%; max-width: none; margin: -2% 0 0; }
   }
   @media (prefers-reduced-motion: reduce) {
     #hp-{{ section.id }} .hp__mat,
@@ -215,24 +220,10 @@
           {{
             section.settings.image
             | image_url: width: 1600
-            | image_tag: loading: 'eager', fetchpriority: 'high', widths: '600, 900, 1200, 1600', sizes: '(min-width: 900px) 58vw, 118vw', alt: mat_alt
+            | image_tag: loading: 'eager', fetchpriority: 'high', widths: '600, 900, 1200, 1600', sizes: '(min-width: 900px) 56vw, 112vw', alt: mat_alt
           }}
         {%- else -%}
-          <img src="{{ 'hero-promo-materassi.png' | asset_url }}" width="847" height="427" loading="eager" fetchpriority="high" alt="{{ mat_alt | escape }}">
-        {%- endif -%}
-        {%- if section.settings.image == blank and section.settings.show_logo_on_handles -%}
-          {%- liquid
-            assign logo_dark = settings.logo | image_url: width: 400
-            assign logo_light = settings.logo_inverse | default: settings.logo | image_url: width: 400
-          -%}
-          {%- if settings.logo != blank -%}
-            <svg class="hp__logos" viewBox="0 0 847 427" aria-hidden="true" focusable="false">
-              <image href="{{ logo_dark }}" x="10" y="3" width="80" height="34" preserveAspectRatio="xMidYMid meet" transform="matrix(0.5500 0.2000 0.0250 0.5250 72 247)" opacity=".9"/>
-              <image href="{{ logo_dark }}" x="10" y="3" width="80" height="34" preserveAspectRatio="xMidYMid meet" transform="matrix(0.6400 0.2500 0.0000 0.5500 235 313)" opacity=".9"/>
-              <image href="{{ logo_light }}" x="10" y="3" width="80" height="34" preserveAspectRatio="xMidYMid meet" transform="matrix(0.5200 0.2200 0.0000 0.4750 233 88)" opacity=".9"/>
-              <image href="{{ logo_light }}" x="10" y="3" width="80" height="34" preserveAspectRatio="xMidYMid meet" transform="matrix(0.5800 0.2400 0.0000 0.6000 392 158)" opacity=".9"/>
-            </svg>
-          {%- endif -%}
+          <img src="{{ 'hero-promo-materassi.webp' | asset_url }}" width="2000" height="1160" loading="eager" fetchpriority="high" alt="{{ mat_alt | escape }}">
         {%- endif -%}
       </div>
     </div>
@@ -253,8 +244,7 @@
     { "type": "textarea", "id": "legal", "label": "Riga legale HeyLight", "info": "Inserisci qui TAN, TAEG e importo totale dovuto prima di pubblicare.", "default": "Riga legale HeyLight: TAN, TAEG, importo totale dovuto" },
 
     { "type": "header", "content": "Immagine" },
-    { "type": "image_picker", "id": "image", "label": "Materassi (PNG scontornato)", "info": "Se vuoto usa l'immagine di default del tema." },
-    { "type": "checkbox", "id": "show_logo_on_handles", "label": "Logo sulle maniglie dei materassi", "info": "Usa il logo del tema. Vale solo per l'immagine di default.", "default": true },
+    { "type": "image_picker", "id": "image", "label": "Foto materassi (su fondo nero)", "info": "Foto su sfondo nero puro: si fonde con lo sfondo della hero. Se vuoto usa quella di default del tema." },
     { "type": "text", "id": "image_alt", "label": "Testo alternativo", "default": "I materassi Sostegno e Carezza Concomodo" },
 
     { "type": "header", "content": "Stile" },
