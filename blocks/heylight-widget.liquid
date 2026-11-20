@@ -1,0 +1,68 @@
+{%- doc -%}
+  Blocco con il messaggio promozionale ufficiale HeyLight Dilazione.
+  Le condizioni (min, max, rate, rata minima) sono nello snippet heylight-widget.
+{%- enddoc -%}
+
+<div class="heylight-widget-block spacing-style" style="{% render 'spacing-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  {%- render 'heylight-widget', product_resource: closest.product -%}
+</div>
+
+{% stylesheet %}
+  heylight-widget {
+    display: block;
+  }
+
+  heylight-widget[hidden] {
+    display: none;
+  }
+
+  .heylight-widget-block {
+    width: 100%;
+  }
+
+  .heylight-widget-block:not(:has(heylight-widget:not([hidden]))) {
+    display: none;
+  }
+
+  /* Concomodo: niente padding interno del widget, testo che va a capo nella card */
+  .heylight-widget-block .heyLight-inline {
+    padding-block: 0 !important;
+    max-width: 100%;
+  }
+
+  .heylight-widget-block .summary-row {
+    gap: 12px;
+    max-width: 100%;
+  }
+
+  .heylight-widget-block .summary-row > *:not(.heyLightLogo) {
+    min-width: 0;
+  }
+
+  .heylight-widget-block .summary-details,
+  .heylight-widget-block .summary-details span {
+    flex-wrap: wrap;
+    white-space: normal;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Messaggio HeyLight",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Messaggio ufficiale HeyLight: rata e numero di rate calcolati dal widget HeyLight sul prezzo della variante."
+    },
+    { "type": "range", "id": "padding-block-start", "label": "Sopra", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding-block-end", "label": "Sotto", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 0 }
+  ],
+  "presets": [
+    {
+      "name": "Messaggio HeyLight",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}
