@@ -1112,6 +1112,15 @@
                     "group_mW48FJ"
                   ]
                 },
+                "heylight_widget_Ye9tnx": {
+                  "type": "heylight-widget",
+                  "name": "Messaggio HeyLight",
+                  "settings": {
+                    "padding-block-start": 0,
+                    "padding-block-end": 0
+                  },
+                  "blocks": {}
+                },
                 "buy_buttons_VLi7An": {
                   "type": "buy-buttons",
                   "settings": {
@@ -1152,6 +1161,7 @@
               "block_order": [
                 "heylight_rate_HVFKmr",
                 "group_rm3y8g",
+                "heylight_widget_Ye9tnx",
                 "buy_buttons_VLi7An"
               ]
             },
