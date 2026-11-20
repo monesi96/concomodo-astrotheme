@@ -134,13 +134,17 @@
   #hp-{{ section.id }} .hp__media { position: relative; z-index: 1; align-self: stretch; display: flex; align-items: center; justify-content: center; min-width: 0; }
   #hp-{{ section.id }} .hp__mat {
     position: relative;
-    width: min(122%, 980px);
-    margin-right: -22%;
+    width: min(116%, 980px);
+    margin-right: calc(-1 * clamp(20px, 5vw, 72px));
     margin-left: -4%;
     pointer-events: none;
     animation: hpFloat 7s ease-in-out infinite;
   }
-  #hp-{{ section.id }} .hp__mat img { display: block; width: 100%; height: auto; filter: drop-shadow(0 30px 40px rgba(0,0,0,.35)); }
+  #hp-{{ section.id }} .hp__mat img { display: block; width: 100%; height: auto; filter: drop-shadow(0 30px 40px rgba(0,0,0,.35));
+    /* il ritaglio ha il bordo destro tagliato: lo sfumiamo nel buio */
+    -webkit-mask-image: linear-gradient(to right, #000 0%, #000 84%, transparent 99%);
+    mask-image: linear-gradient(to right, #000 0%, #000 84%, transparent 99%);
+  }
   #hp-{{ section.id }} .hp__glow {
     position: absolute;
     left: 50%; bottom: 4%;
@@ -159,7 +163,7 @@
     #hp-{{ section.id }} .hp__inner { grid-template-columns: 1fr; min-height: 0; gap: 8px; padding-bottom: 40px; }
     #hp-{{ section.id }} .hp__title { font-size: clamp(80px, 25vw, 170px); }
     #hp-{{ section.id }} .hp__media { order: 2; }
-    #hp-{{ section.id }} .hp__mat { width: 118%; margin: 8px -9% 0; }
+    #hp-{{ section.id }} .hp__mat { width: 112%; margin: 8px -20px 0 -6%; }
     #hp-{{ section.id }} .hp__legal { max-width: none; }
   }
   @media (prefers-reduced-motion: reduce) {
