@@ -161,6 +161,10 @@
   @keyframes hpFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
   @keyframes hpGlow { 0%,100% { opacity: 1; transform: translateX(-50%) scale(1); } 50% { opacity: .7; transform: translateX(-50%) scale(.92); } }
 
+  @media (min-width: 900px) and (max-width: 1100px) {
+    #hp-{{ section.id }} .hp__media { width: 47%; }
+  }
+
   @media (max-width: 899px) {
     #hp-{{ section.id }} .hp__inner { display: block; min-height: 0; padding-top: 112px; padding-bottom: 0; }
     #hp-{{ section.id }} .hp__copy { width: 100%; }
@@ -171,8 +175,8 @@
     #hp-{{ section.id }} .hp__cta { margin-top: 18px; gap: 12px; }
     #hp-{{ section.id }} .hp__btn { font-size: 17px; padding: .85em 1.5em; }
     #hp-{{ section.id }} .hp__legal { flex: 1 1 100%; max-width: none; font-size: 11px; }
-    #hp-{{ section.id }} .hp__media { position: relative; width: auto; margin: 0 calc(-1 * clamp(20px, 5vw, 72px)); padding: 0 0 12px; }
-    #hp-{{ section.id }} .hp__mat { width: 112%; max-width: none; margin: -2% 0 0; }
+    #hp-{{ section.id }} .hp__media { position: relative; width: auto; margin: 0 calc(-1 * clamp(20px, 5vw, 72px)); padding: 0 0 28px; }
+    #hp-{{ section.id }} .hp__mat { width: 100%; max-width: none; margin: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
     #hp-{{ section.id }} .hp__mat,
@@ -218,7 +222,7 @@
           {{
             section.settings.image
             | image_url: width: 1600
-            | image_tag: loading: 'eager', fetchpriority: 'high', widths: '600, 900, 1200, 1600', sizes: '(min-width: 900px) 56vw, 112vw', alt: mat_alt
+            | image_tag: loading: 'eager', fetchpriority: 'high', widths: '600, 900, 1200, 1600', sizes: '(min-width: 900px) 52vw, 100vw', alt: mat_alt
           }}
         {%- else -%}
           <img src="{{ 'hero-promo-materassi.webp' | asset_url }}" width="2000" height="937" loading="eager" fetchpriority="high" alt="{{ mat_alt | escape }}">
