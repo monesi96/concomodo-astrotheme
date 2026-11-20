@@ -51,7 +51,8 @@
     max-width: 1440px;
     margin: 0 auto;
     min-height: {{ section.settings.min_height }}px;
-    padding: clamp(48px, 7vw, 96px) clamp(20px, 5vw, 72px);
+    /* l'header è trasparente e sta sopra la hero: lascia spazio sotto */
+    padding: clamp(150px, 14vw, 210px) clamp(20px, 5vw, 72px) clamp(48px, 7vw, 96px);
     display: grid;
     grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
     align-items: center;
@@ -160,7 +161,7 @@
   @keyframes hpGlow { 0%,100% { opacity: 1; transform: translateX(-50%) scale(1); } 50% { opacity: .7; transform: translateX(-50%) scale(.92); } }
 
   @media (max-width: 899px) {
-    #hp-{{ section.id }} .hp__inner { grid-template-columns: 1fr; min-height: 0; gap: 8px; padding-bottom: 40px; }
+    #hp-{{ section.id }} .hp__inner { grid-template-columns: 1fr; min-height: 0; gap: 8px; padding-top: 130px; padding-bottom: 40px; }
     #hp-{{ section.id }} .hp__title { font-size: clamp(80px, 25vw, 170px); }
     #hp-{{ section.id }} .hp__media { order: 2; }
     #hp-{{ section.id }} .hp__mat { width: 112%; margin: 8px -20px 0 -6%; }
