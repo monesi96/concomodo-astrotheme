@@ -11,7 +11,23 @@
   "sections": {
     "hero_promo_tasso0": {
       "type": "hero-promo",
-      "settings": {}
+      "settings": {
+        "badge": "Black Friday",
+        "title": "Tasso 0",
+        "pill": "12 rate da 21,58 € al mese",
+        "subtitle": "<p>Sostegno o Carezza singolo. Totale 259 €, senza interessi.</p>",
+        "button_label": "Scopri le rate",
+        "button_link": "",
+        "legal": "Riga legale HeyLight: TAN, TAEG, importo totale dovuto",
+        "image_alt": "I materassi Sostegno e Carezza Concomodo",
+        "bg_dark": "#1c2025",
+        "bg_light": "#2e343b",
+        "text_color": "#f4efe8",
+        "accent_color": "#b2c8d1",
+        "pill_color": "#f4efe8",
+        "show_stars": true,
+        "min_height": 640
+      }
     },
     "hero_jVaWmY": {
       "type": "hero",
@@ -111,6 +127,7 @@
       "block_order": [
         "group_fCMeMm"
       ],
+      "disabled": true,
       "custom_css": [
         ".color-scheme-5 {background: linear-gradient( 0deg, rgba(178, 200, 209, 1) 50%, rgba(244, 239, 232, 1) 50% );}",
         "img {border-radius: 0 0 0px 0px;}"
